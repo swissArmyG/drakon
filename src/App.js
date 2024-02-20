@@ -1,12 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
+import { LandingPage } from './LandingPage/LandingPage.js'
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>MySpine: Powered by React.js</p>
-      </header>
+      <LandingPage />
     </div>
   );
 }

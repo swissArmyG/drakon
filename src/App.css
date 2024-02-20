@@ -13,17 +13,6 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
@@ -35,4 +24,104 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.LandingPage.--content-container {
+  position: relative;
+  height: 100vh;
+  max-width: 100%;
+  overflow-y: scroll;
+}
+
+.LandingPage .--background-img {
+  position: relative;
+  z-index: 0;
+  top: 0;
+  height: 100vh;
+  padding-top: 100%;
+  background-image: url('./img/bg/landing.png');
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.LandingPage .--nav-bar {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.LandingPage .--logo-img {
+  width: 40%;
+}
+
+.LandingPageNav.--container {
+  width: 60%;
+  padding: 20px 0;
+}
+
+.LandingPageNav.--nav-options {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.LandingPageNav .--nav-option {
+  padding: 0 15px;
+  margin: 0;
+}
+
+.LandingPageNav .--nav-option:hover {
+  color: #FFC655; 
+  cursor: pointer;
+}
+
+.LandingPageNav .--nav-info {
+  text-align: right;
+  padding-right: 15px;
+  min-width: 95%;
+}
+
+@media screen and (max-width: 540px) {
+  .LandingPageNav .--nav-option {
+    font-size: 13px;
+  }
+}
+
+@media screen and (max-width: 588px) {
+  .LandingPageNav .--nav-info {
+    font-size: 10px;
+  }
+}
+
+.LandingPageMenu .--menu-options {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  margin: 23% 10%;
+  width: 20vw;
+}
+
+.LandingPageMenu .--menu-option-background {
+  position: inherit;
+  z-index: 10px;
+}
+
+.LandingPageMenu .--menu-option {
+  font-size: 20px;
+  font-weight: 600px;
+}
+
+.FadedButton {
+  cursor: pointer;
+  /* width: 292px; */
 }
