@@ -1,4 +1,3 @@
-// import ScrollAnimation from "react-animate-on-scroll"
 import infoboxLeft from "../img/shapes/infobox_left.png"
 import infoboxRight from "../img/shapes/infobox_right.png"
 import Zoom from "react-reveal"
@@ -29,14 +28,10 @@ export const LandingPageEducation = () => {
 
   return (
     <section className="LandingPageEducation --container">
-      {/* <ScrollAnimation animateIn="fadeIn"> */}
       <Zoom>
         <img className="--infobox-left" src={`${infoboxLeft}`} alt={"Info box fades in on scroll. Did you know? The spine is not only a structural support but also an information superhighway. It's the central hub for transmitting signals between the brain and the rest of the body. Orchestrating movements, sensations, and reflexes"} />
-      </Zoom>
-      <Zoom>
         <img className="--infobox-right" src={`${infoboxRight}`} alt={"Info box fades in on scroll. Spine pain? Herniated discs, often caused by wear and tear, can press on nerves, leading to pain, numbness, or weakness in the limbs"} />
       </Zoom>
-      {/* </ScrollAnimation> */}
     </section>
   )
 }
