@@ -1,5 +1,5 @@
 import './App.css'
-import { LandingPage } from './LandingPage/LandingPage.js'
+import { LandingPage } from './LandingPage'
 
 const App = () => {
   return (

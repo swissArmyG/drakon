@@ -1,7 +1,9 @@
 import fullLogoImagePath from '../img/logo/full.svg'
-import { LandingPageNav } from './LandingPageNav.js'
-import { LandingPageMenu } from './LandingPageMenu.js'
-import { LandingPageEducation } from './LandingPageEducation'
+import { 
+  LandingPageNav, 
+  LandingPageMenu, 
+  LandingPageEducation 
+} from '.'
 
 export const LandingPage = () => {
   return (

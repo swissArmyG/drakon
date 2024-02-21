@@ -1,6 +1,8 @@
-import { FadedButtonEducation } from "../img/buttons/FadedButtonEducation.js"
-import { FadedButtonPricing } from "../img/buttons/FadedButtonPricing.js"
-import { FadedButtonOurStory } from "../img/buttons/FadedButtonOurStory.js"
+import { 
+  FadedButtonEducation,
+  FadedButtonPricing,
+  FadedButtonOurStory
+} from "../img/buttons"
 
 export const LandingPageMenu = () => {
 
