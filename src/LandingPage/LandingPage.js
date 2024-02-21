@@ -1,6 +1,7 @@
 import fullLogoImagePath from '../img/logo/full.svg'
 import { LandingPageNav } from './LandingPageNav.js'
 import { LandingPageMenu } from './LandingPageMenu.js'
+import { LandingPageEducation } from './LandingPageEducation'
 
 export const LandingPage = () => {
   return (
@@ -16,6 +17,7 @@ export const LandingPage = () => {
           <LandingPageNav />
         </header>
         <LandingPageMenu />
+        <LandingPageEducation />
       </div>  
     </section>
   )
