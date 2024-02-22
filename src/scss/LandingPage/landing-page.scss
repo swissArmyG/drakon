@@ -1,0 +1,36 @@
+.LandingPage {
+  .--content-container {
+    position: relative;
+    height: 100vh;
+    max-width: 100%;
+    overflow-y: scroll;
+  }
+
+  .--background-img {
+    position: relative;
+    z-index: 0;
+    top: 0;
+    height: 100vh;
+    padding-top: 100%;
+    background-image: url('../../img/bg/landing.png');
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .--nav-bar {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .--logo-img {
+    width: 40%;
+  }
+}

@@ -8,9 +8,9 @@ import {
 export const LandingPage = () => {
   return (
     <section className="LandingPage --container">
-      <div className="LandingPage --content-container">
-        <div className="LandingPage --background-img" />
-        <header className="LandingPage --nav-bar">
+      <div className="--content-container">
+        <div className="--background-img" />
+        <header className="--nav-bar">
           <img 
             className="--logo-img"
             src={`${fullLogoImagePath}`}

@@ -1,0 +1,17 @@
+.LandingPageEducation {
+  &.--container {
+    position: absolute;
+    top: 0;
+    margin: 69% 0;
+  }
+
+  .--infobox-left,
+  .--infobox-right { 
+    width: 50%;
+    height: auto;
+  }
+
+  .--infobox-right {
+    margin-top: 100px;
+  }
+}
