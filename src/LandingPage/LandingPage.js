@@ -8,11 +8,11 @@ import {
 export const LandingPage = () => {
   return (
     <section className="LandingPage --container">
-      <div className="--content-container">
-        <div className="--background-img" />
-        <header className="--nav-bar">
+      <div className="LandingPage --content-container">
+        <div className="LandingPage --background-img" />
+        <header className="LandingPage --nav-bar">
           <img 
-            className="--logo-img"
+            className="LandingPage --logo-img"
             src={`${fullLogoImagePath}`}
             alt="Peace of Mind Spine.com logo, the left side of the logo resembles a stylish representation of a spinal column, and to the right, a partial butterfly wing."
           />
