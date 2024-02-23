@@ -1,10 +1,10 @@
-import Zoom from "react-reveal"
-import infoboxLeft from "../img/shapes/infobox_left.png"
-import infoboxRight from "../img/shapes/infobox_right.png"
+import Zoom from 'react-reveal'
+import infoboxLeft from '../img/shapes/infobox_left.png'
+import infoboxRight from '../img/shapes/infobox_right.png'
 
 export const LandingPageEducation = () => {
   return (
-    <section className="LandingPageEducation --container">
+    <section id="#education" className="LandingPageEducation --container">
       <Zoom>
         <img 
           className="LandingPageEducation --infobox-left" 

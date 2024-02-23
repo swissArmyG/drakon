@@ -1,15 +1,16 @@
-import fullLogoImagePath from '../img/logo/full.svg'
 import { 
   LandingPageNav, 
   LandingPageMenu, 
   LandingPageEducation 
 } from '.'
+import fullLogoImagePath from '../img/logo/full.svg'
 
-export const LandingPage = () => {
+export const LandingPage = () => {  
   return (
     <section className="LandingPage --container">
       <div className="LandingPage --content-container">
         <div className="LandingPage --background-img" />
+
         <header className="LandingPage --nav-bar">
           <img 
             className="LandingPage --logo-img"
@@ -18,6 +19,7 @@ export const LandingPage = () => {
           />
           <LandingPageNav />
         </header>
+
         <LandingPageMenu />
         <LandingPageEducation />
       </div>  

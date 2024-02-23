@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 export const FadedButtonOurStory = () => {
   const [isHover, setIsHover] = useState(false);
