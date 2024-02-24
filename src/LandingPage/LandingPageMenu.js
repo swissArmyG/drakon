@@ -1,3 +1,4 @@
+import { forwardRef } from 'react'
 import { 
   FadedButtonEducation,
   FadedButtonPricing,
@@ -5,22 +6,27 @@ import {
 } from '../img/buttons'
 import { Link } from 'react-router-dom'
 
-export const LandingPageMenu = () => {
+export const LandingPageMenu = forwardRef((_, refs) => {
+  const { educationRef, pricingRef, storyRef } = refs
+
   return (
     <section className="LandingPageMenu --container">
       <nav className="LandingPageMenu --menu-options">
-        <Link to="#education">
+        <Link to="#education" 
+          onClick={() => educationRef.current.scrollIntoView({ behavior: "smooth" })}>
           <FadedButtonEducation />
         </Link>
 
-        <Link to="#pricing">
+        <Link to="#pricing" 
+          onClick={() => pricingRef.current.scrollIntoView({ behavior: "smooth" })}>
           <FadedButtonPricing />
         </Link>
 
-        <Link to="#story">
+        <Link to="#story"
+          onClick={() => storyRef.current.scrollIntoView({ behavior: "smooth" })}>
           <FadedButtonOurStory />
         </Link>
       </nav>
     </section>
   )
-}
+})

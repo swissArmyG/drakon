@@ -1,10 +1,11 @@
 import { useState } from 'react'
 
-export const FadedButtonPricing = () => {
+export const FadedButtonPricing = (props) => {
   const [isHover, setIsHover] = useState(false);
   
   return (
     <svg 
+      {...props}
       className="FadedButton"
       width="100%" 
       height="100%" 
