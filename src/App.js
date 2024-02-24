@@ -14,13 +14,13 @@ const App = () => {
     <section className="App">
       <Routes location={location}>
         <Route exact path="/" element={<LandingPage />} />
-        <Route exact path="/#education" element={(props) =>  
+        <Route exact path="/education" element={(props) =>  
           <LandingPageEducation key={key} {...props} />
         }/>
-        <Route exact path="/#pricing" element={(props) => 
+        <Route exact path="/pricing" element={(props) => 
           <LandingPagePricing key={key} {...props} />
         }/>
-        <Route exact path="/#story" element={(props) => 
+        <Route exact path="/story" element={(props) => 
           <LandingPageStory key={key} {...props} />
         }/>
       </Routes>
