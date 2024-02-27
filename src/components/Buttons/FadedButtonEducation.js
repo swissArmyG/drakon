@@ -1,11 +1,10 @@
 import { useState } from 'react';
 
-export const FadedButtonEducation = (props) => {
+export const FadedButtonEducation = () => {
   const [isHover, setIsHover] = useState(false);
 
   return (
     <svg
-      {...props}
       className="FadedButton --button"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"

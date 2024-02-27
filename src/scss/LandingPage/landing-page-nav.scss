@@ -4,43 +4,54 @@
     padding: 20px 0;
   }
 
-  .--nav-options {
-    position: relative;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-  }
-
-  .--nav-option {
-    padding: 0 15px;
-    margin: 0;
-    font-weight: 700;
-
-    &:hover {
-      color: #FFC655;
+  .--nav {
+    &.-options {
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-end;
+      align-items: center;
     }
-  }
 
-  .--nav-info {
-    text-align: right;
-    padding-right: 15px;
-    min-width: 95%;
+    &.-option,
+    &.-info {
+      color: #FFF;
+    }
+
+    &.-option {
+      padding: 0 15px;
+      margin: 0;
+      font-weight: 700;
+
+      &:hover {
+        color: #FFC655;
+      }
+    }
+
+    &.-info {
+      text-align: right;
+      padding-right: 15px;
+      min-width: 95%;
+    }
   }
 }
 
 @media screen and (max-width: 540px) {
   .LandingPageNav { 
-    .--nav-info {
-      font-size: 13px;
+    .--nav {
+      &.-info {
+        font-size: 13px;
+      }
     }
   }
 }
 
 @media screen and (max-width: 588px) {
   .LandingPageNav {
-    .--nav-info {
-      font-size: 10px;
+    .--nav {
+      &.-info {
+        font-size: 10px;
+      }
     }
   }
 }
