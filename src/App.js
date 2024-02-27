@@ -4,7 +4,7 @@ import {
   LandingPageEducation,
   LandingPagePricing,
   LandingPageStory
-} from './LandingPage/'
+} from './components/LandingPage'
 
 const App = () => {  
   const location = useLocation()

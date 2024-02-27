@@ -6,15 +6,17 @@ import {
   LandingPagePricing,
   LandingPageStory
 } from '.'
-import fullLogoImagePath from '../img/logo/full.svg'
+import fullLogoImagePath from '../../img/logo/full.svg'
+import { SideButton } from '../Buttons'
 
 export const LandingPage = () => {
+  const backToTopRef = useRef(null)
   const educationRef = useRef(null)
   const pricingRef = useRef(null)
   const storyRef = useRef(null)
 
   return (
-    <section className="LandingPage --container --background">
+    <section className="LandingPage --container --background" ref={backToTopRef}>
       <header className="LandingPage --nav-bar">
         <img
           className="LandingPage --logo-img"
@@ -23,7 +25,7 @@ export const LandingPage = () => {
         />
         <LandingPageNav />
       </header>
-
+      <SideButton ref={backToTopRef} />
       <LandingPageMenu ref={{
           educationRef,
           pricingRef,

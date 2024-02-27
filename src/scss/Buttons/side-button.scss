@@ -1,0 +1,8 @@
+.SideButton {
+  &.--container {
+    position: fixed;
+    z-index: 1;
+    top: 50%;
+    right: 20px;
+  }
+}

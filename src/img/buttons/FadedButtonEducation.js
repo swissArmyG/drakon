@@ -6,7 +6,7 @@ export const FadedButtonEducation = (props) => {
   return (
     <svg
       {...props}
-      className="FadedButton"
+      className="FadedButton --button"
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       viewBox="0 0 391 95"

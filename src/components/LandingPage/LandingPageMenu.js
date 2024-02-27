@@ -3,7 +3,7 @@ import {
   FadedButtonEducation,
   FadedButtonPricing,
   FadedButtonOurStory
-} from '../img/buttons'
+} from '../../img/buttons'
 import { Link } from 'react-router-dom'
 
 export const LandingPageMenu = forwardRef((_, refs) => {

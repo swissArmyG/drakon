@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import Zoom from 'react-reveal'
-import infoboxLeft from '../img/shapes/infobox_left.png'
-import infoboxRight from '../img/shapes/infobox_right.png'
+import infoboxLeft from '../../img/shapes/infobox_left.png'
+import infoboxRight from '../../img/shapes/infobox_right.png'
 
 export const LandingPageEducation = forwardRef((_, ref) => {
   return (

@@ -11,7 +11,7 @@ export const LandingPageNav = () => {
       <div className="LandingPageNav --nav-options">
         {
           navOptions.map((navOp, idx) => {
-            return <p key={idx} className="LandingPageNav --nav-option">{navOp}</p>
+            return <p key={idx} className="LandingPageNav --nav-option --button">{navOp}</p>
           })
         }
       </div>
