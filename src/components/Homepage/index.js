@@ -1,0 +1,6 @@
+export { Homepage } from './Homepage'
+export { HomepageMenu } from './HomepageMenu'
+export { HomepageNav } from './HomepageNav'
+export { HomepageEducation } from './HomepageEducation'
+export { HomepagePricing } from './HomepagePricing'
+export { HomepageStory } from './HomepageStory'

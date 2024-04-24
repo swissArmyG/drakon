@@ -1,4 +1,4 @@
-.LandingPageNav {
+.HomepageNav {
   &.--container {
     width: 60%;
     padding: 20px 0;
@@ -37,7 +37,7 @@
 }
 
 @media screen and (max-width: 540px) {
-  .LandingPageNav { 
+  .HomepageNav { 
     .--nav {
       &.-info {
         font-size: 13px;
@@ -47,7 +47,7 @@
 }
 
 @media screen and (max-width: 588px) {
-  .LandingPageNav {
+  .HomepageNav {
     .--nav {
       &.-info {
         font-size: 10px;

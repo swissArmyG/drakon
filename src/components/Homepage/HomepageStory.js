@@ -1,6 +1,6 @@
 import { forwardRef } from "react"
 
-export const LandingPageStory = forwardRef((_, ref) => {
+export const HomepageStory = forwardRef((_, ref) => {
   const placeholderStyles = {
     height: "1000px",
     width: "100%",

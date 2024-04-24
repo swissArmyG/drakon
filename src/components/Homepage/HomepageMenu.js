@@ -6,12 +6,12 @@ import {
 } from '../Buttons'
 import { Link } from 'react-router-dom'
 
-export const LandingPageMenu = forwardRef((_, refs) => {
+export const HomepageMenu = forwardRef((_, refs) => {
   const { educationRef, pricingRef, storyRef } = refs
 
   return (
-    <section className="LandingPageMenu --container">
-      <nav className="LandingPageMenu --menu-options">
+    <section className="HomepageMenu --container">
+      <nav className="HomepageMenu --menu-options">
         <Link to="#education" 
           onClick={() => educationRef.current.scrollIntoView({ behavior: "smooth" })}>
           <FadedButtonEducation />

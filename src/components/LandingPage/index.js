@@ -1,6 +1,0 @@
-export { LandingPage } from './LandingPage'
-export { LandingPageMenu } from './LandingPageMenu'
-export { LandingPageNav } from './LandingPageNav'
-export { LandingPageEducation } from './LandingPageEducation'
-export { LandingPagePricing } from './LandingPagePricing'
-export { LandingPageStory } from './LandingPageStory'

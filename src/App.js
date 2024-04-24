@@ -1,10 +1,10 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { 
-  LandingPage,
-  LandingPageEducation,
-  LandingPagePricing,
-  LandingPageStory
-} from './components/LandingPage'
+  Homepage,
+  HomepageEducation,
+  HomepagePricing,
+  HomepageStory
+} from './components/Homepage'
 
 const App = () => {  
   const location = useLocation()
@@ -13,15 +13,15 @@ const App = () => {
   return (
     <section className="App">
       <Routes location={location}>
-        <Route exact path="/" element={<LandingPage />} />
+        <Route exact path="/" element={<Homepage />} />
         <Route exact path="/education" element={(props) =>  
-          <LandingPageEducation key={key} {...props} />
+          <HomepageEducation key={key} {...props} />
         }/>
         <Route exact path="/pricing" element={(props) => 
-          <LandingPagePricing key={key} {...props} />
+          <HomepagePricing key={key} {...props} />
         }/>
         <Route exact path="/story" element={(props) => 
-          <LandingPageStory key={key} {...props} />
+          <HomepageStory key={key} {...props} />
         }/>
       </Routes>
     </section>
