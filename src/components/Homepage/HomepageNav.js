@@ -16,9 +16,9 @@ export const HomepageNav = () => {
         }
       </div>
       <p className="HomepageNav --nav -info">
-        Your spine is a critical component of your body<br/>
-        Without it, you would crumble to pieces<br/>
-        Take excellent care of it
+      Empowering individuals with unparalleled access to<br/>
+      expert medical opinions, fostering confidence and<br/>
+      informed decision-making in their healthcare journey.
       </p>
     </section>
   )
