@@ -18,8 +18,8 @@
     "web-vitals": "2.1.4"
   },
   "scripts": {
-    "dev": "react-scripts start --port 4000",
     "build": "react-scripts build",
+    "dev": "yarn build && yarn react-scripts start --port 4000",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

@@ -1,5 +1,3 @@
 export { ArrowUp } from './ArrowUp'
-export { FadedButtonEducation } from './FadedButtonEducation'
-export { FadedButtonOurStory } from './FadedButtonOurStory'
-export { FadedButtonPricing } from './FadedButtonPricing'
-export { SideButton } from './SideButton'
+export { FadedBgButton } from './FadedBgButton'
+export { SideNavigation } from './SideNavigation'

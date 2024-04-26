@@ -1,9 +1,9 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { 
   Homepage,
-  HomepageEducation,
-  HomepagePricing,
-  HomepageStory
+  HomepageStory,
+  HomepageRequestAppt,
+  HomepageContact
 } from './components/Homepage'
 
 const App = () => {  
@@ -15,13 +15,13 @@ const App = () => {
       <Routes location={location}>
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/education" element={(props) =>  
-          <HomepageEducation key={key} {...props} />
+          <HomepageStory key={key} {...props} />
         }/>
         <Route exact path="/pricing" element={(props) => 
-          <HomepagePricing key={key} {...props} />
+          <HomepageRequestAppt key={key} {...props} />
         }/>
         <Route exact path="/story" element={(props) => 
-          <HomepageStory key={key} {...props} />
+          <HomepageContact key={key} {...props} />
         }/>
       </Routes>
     </section>

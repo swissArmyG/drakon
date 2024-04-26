@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.ca9ec8c6.css",
+    "main.js": "/static/js/main.fde9ca18.js",
+    "static/js/453.937f8a7d.chunk.js": "/static/js/453.937f8a7d.chunk.js",
+    "static/media/homepage.png": "/static/media/homepage.48949bb44e0ff53eb824.png",
+    "static/media/EBGaramond-VariableFont_wght.ttf": "/static/media/EBGaramond-VariableFont_wght.a3db34d9a4fb5564be54.ttf",
+    "static/media/icon.svg": "/static/media/icon.136bad2e611c945c1a8227aec6c4ee1f.svg",
+    "static/media/DidactGothic-Regular.ttf": "/static/media/DidactGothic-Regular.37c8a8ed522192cd4de5.ttf",
+    "static/media/Cantarell-Bold.ttf": "/static/media/Cantarell-Bold.2c4f1ee735df59c4cdeb.ttf",
+    "static/media/Cantarell-Regular.ttf": "/static/media/Cantarell-Regular.d92f45e08b65acbc2b2f.ttf",
+    "index.html": "/index.html",
+    "main.ca9ec8c6.css.map": "/static/css/main.ca9ec8c6.css.map",
+    "main.fde9ca18.js.map": "/static/js/main.fde9ca18.js.map",
+    "453.937f8a7d.chunk.js.map": "/static/js/453.937f8a7d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ca9ec8c6.css",
+    "static/js/main.fde9ca18.js"
+  ]
+}

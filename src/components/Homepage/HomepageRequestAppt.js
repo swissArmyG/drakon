@@ -1,8 +1,8 @@
 import { forwardRef } from "react"
 
-export const HomepageStory = forwardRef((_, ref) => {
+export const HomepageRequestAppt = forwardRef((_, ref) => {
   const placeholderStyles = {
-    height: "1000px",
+    height: "500px",
     width: "100%",
     display: "flex",
     flexDirection: "column",
@@ -10,12 +10,10 @@ export const HomepageStory = forwardRef((_, ref) => {
     justifyContent: "center"
   }
 
-  const story = "Peace of Mind Spine (POMS) provides a streamlined for "
-
   return (
     <section ref={ref} style={placeholderStyles}>
-      {/* <h1>Our Story</h1>
-      <h4>Coming soon!</h4> */}
+      <h1>Request Appointment</h1>
+      <h4>Coming soon!</h4>
     </section>
   )
 })
