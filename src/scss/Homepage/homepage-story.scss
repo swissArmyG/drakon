@@ -1,11 +1,17 @@
 .HomepageStory {
-  .--infobox-left,
-  .--infobox-right { 
-    width: 50%;
-    height: auto;
-  }
+  // .--infobox-left,
+  // .--infobox-right { 
+  //   width: 50%;
+  //   height: auto;
+  // }
 
-  .--infobox-right {
-    margin-top: 100px;
+  // .--infobox-right {
+  //   margin-top: 100px;
+  // }
+
+  .--icon-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }
