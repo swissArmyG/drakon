@@ -18,7 +18,18 @@
     }
   }
 
-  .--story-content {
-    width: 27%;
+  .--story-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* width: 38%; */
+    padding: 0 30%;
+
+    .--story-content {
+      width: 100%;
+    }
   }
 }
