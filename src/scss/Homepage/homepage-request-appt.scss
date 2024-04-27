@@ -1,0 +1,112 @@
+.HomepageRequestAppt {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  flex-direction: flex-start;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2000px;
+  background-image: url('../../img/bg/logo_overlay_alphaed.png');
+  background-repeat: no-repeat;
+
+  .--background-overlay {
+    position: absolute;
+    z-index: 100;
+    background-image: url('../../img/bg/form_overlay.png');
+    background-repeat: no-repeat;
+    width: 90%;
+    height: 857px;
+    top: 20%;
+  }
+
+  .--form-container {
+    position: absolute;
+    z-index: 1000;
+    top: 24.4%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+    .--header-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-end;
+        position: relative;
+        width: 100%;
+        margin-bottom: 20px;
+  
+      .--header-logo-placeholder {
+        position: absolute;
+        top: -80px;
+        left: 20%;
+        border-radius: 50%;
+        width: 140px;
+        height: 140px;
+        background-color: grey;
+        margin-right: 0;
+      }
+  
+      .--header-text {
+        position: relative;
+        left: -30px;
+        width: 40%;
+        text-align: left;
+      }
+    }
+    
+    .ConditionForm {
+      position: relative;
+      width: 55%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .--options-container {
+        width: 100%;
+        margin: 40px 0 20px 0;
+
+        label {
+          margin: 40px 0;
+
+          em {
+            font-family: "Cantarell-BoldItalic", sans-serif;
+          }
+        }
+    
+        .--option-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          
+          .--checkbox {
+            width: 23px;
+            height: 23px;
+            min-width: 23px;
+            max-width: 23px;
+            margin-right: 10px;
+            border-radius: 25%;
+            background-color: grey;
+  
+            &.--selected {
+              background-color: $accent-color;
+            }
+          }
+  
+          .--checkoption {
+            margin: 5px 0;
+
+            &.--selected {
+              color: $accent-color;
+            }
+          }
+        }
+      }
+    }
+  }
+}
