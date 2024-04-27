@@ -10,6 +10,9 @@
   height: 2000px;
   background-image: url('../../img/bg/logo_overlay_alphaed.png');
   background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+
 
   .--background-overlay {
     position: absolute;
@@ -40,15 +43,13 @@
         width: 100%;
         margin-bottom: 20px;
   
-      .--header-logo-placeholder {
+      .--header-logo {
         position: absolute;
         top: -80px;
-        left: 20%;
-        border-radius: 50%;
-        width: 140px;
-        height: 140px;
-        background-color: grey;
+        left: 18%;
         margin-right: 0;
+        width: 160px;
+        height: 160px;
       }
   
       .--header-text {
@@ -106,6 +107,25 @@
             }
           }
         }
+      }
+    }
+
+    .PaneControl {
+      display: flex;
+      flex-direction: row;
+      margin-top: 40px;
+    }
+
+    .InputContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-end;
+      width: 100%;
+      margin-top: 40px;
+
+      label {
+        margin-right: 10px;
       }
     }
   }

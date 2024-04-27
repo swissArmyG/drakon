@@ -1,7 +1,7 @@
-export const FadedBgButton = ({ buttonText, onClick }) => {
+export const FadedBgButton = ({ buttonText, onClick, isDisabled }) => {
   return (
-    <section className="FadedBgButton --button">
-      <h1 className="--button-text"
+    <section className={`FadedBgButton --button ${isDisabled ? 'isDisabled' : ''}`}>
+      <h1 className={`--button-text ${isDisabled ? 'isDisabled' : ''}`}
         onClick={onClick}>
         {buttonText}
       </h1>
@@ -26,15 +26,6 @@ export const FadedBgButton = ({ buttonText, onClick }) => {
                 </g>
               </g>
               <g transform="matrix(1,0,0,1,193,527)">
-                {/* <text x="19px" y="297.688px" 1
-                  style={{
-                    fontFamily:'Bahnschrift',
-                    fontSize: '39px',
-                    fill:`${isHover ? '#FFC655' : 'white'}`}}
-                  >UPPER
-                  <tspan x="67.141px 91.935px 114.919px 139.409px 158.947px 169.687px 194.481px " 
-                  y="297.688px 297.688px 297.688px 297.688px 297.688px 297.688px 297.688px ">SPINE</tspan> */}
-                {/* </text> */}
               </g>
             </g>
           </g>

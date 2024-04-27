@@ -3,10 +3,13 @@ import {
   singleSelectOption, 
   multipleSelectOptions 
 } from '../../copies/homepage-form-options'
+import spineGraphic from '../../img/shapes/form_spine_graphic.png'
+import { FadedBgButton } from '../Buttons/FadedBgButton';
 
 export const HomepageRequestAppt = forwardRef((_, ref) => {
   const [ singleOption, selectSingleOption ] = useState(undefined)
   const [ multipleOptions, selectMultipleOptions ] = useState([])
+  const [ painDegree, setPainDegree ] = useState(undefined)
   const [ pane, setPane ] = useState(0)
 
   const isSingleSelected = (option) => {
@@ -35,8 +38,8 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
 
   const renderHeader = () => {
     return <div className="--header-container">
-      <div className="--header-logo-placeholder" />
-      <p className="--header-text">Please send us your details electronically to make an appointment with us. Use the online form below.<br />An associate from <em>PeaceOfMindSpine.com</em> (POMS) will contact you soon.</p>
+      <img src={spineGraphic} alt="A section of a spine" className="--header-logo" />
+      <p className="--header-text">Please send us your details electronically to make an appointment with us. Use the online form below. An associate from <em>PeaceOfMindSpine.com</em> (POMS) will contact you soon.</p>
     </div>
   }
 
@@ -79,6 +82,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
           })
         }
       </div>
+      {renderInputContainer()}
     </div>
   }
 
@@ -90,20 +94,43 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
 
   const renderPaneControls = () => {
     return <div className="PaneControl">
-      <button disabled={pane === 0} 
-        onClick={(e) => {
-          e.preventDefault()
-          pane !== 0 && setPane(pane - 1)
-        }}>
-        Back
-      </button>
-      <button disabled={pane === 1} 
-        onClick={(e) => {
-          e.preventDefault()
-          pane !== 1 && setPane(pane + 1)
-        }}>
-        Next
-      </button>
+      <div className="--button-container">
+        <FadedBgButton
+          buttonText={'BACK'} 
+          onClick={(e) => {
+            e.preventDefault()
+            pane !== 0 && setPane(pane - 1)
+          }}
+          isDisabled={pane === 0}
+        />
+      </div>
+      <div className="--button-container">
+        <FadedBgButton                                             
+          buttonText={'NEXT'} 
+          onClick={(e) => {
+            e.preventDefault()
+            pane !== 1 && setPane(pane + 1)
+          }}
+          isDisabled={pane === 1}
+        />
+      </div>
+    </div>
+  }
+
+  const renderInputContainer = () => {
+    return <div className="InputContainer">
+      <label>Rate your overall degree of pain right now from 1-10 : </label>
+      <input type="number" min="1" max="10"
+        value={painDegree}
+        onChange={({ target: { value }}) => {
+          if (value < 1) {
+            value = undefined
+          }
+          if (value > 10) {
+            value = 10
+          }
+          setPainDegree(value)
+        }}/>
     </div>
   }
   

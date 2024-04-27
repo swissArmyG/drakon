@@ -9,6 +9,18 @@
     &:hover {
       color: $accent-color;
     }
+
+    &.isDisabled {
+      color: darkgrey;
+      
+      &:hover {
+        color: darkgrey;  
+      }
+    }
+  }
+
+  &.isDisabled {
+    cursor: not-allowed;
   }
 }
 
