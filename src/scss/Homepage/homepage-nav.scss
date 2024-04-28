@@ -26,7 +26,7 @@
       font-weight: 700;
 
       &:hover {
-        color: $accent-color;
+        color: $secondary-color;
       }
     }
   }
@@ -63,6 +63,7 @@
     
     .--nav-info {
       font-size: 12px;
+      width: 345px;
     }
   }
 }

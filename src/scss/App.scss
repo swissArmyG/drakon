@@ -7,7 +7,7 @@
     color: #FFF;
 
     &:hover {
-      color: $accent-color;
+      color: $secondary-color;
     }
 
     &.isDisabled {
@@ -45,5 +45,5 @@
 }
 
 .accented {
-  color: $accent-color;
+  color: $secondary-color;
 }

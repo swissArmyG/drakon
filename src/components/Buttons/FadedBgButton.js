@@ -20,7 +20,7 @@ export const FadedBgButton = ({ buttonText, buttonTextPosition, onClick, isDisab
           clipRule: "evenodd",
           strokeLinejoin: "round",
           strokeMiterlimit: 2,
-          width
+          "width": `${width}`
         }}
       >
         <g id="PAGE-INTERACTION" serifId="PAGE INTERACTION" transform="matrix(1,0,0,1,-182,-503)">

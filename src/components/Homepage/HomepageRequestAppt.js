@@ -1,16 +1,51 @@
-import React, { useState, forwardRef } from "react"
+import React, { useState, useEffect, forwardRef } from "react"
 import { 
   singleSelectOption, 
   multipleSelectOptions 
 } from '../../copies/homepage-form-options'
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { FadedBgButton } from '../Buttons/FadedBgButton';
+import { ProgressBar } from "../Assorted/ProgressBar";
 
 export const HomepageRequestAppt = forwardRef((_, ref) => {
   const [ singleOption, selectSingleOption ] = useState(undefined)
   const [ multipleOptions, selectMultipleOptions ] = useState([])
   const [ painDegree, setPainDegree ] = useState(undefined)
   const [ pane, setPane ] = useState(0)
+  const [ completedSteps, setCompletedSteps ] = useState(0)
+  const [ isMobileDevice, setIsMobileDevice ] = useState(false)
+  const [ windowSize, setWindowSize ] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowSize({
+        width: !isMobileDevice ? window.innerWidth : window.width,
+        height: !isMobileDevice ? window.innerHeight : window.height,
+      });
+      setIsMobileDevice(/Mobi/i.test(navigator.userAgent)
+    )}
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobileDevice]);
+
+  useEffect(() => {
+    const firstStepCompleted = !!painDegree && (
+      singleOption 
+        ? multipleOptions.concat(singleOption).length >= 1 
+        : multipleOptions.length >= 1
+    )
+    
+    setCompletedSteps(firstStepCompleted)
+  }, [singleOption, multipleOptions, painDegree])
+
 
   const isSingleSelected = (option) => {
     return singleOption === option ? '--selected' : ''
@@ -29,11 +64,13 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
   }
 
   const determineMultipleOptions = (option) => {
-    if (isMultipleSelected(option)) {
-      selectMultipleOptions(multipleOptions.filter(op => op !== option))
-    } else {
-      selectMultipleOptions([...multipleOptions, option])
-    }
+    selectMultipleOptions(prevState => {
+      if (isMultipleSelected(option)) {
+        return prevState.filter(op => op!== option)
+      } else {
+        return [...prevState, option]
+      }
+    })
   }
 
   const renderHeader = () => {
@@ -65,7 +102,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
       </div>
 
       <div className="--options-container">
-        <label><i>Please select <em>one or more</em> of the following:</i></label>
+        <label><i>-OR- select <em>one or more</em> of the following:</i></label>
         {
           Object.keys(multipleSelectOptions).map((option, index) => {
             return <div key={index} className='--option-container'>
@@ -93,30 +130,34 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
   }
 
   const renderPaneControls = () => {
+    console.log(windowSize)
+    const buttonWidth = windowSize.width > 412 ? "300px" : "160px"
+    const buttonTextPosition = windowSize.width > 412 ? "-28%" : "-88%"
+
     return <div className="PaneControl">
       <div className="--button-container">
         <FadedBgButton
           buttonText={'BACK'} 
-          buttonTextPosition="-88%"
+          buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
             e.preventDefault()
             pane !== 0 && setPane(pane - 1)
           }}
           isDisabled={pane === 0}
-          width="160px"
+          width={buttonWidth}
         />
       </div>
       <div className="--button-container">
-        <FadedBgButton                                             
+        <FadedBgButton                                           
           buttonText={'NEXT'} 
-          buttonTextPosition="-88%"
+          buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
             e.preventDefault()
             pane !== 1 && setPane(pane + 1)
           }}
           isDisabled={pane === 1}
           isFlipped
-          width="160px"
+          width={buttonWidth}
         />
       </div>
     </div>
@@ -128,7 +169,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
       <input type="number" min="1" max="10"
         value={painDegree}
         onChange={({ target: { value }}) => {
-          if (value < 1) {
+          if (value < 1 || !value) {
             value = undefined
           }
           if (value > 10) {
@@ -146,6 +187,10 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
           {renderHeader()}
           {pane === 0 && renderConditionForm()}
           {pane === 1 && renderPatientDetailForm()}
+          <ProgressBar 
+            steps={2} 
+            stepsCompleted={completedSteps}
+          />
           {renderPaneControls()}
         </div>
     </section>
