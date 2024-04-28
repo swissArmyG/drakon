@@ -28,8 +28,10 @@ export const HomepageTopics =  () => {
   return (
     <section className="HomepageTopics --container">
       {
-        Object.keys(topics).map((category, idx) => {
-          return <div className="--topics-container">
+        Object.keys(topics).map((category, index) => {
+          return <div
+          key={index}
+           className="--topics-container">
             <div className="--button-container">
               <FadedBgButton
                 buttonText={category} 
@@ -37,12 +39,13 @@ export const HomepageTopics =  () => {
                   e.preventDefault()
                   setCurrentCategory(currentCategory === category ? undefined : category)
                 }}
+                width="300px"
               />
             </div>
             {
               category === currentCategory &&
               <div className={`--textbox-container`}>
-                {renderTopicContent(category, idx)}
+                {renderTopicContent(category, index)}
               </div>
             }
           </div>

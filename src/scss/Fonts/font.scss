@@ -50,3 +50,12 @@ h1 {
 span {
   font-size: 13px;
 }
+
+
+@media screen and (max-width: 412px) {
+  h4 {
+    &.--nav-option {
+      font-size: 12px;
+    }
+  }
+}

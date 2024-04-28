@@ -29,21 +29,19 @@ export const HomepageNav = forwardRef((_, refs) => {
   }
 
   return (
-    <section className="HomepageNav --container">
-      <div className="HomepageNav --nav -options">
+    <section className="HomepageNav">
+      <div className="--nav-options">
         {
-          Object.keys(navOptions).map((op, idx) => {
-            return <Link to={`${navOptions[op].linkTo}`}
+          Object.keys(navOptions).map((op, index) => {
+            return <Link key={index} to={`${navOptions[op].linkTo}`}
               onClick={navOptions[op].onClick}>
-              <h4 key={idx} className="HomepageNav --nav -option --button">{navOptions[op].text}</h4>
+              <h4 className="--nav-option --button">{navOptions[op].text}</h4>
             </Link>
           })
         } 
       </div>
-      <p className="HomepageNav --nav -info"> 
-          To empower individuals with unparalleled access to<br/>
-          expert medical opinions, fostering confidence and<br/>
-          informed decision-making in their healthcare journey.
+      <p className="--nav-info"> 
+          To empower individuals with unparalleled access to expert medical opinions, fostering confidence and informed decision-making in their healthcare journey.
         </p>
     </section>
   )

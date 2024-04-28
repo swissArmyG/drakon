@@ -7,21 +7,22 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 2000px;
+  height: 1320px;
   background-image: url('../../img/bg/logo_overlay_alphaed.png');
   background-repeat: no-repeat;
-  background-size: contain;
+  background-size: cover;
   background-position: center;
 
 
   .--background-overlay {
     position: absolute;
     z-index: 100;
+    top: 15%;
     background-image: url('../../img/bg/form_overlay.png');
     background-repeat: no-repeat;
-    width: 90%;
-    height: 857px;
-    top: 20%;
+    background-size: cover;
+    width: 100%;
+    height: 1100px;
   }
 
   .--form-container {

@@ -1,24 +1,26 @@
 .HomepageNav {
-  &.--container {
-    width: 60%;
-    padding: 20px 0;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 60%;
+  min-width: 425px;
+  padding: 20px 0;
+  text-align: center;
 
-  .--nav {
-    &.-options {
-      position: relative;
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-    }
 
-    &.-option,
-    &.-info {
+  .--nav-options {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+
+    .--nav-option,
+    .--nav-info {
       color: #FFF;
     }
 
-    &.-option {
+    .--nav-option {
       padding: 0 15px;
       margin: 0;
       font-weight: 700;
@@ -27,31 +29,40 @@
         color: $accent-color;
       }
     }
+  }
 
-    &.-info {
-      text-align: right;
-      padding-right: 15px;
-      min-width: 95%;
-    }
+  .--nav-info {
+    text-align: right;
+    padding-right: 15px;
+    min-width: 95%;
   }
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (max-width: 988px) {
   .HomepageNav { 
-    .--nav {
-      &.-info {
-        font-size: 13px;
-      }
+    width: 100%;
+    align-items: center;
+
+    .--nav-option {
+      justify-content: center;
+    }
+
+    .--nav-info {
+      text-align: center;
     }
   }
 }
 
-@media screen and (max-width: 588px) {
+@media screen and (max-width: 412px) {
   .HomepageNav {
-    .--nav {
-      &.-info {
-        font-size: 12px;
-      }
+    min-width: 300px;
+
+    .--nav-options {
+      max-width: 340px;;
+    }
+    
+    .--nav-info {
+      font-size: 12px;
     }
   }
 }

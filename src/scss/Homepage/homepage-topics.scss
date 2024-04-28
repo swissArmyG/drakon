@@ -1,13 +1,12 @@
 .HomepageTopics {
   padding: 7.6% 0 0 12%;
-  height: 1160px;
+  height: 1360px;
 
   &.--topics-container {
     position: relative;
     width: 50%;
     padding-top: 12%;
     min-height: 596px;
-    
   }
 
   .--textbox-container {
@@ -55,8 +54,31 @@
   .HomepageTopics {
     .--textbox-container {
       .--textbox-content {
+        // position: relative;
+        left: 41%
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1034px) {
+  .HomepageTopics {
+    .--textbox-container {
+      .--textbox-content {
         position: relative;
         left: 0%
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .HomepageTopics {
+    .--textbox-container {
+      .--textbox-content {
+        width: 78%;
+        border-radius: 6%;
+        padding: 22px 15px;
       }
     }
   }

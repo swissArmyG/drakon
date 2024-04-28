@@ -97,21 +97,26 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
       <div className="--button-container">
         <FadedBgButton
           buttonText={'BACK'} 
+          buttonTextPosition="-88%"
           onClick={(e) => {
             e.preventDefault()
             pane !== 0 && setPane(pane - 1)
           }}
           isDisabled={pane === 0}
+          width="160px"
         />
       </div>
       <div className="--button-container">
         <FadedBgButton                                             
           buttonText={'NEXT'} 
+          buttonTextPosition="-88%"
           onClick={(e) => {
             e.preventDefault()
             pane !== 1 && setPane(pane + 1)
           }}
           isDisabled={pane === 1}
+          isFlipped
+          width="160px"
         />
       </div>
     </div>
