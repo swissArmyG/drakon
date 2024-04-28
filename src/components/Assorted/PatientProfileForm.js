@@ -26,6 +26,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
       </div>
     </div>
 
+    <div className="--address-input-container">
       <p><em>Address</em><span>Optional</span></p>
       <input type="text"
         value={patientProfile.address || ""}
@@ -34,6 +35,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
           onChange({ address: e.target.value })
         }} 
       />
+    </div>
 
     <div className="row">
       <div className="--input-container">
