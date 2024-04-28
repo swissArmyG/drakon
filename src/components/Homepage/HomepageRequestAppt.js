@@ -4,21 +4,25 @@ import {
   multipleSelectOptions 
 } from '../../copies/homepage-form-options'
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
-import { FadedBgButton } from '../Buttons/FadedBgButton';
-import { ProgressBar } from "../Assorted/ProgressBar";
+import { FadedBgButton } from '../Buttons';
+import { PatientProfileForm, ProgressBar } from "../Assorted";
 
 export const HomepageRequestAppt = forwardRef((_, ref) => {
   const [ singleOption, selectSingleOption ] = useState(undefined)
   const [ multipleOptions, selectMultipleOptions ] = useState([])
   const [ painDegree, setPainDegree ] = useState(undefined)
+  const [ patientProfile, setPatientProfile ] = useState({})
+
   const [ pane, setPane ] = useState(0)
-  const [ completedSteps, setCompletedSteps ] = useState(0)
+  const [ stepsCompleted, setStepsCompleted ] = useState(0)
+
   const [ isMobileDevice, setIsMobileDevice ] = useState(false)
   const [ windowSize, setWindowSize ] = useState({
     width: window.innerWidth,
     height: window.innerHeight,
   });
 
+  console.log(stepsCompleted)
 
   useEffect(() => {
     const handleResize = () => {
@@ -42,9 +46,25 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
         ? multipleOptions.concat(singleOption).length >= 1 
         : multipleOptions.length >= 1
     )
+
+    const { firstname, lastname, email, phoneNumber } = patientProfile
+
+    const secondStepCompleted = firstname && lastname && email && phoneNumber 
+
+    let stepsCompleted = 0;
+
+    if (firstStepCompleted || secondStepCompleted) {
+      stepsCompleted = 1;
+    }
+
+    if (firstStepCompleted && secondStepCompleted) {
+      stepsCompleted = 2;
+    }
+
+    console.log(patientProfile, stepsCompleted)
     
-    setCompletedSteps(firstStepCompleted)
-  }, [singleOption, multipleOptions, painDegree])
+    setStepsCompleted(stepsCompleted)
+  }, [singleOption, multipleOptions, painDegree, patientProfile])
 
 
   const isSingleSelected = (option) => {
@@ -123,14 +143,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
     </div>
   }
 
-  const renderPatientDetailForm = () => {
-    return <div className="PatientDetailForm">
-       <h1>Patient Info</h1>
-    </div>
-  }
-
   const renderPaneControls = () => {
-    console.log(windowSize)
     const buttonWidth = windowSize.width > 412 ? "300px" : "160px"
     const buttonTextPosition = windowSize.width > 412 ? "-28%" : "-88%"
 
@@ -186,10 +199,12 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
         <div className="--form-container">
           {renderHeader()}
           {pane === 0 && renderConditionForm()}
-          {pane === 1 && renderPatientDetailForm()}
+          {pane === 1 && <PatientProfileForm
+            patientProfile={patientProfile}  
+            onChange={(data) => setPatientProfile({ ...patientProfile, ...data })} />}
           <ProgressBar 
             steps={2} 
-            stepsCompleted={completedSteps}
+            stepsCompleted={stepsCompleted}
           />
           {renderPaneControls()}
         </div>

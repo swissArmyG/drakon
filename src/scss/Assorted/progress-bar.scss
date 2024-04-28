@@ -16,7 +16,7 @@
 
   .--progress-label-container,
   .--progress-indicator {
-    background-color: grey;
+    background-color: $accent-a-color;
 
     &.isCompleted-1 {
       background-color: $accent-c-color;

@@ -1,0 +1,20 @@
+.PatientProfileForm {
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+
+  .--input-container {
+    width: 50%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  span {
+    padding-left: 10px;
+    font-style: italic;
+  }
+}

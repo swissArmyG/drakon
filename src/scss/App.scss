@@ -11,10 +11,10 @@
     }
 
     &.isDisabled {
-      color: darkgrey;
+      color: $accent-a-color;
       
       &:hover {
-        color: darkgrey;  
+        color: $accent-a-color;  
       }
     }
   }
@@ -47,3 +47,4 @@
 .accented {
   color: $secondary-color;
 }
+
