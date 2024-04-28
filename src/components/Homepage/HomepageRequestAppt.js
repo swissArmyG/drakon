@@ -22,8 +22,6 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
     height: window.innerHeight,
   });
 
-  console.log(stepsCompleted)
-
   useEffect(() => {
     const handleResize = () => {
       setWindowSize({
@@ -60,8 +58,6 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
     if (firstStepCompleted && secondStepCompleted) {
       stepsCompleted = 2;
     }
-
-    console.log(patientProfile, stepsCompleted)
     
     setStepsCompleted(stepsCompleted)
   }, [singleOption, multipleOptions, painDegree, patientProfile])
