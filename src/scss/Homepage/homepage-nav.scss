@@ -34,7 +34,8 @@
   .--nav-info {
     text-align: right;
     padding-right: 15px;
-    min-width: 95%;
+    // min-width: 95%;
+    width: 396
   }
 }
 
@@ -58,7 +59,7 @@
     min-width: 300px;
 
     .--nav-options {
-      max-width: 340px;;
+      max-width: 340px;
     }
     
     .--nav-info {
