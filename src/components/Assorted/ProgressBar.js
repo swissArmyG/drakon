@@ -20,4 +20,3 @@ export const ProgressBar = ({ steps, stepsCompleted }) => {
 
   return <div className="ProgressBar">{mappedArr}</div>;
 };
-
