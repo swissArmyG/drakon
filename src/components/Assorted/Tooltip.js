@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export const Tooltip = ({ children, text, position, right }) => {
-  const [isVisible, setIsVisible] = useState(true)
+  const [isVisible, setIsVisible] = useState(false)
 
   return (
     <section className="Tooltip">
