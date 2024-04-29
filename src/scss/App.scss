@@ -48,3 +48,16 @@
   color: $secondary-color;
 }
 
+input {
+  background-color: unset;
+  border: 2px solid $primary-color;
+  padding: 10px;
+  border-radius: 8px;
+  color: #FFF;
+
+  &:focus, 
+  &:active {
+    outline: none;
+    border: 2px solid $secondary-color !important;
+  }
+}
