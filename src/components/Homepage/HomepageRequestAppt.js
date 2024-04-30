@@ -191,7 +191,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
 
   const renderInputContainer = () => {
     return <div className="InputContainer">
-      <label>Rate your overall degree of pain right now from 1-10 : </label>
+      <label>Rate your overall degree of pain right now from 1-10: </label>
       <input type="number" min="1" max="10"
         value={painDegree}
         onChange={({ target: { value }}) => {
