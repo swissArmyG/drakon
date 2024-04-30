@@ -151,13 +151,6 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
     const buttonWidth = windowSize.width > 412 ? "300px" : "160px"
     const buttonTextPosition = windowSize.width > 412 ? "-28%" : "-88%"
 
-    console.log('stepsCompleted:', stepsCompleted, 'isSubmittable:', isSubmittable)
-    console.log('pane', pane)
-
-
-    console.log('NEXTABLE', pane < MAX_PANE && stepsCompleted !== 1)
-    console.log('SUBMITTABLE', pane === MAX_PANE && stepsCompleted !== 2)
-
     return <div className="PaneControl">
       <div className="--button-container">
         <FadedBgButton
