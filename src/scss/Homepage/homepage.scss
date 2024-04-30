@@ -38,7 +38,23 @@
         flex-wrap: wrap;
 
         .logo {
-          min-width: 324px;;
+          min-width: 324px;
+          width: 100%;
+        }
+      }
+    } 
+  }
+}
+
+@media screen and (max-width: 988px) {
+  .Homepage {
+    &.--background {
+      .--nav-bar {
+        flex-wrap: wrap;
+
+        .logo {
+          min-width: 324px;
+          width: 100%;
         }
       }
     } 

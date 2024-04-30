@@ -30,6 +30,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
 
   useEffect(() => {
     const handleResize = () => {
+      console.log(window.innerWidth)
       setWindowSize({
         width: !isMobileDevice ? window.innerWidth : window.width,
         height: !isMobileDevice ? window.innerHeight : window.height,
@@ -42,7 +43,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [isMobileDevice]);
+  }, [isMobileDevice, windowSize.width]);
 
   useEffect(() => {
     const firstStepCompleted = !!painDegree && (
@@ -148,8 +149,8 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
   const renderPaneControls = () => {
     const isSubmittable = stepsCompleted === 2
 
-    const buttonWidth = windowSize.width > 412 ? "300px" : "160px"
-    const buttonTextPosition = windowSize.width > 412 ? "-28%" : "-88%"
+    const buttonWidth = windowSize.width > 613 ? "300px" : "160px"
+    const buttonTextPosition = windowSize.width > 613 ? "-28%" : "-88%"
 
     return <div className="PaneControl">
       <div className="--button-container">
@@ -180,7 +181,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
             }
           }}
           isDisabled={(pane < MAX_PANE && stepsCompleted < 1) || 
-            (pane === MAX_PANE && stepsCompleted !== 2)}
+            (pane === MAX_PANE && !isSubmittable)}
           isFlipped
           width={buttonWidth}
         />
