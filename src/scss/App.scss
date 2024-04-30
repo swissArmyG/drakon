@@ -1,0 +1,63 @@
+@import './variables.scss';
+
+.--button {
+  cursor: pointer;
+
+  .--button-text {
+    color: #FFF;
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &.isDisabled {
+      color: $accent-a-color;
+      
+      &:hover {
+        color: $accent-a-color;  
+      }
+    }
+  }
+
+  &.isDisabled {
+    cursor: not-allowed;
+  }
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.accented {
+  color: $secondary-color;
+}
+
+input {
+  background-color: unset;
+  border: 2px solid $primary-color;
+  padding: 10px;
+  border-radius: 8px;
+  color: #FFF;
+
+  &:focus, 
+  &:active {
+    outline: none;
+    border: 2px solid $secondary-color !important;
+  }
+}

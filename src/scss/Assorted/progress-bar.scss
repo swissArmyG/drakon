@@ -1,0 +1,33 @@
+.ProgressBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 55%;
+  height: 250px;
+
+  .--progress-label-container {
+    width: 26px;
+
+    .--progress-label {
+      padding-left: 8px;
+    }
+  }
+
+  .--progress-label-container,
+  .--progress-indicator {
+    background-color: $accent-a-color;
+
+    &.isCompleted-1 {
+      background-color: $accent-c-color;
+    }
+
+    &.isCompleted-2 {
+      background-color: $secondary-color;
+    }
+  }
+
+  .--progress-indicator {
+    height: 5px;
+  }
+}

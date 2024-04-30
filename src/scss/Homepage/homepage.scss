@@ -1,0 +1,62 @@
+.Homepage {
+  &.--background {
+    background-image: url('../../img/bg/homepage.png');
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    .--nav-bar {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+
+      .logo {
+        width: 48%;
+        min-width: 513px;
+        padding: 20px 10px;
+      }
+    }
+  }
+
+  .--content-container {
+    position: relative;
+    height: fit-content;
+    max-width: 100%;
+  }
+
+  .--logo-img {
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 988px) {
+  .Homepage {
+    &.--background {
+      .--nav-bar {
+        flex-wrap: wrap;
+
+        .logo {
+          min-width: 324px;
+          width: 100%;
+        }
+      }
+    } 
+  }
+}
+
+@media screen and (max-width: 988px) {
+  .Homepage {
+    &.--background {
+      .--nav-bar {
+        flex-wrap: wrap;
+
+        .logo {
+          min-width: 324px;
+          width: 100%;
+        }
+      }
+    } 
+  }
+}

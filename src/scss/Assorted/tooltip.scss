@@ -1,0 +1,26 @@
+.Tooltip {
+  position: fixed;
+  top: 47%; 
+  right: 0%;
+  z-index: 10000;
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+ 
+  .--tooltip-content {
+    text-align: center;
+    height: 100vh;
+    padding: 2px 5px;
+
+    &.top {
+      bottom: 100%;
+      transform: translateX(-50%) translateY(-100%);
+      white-space: no-wrap
+    }
+
+    &.right {
+      right: 0px;
+      left: auto;
+      transform: translateX(100%);
+    }
+  }
+}

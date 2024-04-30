@@ -1,0 +1,14 @@
+.FadedBgButton {
+  position: relative;
+
+  .--button-text {
+    position: absolute;
+    top: -28%;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .isFlipped {
+    transform: scaleX(-1);
+  }
+}

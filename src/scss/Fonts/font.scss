@@ -1,0 +1,61 @@
+@font-face {
+  font-family: 'EBGaramond';
+  src: url('./EBGaramond/EBGaramond-VariableFont_wght.ttf');
+}
+
+
+@font-face {
+  font-family: 'Didact Gothic';
+  src: url('./DidactGothic/DidactGothic-Regular.ttf')
+}
+
+@font-face {
+  font-family: 'Cantarell';
+  src: url('./Cantarell/Cantarell-Regular.ttf')
+}
+
+@font-face {
+  font-family: 'Cantarell-Bold';
+  src: url('./Cantarell/Cantarell-Bold.ttf')
+}
+
+@font-face {
+  font-family: 'Cantarell-BoldItalic';
+  src: url('./Cantarell/Cantarell-BoldItalic.ttf')
+}
+
+body {
+  font-family: 'Cantarell', sans-serif;
+  color: #FFF;
+}
+
+h1, h2, h3, h4 {
+  font-family: "Cantarell", sans-serif;
+}
+
+em {
+  font-family: 'Cantarell-Bold', sans-serif;
+  color: $secondary-color;
+  font-style: normal;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+span {
+  font-size: 13px;
+}
+
+
+@media screen and (max-width: 412px) {
+  h4 {
+    &.--nav-option {
+      font-size: 12px;
+    }
+  }
+}

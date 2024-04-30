@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.12086016.css",
+    "main.js": "/static/js/main.0817259a.js",
+    "static/js/453.937f8a7d.chunk.js": "/static/js/453.937f8a7d.chunk.js",
+    "static/media/logo_overlay_alphaed.png": "/static/media/logo_overlay_alphaed.3ec3d71bb98586fa98d9.png",
+    "static/media/homepage.png": "/static/media/homepage.48949bb44e0ff53eb824.png",
+    "static/media/EBGaramond-VariableFont_wght.ttf": "/static/media/EBGaramond-VariableFont_wght.a3db34d9a4fb5564be54.ttf",
+    "static/media/form_overlay.png": "/static/media/form_overlay.31f64e9ba8a5dc2e5b69.png",
+    "static/media/DidactGothic-Regular.ttf": "/static/media/DidactGothic-Regular.37c8a8ed522192cd4de5.ttf",
+    "static/media/form_spine_graphic.png": "/static/media/form_spine_graphic.52d5ca89f186a4f85597.png",
+    "static/media/skele_icon_middle.png": "/static/media/skele_icon_middle.bf2e5ea53a93f3e01966.png",
+    "static/media/Cantarell-BoldItalic.ttf": "/static/media/Cantarell-BoldItalic.7f0da357fd05ecec4818.ttf",
+    "static/media/Cantarell-Bold.ttf": "/static/media/Cantarell-Bold.2c4f1ee735df59c4cdeb.ttf",
+    "static/media/skele_icon_right.png": "/static/media/skele_icon_right.cc740046c5500551825d.png",
+    "static/media/Cantarell-Regular.ttf": "/static/media/Cantarell-Regular.d92f45e08b65acbc2b2f.ttf",
+    "static/media/logo_with_text.png": "/static/media/logo_with_text.0a3ee26d7a5df7a10b40.png",
+    "static/media/skele_icon_left.png": "/static/media/skele_icon_left.be16f9b4d4bf8a93092b.png",
+    "index.html": "/index.html",
+    "main.12086016.css.map": "/static/css/main.12086016.css.map",
+    "main.0817259a.js.map": "/static/js/main.0817259a.js.map",
+    "453.937f8a7d.chunk.js.map": "/static/js/453.937f8a7d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.12086016.css",
+    "static/js/main.0817259a.js"
+  ]
+}

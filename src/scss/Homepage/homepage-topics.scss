@@ -1,0 +1,84 @@
+.HomepageTopics {
+  padding: 7.6% 0 0 12%;
+  height: 1360px;
+
+  &.--topics-container {
+    position: relative;
+    width: 50%;
+    padding-top: 12%;
+    min-height: 596px;
+  }
+
+  .--textbox-container {
+    text-align: left;
+
+    .--textbox-content {
+      position: absolute;
+      width: 530px;
+      left: 47%;
+      height: fit-content;
+      background-color: rgba(0,0,0,.8);
+      border: 5px solid $secondary-color;
+      border-radius: 10%;
+      padding: 40px 15px;
+
+      &.-box-0 {
+        top: 20%;
+      }
+  
+      &.-box-1 {
+        top: 39%;
+      }
+
+      &.-box-2 {
+        top: 68%;
+      }
+
+      &.-box-3 {
+        top: 80%;
+      }
+
+      em {
+        font-family: 'Cantarell-Bold', sans-serif 
+      }
+
+      .--textbox-text {
+        border-radius: 15%;
+      }
+    }
+  }
+}
+
+
+@media screen and (max-width: 1219px) {
+  .HomepageTopics {
+    .--textbox-container {
+      .--textbox-content {
+        left: 41%
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1034px) {
+  .HomepageTopics {
+    .--textbox-container {
+      .--textbox-content {
+        position: relative;
+        left: 0%
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .HomepageTopics {
+    .--textbox-container {
+      .--textbox-content {
+        width: 78%;
+        border-radius: 30px;
+        padding: 22px 15px;
+      }
+    }
+  }
+}
