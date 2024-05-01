@@ -16,7 +16,7 @@ const App = () => {
         <Route exact path="/" element={<Homepage />} />
         <Route exact path="/education" element={(props) =>  
           <HomepageStory key={key} {...props} />
-        }/>
+        }/> 
         <Route exact path="/pricing" element={(props) => 
           <HomepageRequestAppt key={key} {...props} />
         }/>
