@@ -6,16 +6,23 @@ import {
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { FadedBgButton } from '../Buttons';
 import { PatientProfileForm, ProgressBar } from "../Assorted";
+import { createPatient } from "../../servers/patients";
 
+export const HomepageRequestAppt = forwardRef((props, ref) => {
+  const FIRST_PANE = 1
+  const MAX_PANE = 2
 
-export const HomepageRequestAppt = forwardRef((_, ref) => {
-  const MAX_PANE = 2 // First page is 1
-
-  const [ singleOption, selectSingleOption ] = useState(undefined)
+  const [ singleOption, selectSingleOption ] = useState('')
   const [ multipleOptions, selectMultipleOptions ] = useState([])
 
-  const [ painDegree, setPainDegree ] = useState(undefined)
-  const [ patientProfile, setPatientProfile ] = useState({})
+  const [ painDegree, setPainDegree ] = useState()
+  const [ patientProfile, setPatientProfile ] = useState({
+    firstname: '',
+    lastname: '',
+    address: '',
+    email: '',
+    phoneNumber: ''
+  })
 
   const [ pane, setPane ] = useState(1)
   const [ stepsCompleted, setStepsCompleted ] = useState(0)
@@ -30,7 +37,6 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
 
   useEffect(() => {
     const handleResize = () => {
-      console.log(window.innerWidth)
       setWindowSize({
         width: !isMobileDevice ? window.innerWidth : window.width,
         height: !isMobileDevice ? window.innerHeight : window.height,
@@ -47,7 +53,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
 
   useEffect(() => {
     const firstStepCompleted = !!painDegree && (
-      singleOption 
+      !!singleOption 
         ? multipleOptions.concat(singleOption).length >= 1 
         : multipleOptions.length >= 1
     )
@@ -94,6 +100,50 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
         return [...prevState, option]
       }
     })
+  }
+
+  const resetForm = () => {
+    selectSingleOption('')
+    selectMultipleOptions([])
+    setPainDegree(undefined)
+    setPatientProfile({
+      firstname: '',
+      lastname: '',
+      address: '',
+      email: '',
+      phoneNumber: ''
+    })
+    setPane(FIRST_PANE)
+    setStepsCompleted(0)
+  }
+
+  const requestAppointment = async () => {
+    setIsSubmitting(true)
+
+    try {
+      await createPatient({
+        firstname: patientProfile.firstname,
+        lastname: patientProfile.lastname,
+        pain_description: [...multipleOptions.map(option => multipleSelectOptions[option]), 
+          singleOption].join(', '),
+        pain_degree: painDegree,
+        address: patientProfile.address,
+        email: patientProfile.email,
+        phone_number: patientProfile.phoneNumber
+      })
+      props.notify({ 
+        type: 'success', 
+        message: 'Your have requested an appointment! Our doctor will reach out to you soon via email and phone number you provided.'
+      })
+      resetForm()
+    } catch (err) {
+      props.notify({ 
+        type: 'error', 
+        message: 'Unable to request appointment currently, please try again later.'
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const renderHeader = () => {
@@ -147,7 +197,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
   }
 
   const renderPaneControls = () => {
-    const isSubmittable = stepsCompleted === 2
+    const isSubmittable = stepsCompleted === MAX_PANE
 
     const buttonWidth = windowSize.width > 613 ? "300px" : "160px"
     const buttonTextPosition = windowSize.width > 613 ? "-28%" : "-88%"
@@ -159,9 +209,9 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
             e.preventDefault()
-            pane > 0 && setPane(pane - 1)          
+            pane > FIRST_PANE && setPane(pane - 1)          
           }}
-          isDisabled={pane === 1}
+          isDisabled={pane === FIRST_PANE}
           width={buttonWidth}
         />
       </div>
@@ -172,15 +222,16 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
           onClick={(e) => {
             e.preventDefault()
 
-            if (pane < MAX_PANE && stepsCompleted === 1) {
+            if (pane < MAX_PANE && stepsCompleted === FIRST_PANE) {
               setPane(pane + 1)
             }
             
             if (isSubmittable) {
-              console.log('SUBMITTING')
+              requestAppointment()
             }
           }}
-          isDisabled={(pane < MAX_PANE && stepsCompleted < 1) || 
+          isDisabled={isSubmitting || 
+            (pane === FIRST_PANE && stepsCompleted !== FIRST_PANE) || 
             (pane === MAX_PANE && !isSubmittable)}
           isFlipped
           width={buttonWidth}
@@ -192,7 +243,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
   const renderInputContainer = () => {
     return <div className="InputContainer">
       <label>Rate your overall degree of pain right now from 1-10: </label>
-      <input type="number" min="1" max="10"
+      <input type="number" max="10"
         value={painDegree}
         onChange={({ target: { value }}) => {
           if (value < 1 || !value) {

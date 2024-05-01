@@ -1,28 +1,33 @@
 @import './variables.scss';
 
+.accented {
+  color: $secondary-color;
+}
+
 .--button {
   cursor: pointer;
-
-  .--button-text {
-    color: #FFF;
-
-    &:hover {
-      color: $secondary-color;
-    }
-
-    &.isDisabled {
-      color: $accent-a-color;
-      
-      &:hover {
-        color: $accent-a-color;  
-      }
-    }
-  }
 
   &.isDisabled {
     cursor: not-allowed;
   }
 }
+
+.--button-text {
+  color: #FFF;
+
+  &:hover {
+    color: $secondary-color;
+  }
+
+  &.isDisabled {
+    color: $accent-a-color;
+    
+    &:hover {
+      color: $accent-a-color;  
+    }
+  }
+}
+
 
 .App-logo {
   height: 40vmin;
@@ -44,9 +49,7 @@
   }
 }
 
-.accented {
-  color: $secondary-color;
-}
+
 
 input {
   background-color: unset;

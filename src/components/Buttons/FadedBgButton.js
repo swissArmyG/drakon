@@ -23,7 +23,7 @@ export const FadedBgButton = ({ buttonText, buttonTextPosition, onClick, isDisab
           "width": `${width}`
         }}
       >
-        <g id="PAGE-INTERACTION" serifId="PAGE INTERACTION" transform="matrix(1,0,0,1,-182,-503)">
+        <g id="PAGE-INTERACTION" transform="matrix(1,0,0,1,-182,-503)">
           <g transform="matrix(1,0,0,1,127,-263)">
             <g>
               <g transform="matrix(1,0,0,1,-501,-315)">

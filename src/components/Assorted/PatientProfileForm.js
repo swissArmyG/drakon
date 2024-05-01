@@ -52,7 +52,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
         </div>
         <div className="--input-container">
           <p><em>Phone</em><span>Number only</span></p>
-          <input type="text"
+          <input type="number"
             value={patientProfile.phoneNumber || ""}
             onChange={(e) => {
               e.preventDefault()

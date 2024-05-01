@@ -7,7 +7,7 @@ export const ProgressBar = ({ steps, stepsCompleted }) => {
     const stepWidth = 100 / steps
   
     return (
-      <React.Fragment>
+      <React.Fragment key={index}>
         <div className={`--progress-label-container ${isCompleted}`}> 
           <span className="--progress-label">{`${stepCount}`}</span>
         </div>

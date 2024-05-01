@@ -1,0 +1,32 @@
+.Notification {
+  position: fixed;
+  bottom: 0vh;
+  right: 0vh;
+  z-index: 1000;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: 37%;
+  min-width: 325px;
+  padding: 5px 20px 30px 20px;
+  border-radius: 15px;
+  text-align: center;
+
+  &.error {
+    background-color: $accent-c-color-transparent;
+  }
+
+  &.success {
+    background-color: $primary-color-transparent;
+  }
+
+  h3 {
+    margin: 0px;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+
+  p {
+    margin: 0px;
+    text-align: left;
+  }
+}
