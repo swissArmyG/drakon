@@ -17,6 +17,7 @@
     "static/media/logo_with_text.png": "/static/media/logo_with_text.0a3ee26d7a5df7a10b40.png",
     "static/media/skele_icon_left.png": "/static/media/skele_icon_left.be16f9b4d4bf8a93092b.png",
     "index.html": "/index.html",
+<<<<<<< HEAD
     "main.0828b28b.css.map": "/static/css/main.0828b28b.css.map",
     "main.c3990d13.js.map": "/static/js/main.c3990d13.js.map",
     "453.937f8a7d.chunk.js.map": "/static/js/453.937f8a7d.chunk.js.map"
@@ -24,5 +25,14 @@
   "entrypoints": [
     "static/css/main.0828b28b.css",
     "static/js/main.c3990d13.js"
+=======
+    "main.3d5f4698.css.map": "/static/css/main.3d5f4698.css.map",
+    "main.99e787d4.js.map": "/static/js/main.99e787d4.js.map",
+    "453.937f8a7d.chunk.js.map": "/static/js/453.937f8a7d.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d5f4698.css",
+    "static/js/main.99e787d4.js"
+>>>>>>> main
   ]
 }

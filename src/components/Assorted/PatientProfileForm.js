@@ -9,6 +9,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
         <div className="--input-container">
           <p><em>Firstname</em></p>
           <input type="text"
+            placeholder="Firstname"
             value={patientProfile.firstname || ""}
             onChange={(e) => {
               e.preventDefault()
@@ -19,6 +20,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
         <div className="--input-container">
           <p><em>Lastname</em></p>
           <input type="text"
+            placeholder="Lastname"
             value={patientProfile.lastname || ""}
             onChange={(e) => {
               e.preventDefault()
@@ -31,6 +33,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
       <div className="--address-input-container">
         <p><em>Address</em><span>Optional</span></p>
         <input type="text"
+          placeholder="Optional"
           value={patientProfile.address || ""}
           onChange={(e) => {
             e.preventDefault()
@@ -43,6 +46,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
         <div className="--input-container">
           <p><em>Email</em></p>
           <input type="text"
+            placeholder="Please use a valid email"
             value={patientProfile.email || ""}
             onChange={(e) => {
               e.preventDefault()

@@ -10,7 +10,8 @@ import { createPatient } from "../../servers/patients";
 
 export const HomepageRequestAppt = forwardRef((props, ref) => {
   const FIRST_PANE = 1
-  const MAX_PANE = 2
+  const LAST_PANE = 2
+  const INCOMPLETE = 0
 
   const [ singleOption, selectSingleOption ] = useState('')
   const [ multipleOptions, selectMultipleOptions ] = useState([])
@@ -24,8 +25,8 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
     phoneNumber: ''
   })
 
-  const [ pane, setPane ] = useState(1)
-  const [ stepsCompleted, setStepsCompleted ] = useState(0)
+  const [ pane, setPane ] = useState(FIRST_PANE)
+  const [ stepsCompleted, setStepsCompleted ] = useState(INCOMPLETE)
 
   const [ isMobileDevice, setIsMobileDevice ] = useState(false)
   const [ windowSize, setWindowSize ] = useState({
@@ -59,15 +60,13 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
     )
 
     const { firstname, lastname, email, phoneNumber } = patientProfile
-
     const secondStepCompleted = firstname && lastname && email && phoneNumber 
 
-    let stepsCompleted = 0;
+    let stepsCompleted = INCOMPLETE;
 
     if (firstStepCompleted || secondStepCompleted) {
       stepsCompleted = 1;
     }
-
     if (firstStepCompleted && secondStepCompleted) {
       stepsCompleted = 2;
     }
@@ -197,10 +196,10 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
   }
 
   const renderPaneControls = () => {
-    const isSubmittable = stepsCompleted === MAX_PANE
-
     const buttonWidth = windowSize.width > 613 ? "300px" : "160px"
     const buttonTextPosition = windowSize.width > 613 ? "-28%" : "-88%"
+    
+    const isSubmittable = stepsCompleted === LAST_PANE
 
     return <div className="PaneControl">
       <div className="--button-container">
@@ -217,12 +216,13 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
       </div>
       <div className="--button-container">
         <FadedBgButton                                           
-          buttonText={pane < MAX_PANE ? 'NEXT' : 'SUBMIT'} 
+          buttonText={pane < LAST_PANE ? 'NEXT' : 'SUBMIT'} 
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
+            const isSubmittable = stepsCompleted === LAST_PANE
             e.preventDefault()
-
-            if (pane < MAX_PANE && stepsCompleted === FIRST_PANE) {
+            
+            if (pane < LAST_PANE && stepsCompleted === FIRST_PANE) {
               setPane(pane + 1)
             }
             
@@ -232,7 +232,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
           }}
           isDisabled={isSubmitting || 
             (pane === FIRST_PANE && stepsCompleted !== FIRST_PANE) || 
-            (pane === MAX_PANE && !isSubmittable)}
+            (pane === LAST_PANE && !isSubmittable)}
           isFlipped
           width={buttonWidth}
         />
@@ -262,8 +262,8 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
       <div className="--background-overlay" />
         <div className="--form-container">
           {renderHeader()}
-          {pane === 1 && renderConditionForm()}
-          {pane === 2 && <PatientProfileForm
+          {pane === FIRST_PANE && renderConditionForm()}
+          {pane === LAST_PANE && <PatientProfileForm
             patientProfile={patientProfile}  
             onChange={(data) => setPatientProfile({ ...patientProfile, ...data })} />}
           <ProgressBar 
