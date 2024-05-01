@@ -9,7 +9,9 @@ import { PatientProfileForm, ProgressBar } from "../Assorted";
 
 
 export const HomepageRequestAppt = forwardRef((_, ref) => {
-  const MAX_PANE = 2 // First page is 1
+  const INCOMPLETE = 0
+  const FIRST_PANE = 1
+  const LAST_PANE = 2
 
   const [ singleOption, selectSingleOption ] = useState(undefined)
   const [ multipleOptions, selectMultipleOptions ] = useState([])
@@ -17,8 +19,8 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
   const [ painDegree, setPainDegree ] = useState(undefined)
   const [ patientProfile, setPatientProfile ] = useState({})
 
-  const [ pane, setPane ] = useState(1)
-  const [ stepsCompleted, setStepsCompleted ] = useState(0)
+  const [ pane, setPane ] = useState(FIRST_PANE)
+  const [ stepsCompleted, setStepsCompleted ] = useState(INCOMPLETE)
 
   const [ isMobileDevice, setIsMobileDevice ] = useState(false)
   const [ windowSize, setWindowSize ] = useState({
@@ -26,7 +28,7 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
     height: window.innerHeight,
   });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  // const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
@@ -53,15 +55,13 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
     )
 
     const { firstname, lastname, email, phoneNumber } = patientProfile
-
     const secondStepCompleted = firstname && lastname && email && phoneNumber 
 
-    let stepsCompleted = 0;
+    let stepsCompleted = INCOMPLETE;
 
     if (firstStepCompleted || secondStepCompleted) {
       stepsCompleted = 1;
     }
-
     if (firstStepCompleted && secondStepCompleted) {
       stepsCompleted = 2;
     }
@@ -147,10 +147,10 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
   }
 
   const renderPaneControls = () => {
-    const isSubmittable = stepsCompleted === 2
-
     const buttonWidth = windowSize.width > 613 ? "300px" : "160px"
     const buttonTextPosition = windowSize.width > 613 ? "-28%" : "-88%"
+    
+    const isSubmittable = stepsCompleted === LAST_PANE
 
     return <div className="PaneControl">
       <div className="--button-container">
@@ -159,20 +159,21 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
             e.preventDefault()
-            pane > 0 && setPane(pane - 1)          
+            pane > FIRST_PANE && setPane(pane - 1)          
           }}
-          isDisabled={pane === 1}
+          isDisabled={pane === FIRST_PANE}
           width={buttonWidth}
         />
       </div>
       <div className="--button-container">
         <FadedBgButton                                           
-          buttonText={pane < MAX_PANE ? 'NEXT' : 'SUBMIT'} 
+          buttonText={pane < LAST_PANE ? 'NEXT' : 'SUBMIT'} 
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
+            const isSubmittable = stepsCompleted === LAST_PANE
             e.preventDefault()
-
-            if (pane < MAX_PANE && stepsCompleted === 1) {
+            
+            if (pane < LAST_PANE && stepsCompleted === FIRST_PANE) {
               setPane(pane + 1)
             }
             
@@ -180,8 +181,8 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
               console.log('SUBMITTING')
             }
           }}
-          isDisabled={(pane < MAX_PANE && stepsCompleted < 1) || 
-            (pane === MAX_PANE && !isSubmittable)}
+          isDisabled={(pane < LAST_PANE && stepsCompleted < FIRST_PANE) || 
+            (pane === LAST_PANE && !isSubmittable)}
           isFlipped
           width={buttonWidth}
         />
@@ -211,8 +212,8 @@ export const HomepageRequestAppt = forwardRef((_, ref) => {
       <div className="--background-overlay" />
         <div className="--form-container">
           {renderHeader()}
-          {pane === 1 && renderConditionForm()}
-          {pane === 2 && <PatientProfileForm
+          {pane === FIRST_PANE && renderConditionForm()}
+          {pane === LAST_PANE && <PatientProfileForm
             patientProfile={patientProfile}  
             onChange={(data) => setPatientProfile({ ...patientProfile, ...data })} />}
           <ProgressBar 
