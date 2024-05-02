@@ -132,7 +132,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
       })
       props.notify({ 
         type: 'success', 
-        message: 'Your have requested an appointment! Our doctor will reach out to you soon via email and phone number you provided.'
+        message: 'Your have requested an appointment! Our doctor will reach out to you soon via the email or the phone number you provided.'
       })
       resetForm()
     } catch (err) {
@@ -199,7 +199,21 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
     const buttonWidth = windowSize.width > 613 ? "300px" : "160px"
     const buttonTextPosition = windowSize.width > 613 ? "-28%" : "-88%"
     
-    const isSubmittable = stepsCompleted === LAST_PANE
+    const isFirstPane = pane === FIRST_PANE
+    const isLastPane = pane === LAST_PANE
+
+    const isNextable = stepsCompleted >= FIRST_PANE
+    const isSubmittable = isLastPane && stepsCompleted === LAST_PANE 
+
+    let isDisabled = false;
+
+    if (isFirstPane) {
+      isDisabled = !isNextable
+    } else if (isLastPane) {
+      isDisabled = !isSubmittable
+    } else if (isSubmitting) {
+      isDisabled = true
+    }
 
     return <div className="PaneControl">
       <div className="--button-container">
@@ -219,20 +233,17 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
           buttonText={pane < LAST_PANE ? 'NEXT' : 'SUBMIT'} 
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
-            const isSubmittable = stepsCompleted === LAST_PANE
-            e.preventDefault()
+            e.preventDefault() 
             
-            if (pane < LAST_PANE && stepsCompleted === FIRST_PANE) {
+            if (isFirstPane && isNextable) {
               setPane(pane + 1)
             }
             
-            if (isSubmittable) {
+            if (isLastPane && isSubmittable) {
               requestAppointment()
             }
           }}
-          isDisabled={isSubmitting || 
-            (pane === FIRST_PANE && stepsCompleted !== FIRST_PANE) || 
-            (pane === LAST_PANE && !isSubmittable)}
+          isDisabled={isDisabled}
           isFlipped
           width={buttonWidth}
         />
