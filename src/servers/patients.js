@@ -1,7 +1,7 @@
-import { api } from './index'
+import Axios from './axios'
 
 export const createPatient = async(payload) => {
-  await api.post('/patients/create', {
+  await Axios.post('/patients/create', {
     firstname: payload.firstname,
     lastname: payload.lastname,
     pain_description: payload.pain_description,

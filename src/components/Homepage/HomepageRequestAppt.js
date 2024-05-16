@@ -16,7 +16,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
   const [ singleOption, selectSingleOption ] = useState('')
   const [ multipleOptions, selectMultipleOptions ] = useState([])
 
-  const [ painDegree, setPainDegree ] = useState()
+  const [ painDegree, setPainDegree ] = useState(undefined)
   const [ patientProfile, setPatientProfile ] = useState({
     firstname: '',
     lastname: '',
@@ -118,13 +118,19 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
 
   const requestAppointment = async () => {
     setIsSubmitting(true)
+    
+    const painDescriptions = [
+      ...multipleOptions.map(option =>{               
+        return multipleSelectOptions[option]
+      }), 
+      singleSelectOption[singleOption]
+    ].join(', ')
 
     try {
       await createPatient({
         firstname: patientProfile.firstname,
         lastname: patientProfile.lastname,
-        pain_description: [...multipleOptions.map(option => multipleSelectOptions[option]), 
-          singleOption].join(', '),
+        pain_description: painDescriptions,
         pain_degree: painDegree,
         address: patientProfile.address,
         email: patientProfile.email,

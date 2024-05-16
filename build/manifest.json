@@ -1,5 +1,5 @@
 {
-  "short_name": "Peace of Mind",
+  "short_name": "POMS",
   "name": "Peace of Mind SPINE.com",
   "icons": [
     {
@@ -8,12 +8,12 @@
       "type": "image/svg+xml"
     },
     {
-      "src": "../src/img/logo/icon.svg",
+      "src": "icon.svg",
       "type": "image/svg",
       "sizes": "192x192"
     },
     {
-      "src": "../src/img/logo/icon.svg",
+      "src": "icon.svg",
       "type": "image/svg",
       "sizes": "512x512"
     }
