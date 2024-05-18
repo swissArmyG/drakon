@@ -8,9 +8,13 @@ import {
 } from '.'
 import logoPath from '../../img/logo/logo_with_text.png'
 import { SideNavigation } from '../Buttons'
-import { Notification } from '../Assorted'
+import { 
+  Notification, 
+  ThemeToggle, 
+} from '../Assorted'
 
 export const Homepage = () => {
+  const [ theme, setTheme ] = useState('DEEP_OCEAN')
   const [ notification, setNotification ] = useState({
     type: '',
     message: '',
@@ -22,13 +26,14 @@ export const Homepage = () => {
   const contactRef = useRef(null)
 
   return (
-    <section className="Homepage --container --background" ref={backToTopRef}>
+    <section className={`Homepage --container --background --${theme}`} ref={backToTopRef}>
       <header className="--nav-bar">
         <img
           src={`${logoPath}`}
           className="logo"
           alt="Peace of Mind Spine.com logo, with a Vitruvian man in front of the beach at sunrise"
         />
+        <ThemeToggle onToggle={setTheme} theme={theme}/>
         <HomepageNav ref={{
           storyRef,
           requestApptRef,

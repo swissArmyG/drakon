@@ -1,0 +1,65 @@
+.Homepage.--DEEP_OCEAN {
+  .--theme-text {
+    color: $primary-color;
+  }
+
+  .--radio {
+    background-color: $primary-color;
+  }
+
+  .--textbox-content {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.Homepage.--OCEAN {
+  .--theme-text {
+    color: $primary-color;
+    // text-shadow: 2px 2px 4px rgba(0, 56, 98, 1);
+    text-shadow: 2px 2px 4px rgb(0, 0, 0, 1)
+  }
+
+  .--radio {
+    background-color: $primary-color;
+  }
+
+  .--textbox-content {
+    background-color: rgba(240, 240, 240, 0.1)
+  }
+}
+
+.ThemeToggle {
+  display: flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+
+  .--button.-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    min-width: 90px;
+    width: 90px;
+  }
+
+  .--radio {
+    border-radius: 7px;
+    width: 10px;
+    height: 25px;
+    margin-right: 5px;
+
+    &.--selected {
+      background-color: $secondary-color;
+    }
+  }
+
+  .--theme-text {
+    color: $ocean;
+    font-weight: 700;
+
+    &.--selected {
+      color: $secondary-color;
+    }
+  }
+}
+
