@@ -29,6 +29,10 @@
       h1 {
         margin: 0px;
       }
+
+      img {
+        width: 100px;
+      }
     }
 
     .--column-right {
@@ -43,6 +47,7 @@
     .--container {
       flex-direction: column;
       justify-content: center;
+      height: 340px;
     }
 
     .--column-left {

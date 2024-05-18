@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import logo from '../../img/logo/icon.svg'
+import logo from '../../img/logo/logo.png'
 import { Link } from 'react-router-dom';
 
 export const HomepageContact = forwardRef((_, ref) => {
