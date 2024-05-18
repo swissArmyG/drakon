@@ -120,6 +120,17 @@
   }
 }
 
+@media screen and (max-width: 600px) {
+  .HomepageRequestAppt {
+    .--form-container {
+      .InputContainer {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 430px) {
   .HomepageRequestAppt {
     .--form-container {
