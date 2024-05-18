@@ -1,14 +1,15 @@
 .Homepage {
   &.--background {
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;
+
     &.--OCEAN {
-      background-color: $ocean;
+      background-image: url('../../img/bg/homepage-OCEAN.png');
     }
     
     &.--DEEP_OCEAN {
-      background-image: url('../../img/bg/homepage.png');
-      background-position: top;
-      background-size: cover;
-      background-repeat: no-repeat;
+      background-image: url('../../img/bg/homepage-DEEP_OCEAN.png');
     }
 
     .--nav-bar {
