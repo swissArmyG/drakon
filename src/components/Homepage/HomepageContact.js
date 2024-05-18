@@ -1,21 +1,36 @@
 import { forwardRef } from 'react'
+import logo from '../../img/logo/icon.svg'
+import { Link } from 'react-router-dom';
 
 export const HomepageContact = forwardRef((_, ref) => {
-  const placeholderStyles = {
-    height: "500px",
-    width: "100%",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center"
-  }
+  const currentYear = new Date().getFullYear();
 
   return (
     <section ref={ref} 
-      className="HomepageContact --container" 
-      style={placeholderStyles}>
-        <h1>Contact</h1>
-        <h4>Coming soon!</h4>
+      className="HomepageContact">
+        <div className="--container">
+
+          <div className="--column-left">
+            <Link to="">Legal Notice</Link>
+            <Link to="">About Us</Link>
+          </div>
+
+          <div className="--column-center">
+            <img src={logo} alt="POMS logo of the Vitruvian man"/>
+            <h1><em>PeaceofMindSpine</em></h1>
+            <h1><em>{currentYear}</em></h1>
+          </div>
+
+          <div className="--column-right">
+            <p>
+            Peace of Mind Spine (POMS)<br/>
+            5555 Denver, Colorado<br/>
+            info@poms.com<br/>
+            +1 975 555 5555
+            </p>
+          </div>
+
+        </div>
     </section>
   )
 })

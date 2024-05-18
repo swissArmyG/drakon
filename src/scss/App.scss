@@ -49,8 +49,6 @@
   }
 }
 
-
-
 input {
   background-color: unset;
   border: 2px solid $primary-color;
@@ -66,5 +64,13 @@ input {
 
   &::placeholder {
     color: $primary-color;
+  }
+}
+
+a {
+  color: #FFF;
+
+  &:hover {
+    color: $secondary-color;
   }
 }

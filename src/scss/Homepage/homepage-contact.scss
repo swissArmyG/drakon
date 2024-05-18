@@ -1,0 +1,57 @@
+.HomepageContact {
+  height: 500px;
+
+  .--container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+    background-color: $deep-ocean;
+    position: absolute;
+    bottom: -11px;
+
+    .--column-left {
+      padding-left: 15px;
+      
+      a {
+        display: block;
+        font-weight: 700;
+      }
+    }
+
+    .--column-center {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      h1 {
+        margin: 0px;
+      }
+    }
+
+    .--column-right {
+      padding-right: 15px;
+      text-align: right;
+    }
+  }
+}
+
+@media screen and (max-width: 484px) {
+  .HomepageContact {
+    .--container {
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .--column-left {
+      text-align: center;
+      padding-left: 0px;
+    }
+
+    .--column-right {
+      padding-right: 0px;
+    }
+  }
+}
