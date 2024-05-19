@@ -12,7 +12,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
   const FIRST_PANE = 1
   const LAST_PANE = 2
   const INCOMPLETE = 0
-
+  
   const [ singleOption, selectSingleOption ] = useState('')
   const [ multipleOptions, selectMultipleOptions ] = useState([])
 
@@ -138,7 +138,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
       })
       props.notify({ 
         type: 'success', 
-        message: 'Your have requested an appointment! Our doctor will reach out to you soon via the email or the phone number you provided.'
+        message: 'You have requested an appointment! Our doctor will reach out to you soon via the email or the phone number you provided.'
       })
       resetForm()
     } catch (err) {
