@@ -28,12 +28,14 @@ export const Homepage = () => {
   return (
     <section className={`Homepage --container --background --${theme}`} ref={backToTopRef}>
       <header className="--nav-bar">
-        <img
-          src={`${logoPath}`}
-          className="logo"
-          alt="Peace of Mind Spine.com logo, with a Vitruvian man in front of the beach at sunrise"
-        />
-        <ThemeToggle onToggle={setTheme} theme={theme}/>
+        <div>
+          <img
+            src={`${logoPath}`}
+            className="logo"
+            alt="Peace of Mind Spine.com logo, with a Vitruvian man in front of the beach at sunrise"
+          />
+          <ThemeToggle onToggle={setTheme} theme={theme}/>
+        </div>
         <HomepageNav ref={{
           storyRef,
           requestApptRef,
