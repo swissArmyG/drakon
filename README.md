@@ -33,7 +33,5 @@ For development and production stages
 
 1. **axios** : Promised-based API requests in Node.js and the browser
 2. **dotenv** : Environment loading module
-2. **http-proxy-middleware** : For Node.js Proxy middleware
 3. **sass**, **sass-loader**, **style-loader**, **css-loader** : Sassy CSS (Cascade Style Sheet) along with its loading-processing css in JavaScript
 4. **react-router** & **react-router-dom** : On-demand client-side URL routing for faster and more dynamic user experiences
-5. **react-reveal** : Animation effects on elements 
