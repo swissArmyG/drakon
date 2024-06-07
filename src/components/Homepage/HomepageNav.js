@@ -1,14 +1,17 @@
-import { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { Login } from '.'
 
 export const HomepageNav = forwardRef((_, refs) => {
   const { storyRef, requestApptRef, contactRef } = refs
+  const [ isLoginModal, toggleLoginModal ] = useState(false)
 
   const scrollConfig = { behavior: "smooth" }
 
   const navOptions = {
     login: {
-      onClick: undefined,
+      onClick: () => toggleLoginModal(true),
+      linkTo: '#login',
       text: 'LOGIN'
     },
     story: {
@@ -33,16 +36,30 @@ export const HomepageNav = forwardRef((_, refs) => {
       <div className="--nav-options">
         {
           Object.keys(navOptions).map((op, index) => {
-            return <Link key={index} to={`${navOptions[op].linkTo}`}
-              onClick={navOptions[op].onClick}>
-              <h4 className="--nav-option --button">{navOptions[op].text}</h4>
-            </Link>
+            const isFocused = op === 'login' && isLoginModal ? '--focused' : ''
+
+            return <React.Fragment>
+              <Link 
+                key={index} 
+                to={`${navOptions[op].linkTo}`}
+                onClick={navOptions[op].onClick}>
+                <h4 className={`--nav-option --button ${isFocused}`}>
+                  {navOptions[op].text}
+                </h4>
+              </Link>
+              {
+                op === 'login' && <Login 
+                  isOpen={isLoginModal} 
+                  toggleOpen={toggleLoginModal}
+                />
+              }
+            </React.Fragment>
           })
-        } 
+        }
       </div>
       <p className="--nav-info"> 
-          To empower individuals with unparalleled access to expert medical opinions, fostering confidence and informed decision-making in their healthcare journey.
-        </p>
+        To empower individuals with unparalleled access to expert medical opinions, fostering confidence and informed decision-making in their healthcare journey.
+      </p>
     </section>
   )
 })

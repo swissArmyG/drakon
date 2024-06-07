@@ -203,7 +203,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
 
   const renderPaneControls = () => {
     const buttonWidth = windowSize.width > 613 ? "300px" : "160px"
-    const buttonTextPosition = windowSize.width > 613 ? "-28%" : "-88%"
+    const buttonTextPosition = windowSize.width > 613 ? undefined : "0%"
     
     const isFirstPane = pane === FIRST_PANE
     const isLastPane = pane === LAST_PANE

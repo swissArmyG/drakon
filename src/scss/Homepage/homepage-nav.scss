@@ -25,7 +25,8 @@
       margin: 0;
       font-weight: 700;
 
-      &:hover {
+      &:hover,
+      &.--focused {
         color: $secondary-color;
       }
     }

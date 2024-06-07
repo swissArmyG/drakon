@@ -16,7 +16,7 @@ export const HomepageTopics =  () => {
 
   const whitespace = ' '
   const renderTopicContent = (category, idx) => {
-    return <div className={`--textbox-content -box-${idx}`}>
+    return <div className={`--textbox -box-${idx}`}>
       <em>{topics[category].header}</em>
       <p className="--textbox-text"><em>{`Location${whitespace}`}</em>{topics[category].location}</p>
       <p className="--textbox-text"><em>{`Function${whitespace}`}</em>{topics[category].function}</p>

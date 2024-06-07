@@ -10,6 +10,12 @@
   &.isDisabled {
     cursor: not-allowed;
   }
+
+  &.-exit {
+    margin: 0px;
+    margin-bottom: 10px;
+    text-align: right;
+  }
 }
 
 .--button-text {
@@ -73,4 +79,13 @@ a {
   &:hover {
     color: $secondary-color;
   }
+}
+
+.--textbox {
+  position: absolute;
+  z-index: 1000;
+  height: fit-content;
+  border: 5px solid $secondary-color;
+  border-radius: 10%;
+  padding: 40px 15px;
 }

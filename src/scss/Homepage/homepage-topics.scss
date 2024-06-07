@@ -12,15 +12,10 @@
   .--textbox-container {
     text-align: left;
 
-    .--textbox-content {
-      position: absolute;
+    .--textbox {
+
       width: 530px;
       left: 47%;
-      height: fit-content;
-      // background-color: rgba(0,0,0,.8);
-      border: 5px solid $secondary-color;
-      border-radius: 10%;
-      padding: 40px 15px;
 
       &.-box-0 {
         top: 20%;
@@ -41,10 +36,6 @@
       em {
         font-family: 'Cantarell-Bold', sans-serif 
       }
-
-      .--textbox-text {
-        border-radius: 15%;
-      }
     }
   }
 }
@@ -53,7 +44,7 @@
 @media screen and (max-width: 1219px) {
   .HomepageTopics {
     .--textbox-container {
-      .--textbox-content {
+      .--textbox {
         left: 41%
       }
     }
@@ -63,7 +54,7 @@
 @media screen and (max-width: 1034px) {
   .HomepageTopics {
     .--textbox-container {
-      .--textbox-content {
+      .--textbox {
         position: relative;
         left: 0%
       }
@@ -74,7 +65,7 @@
 @media screen and (max-width: 766px) {
   .HomepageTopics {
     .--textbox-container {
-      .--textbox-content {
+      .--textbox {
         width: 78%;
         border-radius: 30px;
         padding: 22px 15px;

@@ -4,8 +4,8 @@ export const FadedBgButton = ({ buttonText, buttonTextPosition, onClick, isDisab
       <h1 className={`--button-text ${isDisabled ? 'isDisabled' : ''}`}
         onClick={onClick}
         style={{
-          "top": `${buttonTextPosition || "-28%"}`,
-          "width": `${width}`
+          "top": `${buttonTextPosition || "20%"}`,
+          "width": `${width || "300px"}`
         }}>
         {buttonText}
       </h1>

@@ -25,6 +25,10 @@ export const Homepage = () => {
   const requestApptRef = useRef(null)
   const contactRef = useRef(null)
 
+  const notify = (notification) => {
+    setNotification(notification)
+  }
+
   return (
     <section className={`Homepage --container --background --${theme}`} ref={backToTopRef}>
       <header className="--nav-bar">
@@ -36,18 +40,22 @@ export const Homepage = () => {
           />
           <ThemeToggle onToggle={setTheme} theme={theme}/>
         </div>
-        <HomepageNav ref={{
-          storyRef,
-          requestApptRef,
-          contactRef
-        }}/>
+        <HomepageNav
+          ref={{
+            storyRef,
+            requestApptRef,
+            contactRef
+          }}
+          notify={notify}
+        />
       </header>
+      
       <SideNavigation ref={backToTopRef} />
       <HomepageTopics />
+
       <div className="--content-container">
         <HomepageStory ref={storyRef} />
-        <HomepageRequestAppt ref={requestApptRef} 
-          notify={(notification) => setNotification(notification)} />
+        <HomepageRequestAppt ref={requestApptRef} notify={notify} />
         <HomepageContact ref={contactRef} />
       </div>
 
