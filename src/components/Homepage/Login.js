@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { FadedBgButton } from '../Buttons'
 import { login } from '../../servers/sessions'
 
@@ -47,7 +46,6 @@ export const Login = ({ isOpen, toggleOpen, notify }) => {
       </div>
 
       <div className="--input-container">
-        {/* <p><em>Email</em></p> */}
         <input type="text"
           placeholder="Email"
           value={loginPayload.email || ""}
@@ -58,7 +56,6 @@ export const Login = ({ isOpen, toggleOpen, notify }) => {
       </div>
 
       <div className="--input-container">
-        {/* <p><em>Password</em></p> */}
         <input type="password"
           placeholder="Password"
           value={loginPayload.password || ""}
