@@ -1,12 +1,33 @@
-import Axios from './axios'
+import { Axios, AuthenticationAxios } from './axios'
 
 export const login = async(payload) => {
-  await Axios.post('/login', {
+  const { data } = await AuthenticationAxios.post('/login', {
     email: payload.email,
-    password: payload
-  })
+    password: payload.password
+  }, { withCredentials: true })
+
+  const { accessToken, refreshToken } = data
+  const httpOnlyAttributes = `Path=/; HttpOnly; Secure; SameSite=Lax;`
+
+  const cookieHeaders = [
+    `accessToken=${accessToken}; ${httpOnlyAttributes}`,
+    `refreshToken=${refreshToken}; ${httpOnlyAttributes}`,
+  ].join('; ')
+  
+  AuthenticationAxios.interceptors.request.use(
+    (config) => {
+      config.headers['Cookie'] = cookieHeaders
+      return config
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  )
+
+  return data
 }
 
 export const readSessionBySessionId = async(sessionId) => {
-  await Axios.get(`/session/${sessionId}`)
+  const { data } = await Axios.get(`/session/${sessionId}`)
+  return data;
 }

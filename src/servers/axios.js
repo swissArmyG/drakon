@@ -1,12 +1,14 @@
 import axios from 'axios'
 
+const globalHeaders = {
+  Authorization: `Bearer ${process.env.TOKEN}`,
+  'Content-Type': 'application/json',
+  Accept: 'application/json'
+}
+
 const Axios = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
-  headers: {
-    Authorization: `Bearer ${process.env.TOKEN}`,
-    'Content-Type': 'application/json',
-    Accept: 'application/json'
-  }
+  headers: globalHeaders
 })
 
 Axios.interceptors.request.use(
@@ -18,4 +20,12 @@ Axios.interceptors.request.use(
   }
 );
 
-export default Axios;
+const AuthenticationAxios = axios.create({
+  baseURL: `${process.env.REACT_APP_BASE_UR}/login`,
+  headers: globalHeaders
+})
+
+export {
+  Axios,
+  AuthenticationAxios
+}

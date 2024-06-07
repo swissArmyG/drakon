@@ -2,7 +2,7 @@ import React, { forwardRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Login } from '.'
 
-export const HomepageNav = forwardRef((_, refs) => {
+export const HomepageNav = forwardRef((props, refs) => {
   const { storyRef, requestApptRef, contactRef } = refs
   const [ isLoginModal, toggleLoginModal ] = useState(false)
 
@@ -51,6 +51,8 @@ export const HomepageNav = forwardRef((_, refs) => {
                 op === 'login' && <Login 
                   isOpen={isLoginModal} 
                   toggleOpen={toggleLoginModal}
+                  notify={props.notify}
+                  setUserData={props.setUserData}
                 />
               }
             </React.Fragment>

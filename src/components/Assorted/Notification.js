@@ -19,7 +19,7 @@ export const Notification = ({ type, message }) => {
     <section className={`Notification ${type}`}>
       { 
         isVisible && <React.Fragment>
-          <h3 className="--button --button-text -x" 
+          <h3 className="--button --button-text -exit" 
             onClick={() => setIsVisible(false)}>
             X
           </h3>

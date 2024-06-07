@@ -2,12 +2,14 @@ import { useState } from 'react'
 import { FadedBgButton } from '../Buttons'
 import { login } from '../../servers/sessions'
 
-export const Login = ({ isOpen, toggleOpen, notify }) => {
+export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
   const [isLoading, setIsLoading] = useState(false)
   const [loginPayload, setLoginPayload] = useState({
     email: '',
     password: ''
   })
+
+  const isSubmittable = loginPayload.email && loginPayload.password
 
   const onChange = (updates) => {
     setLoginPayload({ ...loginPayload, ...updates })
@@ -17,18 +19,23 @@ export const Login = ({ isOpen, toggleOpen, notify }) => {
     setIsLoading(true)
 
     try {
-      await login({
+      const { data } = isSubmittable && await login({
         email: loginPayload.email,
         password: loginPayload.password
       })
+
+      setUserData(data)
+
       notify({ 
         type: 'success', 
         message: 'Successfully logged in.'
       })
+
+      toggleOpen(false)
     } catch (err) {
       notify({ 
         type: 'error', 
-        message: 'Unable to login, please try again later.'
+        message: err.status
       })
     } finally {
       setIsLoading(false)
@@ -51,7 +58,7 @@ export const Login = ({ isOpen, toggleOpen, notify }) => {
           value={loginPayload.email || ""}
           onChange={(e) => {
             onChange({ email: e.target.value })
-          }} 
+          }}
         />
       </div>
 
@@ -72,7 +79,7 @@ export const Login = ({ isOpen, toggleOpen, notify }) => {
           e.preventDefault()
           onSubmit()         
         }}
-        isDisabled={!isLoading}
+        isDisabled={!isLoading && !isSubmittable}
       />
 
       <span className="--button --button-text">Forgot your password ?</span>
