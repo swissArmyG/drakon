@@ -1,7 +1,7 @@
-import { Axios, AuthenticationAxios } from './axios'
+import { Axios, CookieHeadersAxios } from './axios'
 
 export const login = async(payload) => {
-  const { data } = await AuthenticationAxios.post('/login', {
+  const { data } = await CookieHeadersAxios.post('', {
     email: payload.email,
     password: payload.password
   }, { withCredentials: true })
@@ -14,7 +14,7 @@ export const login = async(payload) => {
     `refreshToken=${refreshToken}; ${httpOnlyAttributes}`,
   ].join('; ')
   
-  AuthenticationAxios.interceptors.request.use(
+  CookieHeadersAxios.interceptors.request.use(
     (config) => {
       config.headers['Cookie'] = cookieHeaders
       return config

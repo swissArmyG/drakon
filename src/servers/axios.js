@@ -20,12 +20,12 @@ Axios.interceptors.request.use(
   }
 );
 
-const AuthenticationAxios = axios.create({
+const CookieHeadersAxios = axios.create({
   baseURL: `${process.env.REACT_APP_BASE_UR}/login`,
   headers: globalHeaders
 })
 
 export {
   Axios,
-  AuthenticationAxios
+  CookieHeadersAxios
 }
