@@ -1,7 +1,7 @@
 import { Axios, CookieHeadersAxios } from './axios'
 
 export const login = async(payload) => {
-  const { data } = await CookieHeadersAxios.post('', {
+  const { data } = await CookieHeadersAxios.post('/login', {
     email: payload.email,
     password: payload.password
   }, { withCredentials: true })

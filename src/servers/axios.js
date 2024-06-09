@@ -21,7 +21,7 @@ Axios.interceptors.request.use(
 );
 
 const CookieHeadersAxios = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_UR}/login`,
+  baseURL: `${process.env.REACT_APP_BASE_UR}`,
   headers: globalHeaders
 })
 
