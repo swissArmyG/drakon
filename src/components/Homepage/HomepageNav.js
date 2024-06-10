@@ -10,9 +10,9 @@ export const HomepageNav = forwardRef((props, refs) => {
 
   const navOptions = {
     login: {
-      onClick: () => toggleLoginModal(true),
+      onClick: () => !props.isLoggedIn && toggleLoginModal(true),
       linkTo: '#login',
-      text: 'LOGIN'
+      text: props.isLoggedIn ? 'LOGIN' : `Hi, [ USER NAME ]`
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),

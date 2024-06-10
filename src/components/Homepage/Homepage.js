@@ -47,6 +47,7 @@ export const Homepage = () => {
             requestApptRef,
             contactRef
           }}
+          isLoggedIn={userData?.userId}
           notify={notify}
           setUserData={setUserData}
         />

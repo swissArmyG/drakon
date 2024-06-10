@@ -11,6 +11,11 @@ export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
 
   const isSubmittable = loginPayload.email && loginPayload.password
 
+  const clearAndClose = () => {
+    setLoginPayload({ email: '', password: '' })
+    toggleOpen(false)
+  }
+
   const onChange = (updates) => {
     setLoginPayload({ ...loginPayload, ...updates })
   }
@@ -31,11 +36,11 @@ export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
         message: 'Successfully logged in.'
       })
 
-      toggleOpen(false)
+      clearAndClose()
     } catch (err) {
       notify({ 
         type: 'error', 
-        message: err.status
+        message: 'Invalid email or password.'
       })
     } finally {
       setIsLoading(false)

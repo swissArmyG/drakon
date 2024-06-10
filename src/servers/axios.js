@@ -20,12 +20,7 @@ Axios.interceptors.request.use(
   }
 );
 
-const CookieHeadersAxios = axios.create({
-  baseURL: `${process.env.REACT_APP_BASE_UR}`,
-  headers: globalHeaders
-})
-
 export {
   Axios,
-  CookieHeadersAxios
+  globalHeaders
 }

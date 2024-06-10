@@ -1,28 +1,10 @@
-import { Axios, CookieHeadersAxios } from './axios'
+import { Axios } from './axios'
 
 export const login = async(payload) => {
-  const { data } = await CookieHeadersAxios.post('/login', {
+  const { data: { data }} = await Axios.post('/login', {
     email: payload.email,
     password: payload.password
   }, { withCredentials: true })
-
-  const { accessToken, refreshToken } = data
-  const httpOnlyAttributes = `Path=/; HttpOnly; Secure; SameSite=Lax;`
-
-  const cookieHeaders = [
-    `accessToken=${accessToken}; ${httpOnlyAttributes}`,
-    `refreshToken=${refreshToken}; ${httpOnlyAttributes}`,
-  ].join('; ')
-  
-  CookieHeadersAxios.interceptors.request.use(
-    (config) => {
-      config.headers['Cookie'] = cookieHeaders
-      return config
-    },
-    (error) => {
-      return Promise.reject(error);
-    }
-  )
 
   return data
 }
