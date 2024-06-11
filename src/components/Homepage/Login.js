@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FadedBgButton } from '../Buttons'
-import { login } from '../../servers/sessions'
+import { login } from '../../api/sessions'
 
 export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
   const [isLoading, setIsLoading] = useState(false)

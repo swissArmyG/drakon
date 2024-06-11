@@ -6,7 +6,7 @@ import {
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { FadedBgButton } from '../Buttons';
 import { PatientProfileForm, ProgressBar } from "../Assorted";
-import { createPatient } from "../../servers/patients";
+import { createPatient } from "../../api/patients";
 
 export const HomepageRequestAppt = forwardRef((props, ref) => {
   const FIRST_PANE = 1
@@ -158,6 +158,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
     </div>
   }
 
+  // TODO: Refactor and componentalize these
   const renderConditionForm = () => {
     return <div className="ConditionForm">
       <div className="--options-container">
