@@ -27,6 +27,7 @@
 
   &.isDisabled {
     color: $accent-a-color;
+    cursor: not-allow;
     
     &:hover {
       color: $accent-a-color;  

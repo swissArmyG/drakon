@@ -11,10 +11,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
           <input type="text"
             placeholder="Firstname"
             value={patientProfile.firstname || ""}
-            onChange={(e) => {
-              e.preventDefault()
-              onChange({ firstname: e.target.value })
-            }} 
+            onChange={({ target: { value }}) => onChange({ firstname: value })}
           />
         </div>
         <div className="--input-container">
@@ -23,10 +20,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
           <input type="text"
             placeholder="Lastname"
             value={patientProfile.lastname || ""}
-            onChange={(e) => {
-              e.preventDefault()
-              onChange({ lastname: e.target.value })
-            }} 
+            onChange={({ target: { value }}) => onChange({ lastname: value })}
           />
         </div>
       </div>
@@ -36,10 +30,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
         <input type="text"
           // placeholder="Optional"
           value={patientProfile.address || ""}
-          onChange={(e) => {
-            e.preventDefault()
-            onChange({ address: e.target.value })
-          }} 
+          onChange={({ target: { value }}) => onChange({ address: value })}
         />
       </div>
 
@@ -49,10 +40,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
           <input type="text"
             placeholder="Please use a valid email"
             value={patientProfile.email || ""}
-            onChange={(e) => {
-              e.preventDefault()
-              onChange({ email: e.target.value })
-            }} 
+            onChange={({ target: { value }}) => onChange({ email: value })}
           />
         </div>
         <div className="--input-container">
@@ -60,10 +48,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
           <input type="number"
             placeholder="No dash (-) or dot (.) required"
             value={patientProfile.phoneNumber || ""}
-            onChange={(e) => {
-              e.preventDefault()
-              onChange({ phoneNumber: e.target.value })
-            }} 
+            onChange={({ target: { value }}) => onChange({ phoneNumber: value })} 
           />
         </div>
 

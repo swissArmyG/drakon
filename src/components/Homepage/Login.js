@@ -1,30 +1,25 @@
 import { useState } from 'react'
-import { FadedBgButton } from '../Buttons'
-import { login } from '../../api/sessions'
+import { CredentialForm } from '../Assorted/CredentialForm'
+import { forgotPassword, login } from '../../api/sessions'
 
 export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
-  const [isLoading, setIsLoading] = useState(false)
-  const [loginPayload, setLoginPayload] = useState({
+  const [ isSubmitting, setIsLoading ] = useState(false)
+  const [ isForgettingPassword, setIsForgettingPassword ] = useState(false)
+  const [ loginPayload, setLoginPayload ] = useState({
     email: '',
     password: ''
   })
-
-  const isSubmittable = loginPayload.email && loginPayload.password
 
   const clearAndClose = () => {
     setLoginPayload({ email: '', password: '' })
     toggleOpen(false)
   }
 
-  const onChange = (updates) => {
-    setLoginPayload({ ...loginPayload, ...updates })
-  }
-
   const onSubmit = async() => {
     setIsLoading(true)
 
     try {
-      const { data } = isSubmittable && await login({
+      const { data } = await login({
         email: loginPayload.email,
         password: loginPayload.password
       })
@@ -47,9 +42,30 @@ export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
     }
   }
 
+  const onForgotPassword = async () => {
+    setIsForgettingPassword(true)
+
+    try {
+      await forgotPassword(loginPayload.email)
+
+      notify({
+        type: 'success',
+        message: `The password reset link has been sent to ${loginPayload.email}. If this email is already registered with us, please follow the email instruction to continue.`
+      })
+
+      clearAndClose()
+    } catch (err) {
+      notify({
+        type: 'error',
+        message: 'Something went wrong. Please check your email address or try again later.'
+      })
+    } finally {
+      setIsForgettingPassword(false)
+    }
+  }
+
   return isOpen && <section className="Login">
     <div className="--textbox">
-      
       <div>
         <h3 className="--button --button-text -exit" 
           onClick={() => toggleOpen(false)}>
@@ -57,37 +73,23 @@ export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
         </h3>
       </div>
 
-      <div className="--input-container">
-        <input type="text"
-          placeholder="Email"
-          value={loginPayload.email || ""}
-          onChange={(e) => {
-            onChange({ email: e.target.value })
-          }}
-        />
-      </div>
-
-      <div className="--input-container">
-        <input type="password"
-          placeholder="Password"
-          value={loginPayload.password || ""}
-          onChange={(e) => {
-            onChange({ password: e.target.value })
-          }} 
-        />
-      </div>
-
-      <FadedBgButton
-        buttonText={'LOGIN'}
-        buttonTextPosition={'24%'}
-        onClick={(e) => {
-          e.preventDefault()
-          onSubmit()         
-        }}
-        isDisabled={!isLoading && !isSubmittable}
+      {/* <span><em>Please confirm your email</em></span> */}
+      <CredentialForm 
+        credentials={loginPayload}
+        isSubmitting={isSubmitting}
+        onChange={(updates) => setLoginPayload({ ...loginPayload, ...updates })}
+        onSubmit={onSubmit}
+        submitButtonText={"LOGIN"}
+        requiredFields={['email', 'password']}
       />
 
-      <span className="--button --button-text">Forgot your password ?</span>
+      {
+      loginPayload.email && 
+        <span className={`--button --button-text ${isForgettingPassword ? 'isDisabled' : ''}`}
+          onClick={onForgotPassword}>
+          Forgot your password ?
+        </span>
+      }
     </div>
   </section>
 }

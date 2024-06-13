@@ -12,7 +12,7 @@ export const HomepageNav = forwardRef((props, refs) => {
     login: {
       onClick: () => !props.isLoggedIn && toggleLoginModal(true),
       linkTo: '#login',
-      text: props.isLoggedIn ? 'LOGIN' : `Hi, [ USER NAME ]`
+      text: !props.isLoggedIn ? 'LOGIN' : `Hi, [ USER NAME ]`
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),
