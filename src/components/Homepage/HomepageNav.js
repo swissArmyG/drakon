@@ -35,12 +35,12 @@ export const HomepageNav = forwardRef((props, refs) => {
     <section className="HomepageNav">
       <div className="--nav-options">
         {
-          Object.keys(navOptions).map((op, index) => {
+          Object.keys(navOptions).map((op, idx) => {
             const isFocused = op === 'login' && isLoginModal ? '--focused' : ''
 
-            return <React.Fragment>
+            return <React.Fragment key={idx}>
               <Link 
-                key={index} 
+                key={idx} 
                 to={`${navOptions[op].linkTo}`}
                 onClick={navOptions[op].onClick}>
                 <h4 className={`--nav-option --button ${isFocused}`}>

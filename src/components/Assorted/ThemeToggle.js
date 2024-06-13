@@ -15,11 +15,11 @@ export const ThemeToggle = ({ theme, onToggle }) => {
   return (
     <section className="ThemeToggle">
       {
-        Object.keys(themes).map(key => {
+        Object.keys(themes).map((key, idx) => {
           const themeName = themes[key]
           const selected = theme === key ? '--selected' : ''
 
-          return <div className="--button -container" 
+          return <div key={idx} className="--button -container" 
             onClick={() => onToggle(key)}>
             <div className={`--radio --button --${key} ${selected}`}/>
             <span className={`--${key} ${selected} --theme-text`}>{themeName}</span>

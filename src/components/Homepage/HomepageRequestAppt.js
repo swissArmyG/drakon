@@ -16,7 +16,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
   const [ singleOption, selectSingleOption ] = useState('')
   const [ multipleOptions, selectMultipleOptions ] = useState([])
 
-  const [ painDegree, setPainDegree ] = useState(undefined)
+  const [ painDegree, setPainDegree ] = useState('')
   const [ patientProfile, setPatientProfile ] = useState({
     firstname: '',
     lastname: '',
@@ -162,7 +162,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
   const renderConditionForm = () => {
     return <div className="ConditionForm">
       <div className="--options-container">
-        <label><i>Please select <em>one</em> of the following:</i></label>
+        <p><i>Please select <em>one</em> of the following:</i></p>
         {
           Object.keys(singleSelectOption).map((option, index) => {
             return <div key={index} className='--option-container'>
@@ -181,7 +181,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
       </div>
 
       <div className="--options-container">
-        <label><i>-OR- select <em>one or more</em> of the following:</i></label>
+        <p><i>-OR- select <em>one or more</em> of the following:</i></p>
         {
           Object.keys(multipleSelectOptions).map((option, index) => {
             return <div key={index} className='--option-container'>
@@ -260,12 +260,12 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
 
   const renderInputContainer = () => {
     return <div className="InputContainer">
-      <label>Rate your overall degree of pain right now from 1-10: </label>
-      <input type="number" max="10"
-        value={painDegree}
+      <label htmlFor="painDegree">Rate your overall degree of pain right now from 1-10: </label>
+      <input id="painDegree" type="number" max="10"
+        value={painDegree > 0 ? painDegree : undefined}
         onChange={({ target: { value }}) => {
-          if (value < 1 || !value) {
-            value = undefined
+          if (value < 1 || !value || value.length === 0) {
+            value = 0
           }
           if (value > 10) {
             value = 10
