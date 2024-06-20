@@ -18,13 +18,15 @@ export const forgotPassword = async(email) => {
 }
 
 export const renderResetPassword = async({ token, userId }) => {
-  const { data: { data }} = await Axios.get(`/password/reset?token=${token}&userId=${userId}`)
+  const { data: { data }} = await Axios.get('/password/reset', {
+    params: { token, userId }
+  })
 
   return data
 }
 
 export const resetPassword = async({ password, token, userId }) => {
-  const { data: { data }} = await Axios.post(`/password/reset?token=${token}&userId=${userId}`, {
+  const { data: { data }} = await Axios.post('/password/reset', {
     new_password: password,
     reset_password_token: token,
     user_id: userId

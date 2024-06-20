@@ -5,6 +5,7 @@ import { PasswordReset } from './components/Assorted'
 
 const App = () => {
   const location = useLocation()
+  
   return (
     <section className="App">
       <Routes location={location}>

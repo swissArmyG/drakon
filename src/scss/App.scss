@@ -4,9 +4,18 @@
   color: $secondary-color;
 }
 
-.--button {
+.--button,
+i {
   cursor: pointer;
+}
 
+i {
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.--button {
   &.isDisabled {
     cursor: not-allowed;
   }
@@ -34,7 +43,6 @@
     }
   }
 }
-
 
 .App-logo {
   height: 40vmin;
@@ -82,7 +90,7 @@ a {
   }
 }
 
-.--textbox {
+.--modal {
   position: absolute;
   z-index: 1000;
   height: fit-content;

@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useNavigate, useLocation, useParams } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { CredentialForm } from './CredentialForm'
 import { Notification } from './Notification'
 import { 
@@ -8,47 +8,49 @@ import {
 } from '../../api/sessions'
 
 export const PasswordReset = () => {
-  // const { token, userId } = useParams()
+  const navigate = useNavigate()
   const location = useLocation()
   const queryParams = new URLSearchParams(location.search)
-  const token = queryParams.get('token')
-  const userId = queryParams.get('userId')
+  const tokenParam = queryParams.get('token')
+  const userIdParam = queryParams.get('userId')
 
-  // const navigate = useNavigate()
-
-  const defaultState = {
+  const defaultResetPayload = {
     email: '',
-    userId: '',
-    token: '',
+    userId: userIdParam,
+    token: tokenParam,
   }
   const [ notification, setNotification ] = useState({
     type: '',
     message: ''
   })
-  const [ resetPayload, setResetPayload ] = useState(defaultState)
+  const [ resetPayload, setResetPayload ] = useState(defaultResetPayload)
   const [ isSubmitting, setIsSubmitting ] = useState(false)
-  // const [ isValid, setIsValid ] = useState(false)
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false)
 
-  const requestResetPassword = useCallback(async () => {    
-    try {
-      await renderResetPassword({ token, userId })
-      // setIsValid(true)
-    } catch (err) {
-      // setIsValid(false)
-      // navigate("/")
-      setNotification({
-        type: 'error',
-        message: 'Something went wrong. Please make sure the reset password link has not expired, or try again later.'
-      })
-    }
-  }, [token, userId])
+  const { token, userId } = resetPayload
 
   useEffect(() => {
-    requestResetPassword()
-  }, [requestResetPassword])
+    const requestResetPassword = async () => {
+      try {
+        await renderResetPassword({ token: resetPayload.token, userId: resetPayload.userId })
+        setIsAuthenticated(true)
+      } catch (err) {
+        navigate("/")
+        setIsAuthenticated(false)
+        setNotification({
+          type: 'error',
+          message: 'Something went wrong. Please make sure the reset password link has not expired, or try again later.'
+        })
+      }
+    };
+  
+    if (resetPayload.token && resetPayload.userId) {
+      requestResetPassword()
+    }
+  }, [resetPayload, navigate])
 
   const clearAndClose = () => {
-    setResetPayload(defaultState)
+    setResetPayload(defaultResetPayload)
   }
 
   const onSubmit = async() => {
@@ -56,7 +58,10 @@ export const PasswordReset = () => {
 
     try {
       if (!userId || !token) {
-        throw new Error('Invalid link')
+        setNotification({
+          type: 'error', 
+          message: 'Please make sure your reset password link has not expired, or try again later.'
+        })
       }
 
       await resetPassword({
@@ -72,10 +77,9 @@ export const PasswordReset = () => {
 
       clearAndClose()
     } catch (err) {
-      // navigate("/")
       setNotification({
         type: 'error', 
-        message: 'Something went wrong. Maybe your link has expired. Please try again'
+        message: 'Something went wrong. Please make sure that your email is correct, or try again later.'
       })
     } finally {
       setIsSubmitting(false)
@@ -83,9 +87,9 @@ export const PasswordReset = () => {
   }
 
   return (
-    <section className="PasswordReset">
-      {(!token || !userId) 
-      ? <h1>Invalid token</h1>
+    <section className={`PasswordReset --container --background`}>
+      {!isAuthenticated
+      ? <p>The link may have already expired. Please <em onClick={() => navigate("/")}>return to homepage</em> and request another password reset</p>
       : <CredentialForm 
         credentials={resetPayload}
         isSubmitting={isSubmitting}

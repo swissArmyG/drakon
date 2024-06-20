@@ -9,6 +9,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
         <div className="--input-container">
           <p><em>Patient's Full Name</em></p>
           <input type="text"
+            id="firstname"
             placeholder="Firstname"
             value={patientProfile.firstname || ""}
             onChange={({ target: { value }}) => onChange({ firstname: value })}
@@ -18,6 +19,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
           <p style={{ visibility: 'hidden'}}><em>Lastname</em></p>
           {/* Keep it here to preserve block styling and possible future change */}
           <input type="text"
+            id="lastname"
             placeholder="Lastname"
             value={patientProfile.lastname || ""}
             onChange={({ target: { value }}) => onChange({ lastname: value })}
@@ -28,6 +30,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
       <div className="--address-input-container">
         <p><em>Address</em><span>Optional</span></p>
         <input type="text"
+          id="address"
           // placeholder="Optional"
           value={patientProfile.address || ""}
           onChange={({ target: { value }}) => onChange({ address: value })}
@@ -38,6 +41,8 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
         <div className="--input-container">
           <p><em>Email</em></p>
           <input type="text"
+            id="email"
+            autoComplete="on"
             placeholder="Please use a valid email"
             value={patientProfile.email || ""}
             onChange={({ target: { value }}) => onChange({ email: value })}
@@ -46,6 +51,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
         <div className="--input-container">
           <p><em>Phone</em><span>Number Only</span></p>
           <input type="number"
+            id="phone"
             placeholder="No dash (-) or dot (.) required"
             value={patientProfile.phoneNumber || ""}
             onChange={({ target: { value }}) => onChange({ phoneNumber: value })} 

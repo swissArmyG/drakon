@@ -8,13 +8,13 @@
       "type": "image/svg+xml"
     },
     {
-      "src": "logo.png",
-      "type": "image/png",
+      "src": "icon.svg",
+      "type": "image/svg",
       "sizes": "192x192"
     },
     {
-      "src": "icon.png",
-      "type": "image/png",
+      "src": "icon.svg",
+      "type": "image/svg",
       "sizes": "512x512"
     }
   ],

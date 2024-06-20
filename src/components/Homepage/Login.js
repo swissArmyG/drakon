@@ -65,7 +65,7 @@ export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
   }
 
   return isOpen && <section className="Login">
-    <div className="--textbox">
+    <div className="--modal">
       <div>
         <h3 className="--button --button-text -exit" 
           onClick={() => toggleOpen(false)}>
@@ -73,7 +73,6 @@ export const Login = ({ isOpen, toggleOpen, notify, setUserData }) => {
         </h3>
       </div>
 
-      {/* <span><em>Please confirm your email</em></span> */}
       <CredentialForm 
         credentials={loginPayload}
         isSubmitting={isSubmitting}

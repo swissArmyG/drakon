@@ -10,18 +10,18 @@ export const HomepageTopics =  () => {
     return Object
       .keys(disorder)
       .map(type => {
-        return <p className="--textbox-text"><em>{type}</em> {disorder[type]}</p>
+        return <p className="--modal-text"><em>{type}</em> {disorder[type]}</p>
       })
   }
 
   const whitespace = ' '
   const renderTopicContent = (category, idx) => {
-    return <div className={`--textbox -box-${idx}`}>
+    return <div className={`--modal -box-${idx}`}>
       <em>{topics[category].header}</em>
-      <p className="--textbox-text"><em>{`Location${whitespace}`}</em>{topics[category].location}</p>
-      <p className="--textbox-text"><em>{`Function${whitespace}`}</em>{topics[category].function}</p>
-      <p className="--textbox-text"><em>{`Common Problems / Disorders${whitespace}`}</em>{renderCommonDisorders(category)}</p>
-      <p className="--textbox-text"><em>{`Fun Facts${whitespace}`}</em>{topics[category].funFacts}</p>
+      <p className="--modal-text"><em>{`Location${whitespace}`}</em>{topics[category].location}</p>
+      <p className="--modal-text"><em>{`Function${whitespace}`}</em>{topics[category].function}</p>
+      <p className="--modal-text"><em>{`Common Problems / Disorders${whitespace}`}</em>{renderCommonDisorders(category)}</p>
+      <p className="--modal-text"><em>{`Fun Facts${whitespace}`}</em>{topics[category].funFacts}</p>
     </div>
   }
 
@@ -44,7 +44,7 @@ export const HomepageTopics =  () => {
             </div>
             {
               category === currentCategory &&
-              <div className={`--textbox-container`}>
+              <div className={`--modal-container`}>
                 {renderTopicContent(category, index)}
               </div>
             }

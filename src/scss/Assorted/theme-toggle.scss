@@ -7,7 +7,7 @@
     background-color: $primary-color;
   }
 
-  .--textbox {
+  .--modal {
     background-color: rgba(0, 0, 0, 0.8);
   }
 
@@ -16,7 +16,7 @@
   // }
 
   .Login {
-    .--textbox {
+    .--modal {
       background-color: rgba(0,0,0,0.9)
     }
   }
@@ -32,7 +32,7 @@
     background-color: $primary-color;
   }
 
-  .--textbox {
+  .--modal {
     background-color: rgba(43, 71, 107, 0.8)
   }
 
@@ -41,7 +41,7 @@
   // }
 
   .Login {
-    .--textbox {
+    .--modal {
       background-color: rgba(43, 71, 107, 0.9)
     }
   }

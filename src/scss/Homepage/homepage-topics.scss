@@ -9,11 +9,10 @@
     min-height: 596px;
   }
 
-  .--textbox-container {
+  .--modal-container {
     text-align: left;
 
-    .--textbox {
-
+    .--modal {
       width: 530px;
       left: 47%;
 
@@ -43,8 +42,8 @@
 
 @media screen and (max-width: 1219px) {
   .HomepageTopics {
-    .--textbox-container {
-      .--textbox {
+    .--modal-container {
+      .--modal {
         left: 41%
       }
     }
@@ -53,8 +52,8 @@
 
 @media screen and (max-width: 1034px) {
   .HomepageTopics {
-    .--textbox-container {
-      .--textbox {
+    .--modal-container {
+      .--modal {
         position: relative;
         left: 0%
       }
@@ -64,8 +63,8 @@
 
 @media screen and (max-width: 766px) {
   .HomepageTopics {
-    .--textbox-container {
-      .--textbox {
+    .--modal-container {
+      .--modal {
         width: 78%;
         border-radius: 30px;
         padding: 22px 15px;

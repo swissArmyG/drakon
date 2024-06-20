@@ -11,19 +11,22 @@ export const CredentialForm = ({
   requiredFields=[],
   submitButtonText
 }) => {
-
   const [ isPasswordVisible, setIsPasswordVisible ] = useState(false)
 
   const isInvalid = credentials && containsMissingFields({
     payload: credentials,
     requiredFields
   })
+
   const isSubmittable = !isInvalid;
 
   return (
     <section className="CredentialForm">
        <div className="--input-container">
-        <input type="text"
+        <input
+          id="email" 
+          type="text"
+          autoComplete="on"
           placeholder={placeholderText[0] || "Email"}
           value={credentials.email || ""}
           onChange={({ target: { value }}) => onChange({ email: value })}
@@ -31,20 +34,22 @@ export const CredentialForm = ({
       </div>
 
       <div className="--input-container">
-        <input type={isPasswordVisible ? 'text' : 'password'}
+        <input
+          id="password" 
+          type={isPasswordVisible ? 'text' : 'password'}
           placeholder={placeholderText[1] || "Password"}
           value={credentials.password || ""}
           onChange={({ target: { value }}) => onChange({ password: value })}
         />
-      </div>
-      
+
       {
         isPasswordVisible
-          ? <i className="fa-regular fa-eye-slash" 
-            onClick={() => setIsPasswordVisible(false)} /> 
-          : <i className="fa-regular fa-eye" 
-            onClick={() => setIsPasswordVisible(true)}/>
+        ? <i className="fa-regular fa-eye-slash" 
+          onClick={() => setIsPasswordVisible(false)} /> 
+        : <i className="fa-regular fa-eye" 
+          onClick={() => setIsPasswordVisible(true)}/>
       }
+      </div>
       
       <FadedBgButton
         buttonText={submitButtonText}
