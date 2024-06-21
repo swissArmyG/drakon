@@ -25,11 +25,11 @@ export const renderPasswordReset = async({ token, userId }) => {
   return data
 }
 
-export const resetPassword = async({ email, password, token, userId }) => {
+export const resetPassword = async({ password, userId, token }) => {
   const { data: { data }} = await Axios.post('/password/reset', {
     new_password: password,
-    reset_password_token: token,
-    user_id: userId
+    user_id: userId,
+    reset_password_token: token
   })
  
   return data

@@ -33,7 +33,6 @@ export const PasswordReset = () => {
           await renderPasswordReset({ token: tokenParam, userId: userIdParam })
           setIsAuthenticated(true)
         } catch (err) {
-          navigate("/")
           setIsAuthenticated(false)
           setNotification({
             type: 'error',
@@ -89,8 +88,8 @@ export const PasswordReset = () => {
           onChange={(payload) => setResetPayload({ ...resetPayload, ...payload })}
           onSubmit={onSubmit}
           placeholderText={[
-            "Please confirm your current email",
-            "Enter the new password"
+            "",
+            "Please enter the new password"
           ]}
           requiredFields={["password"]}
           submitButtonText={"CONFIRM"}
