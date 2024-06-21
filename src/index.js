@@ -1,16 +1,19 @@
+import App from './App';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './scss/index.scss'
 import './scss/imports.scss'
 import { BrowserRouter } from 'react-router-dom'
+import { NotificationProvider } from './components/Assorted/NotificationContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <NotificationProvider>
+        <App />
+      </NotificationProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

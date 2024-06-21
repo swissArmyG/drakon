@@ -1,11 +1,19 @@
 .FadedBgButton {
   position: relative;
 
+  &.isDisabled {
+    cursor: not-allowed;
+  }
+
   .--button-text {
     position: absolute;
     z-index: 1;
     text-align: center;
     margin: 0;
+
+    &.isDisabled {
+      cursor: not-allowed;
+    }
   }
 
   .isFlipped {

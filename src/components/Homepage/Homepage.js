@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import {
   HomepageNav,
   HomepageTopics,
@@ -8,17 +8,15 @@ import {
 } from '.'
 import logoPath from '../../img/logo/logo_with_text.png'
 import { SideNavigation } from '../Buttons'
-import { 
-  Notification, 
+import {  
+  NotificationContext, 
   ThemeToggle, 
 } from '../Assorted'
 
 export const Homepage = () => {
+  const { setNotification } = useContext(NotificationContext)
+
   const [ theme, setTheme ] = useState('DEEP_OCEAN')
-  const [ notification, setNotification ] = useState({
-    type: '',
-    message: '',
-  })
   const [ userData, setUserData ] = useState({})
 
   const backToTopRef = useRef(null)
@@ -47,7 +45,6 @@ export const Homepage = () => {
             requestApptRef,
             contactRef
           }}
-          // isLoggedIn={false}
           notify={notify}
           setUserData={setUserData}
         />
@@ -61,11 +58,6 @@ export const Homepage = () => {
         <HomepageRequestAppt ref={requestApptRef} notify={notify} userData={userData} />
         <HomepageContact ref={contactRef} />
       </div>
-
-      <Notification 
-        type={notification.type} 
-        message={notification.message} 
-      /> 
     </section>
   )
 }

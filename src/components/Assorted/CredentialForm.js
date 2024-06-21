@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FadedBgButton  } from '../Buttons'
 import { containsMissingFields } from '../../uitls/validation'
 
@@ -11,27 +11,34 @@ export const CredentialForm = ({
   requiredFields=[],
   submitButtonText
 }) => {
+  const [ isSubmittable, setIsSubmittable ] = useState(false)
   const [ isPasswordVisible, setIsPasswordVisible ] = useState(false)
 
-  const isInvalid = credentials && containsMissingFields({
-    payload: credentials,
-    requiredFields
-  })
+  useEffect(() => {
+    const isInvalid = credentials && containsMissingFields({
+      payload: credentials,
+      requiredFields
+    })
 
-  const isSubmittable = !isInvalid;
+    setIsSubmittable(!isInvalid)
+  }, [credentials, requiredFields])
+
+  const attributes = Object.keys(credentials)
 
   return (
     <section className="CredentialForm">
-       <div className="--input-container">
-        <input
-          id="email" 
-          type="text"
-          autoComplete="on"
-          placeholder={placeholderText[0] || "Email"}
-          value={credentials.email || ""}
-          onChange={({ target: { value }}) => onChange({ email: value })}
-        />
-      </div>
+      { attributes.includes('email') && 
+        <div className="--input-container">
+          <input
+            id="email" 
+            type="text"
+            autoComplete="on"
+            placeholder={placeholderText[0] || "Email"}
+            value={credentials.email || ""}
+            onChange={({ target: { value }}) => onChange({ email: value })}
+          />
+        </div>
+      }
 
       <div className="--input-container">
         <input
@@ -56,9 +63,9 @@ export const CredentialForm = ({
         buttonTextPosition={'24%'}
         onClick={(e) => {
           e.preventDefault()
-          onSubmit()         
+          isSubmittable && onSubmit()         
         }}
-        isDisabled={!isLoading && !isSubmittable}
+        isDisabled={isLoading || !isSubmittable}
       />
     </section>
   )

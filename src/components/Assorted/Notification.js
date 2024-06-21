@@ -1,31 +1,34 @@
-import React, { useEffect, useState } from "react"
+import React, { useContext, useState, useEffect } from "react";
+import { NotificationContext } from "./";
 
-export const Notification = ({ type, message }) => {
-  const [isVisible, setIsVisible] = useState(false)
+export const Notification = () => {
+  const { notification, setNotification } = useContext(NotificationContext);
+  const [ isVisible, setIsVisible ] = useState(false);
 
   useEffect(() => {
-    if (!message || !type) {
-      return setIsVisible(false)
+    if (!notification.message || !notification.type) {
+      return setIsVisible(false);
     }
-    return setIsVisible(true)
-  }, [message, type])
-
+    return setIsVisible(true);
+  }, [notification]);
 
   if (!isVisible) {
-    return;
+    return null;
   }
 
   return (
-    <section className={`Notification ${type}`}>
-      { 
-        isVisible && <React.Fragment>
-          <h3 className="--button --button-text -exit" 
-            onClick={() => setIsVisible(false)}>
+    <section className={`Notification ${notification.type}`}>
+      {isVisible && (
+        <React.Fragment>
+          <h3
+            className="--button --button-text -exit"
+            onClick={() => setNotification({ type: "", message: "" })}
+          >
             X
           </h3>
-          <p>{message}</p>
-        </React.Fragment> 
-      }
+          <p>{notification.message}</p>
+        </React.Fragment>
+      )}
     </section>
-  )
-}
+  );
+};
