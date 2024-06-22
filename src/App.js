@@ -9,7 +9,8 @@ const App = () => {
   return (
     <section className="App">
       <Routes location={location}>
-        <Route exact path="/" element={<Homepage />} />
+        <Route exact path="/" 
+          element={<Homepage />} />
         <Route exact path="/password/reset" 
           element={<PasswordReset />} />
       </Routes>

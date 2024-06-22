@@ -1,18 +1,20 @@
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Login } from '.'
+import { AuthContext } from '../../contexts'
 
 export const HomepageNav = forwardRef((props, refs) => {
   const { storyRef, requestApptRef, contactRef } = refs
+  const { isLoggedIn } = useContext(AuthContext)
   const [ isLoginModal, toggleLoginModal ] = useState(false)
 
   const scrollConfig = { behavior: "smooth" }
 
   const navOptions = {
     login: {
-      onClick: () => !props.isLoggedIn && toggleLoginModal(true),
+      onClick: () => !isLoggedIn && toggleLoginModal(true),
       linkTo: '#login',
-      text: !props.isLoggedIn ? 'LOGIN' : `Hi, [ USER NAME ]`
+      text: !isLoggedIn ? 'LOGIN' : `Hi, [User Name]` 
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),

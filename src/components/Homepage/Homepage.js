@@ -8,10 +8,8 @@ import {
 } from '.'
 import logoPath from '../../img/logo/logo_with_text.png'
 import { SideNavigation } from '../Buttons'
-import {  
-  NotificationContext, 
-  ThemeToggle, 
-} from '../Assorted'
+import { ThemeToggle } from '../Assorted'
+import { NotificationContext } from '../../contexts'
 
 export const Homepage = () => {
   const { setNotification } = useContext(NotificationContext)

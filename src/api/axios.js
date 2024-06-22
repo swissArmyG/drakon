@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import { getToken, setToken, removeToken } from './tokens'
 
 export const Axios = axios.create({
   baseURL: process.env.REACT_APP_BASE_URL,
@@ -9,11 +10,25 @@ export const Axios = axios.create({
   }
 })
 
-Axios.interceptors.request.use(
-  (config) => {
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+// Axios.interceptors.push({
+//   request: (config) => {
+//     const token = getToken()
+//     if (token) {
+//       config.headers.Authorization = `Bearer ${token}`
+//     }
+//     return config;
+//   },
+//   response: (response) => {
+//     const newToken = response.headers['x-new-token']
+//     if (newToken) {
+//       setToken(newToken)
+//     }
+//     return response;
+//   },
+//   error: (err) => {
+//     if (err.response && err.response.status === 401) {
+//       removeToken()
+//     }
+//     return Promise.reject(err)
+//   }
+// })

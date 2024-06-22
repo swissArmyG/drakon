@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CredentialForm } from './CredentialForm'
-import { NotificationContext } from './'
+import { NotificationContext } from '../../contexts'
 import { 
   renderPasswordReset, 
   resetPassword 
@@ -83,16 +83,16 @@ export const PasswordReset = () => {
         !isAuthenticated
           ? <p className="--unauthenticated">The link may be invalid, or has already expired. Please <em className="--button" onClick={() => navigate("/")}>return to homepage</em> and request another password reset</p>
         : <CredentialForm 
-          credentials={resetPayload}
-          isSubmitting={isSubmitting}
-          onChange={(payload) => setResetPayload({ ...resetPayload, ...payload })}
-          onSubmit={onSubmit}
-          placeholderText={[
-            "",
-            "Please enter the new password"
-          ]}
-          requiredFields={["password"]}
-          submitButtonText={"CONFIRM"}
+            credentials={resetPayload}
+            isSubmitting={isSubmitting}
+            onChange={(payload) => setResetPayload({ ...resetPayload, ...payload })}
+            onSubmit={onSubmit}
+            placeholderText={[
+              "",
+              "Please enter the new password"
+            ]}
+            requiredFields={["password"]}
+            submitButtonText={"CONFIRM"}
         />
       }
     </section>
