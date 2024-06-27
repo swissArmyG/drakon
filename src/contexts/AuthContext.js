@@ -1,30 +1,50 @@
-import { createContext, useState, useEffect }  from 'react'
+import { 
+  createContext, 
+  useCallback, 
+  useEffect, 
+  useState 
+}  from 'react'
+import { authenticate } from '../api/sessions'
 
 const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
-  const [ isLoggedIn, setIsLoggedIn ] = useState(false)
+  const [ loginPayload, setLoginPayload ] = useState({
+    email: '',
+    password: ''
+  })
+  const [ userData, setUserData ] = useState({})
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false)
+
+  const authenticateCallback = useCallback(async () => {
+    try {
+      const { authenticated } = await authenticate()
+      setIsAuthenticated(authenticated)
+    } catch (err) {
+      setIsAuthenticated(false)
+    }
+    return userData
+  }, [userData])
 
   useEffect(() => {
-    const checkCookie = () => {
-      const accessToken = document.cookie.match(/accessToken=([^;]+)/);
-      if (accessToken) {
-        setIsLoggedIn(true);
-      } else {
-        setIsLoggedIn(false);
-      }
-    };
+    authenticateCallback()
+  }, [authenticateCallback])
 
-    console.log(typeof window)
-
-    // Check if we're on the client-side
-    if (typeof window !== 'undefined') {
-      checkCookie();
-    }
-  }, []);
+  const logout = () => {
+    setIsAuthenticated(false)
+    setUserData({})
+  }
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider value={{ 
+      authenticate,
+      isAuthenticated,
+      logout,
+      loginPayload,
+      setLoginPayload,
+      setUserData,
+      userData
+    }}>
       {children}
     </AuthContext.Provider>
   )

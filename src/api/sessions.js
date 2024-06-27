@@ -1,11 +1,17 @@
 import { Axios } from './axios'
 
+export const authenticate = async() => {
+  const { data } = await Axios.get('/authenticate', { withCredentials: true })
+  
+  return data
+}
+
 export const login = async(payload) => {
   const { data: { data }} = await Axios.post('/login', {
     email: payload.email,
     password: payload.password
   }, { withCredentials: true })
-
+  
   return data
 }
 

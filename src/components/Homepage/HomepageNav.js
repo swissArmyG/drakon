@@ -1,20 +1,23 @@
 import React, { forwardRef, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Login } from '.'
+import { Login, Logout } from '.'
 import { AuthContext } from '../../contexts'
 
-export const HomepageNav = forwardRef((props, refs) => {
+export const HomepageNav = forwardRef((refs) => {
   const { storyRef, requestApptRef, contactRef } = refs
-  const { isLoggedIn } = useContext(AuthContext)
+  
+  const { isAuthenticated } = useContext(AuthContext)
+
   const [ isLoginModal, toggleLoginModal ] = useState(false)
+  const [ isLogoutModal, toggleLogoutModal ] = useState(false)
 
   const scrollConfig = { behavior: "smooth" }
 
   const navOptions = {
     login: {
-      onClick: () => !isLoggedIn && toggleLoginModal(true),
+      onClick: () => toggleLoginModal(isAuthenticated ? false : true),
       linkTo: '#login',
-      text: !isLoggedIn ? 'LOGIN' : `Hi, [User Name]` 
+      text: isAuthenticated ? `Hi, [User Name]` : 'LOGIN'
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),
@@ -29,7 +32,7 @@ export const HomepageNav = forwardRef((props, refs) => {
     contact: {
       onClick: () => contactRef.current.scrollIntoView(scrollConfig),
       linkTo: '#contact',
-      text: 'CONTACT'
+      text: 'CONTACT'  
     }
   }
 
@@ -50,11 +53,15 @@ export const HomepageNav = forwardRef((props, refs) => {
                 </h4>
               </Link>
               {
-                op === 'login' && <Login 
+                (op === 'login' && !isAuthenticated) && <Login 
                   isOpen={isLoginModal} 
                   toggleOpen={toggleLoginModal}
-                  notify={props.notify}
-                  setUserData={props.setUserData}
+                />
+              }
+              {
+                (op === 'login' && isAuthenticated) && <Logout
+                  isOpen={isLogoutModal}
+                  toggleOpen={toggleLogoutModal}
                 />
               }
             </React.Fragment>

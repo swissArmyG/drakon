@@ -1,4 +1,4 @@
-import React, { useState, useEffect, forwardRef } from "react"
+import React, { useState, useEffect, forwardRef, useContext } from "react"
 import { 
   singleSelectOption, 
   multipleSelectOptions 
@@ -7,11 +7,14 @@ import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { FadedBgButton } from '../Buttons';
 import { PatientProfileForm, ProgressBar } from "../Assorted";
 import { createPatient } from "../../api/patients";
+import { NotificationContext } from "../../contexts";
 
 export const HomepageRequestAppt = forwardRef((props, ref) => {
   const FIRST_PANE = 1
   const LAST_PANE = 2
   const INCOMPLETE = 0
+
+  const { setNotification } = useContext(NotificationContext)
   
   const [ singleOption, selectSingleOption ] = useState('')
   const [ multipleOptions, selectMultipleOptions ] = useState([])
@@ -136,13 +139,13 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
         email: patientProfile.email,
         phone_number: patientProfile.phoneNumber
       })
-      props.notify({ 
+      setNotification({ 
         type: 'success', 
         message: 'You have requested an appointment! Our doctor will reach out to you soon via the email or the phone number you provided.'
       })
       resetForm()
     } catch (err) {
-      props.notify({ 
+      setNotification({ 
         type: 'error', 
         message: 'Unable to request appointment currently, please try again later.'
       })
