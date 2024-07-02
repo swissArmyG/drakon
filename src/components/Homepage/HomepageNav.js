@@ -4,7 +4,7 @@ import { Login, Logout } from '.'
 import { AuthContext } from '../../contexts'
 import { authenticate } from '../../api/sessions'
 
-export const HomepageNav = forwardRef((refs) => {
+export const HomepageNav = forwardRef((_props, refs) => {
   const { storyRef, requestApptRef, contactRef } = refs
 
   const { userData } = useContext(AuthContext)

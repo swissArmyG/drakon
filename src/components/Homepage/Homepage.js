@@ -13,10 +13,10 @@ import { ThemeToggle } from '../Assorted'
 export const Homepage = () => {
   const [ theme, setTheme ] = useState('DEEP_OCEAN')
 
-  const backToTopRef = useRef(null)
-  const storyRef = useRef(null)
-  const requestApptRef = useRef(null)
-  const contactRef = useRef(null)
+  const backToTopRef = useRef()
+  const storyRef = useRef()
+  const requestApptRef = useRef()
+  const contactRef = useRef()
 
   return (
     <section className={`Homepage --container --background --${theme}`} ref={backToTopRef}>
