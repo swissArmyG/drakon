@@ -1,23 +1,52 @@
-import React, { forwardRef, useContext, useState } from 'react'
+import React, { forwardRef, useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Login, Logout } from '.'
 import { AuthContext } from '../../contexts'
+import { authenticate } from '../../api/sessions'
 
 export const HomepageNav = forwardRef((refs) => {
   const { storyRef, requestApptRef, contactRef } = refs
-  
-  const { isAuthenticated } = useContext(AuthContext)
 
+  const { userData } = useContext(AuthContext)
+  
+  const [ isAuthenticated, setIsAuthenticated ] = useState(false)
   const [ isLoginModal, toggleLoginModal ] = useState(false)
   const [ isLogoutModal, toggleLogoutModal ] = useState(false)
-
+  
   const scrollConfig = { behavior: "smooth" }
+
+  const authenticateCallback = async() => {
+    try {
+      const { authenticated } = await authenticate()
+      setIsAuthenticated(authenticated)
+    } catch (err) {
+      setIsAuthenticated(false)
+    }
+  }
+
+  useEffect(() => {
+    if (userData?.email && userData?.id) {
+      authenticateCallback()
+    } else {
+      setIsAuthenticated(false)
+    }
+  }, [userData])
+
+  const isLoggingIn = userData?.email !== '' && !isAuthenticated
+
+  const handleLogoutModal = () => {
+    toggleLogoutModal(isAuthenticated ? true : false)
+  }
+
+  const handleLoginModal = () => {
+    toggleLoginModal(isAuthenticated ? false : true)
+  }
 
   const navOptions = {
     login: {
-      onClick: () => toggleLoginModal(isAuthenticated ? false : true),
+      onClick: () => isLoggingIn ? handleLoginModal() : handleLogoutModal(),
       linkTo: '#login',
-      text: isAuthenticated ? `Hi, [User Name]` : 'LOGIN'
+      text: isLoggingIn ? 'LOGIN' : `Hi, ${userData?.email}`
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),
@@ -41,8 +70,8 @@ export const HomepageNav = forwardRef((refs) => {
       <div className="--nav-options">
         {
           Object.keys(navOptions).map((op, idx) => {
-            const isFocused = op === 'login' && isLoginModal ? '--focused' : ''
-
+            const isFocused = op === 'login' && (isLoginModal ? '--focused' : '')
+   
             return <React.Fragment key={idx}>
               <Link 
                 key={idx} 
@@ -52,18 +81,21 @@ export const HomepageNav = forwardRef((refs) => {
                   {navOptions[op].text}
                 </h4>
               </Link>
-              {
-                (op === 'login' && !isAuthenticated) && <Login 
-                  isOpen={isLoginModal} 
-                  toggleOpen={toggleLoginModal}
-                />
+
+              { 
+                op === 'login' && (
+                !isAuthenticated
+                  ? <Login 
+                      isOpen={isLoginModal} 
+                      toggleOpen={toggleLoginModal}
+                    /> 
+                  : <Logout
+                      isOpen={isLogoutModal}
+                      toggleOpen={toggleLogoutModal}
+                    /> 
+                )
               }
-              {
-                (op === 'login' && isAuthenticated) && <Logout
-                  isOpen={isLogoutModal}
-                  toggleOpen={toggleLogoutModal}
-                />
-              }
+              
             </React.Fragment>
           })
         }

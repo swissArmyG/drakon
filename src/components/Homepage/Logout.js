@@ -1,27 +1,33 @@
 import { useContext, useState } from 'react'
 import { AuthContext, NotificationContext } from '../../contexts'
 import { FadedBgButton } from '../Buttons'
+import { logout } from '../../api/sessions'
 
 export const Logout = ({ isOpen, toggleOpen }) => {
   const {
-    setLoginPayload 
+    setLoginPayload,
+    setUserData,
+    userData 
   } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
 
   const [ isLoading, setIsLoading ] = useState(false)
 
   const clearAndClose = () => {
-    setLoginPayload(false)
+    setLoginPayload({ email: '', password: ''})
     toggleOpen(false)
   }
 
   const onSubmit = async() => {
     setIsLoading(true)
 
+    await logout(userData.id)
+
     try {
+      setUserData({})
       setNotification({ 
         type: 'success', 
-        message: 'Successfully logged in.'
+        message: 'Successfully logged out.'
       })
 
       clearAndClose()

@@ -27,11 +27,11 @@ export const PasswordReset = () => {
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
 
   useEffect(() => {
-    if (!isAuthenticated && tokenParam && userIdParam) {
+    if (tokenParam && userIdParam) {
       const requestPasswordReset = async () => {
         try {
-          await renderPasswordReset({ token: tokenParam, userId: userIdParam })
-          setIsAuthenticated(true)
+          const { message } = await renderPasswordReset({ token: tokenParam, userId: userIdParam })
+          setIsAuthenticated(!!message)
         } catch (err) {
           setIsAuthenticated(false)
           setNotification({
@@ -42,7 +42,7 @@ export const PasswordReset = () => {
       };
       requestPasswordReset()
     }
-  }, [tokenParam, userIdParam, isAuthenticated, navigate, setNotification])
+  }, [tokenParam, userIdParam, setNotification])
 
   const clearAndClose = () => {
     setResetPayload(defaultResetPayload)

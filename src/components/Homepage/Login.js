@@ -27,7 +27,7 @@ export const Login = ({ isOpen, toggleOpen }) => {
         password: loginPayload.password
       })
 
-      setUserData(userData)
+      setUserData({ id: userData.id, email: userData.email })
 
       setNotification({
         type: 'success',

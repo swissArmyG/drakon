@@ -1,4 +1,5 @@
-.Login {
+.Login,
+.Logout {
   position: relative;
   top: 14px;
   left: -68px;
@@ -10,5 +11,24 @@
     border: none;
     border-radius: 15px;
     box-shadow: rgb(0, 0, 0) 0px 2px 8px 0px;
+  }
+}
+
+.Login {
+  left: -68px;
+}
+
+.Logout {
+  .--modal {
+    left: -69px;
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .Login,
+  .Logout {
+    .--modal {
+      left: 6px;
+    }
   }
 }
