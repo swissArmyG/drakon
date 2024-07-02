@@ -30,8 +30,8 @@ export const PasswordReset = () => {
     if (tokenParam && userIdParam) {
       const requestPasswordReset = async () => {
         try {
-          const { message } = await renderPasswordReset({ token: tokenParam, userId: userIdParam })
-          setIsAuthenticated(!!message)
+          const data = await renderPasswordReset({ token: tokenParam, userId: userIdParam })
+          setIsAuthenticated(data)
         } catch (err) {
           setIsAuthenticated(false)
           setNotification({
@@ -42,7 +42,7 @@ export const PasswordReset = () => {
       };
       requestPasswordReset()
     }
-  }, [tokenParam, userIdParam, setNotification])
+  }, [tokenParam, userIdParam, location, setNotification])
 
   const clearAndClose = () => {
     setResetPayload(defaultResetPayload)
