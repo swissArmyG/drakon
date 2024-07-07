@@ -4,15 +4,8 @@
   color: $secondary-color;
 }
 
-.--button,
-i {
+.--button, u {
   cursor: pointer;
-}
-
-i {
-  &:hover {
-    color: $secondary-color;
-  }
 }
 
 .--button {
@@ -97,4 +90,8 @@ a {
   border: 5px solid $secondary-color;
   border-radius: 10%;
   padding: 40px 15px;
+}
+
+.--mr-2 {
+  margin-right: 2%;
 }

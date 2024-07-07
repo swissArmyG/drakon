@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CredentialForm } from './CredentialForm'
-import { NotificationContext } from '../../contexts'
+import { AuthContext, NotificationContext } from '../../contexts'
 import { 
   renderPasswordReset, 
   resetPassword 
@@ -20,17 +21,20 @@ export const PasswordReset = () => {
     userId: userIdParam
   }
 
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
 
   const [ resetPayload, setResetPayload ] = useState(defaultResetPayload)
   const [ isSubmitting, setIsSubmitting ] = useState(false)
-  const [ isAuthenticated, setIsAuthenticated ] = useState(false)
 
   useEffect(() => {
     if (tokenParam && userIdParam) {
       const requestPasswordReset = async () => {
         try {
-          const data = await renderPasswordReset({ token: tokenParam, userId: userIdParam })
+          const data = await renderPasswordReset({ 
+            token: tokenParam, 
+            userId: userIdParam 
+          })
           setIsAuthenticated(data)
         } catch (err) {
           setIsAuthenticated(false)

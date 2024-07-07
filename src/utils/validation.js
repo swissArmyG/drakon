@@ -1,15 +1,12 @@
 export const containsMissingFields = ({ payload, requiredFields })=> {
+  console.log(payload)
   let missingFields = [];
   
   for (const field of requiredFields) {
-    if (!payload[field]) {
+    if (!payload[field] || (field && payload[field].trim() === '')) {
       missingFields.push(field)
     }
   }
 
-  if (missingFields.length > 0) {
-    return missingFields.join(', ')
-  }
-
-  return undefined
+  return missingFields
 }

@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import { FadedBgButton  } from '../Buttons'
-import { containsMissingFields } from '../../uitls/validation'
+import { containsMissingFields } from '../../utils/validation'
 
 export const CredentialForm = ({
   credentials,
+  children,
   isLoading,
   onChange, 
   onSubmit,
@@ -15,18 +16,19 @@ export const CredentialForm = ({
   const [ isPasswordVisible, setIsPasswordVisible ] = useState(false)
 
   useEffect(() => {
-    const isInvalid = credentials && containsMissingFields({
+    const missingFields = credentials && containsMissingFields({
       payload: credentials,
       requiredFields
     })
 
-    setIsSubmittable(!isInvalid)
+    setIsSubmittable(missingFields.length === 0)
   }, [credentials, requiredFields])
 
   const attributes = Object.keys(credentials)
 
   return (
     <section className="CredentialForm">
+      { children && children }
       { attributes.includes('email') && 
         <div className="--input-container">
           <input

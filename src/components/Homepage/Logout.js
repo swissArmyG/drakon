@@ -21,10 +21,10 @@ export const Logout = ({ isOpen, toggleOpen }) => {
   const onSubmit = async() => {
     setIsLoading(true)
 
-    await logout(userData.id)
-
     try {
-      setUserData({})
+      await logout(userData.id)
+      
+      setUserData(undefined)
       setNotification({ 
         type: 'success', 
         message: 'Successfully logged out.'

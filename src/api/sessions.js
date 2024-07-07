@@ -17,7 +17,6 @@ export const login = async(payload) => {
 
 export const logout = async(userId) => {
   const { data: { data }} = await Axios.post(`/logout/${userId}`, {
-    params: { userId },
     withCredentials: true
   })
   return data
@@ -43,10 +42,5 @@ export const resetPassword = async({ password, userId, token }) => {
     user_id: userId,
     reset_password_token: token
   })
-  return data
-}
-
-export const readSessionBySessionId = async(sessionId) => {
-  const { data } = await Axios.get(`/session/${sessionId}`)
   return data
 }

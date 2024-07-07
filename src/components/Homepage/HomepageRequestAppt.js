@@ -9,7 +9,7 @@ import { PatientProfileForm, ProgressBar } from "../Assorted";
 import { createPatient } from "../../api/patients";
 import { NotificationContext } from "../../contexts";
 
-export const HomepageRequestAppt = forwardRef((props, ref) => {
+export const HomepageRequestAppt = forwardRef((_props, ref) => {
   const FIRST_PANE = 1
   const LAST_PANE = 2
   const INCOMPLETE = 0
@@ -107,7 +107,7 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
   const resetForm = () => {
     selectSingleOption('')
     selectMultipleOptions([])
-    setPainDegree(undefined)
+    setPainDegree('')
     setPatientProfile({
       firstname: '',
       lastname: '',
@@ -119,15 +119,18 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
     setStepsCompleted(0)
   }
 
+  const painDescriptions = [
+    ...multipleOptions.map(option =>{               
+      return multipleSelectOptions[option]
+    }), 
+    singleSelectOption[singleOption]
+  ].join(', ')
+
+
   const requestAppointment = async () => {
     setIsSubmitting(true)
     
-    const painDescriptions = [
-      ...multipleOptions.map(option =>{               
-        return multipleSelectOptions[option]
-      }), 
-      singleSelectOption[singleOption]
-    ].join(', ')
+    // TODO: Caveat: if logged in, editing an existing email should have a warning splash page, changing this email will also change the login email. Proceed ? Ok : Exit out
 
     try {
       await createPatient({
@@ -244,11 +247,9 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
             e.preventDefault() 
-            
             if (isFirstPane && isNextable) {
               setPane(pane + 1)
             }
-            
             if (isLastPane && isSubmittable) {
               requestAppointment()
             }
@@ -285,7 +286,11 @@ export const HomepageRequestAppt = forwardRef((props, ref) => {
           {renderHeader()}
           {pane === FIRST_PANE && renderConditionForm()}
           {pane === LAST_PANE && <PatientProfileForm
-            patientProfile={patientProfile}  
+            patientProfile={{ 
+              ...patientProfile, 
+              painDescriptions, 
+              painDegree 
+            }}  
             onChange={(data) => setPatientProfile({ ...patientProfile, ...data })} />}
           <ProgressBar 
             steps={2} 
