@@ -7,7 +7,7 @@ import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { FadedBgButton } from '../Buttons';
 import { PatientProfileForm, ProgressBar } from "../Assorted";
 import { createPatient } from "../../api/patients";
-import { NotificationContext } from "../../contexts";
+import { NotificationContext, PatientContext } from "../../contexts";
 
 export const HomepageRequestAppt = forwardRef((_props, ref) => {
   const FIRST_PANE = 1
@@ -15,18 +15,17 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
   const INCOMPLETE = 0
 
   const { setNotification } = useContext(NotificationContext)
-  
-  const [ singleOption, selectSingleOption ] = useState('')
-  const [ multipleOptions, selectMultipleOptions ] = useState([])
-
-  const [ painDegree, setPainDegree ] = useState('')
-  const [ patientProfile, setPatientProfile ] = useState({
-    firstname: '',
-    lastname: '',
-    address: '',
-    email: '',
-    phoneNumber: ''
-  })
+  const { 
+    singleOption,
+    multipleOptions,
+    painDescriptions,
+    painDegree,
+    patientProfile,
+    selectSingleOption,
+    selectMultipleOptions,
+    setPainDegree,
+    setPatientProfile
+  } = useContext(PatientContext)
 
   const [ pane, setPane ] = useState(FIRST_PANE)
   const [ stepsCompleted, setStepsCompleted ] = useState(INCOMPLETE)
@@ -104,6 +103,13 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
     })
   }
 
+  const _painDescriptions = [
+    ...multipleOptions.map(option =>{               
+      return multipleSelectOptions[option]
+    }), 
+    singleSelectOption[singleOption]
+  ].join(', ')
+
   const resetForm = () => {
     selectSingleOption('')
     selectMultipleOptions([])
@@ -118,14 +124,6 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
     setPane(FIRST_PANE)
     setStepsCompleted(0)
   }
-
-  const painDescriptions = [
-    ...multipleOptions.map(option =>{               
-      return multipleSelectOptions[option]
-    }), 
-    singleSelectOption[singleOption]
-  ].join(', ')
-
 
   const requestAppointment = async () => {
     setIsSubmitting(true)
@@ -285,13 +283,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
         <div className="--form-container">
           {renderHeader()}
           {pane === FIRST_PANE && renderConditionForm()}
-          {pane === LAST_PANE && <PatientProfileForm
-            patientProfile={{ 
-              ...patientProfile, 
-              painDescriptions, 
-              painDegree 
-            }}  
-            onChange={(data) => setPatientProfile({ ...patientProfile, ...data })} />}
+          {pane === LAST_PANE && <PatientProfileForm />}
           <ProgressBar 
             steps={2} 
             stepsCompleted={stepsCompleted}

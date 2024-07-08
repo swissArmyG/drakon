@@ -1,15 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext, NotificationContext } from '../../contexts'
+import { AuthContext, NotificationContext, PatientContext } from '../../contexts'
 import { 
   readPatientByUserId
 } from '../../api/patients'
 import { containsMissingFields } from '../../utils/validation'
 
-export const PatientProfileForm = ({ patientProfile, onChange }) => {
+export const PatientProfileForm = () => {
   const { userData } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
+  const { 
+    patientProfile,
+    painDescriptions,
+    painDegree,
+    setPatientProfile
+  } = useContext(PatientContext)
+
   const navigate = useNavigate()
   const [ missingFields, setMissingFields ] = useState([])
   const [ isRegistering, setIsRegistering ] = useState(false)
@@ -57,13 +64,23 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
     setIsRegistering(true)
 
     _missingFields.length === 0 && navigate("/register", {
-      state: { patientProfile }
+      state: { 
+        patientProfile: { 
+          ...patientProfile, 
+          painDescriptions, 
+          painDegree 
+        } 
+      }
     })
   }
 
   const isInvalid = useCallback((field) => {
     return missingFields?.length > 0 && missingFields.includes(field) ? '--invalid' : ''
   }, [missingFields])
+
+  const onChange = (data) => {
+    setPatientProfile({ ...patientProfile, ...data })
+  }
   
   return ( 
     <section className="PatientProfileForm">
