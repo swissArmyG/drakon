@@ -12,37 +12,10 @@ export const PatientLogin = () => {
     setLoginPayload 
   } = useContext(AuthContext)
 
-  // const defaultResetPayload = {
-  //   password: '',
-  //   token: tokenParam,
-  //   userId: userIdParam
-  // }
-
   const navigate = useNavigate()
   const { setNotification } = useContext(NotificationContext)
   const [ isSubmitting, setIsLoading ] = useState(false)
   const [ isForgettingPassword, setIsForgettingPassword ] = useState(false)
-
-  // useEffect(() => {
-  //   if (tokenParam && userIdParam) {
-  //     const requestPasswordReset = async () => {
-  //       try {
-  //         const data = await renderPasswordReset({ 
-  //           token: tokenParam, 
-  //           userId: userIdParam 
-  //         })
-  //         setIsAuthenticated(data)
-  //       } catch (err) {
-  //         setIsAuthenticated(false)
-  //         setNotification({
-  //           type: 'error',
-  //           message: 'Something went wrong. Please make sure the reset password link has not expired, or try again later.'
-  //         })
-  //       }
-  //     };
-  //     requestPasswordReset()
-  //   }
-  // }, [tokenParam, userIdParam, location, setNotification])
 
   const clearAndClose = () => {
     setLoginPayload({ email: '', password: '' })

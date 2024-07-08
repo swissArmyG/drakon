@@ -3,9 +3,9 @@ import { Routes, Route } from 'react-router-dom'
 import { Homepage } from './components/Homepage'
 import { 
   Notification, 
+  PasswordReset,
   PatientLogin, 
-  PasswordRegister, 
-  PasswordReset 
+  PatientRegister
 } from './components/Assorted'
 
 const App = () => {
@@ -16,12 +16,12 @@ const App = () => {
       <Routes location={location}>
         <Route exact path="/" 
           element={<Homepage />} />
-        <Route exact path="/login" 
-          element={<PatientLogin />} />
         <Route exact path="/password/reset" 
           element={<PasswordReset />} />
+        <Route exact path="/login" 
+          element={<PatientLogin />} />
         <Route exact path="/register"
-          element={<PasswordRegister />} />
+          element={<PatientRegister />} />
       </Routes>
       <Notification />
     </section>

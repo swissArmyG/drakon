@@ -8,18 +8,19 @@ import {
 import { containsMissingFields } from '../../utils/validation'
 
 export const PatientProfileForm = () => {
-  const { userData } = useContext(AuthContext)
+  const { isAuthenticated, userData } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const { 
+    isRegistering,
     patientProfile,
     painDescriptions,
     painDegree,
+    setIsRegistering,
     setPatientProfile
   } = useContext(PatientContext)
 
   const navigate = useNavigate()
   const [ missingFields, setMissingFields ] = useState([])
-  const [ isRegistering, setIsRegistering ] = useState(false)
 
   const readPatient = async () => {
     try {
@@ -84,7 +85,7 @@ export const PatientProfileForm = () => {
   
   return ( 
     <section className="PatientProfileForm">
-      <p className="--login-nav">Please <u><em onClick={() => login()}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login</p>
+      { !isAuthenticated && <p className="--login-nav">Please <u><em onClick={() => login()}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login</p> }
 
       <p><em>Patient's Full Name</em>
        

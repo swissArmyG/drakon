@@ -2,15 +2,15 @@
 import { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { CredentialForm } from './CredentialForm'
-import { NotificationContext } from '../../contexts'
+import { NotificationContext, PatientContext } from '../../contexts'
 import { createPatient } from '../../api/patients'
 
-export const PasswordRegister = () => {
+export const PatientRegister = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const { state } = location;
   const { patientProfile } = state || {};
-
+  const { setIsRegistering } = useContext(PatientContext)
 
   const defaultRegisterPayload = {
     password: '',
@@ -29,6 +29,7 @@ export const PasswordRegister = () => {
 
   const clearAndClose = () => {
     setRegisterPayload(defaultRegisterPayload)
+    setIsRegistering(false)
     navigate("/")
   }
 
@@ -64,7 +65,7 @@ export const PasswordRegister = () => {
   }
 
   return (
-    <section className={`PasswordRegister --container --background`}>
+    <section className={`PatientRegister --container --background`}>
       <CredentialForm 
         credentials={{ password: registerPayload.password }}
         isSubmitting={isSubmitting}
@@ -77,6 +78,12 @@ export const PasswordRegister = () => {
         requiredFields={["password"]}
         submitButtonText={"REGISTER"}
         header={<p className='--instruction'>Please provide a password for your new account. For your convenience, the doctor will be informed about your consultation request, upon registraion with this email <em>{patientProfile.email}</em></p>}
+        footer={
+          <span className="--button --button-text" onClick={() => navigate(-1)}>
+            <i className="fa-solid fa-arrow-left-long" />
+            Return to previous page
+          </span>
+        }
       />
     </section>
   )

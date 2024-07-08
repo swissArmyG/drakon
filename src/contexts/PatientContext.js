@@ -19,6 +19,7 @@ const PatientProvider = ({ children }) => {
     email: '',
     phoneNumber: ''
   })
+  const [ isRegistering, setIsRegistering ] = useState(false)
 
   useEffect(() => {
     const _painDescriptions = [
@@ -36,11 +37,13 @@ const PatientProvider = ({ children }) => {
 
   return (
     <PatientContext.Provider value={{
+      isRegistering,
       singleOption,
       multipleOptions,
       painDescriptions,
       painDegree,
       patientProfile,
+      setIsRegistering,
       selectSingleOption,
       selectMultipleOptions,
       setPainDescriptions,

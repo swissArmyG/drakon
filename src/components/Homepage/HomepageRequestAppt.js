@@ -16,6 +16,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
 
   const { setNotification } = useContext(NotificationContext)
   const { 
+    isRegistering,
     singleOption,
     multipleOptions,
     painDescriptions,
@@ -102,13 +103,6 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
       }
     })
   }
-
-  const _painDescriptions = [
-    ...multipleOptions.map(option =>{               
-      return multipleSelectOptions[option]
-    }), 
-    singleSelectOption[singleOption]
-  ].join(', ')
 
   const resetForm = () => {
     selectSingleOption('')
@@ -226,6 +220,10 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
       isDisabled = true
     }
 
+    const determineSubmitButtonText = () => {
+      return isRegistering ? 'REGISTER' : 'SUBMIT'
+    }
+
     return <div className="PaneControl">
       <div className="--button-container">
         <FadedBgButton
@@ -241,7 +239,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
       </div>
       <div className="--button-container">
         <FadedBgButton                                           
-          buttonText={pane < LAST_PANE ? 'NEXT' : 'SUBMIT'} 
+          buttonText={pane < LAST_PANE ? 'NEXT' : determineSubmitButtonText()} 
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
             e.preventDefault() 
