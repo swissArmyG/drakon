@@ -17,7 +17,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
   const readPatient = async () => {
     try {
       const data = await readPatientByUserId(userData?.id)
-      onChange(data)
+      onChange({ ...data, phoneNumber: data.phone_number })
     } catch (err) {
       setNotification({
         type: 'error',
@@ -43,6 +43,10 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
     }
   }, [patientProfile, isRegistering])
 
+  const login = () => {
+    
+  }
+
   const register = () => {
     const _missingFields = containsMissingFields({
       payload: patientProfile,
@@ -63,7 +67,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
   
   return ( 
     <section className="PatientProfileForm">
-      <p className="--login-nav">Please <u><em onClick={() => navigate("/login")}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login ?</p>
+      <p className="--login-nav">Please <u><em onClick={() => login()}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login</p>
 
       <p><em>Patient's Full Name</em>
        

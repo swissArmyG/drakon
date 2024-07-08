@@ -131,7 +131,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
     setIsSubmitting(true)
     
     // TODO: Caveat: if logged in, editing an existing email should have a warning splash page, changing this email will also change the login email. Proceed ? Ok : Exit out
-
+    
     try {
       await createPatient({
         firstname: patientProfile.firstname,
