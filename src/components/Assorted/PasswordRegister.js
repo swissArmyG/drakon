@@ -76,9 +76,8 @@ export const PasswordRegister = () => {
         ]}
         requiredFields={["password"]}
         submitButtonText={"REGISTER"}
-      >
-        <p className='--instruction'>Please provide a password for your new account. For your convenience, the doctor will be informed about your consultation request, upon registraion with this email <em>{patientProfile.email}</em></p>
-      </CredentialForm>
+        header={<p className='--instruction'>Please provide a password for your new account. For your convenience, the doctor will be informed about your consultation request, upon registraion with this email <em>{patientProfile.email}</em></p>}
+      />
     </section>
   )
 }

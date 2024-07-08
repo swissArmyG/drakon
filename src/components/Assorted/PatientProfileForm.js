@@ -44,7 +44,7 @@ export const PatientProfileForm = ({ patientProfile, onChange }) => {
   }, [patientProfile, isRegistering])
 
   const login = () => {
-    
+    navigate("/login")
   }
 
   const register = () => {

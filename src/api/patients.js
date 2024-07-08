@@ -16,10 +16,9 @@ export const createPatient = async(payload) => {
 
 export const readPatientByUserId = async(userId) => {
   const { data } = await Axios.get(`/patients`, {
-    params: { userId }
-    // Caution: this would be req.query in Express.js API
+    params: { userId } // Caution: this would be the param query or req.query in Express.js API
   })
-  return data;
+  return data
 }
 
 export const updatePatient = async({ patientId, payload }) => {

@@ -4,7 +4,8 @@ import { containsMissingFields } from '../../utils/validation'
 
 export const CredentialForm = ({
   credentials,
-  children,
+  header,
+  footer,
   isLoading,
   onChange, 
   onSubmit,
@@ -28,7 +29,8 @@ export const CredentialForm = ({
 
   return (
     <section className="CredentialForm">
-      { children && children }
+      { header && header }
+
       { attributes.includes('email') && 
         <div className="--input-container">
           <input
@@ -59,10 +61,13 @@ export const CredentialForm = ({
           onClick={() => setIsPasswordVisible(true)}/>
       }
       </div>
+
+      { footer && footer }
       
       <FadedBgButton
         buttonText={submitButtonText}
         buttonTextPosition={'24%'}
+        width={"254px"}
         onClick={(e) => {
           e.preventDefault()
           isSubmittable && onSubmit()         
