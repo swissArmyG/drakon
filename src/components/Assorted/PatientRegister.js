@@ -1,16 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CredentialForm } from './CredentialForm'
 import { NotificationContext, PatientContext } from '../../contexts'
 import { createPatient } from '../../api/patients'
 
 export const PatientRegister = () => {
   const navigate = useNavigate()
-  const location = useLocation()
-  const { state } = location;
-  const { patientProfile } = state || {};
-  const { setIsRegistering } = useContext(PatientContext)
+  const { 
+    patientProfile, 
+    painDegree, 
+    painDescriptions, 
+    setIsRegistering 
+  } = useContext(PatientContext)
 
   const defaultRegisterPayload = {
     password: '',
@@ -36,18 +38,19 @@ export const PatientRegister = () => {
   const onSubmit = async() => {
     setIsSubmitting(true)
 
-    if (registerPayload.password && registerPayload.email) {
+    if (registerPayload.password !== '' && registerPayload.email) {
       try {
         await createPatient({
           firstname: patientProfile.firstname,
           lastname: patientProfile.lastname,
-          pain_description: patientProfile.painDescriptions,
-          pain_degree: patientProfile.painDegree,
+          pain_description: painDescriptions,
+          pain_degree: painDegree,
           address: patientProfile.address,
           email: patientProfile.email,
           phone_number: patientProfile.phoneNumber,
           password: registerPayload.password
         })
+
         setNotification({
           type: 'success', 
           message: 'Thank you for requesting a consultation with us. You are now registered on PeaceofMindSpine.COM (POMS). The doctor will contact you soon according to the email and phone number you provided.'

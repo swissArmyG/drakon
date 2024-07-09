@@ -1,4 +1,5 @@
 import React, { useState, useEffect, forwardRef, useContext } from "react"
+import { useNavigate } from 'react-router-dom'
 import { 
   singleSelectOption, 
   multipleSelectOptions 
@@ -7,13 +8,14 @@ import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { FadedBgButton } from '../Buttons';
 import { PatientProfileForm, ProgressBar } from "../Assorted";
 import { createPatient } from "../../api/patients";
-import { NotificationContext, PatientContext } from "../../contexts";
+import { AuthContext, NotificationContext, PatientContext } from "../../contexts";
 
 export const HomepageRequestAppt = forwardRef((_props, ref) => {
   const FIRST_PANE = 1
   const LAST_PANE = 2
   const INCOMPLETE = 0
 
+  const { userData } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const { 
     isRegistering,
@@ -38,6 +40,8 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleResize = () => {
@@ -134,10 +138,12 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
         email: patientProfile.email,
         phone_number: patientProfile.phoneNumber
       })
+
       setNotification({ 
         type: 'success', 
         message: 'You have requested an appointment! Our doctor will reach out to you soon via the email or the phone number you provided.'
       })
+
       resetForm()
     } catch (err) {
       setNotification({ 
@@ -221,7 +227,15 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
     }
 
     const determineSubmitButtonText = () => {
-      return isRegistering ? 'REGISTER' : 'SUBMIT'
+      return (!userData && isRegistering) 
+        ? 'REGISTER' 
+        : 'SUBMIT'
+    }
+
+    const determineSubmitButtonFunc = () => {
+      return (!userData && isRegistering)
+        ? navigate("/register")
+        : requestAppointment()
     }
 
     return <div className="PaneControl">
@@ -247,7 +261,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
               setPane(pane + 1)
             }
             if (isLastPane && isSubmittable) {
-              requestAppointment()
+              determineSubmitButtonFunc()
             }
           }}
           isDisabled={isDisabled}

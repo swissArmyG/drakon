@@ -13,8 +13,6 @@ export const PatientProfileForm = () => {
   const { 
     isRegistering,
     patientProfile,
-    painDescriptions,
-    painDegree,
     setIsRegistering,
     setPatientProfile
   } = useContext(PatientContext)
@@ -56,23 +54,18 @@ export const PatientProfileForm = () => {
   }
 
   const register = () => {
-    const _missingFields = containsMissingFields({
-      payload: patientProfile,
-      requiredFields: ['firstname', 'lastname', 'email', 'phoneNumber']
-    })
+    if (!isRegistering) {
+      const _missingFields = containsMissingFields({
+        payload: patientProfile,
+        requiredFields: ['firstname', 'lastname', 'email', 'phoneNumber']
+      })
+  
+      setMissingFields(_missingFields.length > 0 ? _missingFields : undefined)
+      setIsRegistering(true)
 
-    setMissingFields(_missingFields.length > 0 ? _missingFields : undefined)
-    setIsRegistering(true)
-
-    _missingFields.length === 0 && navigate("/register", {
-      state: { 
-        patientProfile: { 
-          ...patientProfile, 
-          painDescriptions, 
-          painDegree 
-        } 
-      }
-    })
+  
+      _missingFields.length === 0 && navigate("/register")
+    }
   }
 
   const isInvalid = useCallback((field) => {
