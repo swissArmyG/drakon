@@ -20,6 +20,8 @@ export const PatientProfileForm = () => {
   const navigate = useNavigate()
   const [ missingFields, setMissingFields ] = useState([])
 
+  console.log(patientProfile)
+
   const readPatient = async () => {
     try {
       const data = await readPatientByUserId(userData?.id)
@@ -34,7 +36,7 @@ export const PatientProfileForm = () => {
 
   useEffect(() => {  
     if ((userData?.email && userData?.id)) {
-      readPatient()
+      !patientProfile && readPatient()
     }
   }, [userData?.id, userData?.email, setNotification])
 
@@ -63,7 +65,6 @@ export const PatientProfileForm = () => {
       setMissingFields(_missingFields.length > 0 ? _missingFields : undefined)
       setIsRegistering(true)
 
-  
       _missingFields.length === 0 && navigate("/register")
     }
   }
@@ -97,7 +98,7 @@ export const PatientProfileForm = () => {
             id="firstname"
             placeholder="Firstname"
             className={`${isInvalid('firstname')}`}
-            value={patientProfile.firstname || ""}
+            value={patientProfile?.firstname || ""}
             onChange={({ target: { value }}) => onChange({ firstname: value })}
           />
         </div>
@@ -106,8 +107,10 @@ export const PatientProfileForm = () => {
             id="lastname"
             placeholder="Lastname"
             className={`${isInvalid('lastname')}`}
-            value={patientProfile.lastname || ""}
-            onChange={({ target: { value }}) => onChange({ lastname: value })}
+            value={patientProfile?.lastname || ""}
+            onChange={({ target: { value }}) => { 
+              onChange({ lastname: value })
+            }}
           />
         </div>
       </div>
@@ -116,7 +119,7 @@ export const PatientProfileForm = () => {
         <p><em>Address</em><span>Optional</span></p>
         <input type="text"
           id="address"
-          value={patientProfile.address || ""}
+          value={patientProfile?.address || ""}
           onChange={({ target: { value }}) => onChange({ address: value })}
         />
       </div>
@@ -129,7 +132,7 @@ export const PatientProfileForm = () => {
             autoComplete="on"
             placeholder="Please use a valid email"
             className={`${isInvalid('email')}`}
-            value={patientProfile.email || ""}
+            value={patientProfile?.email || ""}
             onChange={({ target: { value }}) => onChange({ email: value })}
           />
         </div>
@@ -139,7 +142,7 @@ export const PatientProfileForm = () => {
             id="phone"
             placeholder="No dash (-) or dot (.) required"
             className={`${isInvalid('phoneNumber')}`}
-            value={patientProfile.phoneNumber || ""}
+            value={patientProfile?.phoneNumber || ""}
             onChange={({ target: { value }}) => onChange({ phoneNumber: value })} 
           />
         </div>

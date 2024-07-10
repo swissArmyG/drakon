@@ -71,7 +71,7 @@ export const Login = ({ isOpen, toggleOpen }) => {
     <div className="--modal">
       <div>
         <h3 className="--button --button-text -exit" 
-          onClick={() => toggleOpen(false)}>
+          onClick={() => clearAndClose()}>
           X
         </h3>
       </div>

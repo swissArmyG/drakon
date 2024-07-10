@@ -7,7 +7,7 @@ import {
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { FadedBgButton } from '../Buttons';
 import { PatientProfileForm, ProgressBar } from "../Assorted";
-import { createPatient } from "../../api/patients";
+import { createPatient, requestExistingAccountConsultation } from "../../api/patients";
 import { AuthContext, NotificationContext, PatientContext } from "../../contexts";
 
 export const HomepageRequestAppt = forwardRef((_props, ref) => {
@@ -66,7 +66,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
         : multipleOptions.length >= 1
     )
 
-    const { firstname, lastname, email, phoneNumber } = patientProfile
+    const { firstname = '', lastname = '', email = '', phoneNumber = '' } = patientProfile || {};
     const secondStepCompleted = firstname && lastname && email && phoneNumber 
 
     let stepsCompleted = INCOMPLETE;
@@ -112,24 +112,16 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
     selectSingleOption('')
     selectMultipleOptions([])
     setPainDegree('')
-    setPatientProfile({
-      firstname: '',
-      lastname: '',
-      address: '',
-      email: '',
-      phoneNumber: ''
-    })
+    setPatientProfile(undefined)
     setPane(FIRST_PANE)
     setStepsCompleted(0)
   }
 
-  const requestAppointment = async () => {
+  const requestNonAccountConsultation = async () => {
     setIsSubmitting(true)
     
-    // TODO: Caveat: if logged in, editing an existing email should have a warning splash page, changing this email will also change the login email. Proceed ? Ok : Exit out
-    
     try {
-      await createPatient({
+      patientProfile && await createPatient({
         firstname: patientProfile.firstname,
         lastname: patientProfile.lastname,
         pain_description: painDescriptions,
@@ -232,10 +224,33 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
         : 'SUBMIT'
     }
 
+    const _requestExistingAccountConsultation = async (patientId) => {
+      try {
+        await requestExistingAccountConsultation(patientId)
+        resetForm()
+      } catch {
+        setNotification({
+          type: 'error',
+          message: 'Something went wrong while requesting a new consultation. Please try again later.'
+        })
+      }
+    }
+
     const determineSubmitButtonFunc = () => {
-      return (!userData && isRegistering)
-        ? navigate("/register")
-        : requestAppointment()
+      // CONFIRMATION REQUIRED: if the user account already exists, and the login email is different than the patient email.
+
+      // IF CONFIRMED: update the patient with the new email
+      if (userData) {
+        userData.email !== patientProfile.email
+          ?  navigate("/confirm", {
+            state: { email: patientProfile.email }
+          })
+          : _requestExistingAccountConsultation(patientProfile.id)
+      } else {
+        isRegistering
+          ? navigate("/register")
+          : requestNonAccountConsultation()
+      }
     }
 
     return <div className="PaneControl">
@@ -252,7 +267,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
         />
       </div>
       <div className="--button-container">
-        <FadedBgButton                                           
+        <FadedBgButton    
           buttonText={pane < LAST_PANE ? 'NEXT' : determineSubmitButtonText()} 
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {

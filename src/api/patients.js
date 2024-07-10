@@ -16,13 +16,13 @@ export const createPatient = async(payload) => {
 
 export const readPatientByUserId = async(userId) => {
   const { data } = await Axios.get(`/patients`, {
-    params: { userId } // Caution: this would be the param query or req.query in Express.js API
+    params: { userId } // Caution: this would be the param query or req.query in Express.js API, the equivalent of /patients?userId=
   })
   return data
 }
 
 export const updatePatient = async({ patientId, payload }) => {
-  let updating;
+  let updating = {}
 
   if (payload.firstname) {
     updating = { ...updating, firstname: payload.firstname }
@@ -53,5 +53,10 @@ export const updatePatient = async({ patientId, payload }) => {
   }
 
   const { data: { data }} = await Axios.put(`/patients/${patientId}/update`, updating)
+  return data
+}
+
+export const requestExistingAccountConsultation = async (patientId) => {
+  const { data: { data }} = await Axios.post(`/patients/${patientId}/consult`)
   return data
 }

@@ -95,3 +95,9 @@ a {
 .--mr-2 {
   margin-right: 2%;
 }
+
+i {
+  &.fa-solid.fa-arrow-left-long {
+    margin-right: 5px;
+  }
+}

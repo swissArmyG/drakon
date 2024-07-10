@@ -24,10 +24,10 @@ export const PatientRegister = () => {
   const [ isSubmitting, setIsSubmitting ] = useState(false)
 
   useEffect(() => {
-    if (!patientProfile.email) {
+    if (!patientProfile) {
       navigate("/")
     }
-  }, [patientProfile.email])
+  }, [patientProfile])
 
   const clearAndClose = () => {
     setRegisterPayload(defaultRegisterPayload)
@@ -38,7 +38,7 @@ export const PatientRegister = () => {
   const onSubmit = async() => {
     setIsSubmitting(true)
 
-    if (registerPayload.password !== '' && registerPayload.email) {
+    if (patientProfile && registerPayload.password !== '' && registerPayload.email) {
       try {
         await createPatient({
           firstname: patientProfile.firstname,

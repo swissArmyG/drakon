@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.6e77a3e2.css",
-    "main.js": "/static/js/main.ba1e2702.js",
+    "main.css": "/static/css/main.7807f840.css",
+    "main.js": "/static/js/main.9c370e4d.js",
     "static/js/453.937f8a7d.chunk.js": "/static/js/453.937f8a7d.chunk.js",
     "static/media/homepage-OCEAN.png": "/static/media/homepage-OCEAN.a18b7f96d74d7ba8a86f.png",
     "static/media/homepage-DEEP_OCEAN.png": "/static/media/homepage-DEEP_OCEAN.62f06c7a6742a4425f00.png",
@@ -19,12 +19,12 @@
     "static/media/logo_with_text.png": "/static/media/logo_with_text.0a3ee26d7a5df7a10b40.png",
     "static/media/skele_icon_left.png": "/static/media/skele_icon_left.be16f9b4d4bf8a93092b.png",
     "index.html": "/index.html",
-    "main.6e77a3e2.css.map": "/static/css/main.6e77a3e2.css.map",
-    "main.ba1e2702.js.map": "/static/js/main.ba1e2702.js.map",
+    "main.7807f840.css.map": "/static/css/main.7807f840.css.map",
+    "main.9c370e4d.js.map": "/static/js/main.9c370e4d.js.map",
     "453.937f8a7d.chunk.js.map": "/static/js/453.937f8a7d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6e77a3e2.css",
-    "static/js/main.ba1e2702.js"
+    "static/css/main.7807f840.css",
+    "static/js/main.9c370e4d.js"
   ]
 }

@@ -12,13 +12,7 @@ const PatientProvider = ({ children }) => {
   const [ multipleOptions, selectMultipleOptions ] = useState([])
   const [ painDegree, setPainDegree ] = useState('')
   const [ painDescriptions, setPainDescriptions ] = useState('')
-  const [ patientProfile, setPatientProfile ] = useState({
-    firstname: '',
-    lastname: '',
-    address: '',
-    email: '',
-    phoneNumber: ''
-  })
+  const [ patientProfile, setPatientProfile ] = useState(undefined)
   const [ isRegistering, setIsRegistering ] = useState(false)
 
   useEffect(() => {

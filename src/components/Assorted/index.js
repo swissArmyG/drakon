@@ -1,3 +1,4 @@
+export { ConfirmEmailChange } from './ConfirmEmailChange'
 export { Notification } from './Notification' 
 export { PatientProfileForm } from './PatientProfileForm'
 export { ProgressBar } from './ProgressBar'
