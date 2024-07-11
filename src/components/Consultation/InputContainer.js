@@ -1,0 +1,28 @@
+import React, { useContext } from "react"
+import { PatientContext } from "../../contexts"
+
+export const ConditionForm = () => {
+  const { 
+    painDegree,
+    setPainDegree,
+  } = useContext(PatientContext)
+
+  return (
+    <section className="InputContainer">
+      <label htmlFor="painDegree">Rate your overall degree of pain right now from 1-10:</label>
+
+      <input id="painDegree" type="number" max="10"
+        value={painDegree > 0 ? painDegree : undefined}
+        onChange={({ target: { value }}) => {
+          if (value < 1 || !value || value.length === 0) {
+            value = 0
+          }
+          if (value > 10) {
+            value = 10
+          }
+          setPainDegree(value)
+        }}
+      />
+    </section>
+  )
+}

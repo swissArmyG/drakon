@@ -38,9 +38,9 @@ export const PatientRegister = () => {
   const onSubmit = async() => {
     setIsSubmitting(true)
 
-    if (patientProfile && registerPayload.password !== '' && registerPayload.email) {
+    if (registerPayload.password !== '' && registerPayload.email) {
       try {
-        await createPatient({
+        patientProfile && await createPatient({
           firstname: patientProfile.firstname,
           lastname: patientProfile.lastname,
           pain_description: painDescriptions,

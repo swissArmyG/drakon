@@ -14,18 +14,18 @@ export const PatientProfileForm = () => {
     isRegistering,
     patientProfile,
     setIsRegistering,
-    setPatientProfile
+    setPatientProfile,
+    setOriginalPatientProfile
   } = useContext(PatientContext)
 
   const navigate = useNavigate()
   const [ missingFields, setMissingFields ] = useState([])
 
-  console.log(patientProfile)
-
   const readPatient = async () => {
     try {
       const data = await readPatientByUserId(userData?.id)
       onChange({ ...data, phoneNumber: data.phone_number })
+      setOriginalPatientProfile(data)
     } catch (err) {
       setNotification({
         type: 'error',
@@ -58,9 +58,11 @@ export const PatientProfileForm = () => {
   const register = () => {
     if (!isRegistering) {
       const _missingFields = containsMissingFields({
-        payload: patientProfile,
+        payload: patientProfile || {},
         requiredFields: ['firstname', 'lastname', 'email', 'phoneNumber']
       })
+
+      console.log('missingFields:', missingFields)
   
       setMissingFields(_missingFields.length > 0 ? _missingFields : undefined)
       setIsRegistering(true)

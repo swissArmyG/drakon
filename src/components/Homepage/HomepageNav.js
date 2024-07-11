@@ -22,7 +22,7 @@ export const HomepageNav = forwardRef((_props, refs) => {
     login: {
       onClick: () => userData ? handleLogoutModal() : handleLoginModal(),
       linkTo: '#login',
-      text: userData ? `Hi, ${userData.email}` : 'LOGIN'
+      text: userData ? 'LOGOUT' : 'LOGIN'
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),

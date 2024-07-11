@@ -46,7 +46,7 @@ export const ConfirmEmailChange = () => {
             width={"400px"}
             onClick={(e) => {
               e.preventDefault()
-              _updatePatient()
+              patientProfile && _updatePatient()
             }}
           />
           

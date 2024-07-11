@@ -56,7 +56,7 @@ export const updatePatient = async({ patientId, payload }) => {
   return data
 }
 
-export const requestExistingAccountConsultation = async (patientId) => {
+export const requestNewConsultation = async (patientId) => {
   const { data: { data }} = await Axios.post(`/patients/${patientId}/consult`)
   return data
 }
