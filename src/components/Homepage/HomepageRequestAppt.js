@@ -7,12 +7,10 @@ import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 
 export const HomepageRequestAppt = forwardRef((_props, ref) => {
   const { FIRST_PANE, LAST_PANE } = PANE_VARIABLES
-
   const {
     pane,
     stepsCompleted
   } = useContext(PatientContext)
-
   const [ isMobileDevice, setIsMobileDevice ] = useState(false)
   const [ windowSize, setWindowSize ] = useState({
     width: window.innerWidth,
@@ -38,7 +36,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
   const renderHeader = () => {
     return <div className="--header-container">
       <img src={spineGraphic} alt="A section of a spine" className="--header-logo" />
-      <p className="--header-text">Please send us your details electronically to make an appointment with us. Use the online form below. An associate from <em>PeaceOfMindSpine.com</em> (POMS) will contact you soon.</p>
+      <p className="--header-text">Please send us your details electronically to make a consultation request with us. Use the online form below. An associate from <em>PeaceOfMindSpine.com</em> (POMS) will contact you soon.</p>
     </div>
   }
   
@@ -53,7 +51,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
             steps={2} 
             stepsCompleted={stepsCompleted}
           />
-          <PaneControls windowWidth={windowSize.width}/>
+          <PaneControls windowWidth={windowSize.width} />
         </div>
     </section>
   )

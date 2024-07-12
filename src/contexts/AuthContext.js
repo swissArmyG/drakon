@@ -4,19 +4,18 @@ import {
   useEffect,
   useState 
 }  from 'react'
+import { useNavigate } from 'react-router-dom'
 import { authenticate } from '../api/sessions'
-import { readPatientByUserId } from '../api/patients'
 
 const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
+  const navigate = useNavigate()
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
-
   const [ loginPayload, setLoginPayload ] = useState({
     email: '',
     password: ''
   })
-
   const [ userData, setUserData ] = useState(undefined)
 
   useEffect(() => {
@@ -30,6 +29,7 @@ const AuthProvider = ({ children }) => {
         } else {
           setUserData(undefined)
           setIsAuthenticated(false)
+          navigate("/")
         }
         
       } catch (err) {
@@ -39,22 +39,6 @@ const AuthProvider = ({ children }) => {
 
     authenticateCallback()
   }, [])
-
-  useEffect(() => {
-    const userId = userData?.id
-
-    const getPatientProfile = async() => {
-      try {
-        await readPatientByUserId(userId)
-      } catch (err) {
-        console.error(err)
-      }
-    }
-
-    if (userId) {
-      getPatientProfile()
-    }
-  }, [userData?.id])
 
   return (
     <AuthContext.Provider value={{ 

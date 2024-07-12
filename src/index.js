@@ -5,7 +5,11 @@ import reportWebVitals from './reportWebVitals';
 import './scss/index.scss'
 import './scss/imports.scss'
 import { BrowserRouter } from 'react-router-dom'
-import { AuthProvider, NotificationProvider, PatientProvider } from './contexts'
+import { 
+  AuthProvider, 
+  NotificationProvider, 
+  PatientProvider 
+} from './contexts'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

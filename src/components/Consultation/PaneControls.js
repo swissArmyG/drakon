@@ -22,7 +22,7 @@ export const PaneControls = ({ windowWidth }) => {
   const { userData } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const { 
-    isRegistering,
+    isRegisterClicked,
     originalPatientProfile,
     painDescriptions,
     painDegree,
@@ -33,22 +33,28 @@ export const PaneControls = ({ windowWidth }) => {
     stepsCompleted
   } = useContext(PatientContext)
 
+  const patientId = patientProfile?.id  
+
   const getChangedFields = () => {
     const changedFields = {}
-    Object.keys(patientProfile).forEach(key => {
-      if (patientProfile[key] !== originalPatientProfile[key]) {
-        changedFields[key] = patientProfile[key]
-      }
-    })
+
+    Object
+      .keys(patientProfile)
+      .forEach(key => {
+        if (patientProfile[key] !== originalPatientProfile[key]) {
+          changedFields[key] = patientProfile[key]
+        }
+      })
+
     return changedFields
   }
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const requestExistingAccountConsultation = async () => {
-    if (patientProfile?.id) {
+    if (patientId) {
       try {
-        await requestNewConsultation()
+        await requestNewConsultation(patientId)
         resetForm()
       } catch (err) {
         setNotification({
@@ -61,46 +67,52 @@ export const PaneControls = ({ windowWidth }) => {
 
   const requestExistingAccountUpdateConsultation = async () => {
     const changedFields = getChangedFields()
-    try {
-      await updatePatient({
-        patientId: patientProfile.id,
-        payload: changedFields
-      })
-    } catch (err) {
-      setNotification({
-        typpe: "error",
-        message: "Something went wrong. We are unable to update your information at the moment. Please try again later."
-      })
+  
+    if (patientId) {
+      try {
+        await updatePatient({
+          patientId,
+          payload: changedFields
+        })
+        resetForm()
+      } catch (err) {
+        setNotification({
+          type: "error",
+          message: "Something went wrong. We are unable to update your information at the moment. Please try again later."
+        })
+      }
     }
   }
 
   const requestNonAccountConsultation = async () => {
     setIsSubmitting(true)
-    
-    try {
-      patientProfile && await createPatient({
-        firstname: patientProfile.firstname,
-        lastname: patientProfile.lastname,
-        pain_description: painDescriptions,
-        pain_degree: painDegree,
-        address: patientProfile.address,
-        email: patientProfile.email,
-        phone_number: patientProfile.phoneNumber
-      })
 
-      setNotification({ 
-        type: 'success', 
-        message: 'You have requested an appointment! Our doctor will reach out to you soon via the email or the phone number you provided.'
-      })
+    if (patientProfile) {
+      try {
+        await createPatient({        
+          firstname: patientProfile.firstname,
+          lastname: patientProfile.lastname,
+          pain_description: painDescriptions,
+          pain_degree: painDegree,
+          address: patientProfile.address,
+          email: patientProfile.email,
+          phone_number: patientProfile.phoneNumber
+        })
+  
+        setNotification({ 
+          type: 'success', 
+          message: 'You have requested a consultation! Our doctor will reach out to you soon via the email or the phone number you provided.'
+        })
 
-      resetForm()
-    } catch (err) {
-      setNotification({ 
-        type: 'error', 
-        message: 'Unable to request appointment currently, please try again later.'
-      })
-    } finally {
-      setIsSubmitting(false)
+        resetForm()
+      } catch (err) {
+        setNotification({ 
+          type: 'error', 
+          message: 'Unable to make a consultation request currently, please try again later.'
+        })
+      } finally {
+        setIsSubmitting(false)
+      }
     }
   }
 
@@ -119,14 +131,14 @@ export const PaneControls = ({ windowWidth }) => {
      const changedFields = getChangedFields()
 
      if (Object.keys(changedFields) > 0) {
-        requestExistingAccountConsultation(changedFields)
+        requestConsultation.existingAccount.update(changedFields)
      } else {
         requestConsultation.existingAccount.request()
      }
   }
 
   const determineSubmitButtonText = () => {
-    return (!userData && isRegistering) 
+    return (!userData && isRegisterClicked) 
       ? 'REGISTER' 
       : 'SUBMIT'
   }
@@ -138,11 +150,13 @@ export const PaneControls = ({ windowWidth }) => {
       // USE NEW EMAIL: update changed fields w new email
       userData.email !== patientProfile.email
         ?  navigate("/confirm", {
-          state: { email: patientProfile.email }
+          state: { 
+            email: patientProfile.email
+          }
         })
         : determineExistingAccountConsultation()
     } else {
-      isRegistering
+      isRegisterClicked
         ? requestConsultation.newAccount.register()
         : requestConsultation.nonAccount()
     }

@@ -17,17 +17,17 @@ const App = () => {
       <Routes location={location}>
         <Route exact path="/" 
           element={<Homepage />} />
-        <Route exact path="/password/reset" 
-        element={<PasswordReset />} />
-        <Route exact path="/login" 
-          element={<PatientLogin />} />
-        <Route exact path="/register"
-          element={<PatientRegister />} />
-        <Route exact path="/confirm"
-          element={<ConfirmEmailChange/> } />
+          <Route exact path="/password/reset" 
+          element={<PasswordReset />} />
+          <Route exact path="/login" 
+            element={<PatientLogin />} />
+          <Route exact path="/register"
+            element={<PatientRegister />} />
+          <Route exact path="/confirm"
+            element={<ConfirmEmailChange/> } />
       </Routes>
       <Notification />
-    </section>
+      </section>
   );
 }
 

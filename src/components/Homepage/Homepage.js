@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import {
   HomepageNav,
   HomepageTopics,
@@ -9,17 +9,18 @@ import {
 import logoPath from '../../img/logo/logo_with_text.png'
 import { SideNavigation } from '../Buttons'
 import { ThemeToggle } from '../Assorted'
+import { PatientContext } from '../../contexts'
 
 export const Homepage = () => {
   const [ theme, setTheme ] = useState('DEEP_OCEAN')
-
-  const backToTopRef = useRef()
+  const { scrollToTopRef } = useContext(PatientContext)
+  
   const storyRef = useRef()
-  const requestApptRef = useRef()
+  const consultationRef = useRef()
   const contactRef = useRef()
 
   return (
-    <section className={`Homepage --container --background --${theme}`} ref={backToTopRef}>
+    <section className={`Homepage --container --background --${theme}`} ref={scrollToTopRef}>
       <header className="--nav-bar">
         <div>
           <img
@@ -32,18 +33,18 @@ export const Homepage = () => {
         <HomepageNav
           ref={{
             storyRef,
-            requestApptRef,
+            consultationRef,
             contactRef
           }}
         />
       </header>
       
-      <SideNavigation ref={backToTopRef} />
+      <SideNavigation ref={scrollToTopRef} />
       <HomepageTopics />
 
       <div className="--content-container">
         <HomepageStory ref={storyRef} />
-        <HomepageRequestAppt ref={requestApptRef} />
+        <HomepageRequestAppt ref={consultationRef} />
         <HomepageContact ref={contactRef} />
       </div>
     </section>

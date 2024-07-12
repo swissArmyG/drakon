@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, useEffect, useState } from 'react'
+import { createContext, useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { 
   singleSelectOption, 
   multipleSelectOptions 
@@ -8,7 +9,10 @@ import { PANE_VARIABLES } from '../components/Consultation'
 
 const PatientContext = createContext()
 
-const PatientProvider = ({ children }) => {
+const PatientProvider = ({ children, scrollRef }) => {
+  const navigate = useNavigate()
+  const scrollToTopRef = useRef()
+
   const { INCOMPLETE, FIRST_PANE } = PANE_VARIABLES
 
   const [ pane, setPane ] = useState(FIRST_PANE)
@@ -18,11 +22,11 @@ const PatientProvider = ({ children }) => {
   const [ multipleOptions, selectMultipleOptions ] = useState([])
   const [ painDegree, setPainDegree ] = useState('')
   const [ painDescriptions, setPainDescriptions ] = useState('')
+
   const [ patientProfile, setPatientProfile ] = useState(undefined)
+  const [ originalPatientProfile, setOriginalPatientProfile] = useState(undefined)
 
-  const [ originalPatientProfile, setOriginalPatientProfile] = useState(patientProfile)
-
-  const [ isRegistering, setIsRegistering ] = useState(false)
+  const [ isRegisterClicked, setIsRegisterClicked ] = useState(false)
 
   useEffect(() => {
     const _painDescriptions = [
@@ -63,15 +67,19 @@ const PatientProvider = ({ children }) => {
   const resetForm = () => {
     selectSingleOption('')
     selectMultipleOptions([])
+    setIsRegisterClicked(false)
     setPainDegree('')
     setPatientProfile(undefined)
+    setOriginalPatientProfile(undefined)
     setPane(FIRST_PANE)
     setStepsCompleted(0)
+    navigate("/")
+    scrollToTopRef.current.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <PatientContext.Provider value={{
-      isRegistering,
+      isRegisterClicked,
       singleOption,
       multipleOptions,
       originalPatientProfile,
@@ -80,13 +88,15 @@ const PatientProvider = ({ children }) => {
       patientProfile,
       pane,
       resetForm,
+      scrollToTopRef,
       stepsCompleted,
-      setIsRegistering,
       selectSingleOption,
       selectMultipleOptions,
+      setIsRegisterClicked,
       setPainDescriptions,
       setPainDegree,
       setPatientProfile,
+      setPane,
       setOriginalPatientProfile,
       setStepsCompleted
     }}>

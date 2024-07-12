@@ -22,13 +22,13 @@ export const ConditionForm = () => {
     return multipleOptions.includes(option) ? '--selected' : ''
   }
 
-  const determineSingleOption = (option) => {
-    if (!singleOption || singleOption !== option) {
-      return option
-    } else {
-      return singleOption === option ? undefined : singleOption
-    }
-  }
+  // const determineSingleOption = (option) => {
+  //   if (!singleOption || singleOption !== option) {
+  //     return option
+  //   } else {
+  //     return singleOption === option ? '' : singleOption
+  //   }
+  // }
 
   const determineMultipleOptions = (option) => {
     selectMultipleOptions(prevState => {
@@ -39,6 +39,22 @@ export const ConditionForm = () => {
       }
     })
   }
+
+  const determineSingleOption = (option) => {
+    if (singleOption === option) {
+      return '';
+    } else {
+      return option;
+    }
+  };
+  
+  // const determineMultipleOptions = (option) => {
+  //   if (multipleOptions.includes(option)) {
+  //     return multipleOptions.filter(op => op !== option);
+  //   } else {
+  //     return [...multipleOptions, option];
+  //   }
+  // }
 
   return <section className="ConditionForm">
      <div className="--options-container">

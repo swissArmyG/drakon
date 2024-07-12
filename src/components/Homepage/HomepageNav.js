@@ -1,14 +1,39 @@
-import React, { forwardRef, useContext, useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { forwardRef, useEffect, useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Login, Logout } from '.'
-import { AuthContext } from '../../contexts'
+import { AuthContext, PatientContext } from '../../contexts'
+import { readPatientByUserId } from '../../api/patients'
 
 export const HomepageNav = forwardRef((_props, refs) => {
-  const { storyRef, requestApptRef, contactRef } = refs
+  const { storyRef, consultationRef, contactRef } = refs
   const { userData } = useContext(AuthContext)
+  const { 
+    patientProfile, 
+    setOriginalPatientProfile, 
+    setPatientProfile 
+  } = useContext(PatientContext)
   const [ isLoginModal, toggleLoginModal ] = useState(false)
   const [ isLogoutModal, toggleLogoutModal ] = useState(false)
   const scrollConfig = { behavior: "smooth" }
+
+  const readPatient = async () => {
+    try {
+      const patient = await readPatientByUserId(userData?.id)
+      const data = { ...patient, phoneNumber: patient.phone_number }
+      
+      setOriginalPatientProfile(data)
+      setPatientProfile(data)
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  useEffect(() => {
+    if (userData && !patientProfile) {
+      readPatient()
+    }
+  }, [userData])
 
   const handleLogoutModal = () => {
     toggleLogoutModal(true)
@@ -22,17 +47,17 @@ export const HomepageNav = forwardRef((_props, refs) => {
     login: {
       onClick: () => userData ? handleLogoutModal() : handleLoginModal(),
       linkTo: '#login',
-      text: userData ? 'LOGOUT' : 'LOGIN'
+      text: (userData && patientProfile) ? `Hi, ${patientProfile.firstname}` : 'LOGIN'
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),
       linkTo: '#story',
       text: 'OUR STORY'
     },
-    requestAppt: {
-      onClick: () => requestApptRef.current.scrollIntoView(scrollConfig),
-      linkTo: '#requestAppt',
-      text: 'REQUEST APPOINTMENT'
+    consultation: {
+      onClick: () => consultationRef.current.scrollIntoView(scrollConfig),
+      linkTo: '#consultation',
+      text: 'REQUEST CONSULTATION'
     },
     contact: {
       onClick: () => contactRef.current.scrollIntoView(scrollConfig),

@@ -6,7 +6,11 @@ import { updatePatient } from '../../api/patients'
 
 export const ConfirmEmailChange = () => {
   const { userData } = useContext(AuthContext)
-  const { patientProfile, setPatientProfile } = useContext(PatientContext)
+  const { 
+    patientProfile, 
+    resetForm, 
+    setPatientProfile 
+  } = useContext(PatientContext)
   const { setNotification } = useContext(NotificationContext)
   const navigate = useNavigate()
   const location = useLocation()
@@ -18,9 +22,8 @@ export const ConfirmEmailChange = () => {
       await updatePatient({
         patientId: patientProfile.id,
         payload: patientProfile
-      })
-      setPatientProfile(undefined)
-      navigate("/")
+      }) 
+      resetForm()
     } catch (err) {
       setNotification({
         typpe: "error",
@@ -46,7 +49,9 @@ export const ConfirmEmailChange = () => {
             width={"400px"}
             onClick={(e) => {
               e.preventDefault()
-              patientProfile && _updatePatient()
+              if (patientProfile) {
+                _updatePatient()
+              }
             }}
           />
           

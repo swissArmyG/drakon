@@ -1,7 +1,7 @@
 import { Axios } from './axios'
 
 export const createPatient = async(payload) => {
-  const { data: { data }} = await Axios.post('/patients/create', {
+  const { data } = await Axios.post('/patients/create', {
     firstname: payload.firstname,
     lastname: payload.lastname,
     pain_description: payload.pain_description,

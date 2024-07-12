@@ -1,78 +1,49 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext, NotificationContext, PatientContext } from '../../contexts'
-import { 
-  readPatientByUserId
-} from '../../api/patients'
+import { AuthContext, PatientContext } from '../../contexts'
 import { containsMissingFields } from '../../utils/validation'
 
 export const PatientProfileForm = () => {
-  const { isAuthenticated, userData } = useContext(AuthContext)
-  const { setNotification } = useContext(NotificationContext)
+  const { isAuthenticated } = useContext(AuthContext)
+
   const { 
-    isRegistering,
+    isRegisterClicked,
     patientProfile,
-    setIsRegistering,
-    setPatientProfile,
-    setOriginalPatientProfile
+    setIsRegisterClicked,
+    setPatientProfile
   } = useContext(PatientContext)
 
   const navigate = useNavigate()
   const [ missingFields, setMissingFields ] = useState([])
 
-  const readPatient = async () => {
-    try {
-      const data = await readPatientByUserId(userData?.id)
-      onChange({ ...data, phoneNumber: data.phone_number })
-      setOriginalPatientProfile(data)
-    } catch (err) {
-      setNotification({
-        type: 'error',
-        message: 'Something went wrong while loading your profile. Please refresh browser or try again later.'
-      }) 
-    }
+  const checkForMissingFields = () => {
+    const _missingFields = containsMissingFields({
+      payload: patientProfile,
+      requiredFields: ['firstname', 'lastname', 'email', 'phoneNumber']
+    })
+
+    setMissingFields(_missingFields)
   }
 
-  useEffect(() => {  
-    if ((userData?.email && userData?.id)) {
-      !patientProfile && readPatient()
-    }
-  }, [userData?.id, userData?.email, setNotification])
-
   useEffect(() => {
-    if (isRegistering) {
-      const _missingFields = containsMissingFields({
-        payload: patientProfile,
-        requiredFields: ['firstname', 'lastname', 'email', 'phoneNumber']
-      })
-
-      setMissingFields(_missingFields.length > 0 ? _missingFields : undefined)
+    // Check for missing fields only after "register" has been clicked
+    if (isRegisterClicked) {
+      checkForMissingFields()
     }
-  }, [patientProfile, isRegistering])
+  }, [patientProfile, isRegisterClicked])
 
   const login = () => {
     navigate("/login")
   }
 
   const register = () => {
-    if (!isRegistering) {
-      const _missingFields = containsMissingFields({
-        payload: patientProfile || {},
-        requiredFields: ['firstname', 'lastname', 'email', 'phoneNumber']
-      })
-
-      console.log('missingFields:', missingFields)
-  
-      setMissingFields(_missingFields.length > 0 ? _missingFields : undefined)
-      setIsRegistering(true)
-
-      _missingFields.length === 0 && navigate("/register")
-    }
+    checkForMissingFields()
+    setIsRegisterClicked(true)
   }
 
   const isInvalid = useCallback((field) => {
-    return missingFields?.length > 0 && missingFields.includes(field) ? '--invalid' : ''
+    return missingFields.length > 0 && missingFields.includes(field) ? '--invalid' : ''
   }, [missingFields])
 
   const onChange = (data) => {
@@ -85,7 +56,7 @@ export const PatientProfileForm = () => {
 
       <p><em>Patient's Full Name</em>
        
-        {missingFields?.length > 0 && 
+        {missingFields.length > 0 && 
           <span className="--required">
             <i>
               <sup>*</sup>
@@ -129,7 +100,7 @@ export const PatientProfileForm = () => {
       <div className="row">
         <div className="--input-container --mr-2">
           <p><em>Email</em></p>
-          <input type="text"false
+          <input type="text"
             id="email"
             autoComplete="on"
             placeholder="Please use a valid email"
