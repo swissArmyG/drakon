@@ -46,8 +46,6 @@ export const PatientRegister = () => {
         setRegisterPayload(defaultRegisterPayload)
         resetForm()
       } catch (err) {
-
-        console.log('err:', err)
         setNotification({
           type: 'error', 
           message: 'Something went wrong, please try again later.'

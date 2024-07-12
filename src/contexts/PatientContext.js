@@ -9,7 +9,7 @@ import { PANE_VARIABLES } from '../components/Consultation'
 
 const PatientContext = createContext()
 
-const PatientProvider = ({ children, scrollRef }) => {
+const PatientProvider = ({ children }) => {
   const navigate = useNavigate()
   const scrollToTopRef = useRef()
 
@@ -74,7 +74,7 @@ const PatientProvider = ({ children, scrollRef }) => {
     setPane(FIRST_PANE)
     setStepsCompleted(0)
     navigate("/")
-    scrollToTopRef.current.scrollIntoView({ behavior: 'smooth' })
+    scrollToTopRef?.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
