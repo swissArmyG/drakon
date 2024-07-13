@@ -1,9 +1,15 @@
 import { FadedBgButton } from '../Buttons/FadedBgButton';
 import topics from '../../copies/homepage-topics';
 
-export const HomepageTopics =  ({ topic, setTopic }) => {
+export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
   const renderTopicContent = (category, idx) => {
     return <div className={`--modal -box-${idx}`}>
+      <div>
+        <h3 className="--button --button-text -exit" 
+          onClick={() => setTopic(undefined)}>
+          X
+        </h3>
+      </div>
       <em>{topics[category].header}</em>
       <p className="--modal-text">{topics[category].description}</p>
     </div>
@@ -22,6 +28,7 @@ export const HomepageTopics =  ({ topic, setTopic }) => {
                 onClick={(e) => {
                   e.preventDefault()
                   setTopic(topic === topicCategory ? undefined : topicCategory)
+                  closeOverlappingModal()
                 }}
                 width="300px"
               />

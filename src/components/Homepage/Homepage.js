@@ -14,14 +14,23 @@ import { PatientContext } from '../../contexts'
 export const Homepage = () => {
   const [ theme, setTheme ] = useState('DEEP_OCEAN')
   const [ topic, setTopic ] = useState(undefined)
+
+  const [ isLoginModal, toggleLoginModal ] = useState(false)
+  const [ isLogoutModal, toggleLogoutModal ] = useState(false)
+
   const { scrollToTopRef } = useContext(PatientContext)
   
   const storyRef = useRef()
   const consultationRef = useRef()
   const contactRef = useRef()
 
-  const handleOverlappingModals = () => {
-    setTopic(undefined)
+  const closeOverlappingModals = (modalToClose) => {
+    if (modalToClose === 'topic') {
+      setTopic(undefined)
+    } else if (modalToClose === 'authentication') {
+      toggleLoginModal(false)
+      toggleLogoutModal(false)
+    }
   }
 
   return (
@@ -43,12 +52,20 @@ export const Homepage = () => {
             consultationRef,
             contactRef
           }}
-          handleOverlappingModals={handleOverlappingModals}
+          isLoginModal={isLoginModal}
+          isLogoutModal={isLogoutModal}
+          toggleLoginModal={toggleLoginModal}
+          toggleLogoutModal={toggleLogoutModal}
+          closeOverlappingModal={() => closeOverlappingModals('topic')}
         />
       </header>
       
       <SideNavigation ref={scrollToTopRef} />
-      <HomepageTopics topic={topic} setTopic={setTopic} />
+      <HomepageTopics 
+        topic={topic} 
+        setTopic={setTopic} 
+        closeOverlappingModal={() => closeOverlappingModals('authentication')} 
+      />
 
       <div className="--content-container">
         <HomepageStory ref={storyRef} />

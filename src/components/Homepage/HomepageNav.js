@@ -6,6 +6,13 @@ import { AuthContext, PatientContext } from '../../contexts'
 import { readPatientByUserId } from '../../api/patients'
 
 export const HomepageNav = forwardRef((props, refs) => {
+  const {
+    closeOverlappingModal,
+    isLoginModal,
+    isLogoutModal,
+    toggleLoginModal,
+    toggleLogoutModal
+  } = props
   const { storyRef, consultationRef, contactRef } = refs
   const { userData } = useContext(AuthContext)
   const { 
@@ -13,8 +20,7 @@ export const HomepageNav = forwardRef((props, refs) => {
     setOriginalPatientProfile, 
     setPatientProfile 
   } = useContext(PatientContext)
-  const [ isLoginModal, toggleLoginModal ] = useState(false)
-  const [ isLogoutModal, toggleLogoutModal ] = useState(false)
+ 
   const scrollConfig = { behavior: "smooth" }
 
   const readPatient = async () => {
@@ -35,19 +41,19 @@ export const HomepageNav = forwardRef((props, refs) => {
     }
   }, [userData])
 
-  const handleLogoutModal = () => {
+  const openLogoutModal = () => {
     toggleLogoutModal(true)
-    props.handleOverlappingModals()
+    closeOverlappingModal()
   }
 
-  const handleLoginModal = () => {
+  const openLoginModal = () => {
     toggleLoginModal(true)
-    props.handleOverlappingModals()
+    closeOverlappingModal()
   }
 
   const navOptions = {
     login: {
-      onClick: () => userData ? handleLogoutModal() : handleLoginModal(),
+      onClick: () => userData ? openLogoutModal() : openLoginModal(),
       linkTo: '#login',
       text: (userData && patientProfile) ? `Hi, ${patientProfile.firstname}` : 'LOGIN'
     },
