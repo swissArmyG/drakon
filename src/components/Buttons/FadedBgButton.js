@@ -1,11 +1,12 @@
-export const FadedBgButton = ({ buttonText, buttonTextPosition, onClick, isDisabled, isFlipped, width }) => {
+export const FadedBgButton = ({ buttonText, buttonTextPosition, onClick, isDisabled, isFlipped, isFocused, width }) => {
   return (
     <section className={`FadedBgButton --button ${isDisabled ? 'isDisabled' : ''}`}>
-      <h1 className={`--button-text ${isDisabled ? 'isDisabled' : ''}`}
+      <h1 className={`--button-text ${isDisabled ? 'isDisabled' : ''} ${isFocused ? 'isFocused' : ''}`}
         onClick={onClick}
         style={{
           "top": `${buttonTextPosition || "20%"}`,
-          "width": `${width || "300px"}`
+          "width": `${width || "300px"}`,
+          "color": `${isFocused} ? "isFocused" : ""`
         }}>
         {buttonText}
       </h1>

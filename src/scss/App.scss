@@ -35,6 +35,10 @@
       color: $accent-a-color;  
     }
   }
+
+  &.isFocused {
+    color: $secondary-color;
+  }
 }
 
 .App-logo {

@@ -19,11 +19,11 @@ export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
     <section className="HomepageTopics --container">
       {
         Object.keys(topics).map((topicCategory, index) => {
-          return <div
-          key={index}
-           className="--topics-container">
+          console.log(topicCategory === topic, topicCategory, 'vs', topic)
+          return <div key={index} className="--topics-container">
             <div className="--button-container">
               <FadedBgButton
+                isFocused={topicCategory === topic}
                 buttonText={topicCategory} 
                 onClick={(e) => {
                   e.preventDefault()
