@@ -5,7 +5,7 @@ import { Login, Logout } from '.'
 import { AuthContext, PatientContext } from '../../contexts'
 import { readPatientByUserId } from '../../api/patients'
 
-export const HomepageNav = forwardRef((_props, refs) => {
+export const HomepageNav = forwardRef((props, refs) => {
   const { storyRef, consultationRef, contactRef } = refs
   const { userData } = useContext(AuthContext)
   const { 
@@ -37,10 +37,12 @@ export const HomepageNav = forwardRef((_props, refs) => {
 
   const handleLogoutModal = () => {
     toggleLogoutModal(true)
+    props.handleOverlappingModals()
   }
 
   const handleLoginModal = () => {
     toggleLoginModal(true)
+    props.handleOverlappingModals()
   }
 
   const navOptions = {

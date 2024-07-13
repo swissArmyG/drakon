@@ -13,11 +13,16 @@ import { PatientContext } from '../../contexts'
 
 export const Homepage = () => {
   const [ theme, setTheme ] = useState('DEEP_OCEAN')
+  const [ topic, setTopic ] = useState(undefined)
   const { scrollToTopRef } = useContext(PatientContext)
   
   const storyRef = useRef()
   const consultationRef = useRef()
   const contactRef = useRef()
+
+  const handleOverlappingModals = () => {
+    setTopic(undefined)
+  }
 
   return (
     <section 
@@ -38,11 +43,12 @@ export const Homepage = () => {
             consultationRef,
             contactRef
           }}
+          handleOverlappingModals={handleOverlappingModals}
         />
       </header>
       
       <SideNavigation ref={scrollToTopRef} />
-      <HomepageTopics />
+      <HomepageTopics topic={topic} setTopic={setTopic} />
 
       <div className="--content-container">
         <HomepageStory ref={storyRef} />

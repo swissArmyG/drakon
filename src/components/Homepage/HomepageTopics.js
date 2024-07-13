@@ -1,20 +1,7 @@
-import React, { useState } from 'react'
 import { FadedBgButton } from '../Buttons/FadedBgButton';
 import topics from '../../copies/homepage-topics';
 
-export const HomepageTopics =  () => {
-  const [ currentCategory, setCurrentCategory ] = useState(undefined)
-
-  // const renderCommonDisorders = (category) => {
-  //   const disorder = topics[category].commonDisorders
-  //   return Object
-  //     .keys(disorder)
-  //     .map(type => {
-  //       return <p className="--modal-text"><em>{type}</em> {disorder[type]}</p>
-  //     })
-  // }
-
-  // const whitespace = ' '
+export const HomepageTopics =  ({ topic, setTopic }) => {
   const renderTopicContent = (category, idx) => {
     return <div className={`--modal -box-${idx}`}>
       <em>{topics[category].header}</em>
@@ -25,24 +12,24 @@ export const HomepageTopics =  () => {
   return (
     <section className="HomepageTopics --container">
       {
-        Object.keys(topics).map((category, index) => {
+        Object.keys(topics).map((topicCategory, index) => {
           return <div
           key={index}
            className="--topics-container">
             <div className="--button-container">
               <FadedBgButton
-                buttonText={category} 
+                buttonText={topicCategory} 
                 onClick={(e) => {
                   e.preventDefault()
-                  setCurrentCategory(currentCategory === category ? undefined : category)
+                  setTopic(topic === topicCategory ? undefined : topicCategory)
                 }}
                 width="300px"
               />
             </div>
             {
-              category === currentCategory &&
+              topicCategory === topic &&
               <div className={`--modal-container`}>
-                {renderTopicContent(category, index)}
+                {renderTopicContent(topicCategory, index)}
               </div>
             }
           </div>
