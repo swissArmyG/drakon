@@ -2,11 +2,11 @@ import React, { useState, useContext } from "react"
 import { useNavigate } from 'react-router-dom'
 import { FadedBgButton } from '../Buttons'
 import { 
-  createPatient, 
-  updatePatient, 
+  createCustomer, 
+  updateCustomer, 
   requestNewConsultation
-} from "../../api/patients"
-import { AuthContext, NotificationContext, PatientContext } from "../../contexts"
+} from "../../api/customers"
+import { AuthContext, NotificationContext, CustomerContext } from "../../contexts"
 
 export const PANE_VARIABLES = {
   INCOMPLETE: 0,
@@ -23,26 +23,26 @@ export const PaneControls = ({ windowWidth }) => {
   const { setNotification } = useContext(NotificationContext)
   const { 
     isRegisterClicked,
-    originalPatientProfile,
+    originalCustomerProfile,
     painDescriptions,
     painDegree,
     pane,
-    patientProfile,
+    customerProfile,
     resetForm,
     setPane,
     stepsCompleted
-  } = useContext(PatientContext)
+  } = useContext(CustomerContext)
 
-  const patientId = patientProfile?.id  
+  const patientId = customerProfile?.id  
 
   const getChangedFields = () => {
     const changedFields = {}
 
     Object
-      .keys(patientProfile)
+      .keys(customerProfile)
       .forEach(key => {
-        if (patientProfile[key] !== originalPatientProfile[key]) {
-          changedFields[key] = patientProfile[key]
+        if (customerProfile[key] !== originalCustomerProfile[key]) {
+          changedFields[key] = customerProfile[key]
         }
       })
 
@@ -70,7 +70,7 @@ export const PaneControls = ({ windowWidth }) => {
   
     if (patientId) {
       try {
-        await updatePatient({
+        await updateCustomer({
           patientId,
           payload: changedFields
         })
@@ -87,16 +87,16 @@ export const PaneControls = ({ windowWidth }) => {
   const requestNonAccountConsultation = async () => {
     setIsSubmitting(true)
 
-    if (patientProfile) {
+    if (customerProfile) {
       try {
-        await createPatient({        
-          firstname: patientProfile.firstname,
-          lastname: patientProfile.lastname,
+        await createCustomer({        
+          firstname: customerProfile.firstname,
+          lastname: customerProfile.lastname,
           pain_description: painDescriptions,
           pain_degree: painDegree,
-          address: patientProfile.address,
-          email: patientProfile.email,
-          phone_number: patientProfile.phoneNumber
+          address: customerProfile.address,
+          email: customerProfile.email,
+          phone_number: customerProfile.phoneNumber
         })
   
         setNotification({ 
@@ -148,10 +148,10 @@ export const PaneControls = ({ windowWidth }) => {
     // CONFIRMATION REQUIRED: if the user account already exists
       // USE OLD EMAIL: update changed fields w old email
       // USE NEW EMAIL: update changed fields w new email
-      userData.email !== patientProfile.email
+      userData.email !== customerProfile.email
         ?  navigate("/confirm", {
           state: { 
-            email: patientProfile.email
+            email: customerProfile.email
           }
         })
         : determineExistingAccountConsultation()

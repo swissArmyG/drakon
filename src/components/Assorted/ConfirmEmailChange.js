@@ -1,27 +1,27 @@
 import { useContext } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { AuthContext, NotificationContext, PatientContext } from "../../contexts"
+import { AuthContext, NotificationContext, CustomerContext } from "../../contexts"
 import { FadedBgButton } from "../Buttons"
-import { updatePatient } from '../../api/patients' 
+import { updateCustomer } from '../../api/customers' 
 
 export const ConfirmEmailChange = () => {
   const { userData } = useContext(AuthContext)
   const { 
-    patientProfile, 
+    customerProfile, 
     resetForm, 
-    setPatientProfile 
-  } = useContext(PatientContext)
+    setCustomerProfile 
+  } = useContext(CustomerContext)
   const { setNotification } = useContext(NotificationContext)
   const navigate = useNavigate()
   const location = useLocation()
   const { state } = location
   const { email } = state
 
-  const _updatePatient = async() => {
+  const _updateCustomer = async() => {
     try {
-      await updatePatient({
-        patientId: patientProfile.id,
-        payload: patientProfile
+      await updateCustomer({
+        patientId: customerProfile.id,
+        payload: customerProfile
       }) 
       resetForm()
     } catch (err) {
@@ -33,7 +33,7 @@ export const ConfirmEmailChange = () => {
   }
 
   const returnPreviousEmail = () => {
-    setPatientProfile({ ...patientProfile, email: userData.email })
+    setCustomerProfile({ ...customerProfile, email: userData.email })
     navigate(-1)
   }
   
@@ -49,8 +49,8 @@ export const ConfirmEmailChange = () => {
             width={"400px"}
             onClick={(e) => {
               e.preventDefault()
-              if (patientProfile) {
-                _updatePatient()
+              if (customerProfile) {
+                _updateCustomer()
               }
             }}
           />

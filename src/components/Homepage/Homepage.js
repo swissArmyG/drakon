@@ -3,13 +3,13 @@ import {
   HomepageNav,
   HomepageTopics,
   HomepageStory,
-  HomepageRequestAppt,
+  HomepageConsultation,
   HomepageContact
 } from '.'
 import logoPath from '../../img/logo/logo_with_text.png'
 import { SideNavigation } from '../Buttons'
 import { ThemeToggle } from '../Assorted'
-import { PatientContext } from '../../contexts'
+import { CustomerContext } from '../../contexts'
 
 export const Homepage = () => {
   const [ theme, setTheme ] = useState('DEEP_OCEAN')
@@ -18,7 +18,7 @@ export const Homepage = () => {
   const [ isLoginModal, toggleLoginModal ] = useState(false)
   const [ isLogoutModal, toggleLogoutModal ] = useState(false)
 
-  const { scrollToTopRef } = useContext(PatientContext)
+  const { scrollToTopRef } = useContext(CustomerContext)
   
   const storyRef = useRef()
   const consultationRef = useRef()
@@ -69,7 +69,7 @@ export const Homepage = () => {
 
       <div className="--content-container">
         <HomepageStory ref={storyRef} />
-        <HomepageRequestAppt ref={consultationRef} />
+        <HomepageConsultation ref={consultationRef} />
         <HomepageContact ref={contactRef} />
       </div>
     </section>

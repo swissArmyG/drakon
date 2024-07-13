@@ -3,7 +3,7 @@ import {
   singleSelectOption, 
   multipleSelectOptions 
 } from '../../copies/homepage-form-options'
-import { PatientContext } from "../../contexts"
+import { CustomerContext } from "../../contexts"
 import { InputContainer } from "."
 
 export const ConditionForm = () => {
@@ -12,7 +12,7 @@ export const ConditionForm = () => {
     multipleOptions,
     selectSingleOption,
     selectMultipleOptions
-  } = useContext(PatientContext)
+  } = useContext(CustomerContext)
 
   const isSingleSelected = (option) => {
     return singleOption === option ? '--selected' : ''
@@ -21,14 +21,6 @@ export const ConditionForm = () => {
   const isMultipleSelected = (option) => {
     return multipleOptions.includes(option) ? '--selected' : ''
   }
-
-  // const determineSingleOption = (option) => {
-  //   if (!singleOption || singleOption !== option) {
-  //     return option
-  //   } else {
-  //     return singleOption === option ? '' : singleOption
-  //   }
-  // }
 
   const determineMultipleOptions = (option) => {
     selectMultipleOptions(prevState => {
@@ -47,14 +39,6 @@ export const ConditionForm = () => {
       return option;
     }
   };
-  
-  // const determineMultipleOptions = (option) => {
-  //   if (multipleOptions.includes(option)) {
-  //     return multipleOptions.filter(op => op !== option);
-  //   } else {
-  //     return [...multipleOptions, option];
-  //   }
-  // }
 
   return <section className="ConditionForm">
      <div className="--options-container">

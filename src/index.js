@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { 
   AuthProvider, 
   NotificationProvider, 
-  PatientProvider 
+  CustomerProvider 
 } from './contexts'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,9 +17,9 @@ root.render(
     <BrowserRouter>
       <AuthProvider>
         <NotificationProvider>
-          <PatientProvider>
+          <CustomerProvider>
             <App />
-          </PatientProvider>
+          </CustomerProvider>
         </NotificationProvider>
       </AuthProvider>
     </BrowserRouter>

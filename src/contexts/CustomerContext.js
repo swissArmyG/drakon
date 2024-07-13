@@ -7,9 +7,9 @@ import {
 } from '../copies/homepage-form-options'
 import { PANE_VARIABLES } from '../components/Consultation'
 
-const PatientContext = createContext()
+const CustomerContext = createContext()
 
-const PatientProvider = ({ children }) => {
+const CustomerProvider = ({ children }) => {
   const navigate = useNavigate()
   const scrollToTopRef = useRef()
 
@@ -23,8 +23,8 @@ const PatientProvider = ({ children }) => {
   const [ painDegree, setPainDegree ] = useState('')
   const [ painDescriptions, setPainDescriptions ] = useState('')
 
-  const [ patientProfile, setPatientProfile ] = useState(undefined)
-  const [ originalPatientProfile, setOriginalPatientProfile] = useState(undefined)
+  const [ customerProfile, setCustomerProfile ] = useState(undefined)
+  const [ originalCustomerProfile, setOriginalCustomerProfile] = useState(undefined)
 
   const [ isRegisterClicked, setIsRegisterClicked ] = useState(false)
 
@@ -49,7 +49,7 @@ const PatientProvider = ({ children }) => {
         : multipleOptions.length >= 1
     )
 
-    const { firstname = '', lastname = '', email = '', phoneNumber = '' } = patientProfile || {};
+    const { firstname = '', lastname = '', email = '', phoneNumber = '' } = customerProfile || {};
     const secondStepCompleted = firstname && lastname && email && phoneNumber 
 
     let stepsCompleted = INCOMPLETE;
@@ -62,15 +62,15 @@ const PatientProvider = ({ children }) => {
     }
     
     setStepsCompleted(stepsCompleted)
-  }, [singleOption, multipleOptions, painDegree, patientProfile])
+  }, [singleOption, multipleOptions, painDegree, customerProfile])
 
   const resetForm = () => {
     selectSingleOption('')
     selectMultipleOptions([])
     setIsRegisterClicked(false)
     setPainDegree('')
-    setPatientProfile(undefined)
-    setOriginalPatientProfile(undefined)
+    setCustomerProfile(undefined)
+    setOriginalCustomerProfile(undefined)
     setPane(FIRST_PANE)
     setStepsCompleted(0)
     navigate("/")
@@ -78,14 +78,14 @@ const PatientProvider = ({ children }) => {
   }
 
   return (
-    <PatientContext.Provider value={{
+    <CustomerContext.Provider value={{
       isRegisterClicked,
       singleOption,
       multipleOptions,
-      originalPatientProfile,
+      originalCustomerProfile,
       painDescriptions,
       painDegree,
-      patientProfile,
+      customerProfile,
       pane,
       resetForm,
       scrollToTopRef,
@@ -95,14 +95,14 @@ const PatientProvider = ({ children }) => {
       setIsRegisterClicked,
       setPainDescriptions,
       setPainDegree,
-      setPatientProfile,
+      setCustomerProfile,
       setPane,
-      setOriginalPatientProfile,
+      setOriginalCustomerProfile,
       setStepsCompleted
     }}>
       {children}
-    </PatientContext.Provider>
+    </CustomerContext.Provider>
   )
 }
 
-export { PatientContext, PatientProvider }
+export { CustomerContext, CustomerProvider }

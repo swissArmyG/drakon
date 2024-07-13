@@ -1,6 +1,6 @@
 import { Axios } from './axios'
 
-export const createPatient = async(payload) => {
+export const createCustomer = async(payload) => {
   const { data } = await Axios.post('/patients/create', {
     firstname: payload.firstname,
     lastname: payload.lastname,
@@ -14,14 +14,14 @@ export const createPatient = async(payload) => {
   return data
 }
 
-export const readPatientByUserId = async(userId) => {
+export const readCustomerByUserId = async(userId) => {
   const { data } = await Axios.get(`/patients`, {
     params: { userId } // Caution: this would be the param query or req.query in Express.js API, the equivalent of /patients?userId=
   })
   return data
 }
 
-export const updatePatient = async({ patientId, payload }) => {
+export const updateCustomer = async({ patientId, payload }) => {
   let updating = {}
 
   if (payload.firstname) {

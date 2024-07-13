@@ -1,11 +1,11 @@
 import React, { useContext } from "react"
-import { PatientContext } from "../../contexts"
+import { CustomerContext } from "../../contexts"
 
 export const InputContainer = () => {
   const { 
     painDegree,
     setPainDegree,
-  } = useContext(PatientContext)
+  } = useContext(CustomerContext)
 
   return (
     <section className="InputContainer">

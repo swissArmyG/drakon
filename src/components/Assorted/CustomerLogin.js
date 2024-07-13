@@ -5,7 +5,7 @@ import { CredentialForm } from './CredentialForm'
 import { AuthContext, NotificationContext } from '../../contexts'
 import { forgotPassword, login } from '../../api/sessions'
 
-export const PatientLogin = () => {
+export const CustomerLogin = () => {
   const {
     loginPayload,
     setUserData,
@@ -73,7 +73,7 @@ export const PatientLogin = () => {
   }
 
   return (
-    <section className={`PatientLogin --container --background`}>
+    <section className={`CustomerLogin --container --background`}>
       <CredentialForm 
         credentials={loginPayload}
         isSubmitting={isSubmitting}

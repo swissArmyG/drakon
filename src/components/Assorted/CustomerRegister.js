@@ -2,18 +2,18 @@
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { CredentialForm } from './CredentialForm'
-import { NotificationContext, PatientContext } from '../../contexts'
-import { createPatient } from '../../api/patients'
+import { NotificationContext, CustomerContext } from '../../contexts'
+import { createCustomer } from '../../api/customers'
 
-export const PatientRegister = () => {
+export const CustomerRegister = () => {
   const navigate = useNavigate()
 
   const {
-    patientProfile, 
+    customerProfile, 
     painDegree, 
     painDescriptions,
     resetForm
-  } = useContext(PatientContext)
+  } = useContext(CustomerContext)
 
   const defaultRegisterPayload = {
     password: '',
@@ -27,16 +27,16 @@ export const PatientRegister = () => {
   const onSubmit = async() => {
     setIsSubmitting(true)
 
-    if (patientProfile && registerPayload.password) {
+    if (customerProfile && registerPayload.password) {
       try {
-        await createPatient({
-          firstname: patientProfile.firstname,
-          lastname: patientProfile.lastname,
+        await createCustomer({
+          firstname: customerProfile.firstname,
+          lastname: customerProfile.lastname,
           pain_description: painDescriptions,
           pain_degree: painDegree,
-          address: patientProfile.address,
-          email: patientProfile.email,
-          phone_number: patientProfile.phoneNumber,
+          address: customerProfile.address,
+          email: customerProfile.email,
+          phone_number: customerProfile.phoneNumber,
           password: registerPayload.password
         })
         setNotification({
@@ -57,7 +57,7 @@ export const PatientRegister = () => {
   }
 
   return (
-    <section className={`PatientRegister --container --background`}>
+    <section className={`CustomerRegister --container --background`}>
       <CredentialForm 
         credentials={{ password: registerPayload.password }}
         isSubmitting={isSubmitting}
@@ -69,7 +69,7 @@ export const PatientRegister = () => {
         ]}
         requiredFields={["password"]}
         submitButtonText={"REGISTER"}
-        header={<p className='--instruction'>Please provide a password for your new account. For your convenience, the doctor will be informed about your consultation request, upon registraion with this email <em>{patientProfile.email}</em></p>}
+        header={<p className='--instruction'>Please provide a password for your new account. For your convenience, the doctor will be informed about your consultation request, upon registraion with this email <em>{customerProfile.email}</em></p>}
         footer={
           <span className="--button --button-text" onClick={() => navigate(-1)}>
             <i className="fa-solid fa-arrow-left-long" />

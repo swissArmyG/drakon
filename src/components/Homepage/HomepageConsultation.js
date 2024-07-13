@@ -1,16 +1,16 @@
 import React, { useState, useEffect, forwardRef, useContext } from "react"
-import { PatientProfileForm, ProgressBar } from "../Assorted"
-import { PatientContext } from "../../contexts"
+import { CustomerProfileForm, ProgressBar } from "../Assorted"
+import { CustomerContext } from "../../contexts"
 import { ConditionForm, PaneControls } from "../Consultation"
 import { PANE_VARIABLES } from "../Consultation"
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 
-export const HomepageRequestAppt = forwardRef((_props, ref) => {
+export const HomepageConsultation = forwardRef((_props, ref) => {
   const { FIRST_PANE, LAST_PANE } = PANE_VARIABLES
   const {
     pane,
     stepsCompleted
-  } = useContext(PatientContext)
+  } = useContext(CustomerContext)
   const [ isMobileDevice, setIsMobileDevice ] = useState(false)
   const [ windowSize, setWindowSize ] = useState({
     width: window.innerWidth,
@@ -41,12 +41,12 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
   }
   
   return (
-    <section ref={ref} className="HomepageRequestAppt">
+    <section ref={ref} className="HomepageConsultation">
       <div className="--background-overlay" />
         <div className="--form-container">
           {renderHeader()}
           {pane === FIRST_PANE && <ConditionForm />}
-          {pane === LAST_PANE && <PatientProfileForm />}
+          {pane === LAST_PANE && <CustomerProfileForm />}
           <ProgressBar 
             steps={2} 
             stepsCompleted={stepsCompleted}

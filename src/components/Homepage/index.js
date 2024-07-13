@@ -1,7 +1,7 @@
 export { Homepage } from './Homepage'
 export { HomepageContact } from './HomepageContact'
 export { HomepageNav } from './HomepageNav'
-export { HomepageRequestAppt } from './HomepageRequestAppt'
+export { HomepageConsultation } from './HomepageConsultation'
 export { HomepageStory } from './HomepageStory'
 export { HomepageTopics } from './HomepageTopics'
 export { Login } from './Login'

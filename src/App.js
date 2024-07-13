@@ -5,8 +5,8 @@ import {
   ConfirmEmailChange,
   Notification, 
   PasswordReset,
-  PatientLogin, 
-  PatientRegister
+  CustomerLogin, 
+  CustomerRegister
 } from './components/Assorted'
 
 const App = () => {
@@ -20,9 +20,9 @@ const App = () => {
           <Route exact path="/password/reset" 
           element={<PasswordReset />} />
           <Route exact path="/login" 
-            element={<PatientLogin />} />
+            element={<CustomerLogin />} />
           <Route exact path="/register"
-            element={<PatientRegister />} />
+            element={<CustomerRegister />} />
           <Route exact path="/confirm"
             element={<ConfirmEmailChange/> } />
       </Routes>

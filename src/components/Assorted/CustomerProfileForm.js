@@ -1,25 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext, PatientContext } from '../../contexts'
+import { AuthContext, CustomerContext } from '../../contexts'
 import { containsMissingFields } from '../../utils/validation'
 
-export const PatientProfileForm = () => {
+export const CustomerProfileForm = () => {
   const { isAuthenticated } = useContext(AuthContext)
 
   const { 
     isRegisterClicked,
-    patientProfile,
+    customerProfile,
     setIsRegisterClicked,
-    setPatientProfile
-  } = useContext(PatientContext)
+    setCustomerProfile
+  } = useContext(CustomerContext)
 
   const navigate = useNavigate()
   const [ missingFields, setMissingFields ] = useState([])
 
   const checkForMissingFields = () => {
     const _missingFields = containsMissingFields({
-      payload: patientProfile,
+      payload: customerProfile,
       requiredFields: ['firstname', 'lastname', 'email', 'phoneNumber']
     })
 
@@ -31,7 +31,7 @@ export const PatientProfileForm = () => {
     if (isRegisterClicked) {
       checkForMissingFields()
     }
-  }, [patientProfile, isRegisterClicked])
+  }, [customerProfile, isRegisterClicked])
 
   const login = () => {
     navigate("/login")
@@ -47,14 +47,14 @@ export const PatientProfileForm = () => {
   }, [missingFields])
 
   const onChange = (data) => {
-    setPatientProfile({ ...patientProfile, ...data })
+    setCustomerProfile({ ...customerProfile, ...data })
   }
   
   return ( 
-    <section className="PatientProfileForm">
+    <section className="CustomerProfileForm">
       { !isAuthenticated && <p className="--login-nav">Please <u><em onClick={() => login()}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login</p> }
 
-      <p><em>Patient's Full Name</em>
+      <p><em>Full Name</em>
        
         {missingFields.length > 0 && 
           <span className="--required">
@@ -71,7 +71,7 @@ export const PatientProfileForm = () => {
             id="firstname"
             placeholder="Firstname"
             className={`${isInvalid('firstname')}`}
-            value={patientProfile?.firstname || ""}
+            value={customerProfile?.firstname || ""}
             onChange={({ target: { value }}) => onChange({ firstname: value })}
           />
         </div>
@@ -80,7 +80,7 @@ export const PatientProfileForm = () => {
             id="lastname"
             placeholder="Lastname"
             className={`${isInvalid('lastname')}`}
-            value={patientProfile?.lastname || ""}
+            value={customerProfile?.lastname || ""}
             onChange={({ target: { value }}) => { 
               onChange({ lastname: value })
             }}
@@ -92,7 +92,7 @@ export const PatientProfileForm = () => {
         <p><em>Address</em><span>Optional</span></p>
         <input type="text"
           id="address"
-          value={patientProfile?.address || ""}
+          value={customerProfile?.address || ""}
           onChange={({ target: { value }}) => onChange({ address: value })}
         />
       </div>
@@ -105,7 +105,7 @@ export const PatientProfileForm = () => {
             autoComplete="on"
             placeholder="Please use a valid email"
             className={`${isInvalid('email')}`}
-            value={patientProfile?.email || ""}
+            value={customerProfile?.email || ""}
             onChange={({ target: { value }}) => onChange({ email: value })}
           />
         </div>
@@ -115,7 +115,7 @@ export const PatientProfileForm = () => {
             id="phone"
             placeholder="No dash (-) or dot (.) required"
             className={`${isInvalid('phoneNumber')}`}
-            value={patientProfile?.phoneNumber || ""}
+            value={customerProfile?.phoneNumber || ""}
             onChange={({ target: { value }}) => onChange({ phoneNumber: value })} 
           />
         </div>

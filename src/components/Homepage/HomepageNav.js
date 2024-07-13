@@ -1,9 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { forwardRef, useEffect, useContext, useState } from 'react'
+import React, { forwardRef, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { Login, Logout } from '.'
-import { AuthContext, PatientContext } from '../../contexts'
-import { readPatientByUserId } from '../../api/patients'
+import { AuthContext, CustomerContext } from '../../contexts'
+import { readCustomerByUserId } from '../../api/customers'
 
 export const HomepageNav = forwardRef((props, refs) => {
   const {
@@ -16,28 +16,28 @@ export const HomepageNav = forwardRef((props, refs) => {
   const { storyRef, consultationRef, contactRef } = refs
   const { userData } = useContext(AuthContext)
   const { 
-    patientProfile, 
-    setOriginalPatientProfile, 
-    setPatientProfile 
-  } = useContext(PatientContext)
+    customerProfile, 
+    setOriginalCustomerProfile, 
+    setCustomerProfile 
+  } = useContext(CustomerContext)
  
   const scrollConfig = { behavior: "smooth" }
 
-  const readPatient = async () => {
+  const readCustomer = async () => {
     try {
-      const patient = await readPatientByUserId(userData?.id)
-      const data = { ...patient, phoneNumber: patient.phone_number }
+      const customer = await readCustomerByUserId(userData?.id)
+      const data = { ...customer, phoneNumber: customer.phone_number }
       
-      setOriginalPatientProfile(data)
-      setPatientProfile(data)
+      setOriginalCustomerProfile(data)
+      setCustomerProfile(data)
     } catch (err) {
       console.error(err)
     }
   }
 
   useEffect(() => {
-    if (userData && !patientProfile) {
-      readPatient()
+    if (userData && !customerProfile) {
+      readCustomer()
     }
   }, [userData])
 
@@ -55,7 +55,7 @@ export const HomepageNav = forwardRef((props, refs) => {
     login: {
       onClick: () => userData ? openLogoutModal() : openLoginModal(),
       linkTo: '#login',
-      text: (userData && patientProfile) ? `Hi, ${patientProfile.firstname}` : 'LOGIN'
+      text: (userData && customerProfile) ? `Hi, ${customerProfile.firstname}` : 'LOGIN'
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),

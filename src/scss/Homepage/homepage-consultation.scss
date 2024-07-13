@@ -1,4 +1,4 @@
-.HomepageRequestAppt {
+.HomepageConsultation {
   position: relative;
   z-index: 1;
   display: flex;
@@ -121,7 +121,7 @@
 }
 
 @media screen and (max-width: 600px) {
-  .HomepageRequestAppt {
+  .HomepageConsultation {
     .--form-container {
       .InputContainer {
         flex-direction: column;
@@ -132,7 +132,7 @@
 }
 
 @media screen and (max-width: 430px) {
-  .HomepageRequestAppt {
+  .HomepageConsultation {
     .--form-container {
       .--header-container {
         align-items: center;
