@@ -20,7 +20,9 @@ export const Homepage = () => {
   const contactRef = useRef()
 
   return (
-    <section className={`Homepage --container --background --${theme}`} ref={scrollToTopRef}>
+    <section 
+      className={`Homepage --container --background --${theme}`} 
+      ref={scrollToTopRef}>
       <header className="--nav-bar">
         <div>
           <img

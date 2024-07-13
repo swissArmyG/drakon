@@ -36,7 +36,7 @@ export const HomepageRequestAppt = forwardRef((_props, ref) => {
   const renderHeader = () => {
     return <div className="--header-container">
       <img src={spineGraphic} alt="A section of a spine" className="--header-logo" />
-      <p className="--header-text">Please send us your details electronically to make a consultation request with us. Use the online form below. An associate from <em>PeaceOfMindSpine.com</em> (POMS) will contact you soon.</p>
+      <p className="--header-text">Your journey to a healed you begins here… Please begin by answering a few basic questions throughout these brief forms accurately and an associate from POMS will be in touch with you shortly for follow up</p>
     </div>
   }
   
