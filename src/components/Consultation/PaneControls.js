@@ -12,7 +12,7 @@ export const PANE_VARIABLES = {
   INCOMPLETE: 0,
   FIRST_PANE: 1,
   SECOND_PANE: 2,
-  LAST_PANE: 3,
+  LAST_PANE: 6,
 }
 
 export const PaneControls = ({ windowWidth }) => {

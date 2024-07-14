@@ -1,2 +1,2 @@
-export { Input } from './Input'
+export { DetailedInput } from './DetailedInput'
 export { SingleSelect } from './SingleSelect'

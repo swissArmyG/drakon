@@ -4,7 +4,7 @@ import {
   multipleSelectOptions 
 } from '../../copies/homepage-form-options'
 import { CustomerContext } from "../../contexts"
-import { Input, SingleSelect } from "../Assorted/Inputs"
+import { DetailedInput, SingleSelect } from "../Assorted/Inputs"
 import { MultipleSelects } from "../Assorted/Inputs/MultipleSelects"
 
 export const ConditionForm = () => {
@@ -38,16 +38,16 @@ export const ConditionForm = () => {
   const renderAdditionalInputs = () => {
     return <React.Fragment>
       <div className="row">
-        <Input
+        <DetailedInput
           containerClassName="--mr-2p"
           id="age"
           label="Age"
-          subLabel="Number only"
+          placeholder="Number only"
           value={customerProfile?.age}
           onChange={(value) => onChange({ age: value })}
           type="number"
         />
-        <Input
+        <DetailedInput
           id="sex"
           label="Sex"
           value={customerProfile?.sex}
@@ -56,16 +56,16 @@ export const ConditionForm = () => {
       </div>
 
       <div className="row --mb-20px">
-        <Input
+        <DetailedInput
           containerClassName="--mr-2p"
           id="height"
           label="Height"
-          subLabel={`Example: 5 Ft. 10 In. or 5'10"`}
+          subLabel={`Example: 5'10"`}
           placeholder={"In Ft. (Feet) and In. (Inches)"}
           value={customerProfile?.height}
           onChange={(value) => onChange({ height: value })}
         />
-        <Input
+        <DetailedInput
           id="weight"
           label="Weight"
           subLabel={`Example: 170`}
@@ -82,7 +82,7 @@ export const ConditionForm = () => {
     return <div className="painDegree">
       <label htmlFor="painDegree">Rate your overall degree of pain right now from 1-10:</label>
     
-      <Input 
+      <DetailedInput 
         id="painDegree"
         value={painDegree > 0 ? painDegree : ''}
         onChange={(value) => {

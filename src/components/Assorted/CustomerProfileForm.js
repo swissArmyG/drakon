@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, CustomerContext } from '../../contexts'
 import { containsMissingFields } from '../../utils/validation'
-import { Input, SingleSelect } from './Inputs'
+import { DetailedInput, SingleSelect } from './Inputs'
 
 export const CustomerProfileForm = () => {
   const { isAuthenticated } = useContext(AuthContext)
@@ -67,7 +67,7 @@ export const CustomerProfileForm = () => {
       </p>
 
       <div className="row">
-        <Input
+        <DetailedInput
           containerClassName="--mr-2p"
           id="firstname"
           inputClassName={`${isInvalid('firstname')}`}
@@ -75,7 +75,7 @@ export const CustomerProfileForm = () => {
           value={customerProfile?.firstname}
           onChange={(value) => onChange({ firstname: value })}
         />
-        <Input
+        <DetailedInput
           id="lastname"
           inputClassName={`${isInvalid('lastname')}`}
           placeholder="Lastname"
@@ -85,7 +85,7 @@ export const CustomerProfileForm = () => {
       </div>
 
       <div className="row">
-        <Input
+        <DetailedInput
           autoComplete={true}
           containerClassName="--mr-2p --mb-50px"
           id="email"
@@ -95,7 +95,7 @@ export const CustomerProfileForm = () => {
           value={customerProfile?.email}
           onChange={(value) => onChange({ email: value })}
         />
-        <Input
+        <DetailedInput
           id="phone"
           label="Phone"
           subLabel="Number Only"

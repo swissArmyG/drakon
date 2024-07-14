@@ -1,4 +1,4 @@
-export const Input = ({
+export const DetailedInput = ({
   autoCompletion=false,
   containerClassName="",
   inputClassName="",
@@ -13,7 +13,7 @@ export const Input = ({
   ...otherAttributes
 }) => {
   return <section 
-    className={`Input ${containerClassName}`}
+    className={`DetailedInput ${containerClassName}`}
     style={{
       width: width
     }}>

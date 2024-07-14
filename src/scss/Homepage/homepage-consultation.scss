@@ -52,12 +52,12 @@
   }
 }
 
-@media screen and (max-width: 430px) {
+@media screen and (max-width: 715px) {
   .HomepageConsultation {
     .--form-container {
       .--header-container {
         align-items: center;
-        width: 98%;
+        width: 70%;
 
         .--header-logo {
           width: 100px;
@@ -67,6 +67,17 @@
         .--header-text {
           width: 300px;
         }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .HomepageConsultation {
+    .--form-container {
+      .--header-container {
+        align-items: center;
+        width: 98%;
       }
     }
   }
