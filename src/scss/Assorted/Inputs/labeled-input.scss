@@ -1,0 +1,33 @@
+.LabeledInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+
+  label {
+    width: 65%;
+    margin: 0 10px 20px 0;
+  }
+
+  .DetailedInput {
+    width: 34%;
+  }
+
+  span {
+    padding-left: 10px;
+    font-style: italic;
+  }
+
+  .--invalid {
+    border: 2px solid $accent-c-color;
+
+    &:focus, &:active {
+      border: 2px solid $accent-c-color;
+    }
+  }
+
+  .--required {
+    color: $accent-c-color;
+  }
+}
