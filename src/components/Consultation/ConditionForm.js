@@ -4,33 +4,23 @@ import {
   multipleSelectOptions 
 } from '../../copies/homepage-form-options'
 import { CustomerContext } from "../../contexts"
-import { InputContainer } from "."
-import { SingleSelect } from "../Assorted/Inputs/SingleSelect"
+import { Input, SingleSelect } from "../Assorted/Inputs"
+import { MultipleSelects } from "../Assorted/Inputs/MultipleSelects"
 
 export const ConditionForm = () => {
   const { 
+    customerProfile,
     singleOption,
     multipleOptions,
+    painDegree,
     selectSingleOption,
-    selectMultipleOptions
+    selectMultipleOptions,
+    setCustomerProfile,
+    setPainDegree
   } = useContext(CustomerContext)
 
   const isSingleSelected = (option) => {
     return singleOption === option ? '--selected' : ''
-  }
-
-  const isMultipleSelected = (option) => {
-    return multipleOptions.includes(option) ? '--selected' : ''
-  }
-
-  const determineMultipleOptions = (option) => {
-    selectMultipleOptions(prevState => {
-      if (isMultipleSelected(option)) {
-        return prevState.filter(op => op!== option)
-      } else {
-        return [...prevState, option]
-      }
-    })
   }
 
   const determineSingleOption = (option) => {
@@ -41,8 +31,82 @@ export const ConditionForm = () => {
     }
   };
 
+  const onChange = (data) => {
+    setCustomerProfile({ ...customerProfile, ...data })
+  }
+
+  const renderAdditionalInputs = () => {
+    return <React.Fragment>
+      <div className="row">
+        <Input
+          containerClassName="--mr-2p"
+          id="age"
+          label="Age"
+          subLabel="Number only"
+          value={customerProfile?.age}
+          onChange={(value) => onChange({ age: value })}
+          type="number"
+        />
+        <Input
+          id="sex"
+          label="Sex"
+          value={customerProfile?.sex}
+          onChange={(value) => onChange({ sex: value })}
+        />
+      </div>
+
+      <div className="row --mb-20px">
+        <Input
+          containerClassName="--mr-2p"
+          id="height"
+          label="Height"
+          subLabel={`Example: 5 Ft. 10 In. or 5'10"`}
+          placeholder={"In Ft. (Feet) and In. (Inches)"}
+          value={customerProfile?.height}
+          onChange={(value) => onChange({ height: value })}
+        />
+        <Input
+          id="weight"
+          label="Weight"
+          subLabel={`Example: 170`}
+          placeholder={"Number only, in Lbs. (Pounds)"}
+          value={customerProfile?.weight}
+          onChange={(value) => onChange({ weight: value })}
+          type="number"
+        />
+      </div>
+    </React.Fragment>
+  }
+
+  const renderPainDegreeInput = () => {
+    return <div className="painDegree">
+      <label htmlFor="painDegree">Rate your overall degree of pain right now from 1-10:</label>
+    
+      <Input 
+        id="painDegree"
+        value={painDegree > 0 ? painDegree : ''}
+        onChange={(value) => {
+          if (value < 1 || !value || value.length === 0) {
+            value = 0
+          }
+
+          if (value > 10) { 
+            value = 10
+          }
+          
+          setPainDegree(value)
+        }}
+        type="number"
+        max="10"
+        min="1"
+      />
+    </div>
+  }
+
   return <section className="ConditionForm">
-     <div className="--options-container">
+    {renderAdditionalInputs()} 
+
+    <div className="--options-container">
       <p><i>Please select <em>one</em> of the following:</i></p>
         {
           Object
@@ -62,23 +126,13 @@ export const ConditionForm = () => {
 
       <div className="--options-container">
         <p><i>-OR- select <em>one or more</em> of the following:</i></p>
-        {
-          Object.keys(multipleSelectOptions).map((option, index) => {
-            return <div key={index} className='--option-container'>
-              <div 
-                className={`--checkbox --button ${isMultipleSelected(option)}`} 
-                onClick={(e) => {
-                  e.preventDefault()
-                  determineMultipleOptions(option)
-                }}/>
-              <p className={`--checkoption ${isMultipleSelected(option)}`}>
-                {multipleSelectOptions[option]}
-              </p>
-            </div>
-          })
-        }
+        <MultipleSelects 
+          options={multipleSelectOptions}
+          selectedOptions={multipleOptions}
+          selectOptions={selectMultipleOptions}
+        />
       </div>
    
-      <InputContainer />
+      {renderPainDegreeInput()}
   </section>
 }

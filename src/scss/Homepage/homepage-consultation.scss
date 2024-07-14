@@ -49,56 +49,6 @@
         text-align: left;
       }
     }
-    
-    .ConditionForm {
-      position: relative;
-      width: 55%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-
-      .--options-container {
-        width: 100%;
-        margin: 40px 0 20px 0;
-
-        label {
-          margin: 40px 0;
-
-          em {
-            font-family: "Cantarell-BoldItalic", sans-serif;
-          }
-        }
-      }
-    }
-
-    .PaneControls {
-      display: flex;
-      flex-direction: row;
-    }
-
-    .InputContainer {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      width: 100%;
-      margin-top: 40px;
-
-      label {
-        margin-right: 10px;
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .HomepageConsultation {
-    .--form-container {
-      .InputContainer {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-    }
   }
 }
 

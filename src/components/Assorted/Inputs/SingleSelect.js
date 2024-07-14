@@ -1,6 +1,6 @@
 export const SingleSelect = ({ 
   index=0, 
-  isSelected, 
+  isSelected=false,
   option,
   selectOption
 }) => {

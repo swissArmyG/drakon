@@ -1,40 +1,15 @@
 .CustomerProfileForm {
   padding: 0 12px;
-  min-width: 70%;
-
-  .row {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-  }
-
-  .--input-container {
-    width: 49%;
-  }
-
+  width: 50%;
+  
   .--login-nav {
     margin: 0;
     padding: 40px 40px 40px 0px;
   }
+}
 
-  input {
-    width: calc(100% - 25px);
-  }
-
-  span {
-    padding-left: 10px;
-    font-style: italic;
-  }
-
-  .--invalid {
-    border: 2px solid $accent-c-color;
-
-    &:focus, &:active {
-      border: 2px solid $accent-c-color;
-    }
-  }
-
-  .--required {
-    color: $accent-c-color;
+@media screen and (max-width: 800px) {
+  .CustomerProfileForm {
+    width: 90%;
   }
 }

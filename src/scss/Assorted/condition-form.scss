@@ -1,0 +1,42 @@
+.ConditionForm {
+  position: relative;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .--options-container {
+    width: 100%;
+    margin: 20px 0;
+
+    label {
+      margin: 40px 0;
+
+      em {
+        font-family: "Cantarell-BoldItalic", sans-serif;
+      }
+    }
+  }
+
+  .painDegree {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    margin-top: 40px;
+
+    label {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .ConditionForm {
+    .painDeegree {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}

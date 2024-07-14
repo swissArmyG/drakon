@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, CustomerContext } from '../../contexts'
 import { containsMissingFields } from '../../utils/validation'
-import { SingleSelect } from './Inputs/SingleSelect'
+import { Input, SingleSelect } from './Inputs'
 
 export const CustomerProfileForm = () => {
   const { isAuthenticated } = useContext(AuthContext)
@@ -67,57 +67,50 @@ export const CustomerProfileForm = () => {
       </p>
 
       <div className="row">
-        <div className="--input-container --mr-2p">
-          <input type="text"
-            id="firstname"
-            placeholder="Firstname"
-            className={`${isInvalid('firstname')}`}
-            value={customerProfile?.firstname || ""}
-            onChange={({ target: { value }}) => onChange({ firstname: value })}
-          />
-        </div>
-        <div className="--input-container">
-          <input type="text"
-            id="lastname"
-            placeholder="Lastname"
-            className={`${isInvalid('lastname')}`}
-            value={customerProfile?.lastname || ""}
-            onChange={({ target: { value }}) => { 
-              onChange({ lastname: value })
-            }}
-          />
-        </div>
+        <Input
+          containerClassName="--mr-2p"
+          id="firstname"
+          inputClassName={`${isInvalid('firstname')}`}
+          placeholder="Firstname"
+          value={customerProfile?.firstname}
+          onChange={(value) => onChange({ firstname: value })}
+        />
+        <Input
+          id="lastname"
+          inputClassName={`${isInvalid('lastname')}`}
+          placeholder="Lastname"
+          value={customerProfile?.lastname}
+          onChange={(value) => onChange({ lastname: value })}
+        />
       </div>
 
       <div className="row">
-        <div className="--input-container --mr-2p --mb-2">
-          <p><em>Email</em></p>
-          <input type="text"
-            id="email"
-            autoComplete="on"
-            placeholder="Please use a valid email"
-            className={`${isInvalid('email')}`}
-            value={customerProfile?.email || ""}
-            onChange={({ target: { value }}) => onChange({ email: value })}
-          />
-        </div>
-        <div className="--input-container">
-          <p><em>Phone</em><span>Number Only</span></p>
-          <input type="number"
-            id="phone"
-            placeholder="No dash (-) or dot (.) required"
-            className={`${isInvalid('phoneNumber')}`}
-            value={customerProfile?.phoneNumber || ""}
-            onChange={({ target: { value }}) => onChange({ phoneNumber: value })} 
-          />
-        </div>
+        <Input
+          autoComplete={true}
+          containerClassName="--mr-2p --mb-50px"
+          id="email"
+          inputClassName={`${isInvalid('email')}`}
+          label="Email"
+          placeholder="Please use a valid email"
+          value={customerProfile?.email}
+          onChange={(value) => onChange({ email: value })}
+        />
+        <Input
+          id="phone"
+          label="Phone"
+          subLabel="Number Only"
+          placeholder="No dash (-) or dot (.) required"
+          inputClassName={`${isInvalid('phoneNumber')}`}
+          value={customerProfile?.phoneNumber}
+          onChange={(value) => onChange({ phoneNumber: value })}
+        />
       </div>
 
       <SingleSelect 
         isSelected={customerProfile?.isConsented || false}
         option={"By checking this box, you acknowledge that the information provided is accurate and complete to the best of your ability. You consent to the terms and conditions of POMS, its affiliates and partners"}
         selectOption={() => {
-          onChange({ isConsented: !customerProfile.isConsented })
+          onChange({ isConsented: !customerProfile?.isConsented })
         }}
       />
     </section>

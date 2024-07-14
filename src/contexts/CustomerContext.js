@@ -43,14 +43,24 @@ const CustomerProvider = ({ children }) => {
   }, [multipleOptions, singleSelectOption])
 
   useEffect(() => {
-    const firstStepCompleted = !!painDegree && (
+    const { 
+      firstname = '', lastname = '', 
+      email = '', phoneNumber = '', 
+      isConsented = false 
+    } = customerProfile || {};
+
+    const firstStepCompleted = firstname && lastname && email && phoneNumber && isConsented
+
+    const { 
+      age = '', sex = '', 
+      height = '', weight = '' 
+    } = customerProfile || {}
+
+    const secondStepCompleted = painDegree && age && sex && height && weight && (
       !!singleOption 
         ? multipleOptions.concat(singleOption).length >= 1 
         : multipleOptions.length >= 1
     )
-
-    const { firstname = '', lastname = '', email = '', phoneNumber = '', isConsented = false } = customerProfile || {};
-    const secondStepCompleted = firstname && lastname && email && phoneNumber && isConsented
 
     let stepsCompleted = INCOMPLETE;
 

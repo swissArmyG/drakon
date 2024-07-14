@@ -11,7 +11,8 @@ import { AuthContext, NotificationContext, CustomerContext } from "../../context
 export const PANE_VARIABLES = {
   INCOMPLETE: 0,
   FIRST_PANE: 1,
-  LAST_PANE: 2,
+  SECOND_PANE: 2,
+  LAST_PANE: 3,
 }
 
 export const PaneControls = ({ windowWidth }) => {
