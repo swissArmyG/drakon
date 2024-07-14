@@ -49,8 +49,8 @@ const CustomerProvider = ({ children }) => {
         : multipleOptions.length >= 1
     )
 
-    const { firstname = '', lastname = '', email = '', phoneNumber = '' } = customerProfile || {};
-    const secondStepCompleted = firstname && lastname && email && phoneNumber 
+    const { firstname = '', lastname = '', email = '', phoneNumber = '', isConsented = false } = customerProfile || {};
+    const secondStepCompleted = firstname && lastname && email && phoneNumber && isConsented
 
     let stepsCompleted = INCOMPLETE;
 

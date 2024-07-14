@@ -5,6 +5,7 @@ import {
 } from '../../copies/homepage-form-options'
 import { CustomerContext } from "../../contexts"
 import { InputContainer } from "."
+import { SingleSelect } from "../Assorted/Inputs/SingleSelect"
 
 export const ConditionForm = () => {
   const { 
@@ -42,21 +43,20 @@ export const ConditionForm = () => {
 
   return <section className="ConditionForm">
      <div className="--options-container">
-        <p><i>Please select <em>one</em> of the following:</i></p>
+      <p><i>Please select <em>one</em> of the following:</i></p>
         {
-          Object.keys(singleSelectOption).map((option, index) => {
-            return <div key={index} className='--option-container'>
-              <div 
-                className={`--checkbox --button ${isSingleSelected(option)}`} 
-                onClick={(e) => {
-                  e.preventDefault()
-                  selectSingleOption(determineSingleOption(option))
-                }}/>
-              <p className={`--checkoption ${isSingleSelected(option)}`}>
-                {singleSelectOption[option]}
-              </p>
-            </div>
-          })
+          Object
+            .keys(singleSelectOption)
+            .map((option, index) => {
+              const _option = determineSingleOption(option)
+              return <SingleSelect 
+                index={index}
+                isSelected={isSingleSelected(option)}
+                option={singleSelectOption[option]}
+                selectOption={() => selectSingleOption(_option)}
+              />
+            }
+          )
         }
       </div>
 

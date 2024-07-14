@@ -45,8 +45,8 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
       <div className="--background-overlay" />
         <div className="--form-container">
           {renderHeader()}
-          {pane === FIRST_PANE && <ConditionForm />}
-          {pane === LAST_PANE && <CustomerProfileForm />}
+          {pane === FIRST_PANE && <CustomerProfileForm />}
+          {pane === LAST_PANE && <ConditionForm />}
           <ProgressBar 
             steps={2} 
             stepsCompleted={stepsCompleted}

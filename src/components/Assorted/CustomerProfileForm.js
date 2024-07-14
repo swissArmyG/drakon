@@ -3,6 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, CustomerContext } from '../../contexts'
 import { containsMissingFields } from '../../utils/validation'
+import { SingleSelect } from './Inputs/SingleSelect'
 
 export const CustomerProfileForm = () => {
   const { isAuthenticated } = useContext(AuthContext)
@@ -66,7 +67,7 @@ export const CustomerProfileForm = () => {
       </p>
 
       <div className="row">
-        <div className="--input-container --mr-2">
+        <div className="--input-container --mr-2p">
           <input type="text"
             id="firstname"
             placeholder="Firstname"
@@ -88,17 +89,8 @@ export const CustomerProfileForm = () => {
         </div>
       </div>
 
-      <div className="--address-input-container">
-        <p><em>Address</em><span>Optional</span></p>
-        <input type="text"
-          id="address"
-          value={customerProfile?.address || ""}
-          onChange={({ target: { value }}) => onChange({ address: value })}
-        />
-      </div>
-
       <div className="row">
-        <div className="--input-container --mr-2">
+        <div className="--input-container --mr-2p --mb-2">
           <p><em>Email</em></p>
           <input type="text"
             id="email"
@@ -120,6 +112,14 @@ export const CustomerProfileForm = () => {
           />
         </div>
       </div>
+
+      <SingleSelect 
+        isSelected={customerProfile?.isConsented || false}
+        option={"By checking this box, you acknowledge that the information provided is accurate and complete to the best of your ability. You consent to the terms and conditions of POMS, its affiliates and partners"}
+        selectOption={() => {
+          onChange({ isConsented: !customerProfile.isConsented })
+        }}
+      />
     </section>
   )
 }

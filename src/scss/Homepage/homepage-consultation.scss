@@ -68,35 +68,6 @@
             font-family: "Cantarell-BoldItalic", sans-serif;
           }
         }
-    
-        .--option-container {
-          display: flex;
-          flex-direction: row;
-          justify-content: flex-start;
-          align-items: center;
-          
-          .--checkbox {
-            width: 23px;
-            height: 23px;
-            min-width: 23px;
-            max-width: 23px;
-            margin-right: 10px;
-            border-radius: 25%;
-            background-color: $accent-a-color;
-  
-            &.--selected {
-              background-color: $secondary-color;
-            }
-          }
-  
-          .--checkoption {
-            margin: 5px 0;
-
-            &.--selected {
-              color: $secondary-color;
-            }
-          }
-        }
       }
     }
 
