@@ -107,9 +107,7 @@ export const ConditionForm = () => {
       <LabeledInput 
         id="painDuration"
         label="How long have you been experiencing pain"
-        onChange={(value) => {
-          onChange({ ...customerProfile, painDuration: value })
-        }}
+        onChange={(value) => onChange({ painDuration: value })}
         value={customerProfile?.painDuration}
       />
     </React.Fragment>

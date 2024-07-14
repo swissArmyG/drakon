@@ -7,7 +7,7 @@ export const LabeledInput = ({
   onChange,
   placeholder="",
   type="text",
-  value,
+  value="",
   ...otherAttributes
 }) => {
   return (

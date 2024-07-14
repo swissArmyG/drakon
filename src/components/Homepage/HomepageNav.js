@@ -79,7 +79,7 @@ export const HomepageNav = forwardRef((props, refs) => {
       <div className="--nav-options">
         {
           Object.keys(navOptions).map((op, idx) => {
-            const isFocused = op === 'login' && (isLoginModal ? '--focused' : '')
+            const isFocused = (op === 'login' && isLoginModal) ? '--focused' : ''
 
             return <React.Fragment key={idx}>
               <Link

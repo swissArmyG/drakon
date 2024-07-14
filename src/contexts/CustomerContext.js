@@ -53,10 +53,11 @@ const CustomerProvider = ({ children }) => {
 
     const { 
       age = '', sex = '', 
-      height = '', weight = '' 
+      height = '', weight = '',
+      painDuration = ''
     } = customerProfile || {}
 
-    const secondStepCompleted = painDegree && age && sex && height && weight && (
+    const secondStepCompleted = painDegree && age && sex && height && weight && painDuration && (
       !!singleOption 
         ? multipleOptions.concat(singleOption).length >= 1 
         : multipleOptions.length >= 1

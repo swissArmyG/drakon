@@ -12,7 +12,10 @@ export const PANE_VARIABLES = {
   INCOMPLETE: 0,
   FIRST_PANE: 1,
   SECOND_PANE: 2,
-  LAST_PANE: 6,
+  THIRD_PANE: 3,
+  FORTH_PANE: 4,
+  FIFTH_PANE: 5,
+  LAST_PANE: 6
 }
 
 export const PaneControls = ({ windowWidth }) => {
@@ -169,11 +172,11 @@ export const PaneControls = ({ windowWidth }) => {
   const isFirstPane = pane === FIRST_PANE
   const isLastPane = pane === LAST_PANE
 
-  const isNextable = stepsCompleted >= FIRST_PANE
-  const isSubmittable = isLastPane && stepsCompleted === LAST_PANE 
+  const isNextable = stepsCompleted >= pane
+  const isSubmittable = isLastPane && stepsCompleted === LAST_PANE
 
   let isDisabled = false;
-  if (isFirstPane) {
+  if (pane < LAST_PANE) {
     isDisabled = !isNextable
   } else if (isLastPane) {
     isDisabled = !isSubmittable

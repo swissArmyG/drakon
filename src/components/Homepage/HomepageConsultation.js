@@ -1,12 +1,12 @@
 import React, { useState, useEffect, forwardRef, useContext } from "react"
 import { CustomerProfileForm, ProgressBar } from "../Assorted"
 import { CustomerContext } from "../../contexts"
-import { ConditionForm, PaneControls } from "../Consultation"
+import { AdditionalQuestionsForm, ConditionForm, PaneControls } from "../Consultation"
 import { PANE_VARIABLES } from "../Consultation"
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 
 export const HomepageConsultation = forwardRef((_props, ref) => {
-  const { FIRST_PANE, SECOND_PANE, LAST_PANE } = PANE_VARIABLES
+  const { FIRST_PANE, SECOND_PANE, THIRD_PANE, LAST_PANE } = PANE_VARIABLES
   const {
     pane,
     stepsCompleted
@@ -54,6 +54,7 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
           {renderHeader()}
           {pane === FIRST_PANE && <CustomerProfileForm />}
           {pane === SECOND_PANE && <ConditionForm />}
+          {pane === THIRD_PANE && <AdditionalQuestionsForm />}
           <ProgressBar 
             steps={LAST_PANE} 
             stepsCompleted={stepsCompleted}

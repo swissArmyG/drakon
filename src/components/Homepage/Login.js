@@ -86,7 +86,7 @@ export const Login = ({ isOpen, toggleOpen }) => {
       />
 
       {
-      loginPayload.email && 
+        loginPayload.email && 
         <span className={`--button --button-text ${isForgettingPassword ? 'isDisabled' : ''}`}
           onClick={onForgotPassword}>
           Forgot your password ?
