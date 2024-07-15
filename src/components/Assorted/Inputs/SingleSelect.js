@@ -6,8 +6,8 @@ export const SingleSelect = ({
 }) => {
   const selected = isSelected ? '--selected' : ''
 
-  return <section className="SingleSelect">
-    <div key={index} className='--option-container'>
+  return <section key={index} className="SingleSelect">
+    <div className='--option-container'>
       <div 
         className={`--checkbox --button ${selected}`} 
         onClick={(e) => {

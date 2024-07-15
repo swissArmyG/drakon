@@ -1,36 +1,43 @@
 export const MultipleSelects = ({
+  className="",
   options,
-  selectedOptions,
+  selectedOptions=[],
   selectOptions,
 }) => {
 
-  const isMultipleSelected = (option) => {
-    return selectedOptions.includes(option) ? '--selected' : ''
-  }
+  const optionsArray = Array.isArray(options) 
+    ? options 
+    : Object.keys(options);
 
-  const determineMultipleOptions = (optionCategory) => {
-    selectOptions(prevState => {
-      if (isMultipleSelected(optionCategory)) {
-        return prevState.filter(op => op!== optionCategory)
-      } else {
-        return [...prevState, optionCategory]
-      }
-    })
+  const isSelected = (option) => {
+    return selectedOptions.includes(option) ? '--selected' : '';
+  };
+
+  const determineMultipleOptions = (option) => {
+    if (isSelected(option)) {
+      selectOptions(selectedOptions.filter(op => op !== option))
+    } else {
+      selectOptions([...selectedOptions, option])
+    }
   }
 
   return (
-    <section className="MultipleSelects">
+    <section className={`MultipleSelects ${className}`}>
       {
-        Object.keys(options).map((optionCategory, index) => {
-          return <div key={index} className='--option-container'>
+        optionsArray.map((option, index) => {
+          const label = Array.isArray(options) ? option : options[option];
+          
+          return <div key={index}     
+            className='--option-container'>
             <div 
-              className={`--checkbox --button ${isMultipleSelected(optionCategory)}`} 
+              className={`--checkbox --button ${isSelected(label)}`} 
               onClick={(e) => {
                 e.preventDefault()
-                determineMultipleOptions(optionCategory)
+                determineMultipleOptions(label)
               }}/>
-            <p className={`--checkoption ${isMultipleSelected(optionCategory)}`}>
-              {options[optionCategory]}
+
+            <p className={`--checkoption ${isSelected(label)}`}>
+              {label}
             </p>
           </div>
         })

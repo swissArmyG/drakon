@@ -41,7 +41,7 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
           pane === FIRST_PANE && `Your journey to a healed you begins here… Please begin by answering a few basic questions throughout these brief forms accurately and an associate from POMS will be in touch with you shortly for follow up`
         }
         {
-          pane === SECOND_PANE && `You are almost done! We want to understand your pain better to be able to help you on your journey to relief. Please continue filling out our customer questionnaire to share more about what your body has been telling you. Your insights will guide us in identifying the best steps for your care.`
+          pane > FIRST_PANE && `You are almost done! We want to understand your pain better to be able to help you on your journey to relief. Please continue filling out our customer questionnaire to share more about what your body has been telling you. Your insights will guide us in identifying the best steps for your care.`
         }
       </p>
     </div>

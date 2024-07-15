@@ -1,7 +1,7 @@
 import { DetailedInput } from "./DetailedInput"
 
 export const LabeledInput = ({
-  className,
+  className="",
   id,
   label,
   onChange,

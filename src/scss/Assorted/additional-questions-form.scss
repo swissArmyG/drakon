@@ -1,0 +1,24 @@
+.AdditionalQuestionsForm {
+  width: 100%;
+  
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .SingleSelect {
+    flex-wrap: wrap;
+    width: 169px;
+    margin-right: 10px;
+  }
+
+  .MultipleSelects {
+    &.row {
+      flex-wrap: wrap;
+    }
+
+    .--option-container {
+      width: 169px;
+      margin-right: 10px;
+    }
+  }
+}

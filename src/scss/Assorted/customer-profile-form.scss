@@ -1,15 +1,8 @@
 .CustomerProfileForm {
   padding: 0 12px;
-  width: 50%;
   
   .--login-nav {
     margin: 0;
     padding: 40px 40px 40px 0px;
-  }
-}
-
-@media screen and (max-width: 800px) {
-  .CustomerProfileForm {
-    width: 90%;
   }
 }

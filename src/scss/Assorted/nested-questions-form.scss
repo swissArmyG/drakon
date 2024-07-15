@@ -1,0 +1,20 @@
+.NestedQuestionsForm {
+  padding-left: 3%;
+  
+  .SingleSelect {
+    width: fit-content;
+    margin: 10px;
+  }
+
+  .--left-border {
+    border-left: 2px solid $secondary-color;
+  }
+
+  .LabeledInput {
+    margin-top: 0;
+    // flex-wrap: wrap;
+    label {
+      width: 50%;
+    }
+  }
+}

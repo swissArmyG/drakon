@@ -1,13 +1,15 @@
 .HomepageConsultation {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  flex-direction: flex-start;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 1327px;
+    position: relative;
+    z-index: 1;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    flex-direction: flex-start;
+    align-items: center;
+    justify-content: center;
+    height: 1327px;
+    margin: auto;
+
 
   .--background-overlay {
     position: absolute;
@@ -16,7 +18,7 @@
     background-image: url('../../img/bg/form_overlay.png');
     background-repeat: no-repeat;
     background-size: cover;
-    width: 100%;
+    // width: 100%;
     height: 1236px;
   }
 
@@ -24,7 +26,7 @@
     position: absolute;
     z-index: 100;
     top: 5%;
-    width: 100%;
+    // width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -35,7 +37,7 @@
       flex-direction: row;
       justify-content: flex-start;
       align-items: flex-end;
-      width: 74%;
+      // width: 74%;
       margin-bottom: 20px;
   
       .--header-logo {
@@ -74,10 +76,19 @@
 
 @media screen and (max-width: 430px) {
   .HomepageConsultation {
+    width: 90%;
+
     .--form-container {
       .--header-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
         align-items: center;
         width: 98%;
+
+        .--header-text {
+          width: unset;
+        }
       }
     }
   }

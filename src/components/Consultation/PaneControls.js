@@ -203,7 +203,7 @@ export const PaneControls = ({ windowWidth }) => {
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
             e.preventDefault() 
-            if (isFirstPane && isNextable) {
+            if (isNextable) {
               setPane(pane + 1)
             }
             if (isLastPane && isSubmittable) {

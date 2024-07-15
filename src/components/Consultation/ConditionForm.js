@@ -5,7 +5,7 @@ import {
 } from '../../copies/homepage-form-options'
 import { CustomerContext } from "../../contexts"
 import { DetailedInput, LabeledInput, SingleSelect } from "../Assorted/Inputs"
-import { MultipleSelects } from "../Assorted/Inputs/MultipleSelects"
+import { MultipleSelects } from "../Assorted/Inputs"
 
 export const ConditionForm = () => {
   const { 
@@ -22,6 +22,20 @@ export const ConditionForm = () => {
   const isSingleSelected = (option) => {
     return singleOption === option ? '--selected' : ''
   }
+
+  // const isMultipleSelected = (option) => {
+  //   return multipleOptions.includes(option) ? '--selected' : ''
+  // }
+
+  // const determineMultipleOptions = (optionCategory) => {
+  //   selectMultipleOptions(prevState => {
+  //     if (isMultipleSelected(optionCategory)) {
+  //       return prevState.filter(op => op!== optionCategory)
+  //     } else {
+  //       return [...prevState, optionCategory]
+  //     }
+  //   })
+  // }
 
   const determineSingleOption = (option) => {
     if (singleOption === option) {
@@ -74,14 +88,14 @@ export const ConditionForm = () => {
           onChange={(value) => onChange({ weight: value })}
           type="number"
         />
-      </div>
+    </div>
     </React.Fragment>
   }
 
   const renderPainDegreeInput = () => {
     return <React.Fragment>
       <LabeledInput 
-        className="painDegree"
+        className="painDegree --mb-20px"
         id="painDegree"
         label="Rate your overall degree of pain right now from 1-10:"
         onChange={(value) => {
@@ -106,7 +120,8 @@ export const ConditionForm = () => {
 
       <LabeledInput 
         id="painDuration"
-        label="How long have you been experiencing pain"
+        className="--mb-5px"
+        label="How long have you been experiencing pain?"
         onChange={(value) => onChange({ painDuration: value })}
         value={customerProfile?.painDuration}
       />
@@ -134,9 +149,9 @@ export const ConditionForm = () => {
         }
       </div>
 
-      <div className="--options-container --mb-50px">
+      <div className="--options-container --multiple-selects">
         <p><i>-OR- select <em>one or more</em> of the following:</i></p>
-        <MultipleSelects 
+        <MultipleSelects
           options={multipleSelectOptions}
           selectedOptions={multipleOptions}
           selectOptions={selectMultipleOptions}
