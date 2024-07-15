@@ -6,6 +6,7 @@ import {
   multipleSelectOptions 
 } from '../copies/homepage-form-options'
 import { PANE_VARIABLES } from '../components/Consultation'
+import { additionalQuestions } from '../copies/homepage-form-options'
 
 const CustomerContext = createContext()
 
@@ -13,13 +14,22 @@ const CustomerProvider = ({ children }) => {
   const navigate = useNavigate()
   const scrollToTopRef = useRef()
 
-  const { INCOMPLETE, FIRST_PANE } = PANE_VARIABLES
+  const { 
+    INCOMPLETE, 
+    FIRST_PANE,
+    LAST_PANE
+  } = PANE_VARIABLES
 
   const [ pane, setPane ] = useState(FIRST_PANE)
+
+  const [ formPage, setFormPage ] = useState(1)
+  const [ paginatedQuestions, setPaginatedQuestions ] = useState({})
+
   const [ stepsCompleted, setStepsCompleted ] = useState(INCOMPLETE)
 
   const [ singleOption, selectSingleOption ] = useState('')
   const [ multipleOptions, selectMultipleOptions ] = useState([])
+ 
   const [ painDegree, setPainDegree ] = useState('')
   const [ painDescriptions, setPainDescriptions ] = useState('')
 
@@ -27,6 +37,18 @@ const CustomerProvider = ({ children }) => {
   const [ originalCustomerProfile, setOriginalCustomerProfile] = useState(undefined)
 
   const [ isRegisterClicked, setIsRegisterClicked ] = useState(false)
+
+  useEffect(() => {
+    const pageSize = 5;
+    const startIndex = (formPage - 1) * pageSize;
+    const endIndex = startIndex + pageSize;
+    const newPaginatedQuestions = Object.fromEntries(
+      Object.entries(additionalQuestions)
+            .slice(startIndex, endIndex)
+    );
+
+    setPaginatedQuestions(newPaginatedQuestions)
+  }, [formPage]);
 
   useEffect(() => {
     const _painDescriptions = [
@@ -63,14 +85,17 @@ const CustomerProvider = ({ children }) => {
         : multipleOptions.length >= 1
     )
 
-    let stepsCompleted = INCOMPLETE;
+    // TODO: PUT BACK ONCE DONE TESTING
+    // let stepsCompleted = INCOMPLETE;
 
-    if (firstStepCompleted || secondStepCompleted) {
-      stepsCompleted = 1;
-    }
-    if (firstStepCompleted && secondStepCompleted) {
-      stepsCompleted = 2;
-    }
+    // if (firstStepCompleted || secondStepCompleted) {
+    //   stepsCompleted = 1;
+    // }
+    // if (firstStepCompleted && secondStepCompleted) {
+    //   stepsCompleted = 2;
+    // }
+
+    let stepsCompleted = LAST_PANE
     
     setStepsCompleted(stepsCompleted)
   }, [singleOption, multipleOptions, painDegree, customerProfile])
@@ -90,15 +115,17 @@ const CustomerProvider = ({ children }) => {
 
   return (
     <CustomerContext.Provider value={{
+      customerProfile,
+      formPage,
       isRegisterClicked,
-      singleOption,
       multipleOptions,
       originalCustomerProfile,
+      paginatedQuestions,
+      pane,
       painDescriptions,
       painDegree,
-      customerProfile,
-      pane,
       resetForm,
+      setFormPage,
       scrollToTopRef,
       stepsCompleted,
       selectSingleOption,

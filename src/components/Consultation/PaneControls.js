@@ -19,13 +19,19 @@ export const PANE_VARIABLES = {
 }
 
 export const PaneControls = ({ windowWidth }) => {
-  const { FIRST_PANE, LAST_PANE } = PANE_VARIABLES
+  const { 
+    FIRST_PANE,
+    THIRD_PANE, 
+    LAST_PANE 
+  } = PANE_VARIABLES
 
   const navigate = useNavigate()
 
   const { userData } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const { 
+    formPage,
+    setFormPage,
     isRegisterClicked,
     originalCustomerProfile,
     painDescriptions,
@@ -191,7 +197,13 @@ export const PaneControls = ({ windowWidth }) => {
           buttonTextPosition={buttonTextPosition}
           onClick={(e) => {
             e.preventDefault()
-            pane > FIRST_PANE && setPane(pane - 1)          
+            if (pane > FIRST_PANE) {
+              setPane(pane - 1)
+            }        
+            
+            if (pane >= THIRD_PANE) {
+              setFormPage(formPage <= 1 ? 1 : formPage - 1)
+            }
           }}
           isDisabled={pane === FIRST_PANE}
           width={buttonWidth}
@@ -206,6 +218,11 @@ export const PaneControls = ({ windowWidth }) => {
             if (isNextable) {
               setPane(pane + 1)
             }
+
+            if (pane >= THIRD_PANE) {
+              setFormPage(formPage + 1)
+            }
+
             if (isLastPane && isSubmittable) {
               determineSubmitButtonFunc()
             }

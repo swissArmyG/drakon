@@ -23,20 +23,6 @@ export const ConditionForm = () => {
     return singleOption === option ? '--selected' : ''
   }
 
-  // const isMultipleSelected = (option) => {
-  //   return multipleOptions.includes(option) ? '--selected' : ''
-  // }
-
-  // const determineMultipleOptions = (optionCategory) => {
-  //   selectMultipleOptions(prevState => {
-  //     if (isMultipleSelected(optionCategory)) {
-  //       return prevState.filter(op => op!== optionCategory)
-  //     } else {
-  //       return [...prevState, optionCategory]
-  //     }
-  //   })
-  // }
-
   const determineSingleOption = (option) => {
     if (singleOption === option) {
       return '';

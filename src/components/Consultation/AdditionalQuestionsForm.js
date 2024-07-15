@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext } from 'react'
 import { 
   SingleSelect, 
@@ -5,10 +6,7 @@ import {
   LabeledInput 
 } from "../Assorted/Inputs"
 import { NestedQuestionsForm } from './NestedQuestionsForm'
-import { 
-  additionalQuestions, 
-  SELECT_TYPE_VARIABLES 
-} from '../../copies/homepage-form-options'
+import { SELECT_TYPE_VARIABLES } from '../../copies/homepage-form-options'
 import { CustomerContext } from '../../contexts'
 
 export const AdditionalQuestionsForm = () => {
@@ -16,6 +14,7 @@ export const AdditionalQuestionsForm = () => {
 
   const { 
     customerProfile,
+    paginatedQuestions,
     setCustomerProfile 
   } = useContext(CustomerContext)
 
@@ -93,17 +92,15 @@ export const AdditionalQuestionsForm = () => {
     }
   }
 
-  console.log(customerProfile)
-
   return <section className="AdditionalQuestionsForm">
     {
       Object
-        .keys(additionalQuestions)
-        .map((key, index) => {
-          const entry = additionalQuestions[key]
-          const { attribute, ifYes, question, type } = entry
+      .keys(paginatedQuestions)
+      .map((key, index) => {
+        const entry = paginatedQuestions[key]
+        const { attribute, ifYes, question, type } = entry
 
-          const _ifYes = ifYes && customerProfile?.[attribute]?.answer === "Yes"
+        const _ifYes = ifYes && customerProfile?.[attribute]?.answer === "Yes"
           
           return <React.Fragment key={index}>
             {(type === SINGLE_SELECT 
@@ -123,7 +120,7 @@ export const AdditionalQuestionsForm = () => {
               />
             }
           </React.Fragment>
-        })
+      })
     }
   </section>
 }

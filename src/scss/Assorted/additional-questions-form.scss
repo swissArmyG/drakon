@@ -3,6 +3,10 @@
   
   .row {
     flex-wrap: wrap;
+
+    .LabeledInput {
+      margin: 20px 0;
+    }
   }
 
   .SingleSelect {

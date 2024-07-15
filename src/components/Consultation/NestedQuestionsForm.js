@@ -12,7 +12,10 @@ export const NestedQuestionsForm = ({
   onChange
 }) => {
   const { customerProfile } = useContext(CustomerContext)
-  const { MULTI_SELECT, TEXT_INPUT } = SELECT_TYPE_VARIABLES
+  const { 
+    MULTI_SELECT, 
+    TEXT_INPUT 
+  } = SELECT_TYPE_VARIABLES
 
   const onAdditionalMultiSelect = (options) => {
     const entry = customerProfile?.[attribute]

@@ -11,6 +11,7 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
     pane,
     stepsCompleted
   } = useContext(CustomerContext)
+
   const [ isMobileDevice, setIsMobileDevice ] = useState(false)
   const [ windowSize, setWindowSize ] = useState({
     width: window.innerWidth,
@@ -54,7 +55,7 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
           {renderHeader()}
           {pane === FIRST_PANE && <CustomerProfileForm />}
           {pane === SECOND_PANE && <ConditionForm />}
-          {pane === THIRD_PANE && <AdditionalQuestionsForm />}
+          {pane >= THIRD_PANE && <AdditionalQuestionsForm />}
           <ProgressBar 
             steps={LAST_PANE} 
             stepsCompleted={stepsCompleted}
