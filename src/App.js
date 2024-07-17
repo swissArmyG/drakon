@@ -4,10 +4,12 @@ import { Homepage } from './components/Homepage'
 import {
   ConfirmEmailChange,
   Notification, 
-  PasswordReset,
-  CustomerLogin, 
-  CustomerRegister
+  PasswordReset
 } from './components/Assorted'
+import {
+  CustomerLogin,
+  CustomerRegister
+} from './components/Customer'
 
 const App = () => {
   const location = useLocation()

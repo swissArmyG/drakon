@@ -5,4 +5,8 @@
     margin: 0;
     padding: 40px 40px 40px 0px;
   }
+
+  .--required, i {
+    color: $accent-c-color;
+  }
 }

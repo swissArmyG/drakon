@@ -83,7 +83,6 @@ export const HomepageNav = forwardRef((props, refs) => {
 
             return <React.Fragment key={idx}>
               <Link
-                key={idx}
                 to={`${navOptions[op].linkTo}`}
                 onClick={navOptions[op].onClick}>
                 <h4 className={`--nav-option --button ${isFocused}`}>

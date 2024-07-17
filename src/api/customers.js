@@ -1,15 +1,29 @@
 import { Axios } from './axios'
 
 export const createCustomer = async(payload) => {
+  const {
+    firstname,
+    lastname,
+    acutePainType,
+    painDegree,
+    painDuration,
+    painSummary,
+    email,
+    phoneNumber,
+    password = undefined
+  } = payload
+
+
   const { data } = await Axios.post('/patients/create', {
-    firstname: payload.firstname,
-    lastname: payload.lastname,
-    pain_description: payload.pain_description,
-    pain_degree: payload.pain_degree,
-    address: payload.address,
-    email: payload.email,
-    phone_number: parseInt(payload.phone_number),
-    password: payload?.password
+    firstname,
+    lastname,
+    acutePainType,
+    painDegree,
+    painDuration,
+    painSummary,
+    email,
+    phone_number: parseInt(phoneNumber),
+    password
   })
   return data
 }

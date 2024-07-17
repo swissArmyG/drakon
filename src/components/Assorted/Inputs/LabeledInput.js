@@ -3,6 +3,7 @@ import { DetailedInput } from "./DetailedInput"
 export const LabeledInput = ({
   className="",
   id,
+  index=0,
   label,
   onChange,
   placeholder="",
@@ -11,11 +12,11 @@ export const LabeledInput = ({
   ...otherAttributes
 }) => {
   return (
-    <section className={`LabeledInput ${className}`}>
+    <section className={`LabeledInput ${className}`} index={index}>
       <label htmlFor={id}>{label}</label>
       <DetailedInput 
         {...otherAttributes}
-        id="painDegree"
+        id={id}
         value={value}
         placeholder={placeholder}
         onChange={onChange}

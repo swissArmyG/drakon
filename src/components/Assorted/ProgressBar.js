@@ -1,6 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { CustomerContext } from '../../contexts';
+import { PANE_VARIABLES } from '../Consultation';
 
 export const ProgressBar = ({ steps, stepsCompleted }) => {
+  const { pane } = useContext(CustomerContext)
+
   const mappedArr = Array.from({ length: steps }, (_, index) => {
     const stepCount = index + 1;
     const isCompleted = (stepCount <= stepsCompleted) ? `isCompleted-${stepCount}` : '';
@@ -18,5 +22,8 @@ export const ProgressBar = ({ steps, stepsCompleted }) => {
     );
   });
 
-  return <div className="ProgressBar">{mappedArr}</div>;
+  return <React.Fragment>
+    <div className="ProgressBar">{mappedArr}</div>
+    <span className="--pagination">{`Page ${pane} of ${PANE_VARIABLES.LAST_PANE}`}</span>
+  </React.Fragment>
 };

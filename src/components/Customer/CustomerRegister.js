@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { CredentialForm } from './CredentialForm'
+import { CredentialForm } from '../Assorted'
 import { NotificationContext, CustomerContext } from '../../contexts'
 import { createCustomer } from '../../api/customers'
 
@@ -10,8 +10,6 @@ export const CustomerRegister = () => {
 
   const {
     customerProfile, 
-    painDegree, 
-    painDescriptions,
     resetForm
   } = useContext(CustomerContext)
 
@@ -32,8 +30,8 @@ export const CustomerRegister = () => {
         await createCustomer({
           firstname: customerProfile.firstname,
           lastname: customerProfile.lastname,
-          pain_description: painDescriptions,
-          pain_degree: painDegree,
+          acutePainType: customerProfile.acutePainType,
+          painSummary: customerProfile.painSummary,
           address: customerProfile.address,
           email: customerProfile.email,
           phone_number: customerProfile.phoneNumber,

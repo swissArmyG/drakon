@@ -1,7 +1,5 @@
 export { ConfirmEmailChange } from './ConfirmEmailChange'
-export { CustomerLogin } from './CustomerLogin'
-export { CustomerProfileForm } from './CustomerProfileForm'
-export { CustomerRegister } from './CustomerRegister'
+export { CredentialForm } from './CredentialForm'
 export { Notification } from './Notification' 
 export { PasswordReset } from './PasswordReset'
 export { ProgressBar } from './ProgressBar'

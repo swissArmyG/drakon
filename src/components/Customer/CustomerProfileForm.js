@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext, CustomerContext } from '../../contexts'
 import { containsMissingFields } from '../../utils/validation'
-import { DetailedInput, SingleSelect } from './Inputs'
+import { DetailedInput, SingleSelect } from '../Assorted/Inputs'
 
 export const CustomerProfileForm = () => {
   const { isAuthenticated } = useContext(AuthContext)
@@ -58,7 +58,7 @@ export const CustomerProfileForm = () => {
       <p><em>Full Name</em>
        
         {missingFields.length > 0 && 
-          <span className="--required">
+          <span className="--required --ml-10px">
             <i>
               <sup>*</sup>
               Required fields

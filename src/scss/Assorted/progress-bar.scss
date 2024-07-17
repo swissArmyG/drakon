@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   width: 97%;
-  height: 150px;
+  padding: 50px 0;
 
   .--progress-label-container {
     width: 26px;
@@ -23,11 +23,45 @@
     }
 
     &.isCompleted-2 {
+      background-color: $accent-c-color;
+    }
+
+    &.isCompleted-3 {
+      background-color: $accent-c-color;
+    }
+
+    &.isCompleted-4 {
       background-color: $secondary-color;
+    }
+
+    &.isCompleted-5 {
+      background-color: $secondary-color;
+    }
+
+    &.isCompleted-6 {
+      background-color: $secondary-color;
+    }
+
+    &.isCompleted-7 {
+      background-color: $primary-color;
     }
   }
 
   .--progress-indicator {
     height: 5px;
+  }
+}
+
+.--pagination {
+  margin-bottom: 40px;
+}
+
+@media screen and (max-width: 413px) {
+  .ProgressBar {
+    padding: 10px 0;
+  }
+
+  .--pagination {
+    margin: 0px
   }
 }

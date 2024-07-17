@@ -24,17 +24,23 @@ export const AdditionalQuestionsForm = () => {
 
   const renderSingleSelect = ({
     attribute,
+    ifYes,
     index,
     op 
   }) => {
     return <SingleSelect 
-      index={index}
-      isSelected={customerProfile?.[attribute]?.answer === op}
+      key={index}
+      isSelected={customerProfile?.[attribute] === op}
       option={op}
       selectOption={(option) => {
-        onChange({ 
-          [attribute]: { answer: option } 
-        })
+        if (ifYes) {
+          const nestedAttributes = ifYes.options.map(_option => _option.attribute)
+
+          option === 'Yes' 
+            ? onChange({ [attribute]: option })
+            : nestedAttributes.map(attr => delete customerProfile?.[attr])
+        }
+        onChange({ [attribute]: option })
       }}
     />
   }
@@ -46,7 +52,7 @@ export const AdditionalQuestionsForm = () => {
     return <MultipleSelects
       className="row"
       options={options}
-      selectedOptions={customerProfile?.[attribute] || []}
+      selectedOptions={customerProfile?.[attribute]}
       selectOptions={(options) => {
         onChange({ [attribute]: options })
       }}
@@ -61,6 +67,7 @@ export const AdditionalQuestionsForm = () => {
       className="--mb-20px"
       id={attribute}
       label={question}
+      value={customerProfile?.[attribute]}
       onChange={(value) => {
         onChange({ [attribute]: value })
       }}
@@ -72,20 +79,21 @@ export const AdditionalQuestionsForm = () => {
       attribute, 
       options, 
       question, 
+      ifYes=undefined,
       type 
     } = entry
 
     switch (type) {
       case SINGLE_SELECT:
-      return options.map((op, idx)=> {
-        return renderSingleSelect({attribute, idx, op})
+      return options.map((op, index)=> {
+        return renderSingleSelect({attribute, ifYes, index, op})
       })
 
       case MULTI_SELECT:
         return renderMultiSelects({attribute, options})
 
       case TEXT_INPUT:
-        return renderLabeledInput({attribute,question})
+        return renderLabeledInput({attribute, question})
 
       default:
         return;
@@ -94,13 +102,14 @@ export const AdditionalQuestionsForm = () => {
 
   return <section className="AdditionalQuestionsForm">
     {
-      Object
+      paginatedQuestions && Object
       .keys(paginatedQuestions)
       .map((key, index) => {
+
         const entry = paginatedQuestions[key]
         const { attribute, ifYes, question, type } = entry
 
-        const _ifYes = ifYes && customerProfile?.[attribute]?.answer === "Yes"
+        const _ifYes = ifYes && customerProfile?.[attribute] === "Yes"
           
           return <React.Fragment key={index}>
             {(type === SINGLE_SELECT 
@@ -112,10 +121,9 @@ export const AdditionalQuestionsForm = () => {
               {determineInputTypes(entry)}
             </div>
 
-            { 
+            {
               _ifYes && <NestedQuestionsForm 
-                attribute={attribute}
-                nestedQuestions={ifYes}
+                nested={ifYes}
                 onChange={onChange}
               />
             }

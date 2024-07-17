@@ -1,14 +1,3 @@
-export const singleSelectOption = {
-  acute_back: 'Acute pain in lower back but does not extend to legs.',
-  acute_back_to_legs: 'Acute pain in lower back that radiates into the legs.',
-}
-
-export const multipleSelectOptions = {
-  chronic: 'Chronic pain.',
-  spine_accident: 'Spine pain caused by accident.',
-  second_opinion: 'Second opinion from our spine specialists.'
-}
-
 export const SELECT_TYPE_VARIABLES = {
   SINGLE_SELECT: 'single_select',
   MULTI_SELECT: 'multi_select',
@@ -20,6 +9,24 @@ export const {
   MULTI_SELECT, 
   TEXT_INPUT
 } = SELECT_TYPE_VARIABLES
+
+export const firstPageQuestions = {
+  1: {
+    attribute: "acutePainType",
+    options: [
+      "Acute pain in the lower back but does not extend to legs.",
+      "Acute pain in the lower back that radiates into the legs"
+    ],
+  },
+  2: {
+    attribute: "painSummary",
+    options: [
+      "Chronic pain.",
+      "Spine pain caused by accident.",
+      "Second opion from our spine specialists."
+    ]
+  }
+}
 
 export const additionalQuestions = {
   1: {
@@ -80,25 +87,23 @@ export const additionalQuestions = {
       "Yes",
       "No"
     ],
-    ifYes: [
-      {
-        type: TEXT_INPUT,
-        options: [
-          { 
-            question: "Procedure offered/Recommended?",
-            attribute: "offeredProcedure"
-          },
-          {
-            question: "What surgeon has offered you surgery?",
-            attribute: "offeredBy"
-          },
-          { 
-            question: "Expectation of results discussed?",
-            attribute: "resultsDiscussed"
-          }
-        ]
-      }
-    ],
+    ifYes: {
+      type: TEXT_INPUT,
+      options: [
+        { 
+          question: "Procedure offered/Recommended?",
+          attribute: "offeredProcedure"
+        },
+        {
+          question: "What surgeon has offered you surgery?",
+          attribute: "offeredBy"
+        },
+        { 
+          question: "Expectation of results discussed?",
+          attribute: "resultsDiscussed"
+        }
+      ]
+    },    
     type: SINGLE_SELECT
   },
   7: {
@@ -118,26 +123,24 @@ export const additionalQuestions = {
       "Yes",
       "No"
     ],
-    ifYes: [
-      {
-        question: "If yes",
-        type: TEXT_INPUT,
-        options: [
-          {
-            question: "What procedure was performed",
-            attribute: "surgeryType"
-          },
-          {
-            question: "When was procedure performed",
-            attribute: "surgeryDateTime"
-          },
-          {
-            question: "Who performed the procedure",
-            attribute: "surgeon"
-          }
-        ]
-      }
-    ],
+    ifYes: {
+      question: "If yes",
+      type: TEXT_INPUT,
+      options: [
+        {
+          question: "What procedure was performed",
+          attribute: "surgeryType"
+        },
+        {
+          question: "When was procedure performed",
+          attribute: "surgeryDateTime"
+        },
+        {
+          question: "Who performed the procedure",
+          attribute: "surgeon"
+        }
+      ]
+    },
     type: SINGLE_SELECT
   },
   9: {
@@ -225,7 +228,7 @@ export const additionalQuestions = {
       "Yes",
       "No"
     ],
-    type: MULTI_SELECT
+    type: SINGLE_SELECT
   },
   18: {
     question: "Have you seen a pain management physician for your pain?",
@@ -243,17 +246,16 @@ export const additionalQuestions = {
       "Yes",
       "No"
     ],
-    ifYes: [
-      {
-        label: "If yes, what type of injections have you had in the past?",
-        type: MULTI_SELECT,
-        options: [
-          "Epidural injections (Level/side)",
-          "Interlaminar/Transforaminal",
-          "Facet injections (Level/side)"
-        ]
-      }
-    ],
+    ifYes: {
+      label: "If yes, what type of injections have you had in the past?",
+      type: MULTI_SELECT,
+      attribute: "injectionTypes",
+      options: [
+        "Epidural injections (Level/side)",
+        "Interlaminar/Transforaminal",
+        "Facet injections (Level/side)"
+      ],
+    },
     type: SINGLE_SELECT
   },
   20: {
@@ -263,21 +265,19 @@ export const additionalQuestions = {
       "Yes",
       "No"
     ],
-    ifYes: [
-      {
-        type: TEXT_INPUT,
-        options: [
-          {
-            question: "Specifically which injections helped?",
-            attribute: "helpfulInjections"
-          },
-          {
-            question: "How long did you get relief from this injection?",
-            attribute: "injectionReliefDurations"
-          }
-        ]
-      }
-    ],
+    ifYes: {
+      type: TEXT_INPUT,
+      options: [
+        {
+          question: "Specifically which injections helped?",
+          attribute: "helpfulInjections"
+        },
+        {
+          question: "How long did you get relief from this injection?",
+          attribute: "injectionReliefDuration"
+        }
+      ]
+    },
     type: SINGLE_SELECT
   },
   21: {

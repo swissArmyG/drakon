@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { CredentialForm } from './CredentialForm'
+import { CredentialForm } from '.'
 import { AuthContext, NotificationContext } from '../../contexts'
 import { 
   renderPasswordReset, 

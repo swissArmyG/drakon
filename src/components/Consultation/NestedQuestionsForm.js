@@ -7,73 +7,49 @@ import { CustomerContext } from '../../contexts'
 import { SELECT_TYPE_VARIABLES } from '../../copies/homepage-form-options'
 
 export const NestedQuestionsForm = ({
-  attribute,
-  nestedQuestions,
+  nested=undefined,
   onChange
 }) => {
   const { customerProfile } = useContext(CustomerContext)
   const { 
     MULTI_SELECT, 
     TEXT_INPUT 
-  } = SELECT_TYPE_VARIABLES
-
-  const onAdditionalMultiSelect = (options) => {
-    const entry = customerProfile?.[attribute]
-
-    onChange({
-      [attribute]: {
-        ...entry,
-        addition: options
-      }
-   })
-  }
-
-  const onAdditionalChange = ({ newAttribute, value}) => {
-    onChange({ [newAttribute]: value })
-  }
+  } = SELECT_TYPE_VARIABLES 
 
   return (
     <section className="NestedQuestionsForm">
-      { nestedQuestions.map((entry, index) => {
-        const { type, options } = entry
-        
-        return <React.Fragment key={index}>
-          <div className="--left-border --mb-50px">
-            {
-              type === MULTI_SELECT
-              && <MultipleSelects 
-                className="--ml-10px"
-                options={options}
-                selectedOptions={customerProfile?.[attribute]?.addition}
-                selectOptions={(options) => {
-                  onAdditionalMultiSelect(options)
-                }}
-              />
-            }
+      <div className="--left-border --mb-50px">
+        {
+          nested.type === MULTI_SELECT
+          && <MultipleSelects
+            className="--ml-10px"
+            options={nested.options}
+            selectedOptions={customerProfile?.[nested.attribute]}
+            selectOptions={(options) => {
+              onChange({ [nested.attribute]: options })
+            }}
+          />
+        }
 
-            {
-              type === TEXT_INPUT
-              && options.map(option => {
-                const _attribute = option.attribute
+        {
+          nested.type === TEXT_INPUT
+          && nested.options.map((option, index) => {
+            const { attribute } = option                
 
-                return <LabeledInput
-                  className="--ml-10px --mb-5px"
-                  id={_attribute}
-                  label={option.question}
-                  value={customerProfile?.[_attribute]}
-                  onChange={(value) => {
-                    onAdditionalChange({ 
-                      newAttribute: _attribute,
-                      value
-                    })
-                  }}
-                />
-              })
-            } 
-          </div>
-        </React.Fragment>          
-      })
-    }
+            return <LabeledInput
+              key={index}
+              className="--ml-10px --mb-5px"
+              id={attribute}
+              index={index}
+              label={option.question}
+              value={customerProfile?.[attribute]}
+              onChange={(value) => {
+                onChange({ [attribute]: value })
+              }}
+            />
+          })
+        } 
+      </div>
     </section>
   )
 }

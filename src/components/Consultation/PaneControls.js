@@ -11,17 +11,12 @@ import { AuthContext, NotificationContext, CustomerContext } from "../../context
 export const PANE_VARIABLES = {
   INCOMPLETE: 0,
   FIRST_PANE: 1,
-  SECOND_PANE: 2,
-  THIRD_PANE: 3,
-  FORTH_PANE: 4,
-  FIFTH_PANE: 5,
-  LAST_PANE: 6
+  LAST_PANE: 7
 }
 
 export const PaneControls = ({ windowWidth }) => {
   const { 
     FIRST_PANE,
-    THIRD_PANE, 
     LAST_PANE 
   } = PANE_VARIABLES
 
@@ -30,16 +25,14 @@ export const PaneControls = ({ windowWidth }) => {
   const { userData } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const { 
-    formPage,
-    setFormPage,
     isRegisterClicked,
     originalCustomerProfile,
-    painDescriptions,
-    painDegree,
-    pane,
     customerProfile,
+    formPage,
+    pane,
     resetForm,
     setPane,
+    setFormPage,
     stepsCompleted
   } = useContext(CustomerContext)
 
@@ -99,15 +92,7 @@ export const PaneControls = ({ windowWidth }) => {
 
     if (customerProfile) {
       try {
-        await createCustomer({        
-          firstname: customerProfile.firstname,
-          lastname: customerProfile.lastname,
-          pain_description: painDescriptions,
-          pain_degree: painDegree,
-          address: customerProfile.address,
-          email: customerProfile.email,
-          phone_number: customerProfile.phoneNumber
-        })
+        await createCustomer(customerProfile)
   
         setNotification({ 
           type: 'success', 
@@ -155,9 +140,9 @@ export const PaneControls = ({ windowWidth }) => {
 
   const determineSubmitButtonFunc = () => {
     if (userData) {
-    // CONFIRMATION REQUIRED: if the user account already exists
-      // USE OLD EMAIL: update changed fields w old email
-      // USE NEW EMAIL: update changed fields w new email
+      // CONFIRMATION REQUIRED: if the user account already exists
+        // IF USE OLD EMAIL: update changed fields w old email
+        // IF USE NEW EMAIL: update changed fields w new email
       userData.email !== customerProfile.email
         ?  navigate("/confirm", {
           state: { 
@@ -190,47 +175,42 @@ export const PaneControls = ({ windowWidth }) => {
     isDisabled = true
   }
 
-  return <section className="PaneControls">
+  return <section className="PaneControls row">
     <div className="--button-container">
-        <FadedBgButton
-          buttonText={'BACK'} 
-          buttonTextPosition={buttonTextPosition}
-          onClick={(e) => {
-            e.preventDefault()
-            if (pane > FIRST_PANE) {
-              setPane(pane - 1)
-            }        
-            
-            if (pane >= THIRD_PANE) {
-              setFormPage(formPage <= 1 ? 1 : formPage - 1)
-            }
-          }}
-          isDisabled={pane === FIRST_PANE}
-          width={buttonWidth}
-        />
-      </div>
-      <div className="--button-container">
-        <FadedBgButton    
-          buttonText={pane < LAST_PANE ? 'NEXT' : determineSubmitButtonText()} 
-          buttonTextPosition={buttonTextPosition}
-          onClick={(e) => {
-            e.preventDefault() 
-            if (isNextable) {
-              setPane(pane + 1)
-            }
+      <FadedBgButton
+        buttonText={'BACK'} 
+        buttonTextPosition={buttonTextPosition}
+        onClick={(e) => {
+          e.preventDefault()
+          setPane(pane <= 1 ? 1 : pane - 1)
 
-            if (pane >= THIRD_PANE) {
-              setFormPage(formPage + 1)
-            }
-
-            if (isLastPane && isSubmittable) {
-              determineSubmitButtonFunc()
-            }
-          }}
-          isDisabled={isDisabled}
-          isFlipped
-          width={buttonWidth}
-        />
-      </div>
+          if (pane >= 3)
+          setFormPage(formPage <= 0 ? 0 : formPage - 1)
+        }}
+        isDisabled={isFirstPane}
+        width={buttonWidth}
+      />
+    </div>
+    <div className="--button-container">
+      <FadedBgButton    
+        buttonText={pane < LAST_PANE ? 'NEXT' : determineSubmitButtonText()} 
+        buttonTextPosition={buttonTextPosition}
+        onClick={(e) => {
+          e.preventDefault() 
+          if (isNextable) {
+            setPane(pane + 1)
+          }
+          if (isLastPane && isSubmittable) {
+            determineSubmitButtonFunc()
+          }
+          if (pane >= 3 && pane <= LAST_PANE) {
+            setFormPage(formPage + 1)
+          }
+        }}
+        isDisabled={isDisabled}
+        isFlipped
+        width={buttonWidth}
+      />
+    </div>
   </section>
 }

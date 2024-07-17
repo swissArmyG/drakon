@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { CredentialForm } from '../Assorted/CredentialForm'
+import { CredentialForm } from '../Assorted'
 import { forgotPassword, login } from '../../api/sessions'
 import { AuthContext, NotificationContext } from '../../contexts'
 

@@ -25,10 +25,11 @@ export const MultipleSelects = ({
     <section className={`MultipleSelects ${className}`}>
       {
         optionsArray.map((option, index) => {
-          const label = Array.isArray(options) ? option : options[option];
+          const label = Array.isArray(options) 
+            ? option 
+            : options[option];
           
-          return <div key={index}     
-            className='--option-container'>
+          return <div key={index} className='--option-container'>
             <div 
               className={`--checkbox --button ${isSelected(label)}`} 
               onClick={(e) => {

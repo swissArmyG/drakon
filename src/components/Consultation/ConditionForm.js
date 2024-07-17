@@ -1,8 +1,5 @@
 import React, { useContext } from "react"
-import { 
-  singleSelectOption, 
-  multipleSelectOptions 
-} from '../../copies/homepage-form-options'
+import { firstPageQuestions } from '../../copies/homepage-form-options'
 import { CustomerContext } from "../../contexts"
 import { DetailedInput, LabeledInput, SingleSelect } from "../Assorted/Inputs"
 import { MultipleSelects } from "../Assorted/Inputs"
@@ -10,26 +7,8 @@ import { MultipleSelects } from "../Assorted/Inputs"
 export const ConditionForm = () => {
   const { 
     customerProfile,
-    singleOption,
-    multipleOptions,
-    painDegree,
-    selectSingleOption,
-    selectMultipleOptions,
     setCustomerProfile,
-    setPainDegree
   } = useContext(CustomerContext)
-
-  const isSingleSelected = (option) => {
-    return singleOption === option ? '--selected' : ''
-  }
-
-  const determineSingleOption = (option) => {
-    if (singleOption === option) {
-      return '';
-    } else {
-      return option;
-    }
-  };
 
   const onChange = (data) => {
     setCustomerProfile({ ...customerProfile, ...data })
@@ -55,7 +34,7 @@ export const ConditionForm = () => {
         />
       </div>
 
-      <div className="row --mb-20px">
+      <div className="row">
         <DetailedInput
           containerClassName="--mr-2p"
           id="height"
@@ -75,6 +54,15 @@ export const ConditionForm = () => {
           type="number"
         />
     </div>
+    <DetailedInput
+      containerClassName="--mb-20px"
+      id="occupation"
+      label="Occupation"
+      placeholder="Your current occupation"
+      value={customerProfile?.occupation}
+      width={'100%'}
+      onChange={(value) => onChange({ occupation: value })}
+    />
     </React.Fragment>
   }
 
@@ -95,11 +83,11 @@ export const ConditionForm = () => {
           } else {
             val = value;
           }
-          setPainDegree(val)
+          onChange({ painDegree: val })
         }}
         placeholder="Number 1-10 only"
         type="number"
-        value={painDegree}
+        value={customerProfile?.painDegree}
         max="10"
         min="1"
       />
@@ -120,15 +108,15 @@ export const ConditionForm = () => {
     <div className="--options-container">
       <p><i>Please select <em>one</em> of the following:</i></p>
         {
-          Object
-            .keys(singleSelectOption)
+          firstPageQuestions[1].options
             .map((option, index) => {
-              const _option = determineSingleOption(option)
-              return <SingleSelect 
-                index={index}
-                isSelected={isSingleSelected(option)}
-                option={singleSelectOption[option]}
-                selectOption={() => selectSingleOption(_option)}
+              return <SingleSelect
+                key={index}
+                isSelected={customerProfile?.acutePainType === option}
+                option={option}
+                selectOption={(option) => onChange({
+                  acutePainType: option
+                })}
               />
             }
           )
@@ -137,10 +125,13 @@ export const ConditionForm = () => {
 
       <div className="--options-container --multiple-selects">
         <p><i>-OR- select <em>one or more</em> of the following:</i></p>
+
         <MultipleSelects
-          options={multipleSelectOptions}
-          selectedOptions={multipleOptions}
-          selectOptions={selectMultipleOptions}
+          options={firstPageQuestions[2].options}
+          selectedOptions={customerProfile?.painSummary}
+          selectOptions={(options) => onChange({
+            painSummary: options
+          })}
         />
       </div>
    
