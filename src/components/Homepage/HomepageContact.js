@@ -10,16 +10,13 @@ export const HomepageContact = forwardRef((_, ref) => {
       className="HomepageContact">
         <div className="--container">
 
-          <div className="--column-left">
-            <Link to="">Legal Notice</Link>
-            <Link to="">About Us</Link>
-          </div>
-
           <div className="--column-center">
             <img src={logo} alt="POMS logo of the Vitruvian man"/>
             <h1><em>PeaceofMindSpine</em></h1>
             <h1><em>{currentYear}</em></h1>
           </div>
+
+          <Link target="_blank" to="https://www.2nd.md/privacy/general/">Privacy Policy</Link>
 
           <div className="--column-right">
             <p>

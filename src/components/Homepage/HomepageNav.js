@@ -108,7 +108,7 @@ export const HomepageNav = forwardRef((props, refs) => {
         }
       </div>
       <p className="--nav-info">
-        To empower individuals with unparalleled access to expert medical opinions, fostering confidence and informed decision-making in their healthcare journey.
+        #1 Choice. Second opinion Expert Advice. Fair Pricing
       </p>
     </section>
   )

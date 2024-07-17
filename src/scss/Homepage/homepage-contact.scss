@@ -12,15 +12,11 @@
     position: absolute;
     bottom: -11px;
 
-    .--column-left {
-      padding-left: 15px;
-      
-      a {
-        display: block;
-        font-weight: 700;
-      }
+    a {
+      display: block;
+      font-weight: 700;
     }
-
+    
     .--column-center {
       display: flex;
       flex-direction: column;
