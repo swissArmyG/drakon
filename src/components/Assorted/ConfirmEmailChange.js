@@ -20,7 +20,7 @@ export const ConfirmEmailChange = () => {
   const _updateCustomer = async() => {
     try {
       await updateCustomer({
-        patientId: customerProfile.id,
+        customerId: customerProfile.id,
         payload: customerProfile
       }) 
       resetForm()

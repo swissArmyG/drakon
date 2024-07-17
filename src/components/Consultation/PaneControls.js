@@ -36,7 +36,7 @@ export const PaneControls = ({ windowWidth }) => {
     stepsCompleted
   } = useContext(CustomerContext)
 
-  const patientId = customerProfile?.id  
+  const customerId = customerProfile?.id  
 
   const getChangedFields = () => {
     const changedFields = {}
@@ -55,9 +55,9 @@ export const PaneControls = ({ windowWidth }) => {
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const requestExistingAccountConsultation = async () => {
-    if (patientId) {
+    if (customerId) {
       try {
-        await requestNewConsultation(patientId)
+        await requestNewConsultation(customerId)
         resetForm()
       } catch (err) {
         setNotification({
@@ -71,10 +71,10 @@ export const PaneControls = ({ windowWidth }) => {
   const requestExistingAccountUpdateConsultation = async () => {
     const changedFields = getChangedFields()
   
-    if (patientId) {
+    if (customerId) {
       try {
         await updateCustomer({
-          patientId,
+          customerId,
           payload: changedFields
         })
         resetForm()
