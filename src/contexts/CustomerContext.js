@@ -147,7 +147,7 @@ const CustomerProvider = ({ children }) => {
     setStepsCompleted(_stepsCompleted);
   };
   useEffect(() => {
-    // determineStepsCompleted()
+    determineStepsCompleted()
   }, [customerProfile, pane])
 
   const resetForm = () => {
