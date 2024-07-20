@@ -7,6 +7,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
 import { authDropbox, authDropboxCallback } from '../../api/customerFiles';
 import { uploadFile } from '../../api/customerFiles';
 import { NotificationContext } from '../../contexts'
+import { Link } from 'react-router-dom';
 
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
@@ -20,20 +21,7 @@ export const CustomerFile = () => {
   const { setNotification } = useContext(NotificationContext)
 
   useEffect(() => {
-    const getAuthUrl = async () => {
-      try {
-        const { auth_url } = await authDropbox()
-        console.log(auth_url)
-
-        if (auth_url) {
-          window.location.href = auth_url
-        }
-      } catch (err) {
-        console.error(err)
-      }
-    }
-
-    getAuthUrl()
+    
   }, []);
 
   useEffect(() => {
@@ -84,10 +72,24 @@ export const CustomerFile = () => {
     }
   };
 
+  const getAuthUrl = async () => {
+    try {
+      const { auth_url } = await authDropbox()
+      console.log(auth_url)
+
+      if (auth_url) {
+        window.location.href = auth_url
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
 
   return (
     <section className="CustomerFile">
-      <p>File upload</p> 
+      <p>File upload</p>
+      <u onClick={() => getAuthUrl()}>Please click here upload .dcm, .jpeg or .jpg file with Dropbox</u>
       <FilePond
         files={files}
         onupdatefiles={(files) => setFiles(files)}
