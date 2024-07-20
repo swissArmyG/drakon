@@ -14,7 +14,7 @@ export const PANE_VARIABLES = {
   LAST_PANE: 7
 }
 
-export const PaneControls = ({ windowWidth }) => {
+export const PaneControls = ({ windowWidth, scrollToFormTop }) => {
   const { 
     FIRST_PANE,
     LAST_PANE 
@@ -206,6 +206,7 @@ export const PaneControls = ({ windowWidth }) => {
           if (pane >= 3 && pane <= LAST_PANE) {
             setFormPage(formPage + 1)
           }
+          scrollToFormTop()
         }}
         isDisabled={isDisabled}
         isFlipped

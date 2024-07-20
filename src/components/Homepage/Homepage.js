@@ -38,7 +38,7 @@ export const Homepage = () => {
       className={`Homepage --container --background --${theme}`} 
       ref={scrollToTopRef}>
       <header className="--nav-bar">
-        <div>
+        <div className="--left-column">
           <img
             src={`${logoPath}`}
             className="logo"

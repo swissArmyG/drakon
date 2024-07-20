@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forwardRef, useContext } from "react"
 import { ProgressBar } from "../Assorted"
-import { CustomerProfileForm } from "../Customer"
+import { CustomerFile, CustomerProfileForm } from "../Customer"
 import { CustomerContext } from "../../contexts"
 import { AdditionalQuestionsForm, ConditionForm, PaneControls } from "../Consultation"
 import { PANE_VARIABLES } from "../Consultation"
@@ -60,11 +60,15 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
           {pane === FIRST_PANE && <CustomerProfileForm />}
           {pane === 2 && <ConditionForm />}
           {pane >= 3 && <AdditionalQuestionsForm />}
+          {pane === LAST_PANE && <CustomerFile />}
           <ProgressBar 
             steps={LAST_PANE} 
             stepsCompleted={stepsCompleted}
           />
-          <PaneControls windowWidth={windowSize.width} />
+          <PaneControls 
+            windowWidth={windowSize.width} 
+            scrollToFormTop={() => ref.current.scrollIntoView({ behavior: 'smooth' })}  
+          />
         </div>
     </section>
   )
