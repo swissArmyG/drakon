@@ -4,7 +4,8 @@ import { Homepage } from './components/Homepage'
 import {
   ConfirmEmailChange,
   Notification, 
-  PasswordReset
+  PasswordReset,
+  Pricing
 } from './components/Assorted'
 import {
   CustomerLogin,
@@ -27,6 +28,8 @@ const App = () => {
             element={<CustomerRegister />} />
           <Route exact path="/confirm"
             element={<ConfirmEmailChange/> } />
+          <Route exact path="/pricing"
+            element={<Pricing /> }/> 
       </Routes>
       <Notification />
       </section>

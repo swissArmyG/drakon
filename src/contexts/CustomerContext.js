@@ -14,7 +14,7 @@ const CustomerProvider = ({ children }) => {
 
   const [ isRegisterClicked, setIsRegisterClicked ] = useState(false)
 
-  const [ pane, setPane ] = useState(7) // TODO: put back FIRST_PANE once done testing
+  const [ pane, setPane ] = useState(FIRST_PANE)
   const [ paginatedQuestions, setPaginatedQuestions ] = useState(undefined)
 
   const [ formPage, setFormPage ] = useState(0)
@@ -22,7 +22,7 @@ const CustomerProvider = ({ children }) => {
   const [ customerProfile, setCustomerProfile ] = useState(undefined)
   const [ originalCustomerProfile, setOriginalCustomerProfile] = useState(undefined)
 
-  const [ stepsCompleted, setStepsCompleted ] = useState(7) // TODO: put back INCOMPLETE once done testing
+  const [ stepsCompleted, setStepsCompleted ] = useState(INCOMPLETE)
 
   useEffect(() => {
     if (pane >= 3) {

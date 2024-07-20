@@ -1,0 +1,27 @@
+.Pricing {
+  height: 100vh;
+
+  &.--background {
+    background-image: url('../../img/bg/homepage\ copy.png');
+  }
+
+  .--content-context {
+    width: 55%;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+
+  em {
+    margin-right: 5px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .Pricing {
+    height: fit-content;
+
+    .--content-context {
+      width: 90%;
+    }
+  }
+}

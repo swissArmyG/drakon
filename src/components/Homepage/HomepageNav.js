@@ -71,6 +71,11 @@ export const HomepageNav = forwardRef((props, refs) => {
       onClick: () => contactRef.current.scrollIntoView(scrollConfig),
       linkTo: '#contact',
       text: 'CONTACT'
+    },
+    pricing: {
+      onClick: () => {},
+      linkTo: '/pricing',
+      text: 'PRICING'
     }
   }
 
@@ -80,13 +85,14 @@ export const HomepageNav = forwardRef((props, refs) => {
         {
           Object.keys(navOptions).map((op, idx) => {
             const isFocused = (op === 'login' && isLoginModal) ? '--focused' : ''
+            const text = navOptions[op].text
 
             return <React.Fragment key={idx}>
               <Link
-                to={`${navOptions[op].linkTo}`}
+                to={`${navOptions[op]?.linkTo}`}
                 onClick={navOptions[op].onClick}>
-                <h4 className={`--nav-option --button ${isFocused}`}>
-                  {navOptions[op].text}
+                <h4 className={`--nav-option --button ${isFocused} ${op}`}>
+                  {text}
                 </h4>
               </Link>
 
