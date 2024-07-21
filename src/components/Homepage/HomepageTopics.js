@@ -1,8 +1,30 @@
+import React  from 'react';
 import { FadedBgButton } from '../Buttons/FadedBgButton';
 import topics from '../../copies/homepage-topics';
 
 export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
-  const renderTopicContent = (category, idx) => {
+  const renderLeftPane = (category) => {
+    return (
+      <div className="--left-pane">
+        <p className="--minus-margin"><em>Basic Spine Anatomy </em> {topics[category].basicSpineAnatomy}</p>
+        <p><em>Pathology </em>{topics[category].pathology}</p>
+        <p><em>Clinical Conditions </em>{topics[category].clinicalConditions}</p>
+        <p><em>Physical Exam Items </em>{topics[category].physicalExamItems}</p>
+        <p><em>Treatment Options </em>{topics[category].treatmentOptions}</p>
+        <p><em>Fun Fact </em>{topics[category].funFact}</p>
+      </div>
+    )
+  }
+
+  const renderRightPane = (category) => {
+    return (
+      <div className="--right-pane">
+        <img src={topics[category].imageURL} alt={topics[category].header}/>
+      </div>
+    )
+  }
+  
+  const renderTopicContent = (category, idx) => {  
     return <div className={`--modal -box-${idx}`}>
       <div>
         <h3 className="--button --button-text -exit" 
@@ -10,8 +32,12 @@ export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
           X
         </h3>
       </div>
-      <em>{topics[category].header}</em>
-      <p className="--modal-text">{topics[category].description}</p>
+      <h3 className="--header"><em>{topics[category].header}</em></h3>
+
+      <div className="--panes-container">
+        {renderLeftPane(category)}
+        {renderRightPane(category)}
+      </div>
     </div>
   }
 
