@@ -41,7 +41,7 @@ export const additionalQuestions = {
   },
   2: {
     question: "Where are you having pain?",
-    attribute: "painArea",
+    attribute: "painAreas",
     options: [
       "Neck",
       "Arm",
@@ -61,7 +61,7 @@ export const additionalQuestions = {
   },
   4: {
     question: "How did your current pain start?",
-    attribute: "painStartCause",
+    attribute: "painStartCauses",
     options: [
       "Lifting",
       "Twisting",
@@ -100,7 +100,7 @@ export const additionalQuestions = {
         },
         { 
           question: "Expectation of results discussed?",
-          attribute: "resultsDiscussed"
+          attribute: "discussedResult"
         }
       ]
     },    
@@ -163,7 +163,7 @@ export const additionalQuestions = {
   },
   11: {
     question: "Do you have problems using your hands or manipulating objects?",
-    attribute: "handObjectManipulationProblems",
+    attribute: "handObjectManipulationProblem",
     options: [
       "Yes",
       "No"
@@ -172,12 +172,12 @@ export const additionalQuestions = {
   },
   12: {
     question: "What medications have you taken for your pain in the past?",
-    attribute: "pastPainMedications",
+    attribute: "pastPainMedication",
     type: TEXT_INPUT
   },
   13: {
     question: "What medications are you currently taking for your pain?",
-    attribute: "currentPainMedications",
+    attribute: "currentPainMedication",
     type: TEXT_INPUT
   },
   14: {
@@ -241,7 +241,7 @@ export const additionalQuestions = {
   },
   19: {
     question: "Have you had injection procedures for your pain?",
-    attribute: "injectionProceduresForPain",
+    attribute: "injectionProcedureForPain",
     options: [
       "Yes",
       "No"
@@ -270,7 +270,7 @@ export const additionalQuestions = {
       options: [
         {
           question: "Specifically which injections helped?",
-          attribute: "helpfulInjections"
+          attribute: "helpfulInjection"
         },
         {
           question: "How long did you get relief from this injection?",
@@ -282,12 +282,12 @@ export const additionalQuestions = {
   },
   21: {
     question: "What other medical problem do you have?",
-    attribute: "medicalProblems",
+    attribute: "medicalProblem",
     type: TEXT_INPUT
   },
   22: {
     question: "What current medications are you taking for this problem?",
-    attribute: "currentMedications",
+    attribute: "currentMedication",
     type: TEXT_INPUT
   }
 }

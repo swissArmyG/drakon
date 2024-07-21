@@ -55,12 +55,12 @@ const CustomerProvider = ({ children }) => {
     const requiredFields = ['activityLevel', 'painStartType', 'physicalTherapyHistory']
 
     return requiredFields.every(field => !!customerProfile?.[field])
-      && customerProfile?.painArea?.length > 0
-      && customerProfile?.painStartCause?.length > 0
+      && customerProfile?.painAreas?.length > 0
+      && customerProfile?.painStartCauses?.length > 0
   }
 
   const fourthStepCompleted = () => {
-    const nestedOfferedSpinalSurgery = ['offeredProcedure', 'offeredBy', 'resultsDiscussed']
+    const nestedOfferedSpinalSurgery = ['offeredProcedure', 'offeredBy', 'discussedResult']
     const nestedPreviousSpinalSurgery = ['surgeryType', 'surgeryDateTime', 'surgeon']
     const requiredFields = ['limbWeaknessNumbness', 'walkingUnsteadiness']
     
@@ -79,7 +79,7 @@ const CustomerProvider = ({ children }) => {
   }
 
   const fifthStepCompleted = () => {
-    const requiredFields = ['handObjectManipulationProblems', 'pastPainMedications', 'currentPainMedications']
+    const requiredFields = ['handObjectManipulationProblem', 'pastPainMedication', 'currentPainMedication']
     
     return requiredFields.every(field => !!customerProfile?.[field])
       && customerProfile?.painfulActivities?.length > 0
@@ -89,11 +89,11 @@ const CustomerProvider = ({ children }) => {
   const sixthStepCompleted = () => {
     const requiredFields = ['unoperationalDueToPain', 'physicianVisitForPain'].every(field => !!customerProfile?.[field])
 
-    const nestedInjectionRelief = ['helpfulInjections', 'injectionReliefDuration'].every(field => !!customerProfile?.[field])
+    const nestedInjectionRelief = ['helpfulInjection', 'injectionReliefDuration'].every(field => !!customerProfile?.[field])
 
-    const injectionProceduresForPain = customerProfile?.injectionProceduresForPain === 'Yes'
+    const injectionProcedureForPain = customerProfile?.injectionProcedureForPain === 'Yes'
       ? customerProfile?.injectionTypes?.length > 0
-      : !!customerProfile?.injectionProceduresForPain
+      : !!customerProfile?.injectionProcedureForPain
 
     const injectionRelief = customerProfile?.injectionRelief === 'Yes'
       ? nestedInjectionRelief
@@ -101,11 +101,11 @@ const CustomerProvider = ({ children }) => {
 
     const helpfulActivities = customerProfile?.helpfulActivities?.length > 0
 
-    return requiredFields && injectionProceduresForPain && injectionRelief && helpfulActivities
+    return requiredFields && injectionProcedureForPain && injectionRelief && helpfulActivities
   }
 
   const seventhStepCompleted = () => {
-    const requiredFields = ['medicalProblems', 'currentMedications']
+    const requiredFields = ['medicalProblem', 'currentMedication']
     return requiredFields.every(field => !!customerProfile?.[field])
   }
 
