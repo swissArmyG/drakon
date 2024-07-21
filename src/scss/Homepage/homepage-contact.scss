@@ -12,6 +12,10 @@
     position: absolute;
     bottom: -11px;
 
+    .--column-left {
+      padding-left: 20px;
+    }
+
     a {
       display: block;
       font-weight: 700;
@@ -32,7 +36,7 @@
     }
 
     .--column-right {
-      padding-right: 15px;
+      padding-right: 20px;
       text-align: right;
     }
   }

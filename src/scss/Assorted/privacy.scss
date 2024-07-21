@@ -1,0 +1,35 @@
+.Privacy {
+  .--content-container {
+    width: 50%;
+    margin: 20px auto;
+  }
+
+  h1, p, em, ul, li {
+    color: #000;
+  }
+
+  a {
+    color: blue;
+    text-decoration: underline;
+  }
+
+  h1, p, em, ul, li, a {
+    font-family: 'Arial';
+  }
+
+  em {
+    font-weight: bold;
+  }
+
+  .text-align-center {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .Privacy {
+    .--content-container {
+      width: 80%;
+    }
+  }
+}

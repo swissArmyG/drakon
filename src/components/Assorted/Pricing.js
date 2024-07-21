@@ -5,7 +5,7 @@ export const Pricing = () => {
 
   return (
     <section className="Pricing --background">
-      <div className="--content-context">
+      <div className="--content-container">
         <h1 className="mt-0">Pricing</h1>
         <span className="--button --button-text" onClick={() => navigate("/")}>
           <i className="fa-solid fa-arrow-left-long" />
