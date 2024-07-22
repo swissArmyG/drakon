@@ -20,10 +20,6 @@ export const CustomerFile = () => {
   const { setNotification } = useContext(NotificationContext)
 
   useEffect(() => {
-    
-  }, []);
-
-  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const code = params.get('code')
     const state = params.get('state')
@@ -74,10 +70,8 @@ export const CustomerFile = () => {
   const getAuthUrl = async () => {
     try {
       const { auth_url } = await authDropbox()
-      console.log(auth_url)
-
       if (auth_url) {
-        window.location.href = auth_url
+        window.open(auth_url, '_blank');
       }
     } catch (err) {
       console.error(err)
@@ -86,11 +80,8 @@ export const CustomerFile = () => {
 
   return (
     <section className="CustomerFile">
-      <p>File upload</p>
-      
-      <em>Before you download</em>
+      <p>File upload: </p>
       <u onClick={() => getAuthUrl()}>Please click here to authenticate with Dropbox</u>
-
       <FilePond
         files={files}
         onupdatefiles={(files) => setFiles(files)}

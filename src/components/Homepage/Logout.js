@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { AuthContext, NotificationContext } from '../../contexts'
+import { AuthContext, CustomerContext, NotificationContext } from '../../contexts'
 import { FadedBgButton } from '../Buttons'
 import { logout } from '../../api/sessions'
 
@@ -9,8 +9,8 @@ export const Logout = ({ isOpen, toggleOpen }) => {
     setUserData,
     userData 
   } = useContext(AuthContext)
+  const { setCustomerProfile } = useContext(CustomerContext)
   const { setNotification } = useContext(NotificationContext)
-
   const [ isLoading, setIsLoading ] = useState(false)
 
   const clearAndClose = () => {
@@ -25,6 +25,7 @@ export const Logout = ({ isOpen, toggleOpen }) => {
       await logout(userData.id)
       
       setUserData(undefined)
+      setCustomerProfile(undefined)
       setNotification({ 
         type: 'success', 
         message: 'Successfully logged out.'

@@ -28,13 +28,7 @@ export const CustomerRegister = () => {
     if (customerProfile && registerPayload.password) {
       try {
         await createCustomer({
-          firstname: customerProfile.firstname,
-          lastname: customerProfile.lastname,
-          acutePainType: customerProfile.acutePainType,
-          painSummary: customerProfile.painSummary,
-          address: customerProfile.address,
-          email: customerProfile.email,
-          phone_number: customerProfile.phoneNumber,
+          ...customerProfile,
           password: registerPayload.password
         })
         setNotification({
