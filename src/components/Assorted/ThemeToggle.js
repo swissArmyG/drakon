@@ -18,10 +18,13 @@ export const ThemeToggle = ({ theme, onToggle }) => {
         Object.keys(themes).map((key, idx) => {
           const themeName = themes[key]
           const selected = theme === key ? '--selected' : ''
+          const isSelected = theme === key ? '✔'  : ''
 
           return <div key={idx} className="--button -container" 
             onClick={() => onToggle(key)}>
-            <div className={`--radio --button --${key} ${selected}`}/>
+            <div className={`--radio --button --${key} ${selected}`}>
+              <h1>{isSelected}</h1>
+            </div>
             <span className={`--${key} ${selected} --theme-text`}>{themeName}</span>
           </div>
         })

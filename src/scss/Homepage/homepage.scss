@@ -49,8 +49,11 @@
         flex-wrap: wrap;
 
         .logo {
-          min-width: 324px;
-          width: 80%;
+          width: 100%;
+        }
+
+        .--left-column {
+          width: 69%;
         }
       }
     } 
