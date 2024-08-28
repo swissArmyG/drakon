@@ -6,7 +6,7 @@ My business partner took care of the deployment, designs and being the point of 
 
 Written in Typescript Node as a backend with lightweight SQLite database and Knex query builder. React for the UX. The rest are dependencies as documented on the README.
 
-The application is currently going through a few additional features- such as secret management with Docker container or adding a certificate for the secure protocol and third-party OAuth integration.
+The application is currently going through a few additional features- such as secret management with Docker container, and adding a certificate for the secure protocol and third-party OAuth integration.
 
 ## Scripts
 
@@ -44,4 +44,3 @@ For development and production stages
 2. **http-proxy-middleware** : For Node.js Proxy middleware
 3. **sass**, **sass-loader**, **style-loader**, **css-loader** : Sassy CSS (Cascade Style Sheet) along with its loading-processing css in JavaScript
 4. **react-router** & **react-router-dom** : On-demand client-side URL routing for faster and more dynamic user experiences
-5. **react-reveal** : Animation effects on elements 
