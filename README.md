@@ -33,7 +33,7 @@ The application is currently going through a few additional features- such as se
   #### Run `yarn cache clean` when 
   - Whenever you want to clear local packages cache
 
-## Framework & Language**
+## Frameworks
 1. **React.js** : Flexible and performant web API framework
 
 ## Dependencies
