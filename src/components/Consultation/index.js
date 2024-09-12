@@ -1,4 +1,4 @@
-export { AdditionalQuestionsForm } from '../Consultation/AdditionalQuestionsForm'
+export { AdditionalQuestionsForm } from './AdditionalQuestionsForm'
 export { ConditionForm } from './ConditionForm'
 export { 
   PaneControls,
