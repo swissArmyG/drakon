@@ -1,4 +1,5 @@
 import { forwardRef } from 'react'
+import LazyLoad from 'react-lazy-load';
 import logo from '../../img/logo/logo.png'
 import { Link } from 'react-router-dom';
 
@@ -15,7 +16,9 @@ export const HomepageContact = forwardRef((_, ref) => {
           </div>
 
           <div className="--column-center">
-            <img src={logo} alt="POMS logo of the Vitruvian man"/>
+            <LazyLoad>
+              <img src={logo} alt="POMS logo of the Vitruvian man"/>
+            </LazyLoad>
             <h1><em>PeaceofMindSpine</em></h1>
             <h1><em>{currentYear}</em></h1>
           </div>

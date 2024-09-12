@@ -1,10 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.d350b77d.css",
-    "main.js": "/static/js/main.9301808a.js",
+    "main.css": "/static/css/main.e24cfab3.css",
+    "main.js": "/static/js/main.33ac6f38.js",
     "static/js/453.937f8a7d.chunk.js": "/static/js/453.937f8a7d.chunk.js",
+    "static/media/sacral.gif": "/static/media/sacral.1ed32f344acb07774c81.gif",
+    "static/media/lumbar.gif": "/static/media/lumbar.2945b1a1899f4f51a3c4.gif",
     "static/media/homepage-OCEAN.png": "/static/media/homepage-OCEAN.a18b7f96d74d7ba8a86f.png",
     "static/media/homepage-DEEP_OCEAN.png": "/static/media/homepage-DEEP_OCEAN.62f06c7a6742a4425f00.png",
+    "static/media/thoracic.gif": "/static/media/thoracic.f341967b5b4112df388b.gif",
+    "static/media/cervical.gif": "/static/media/cervical.014b1571d5c90c1e0231.gif",
     "static/media/homepage copy.png": "/static/media/homepage copy.556430e7cbf3c95ff6b1.png",
     "static/media/EBGaramond-VariableFont_wght.ttf": "/static/media/EBGaramond-VariableFont_wght.a3db34d9a4fb5564be54.ttf",
     "static/media/form_overlay.png": "/static/media/form_overlay.31f64e9ba8a5dc2e5b69.png",
@@ -19,12 +23,12 @@
     "static/media/logo_with_text.png": "/static/media/logo_with_text.0a3ee26d7a5df7a10b40.png",
     "static/media/skele_icon_left.png": "/static/media/skele_icon_left.be16f9b4d4bf8a93092b.png",
     "index.html": "/index.html",
-    "main.d350b77d.css.map": "/static/css/main.d350b77d.css.map",
-    "main.9301808a.js.map": "/static/js/main.9301808a.js.map",
+    "main.e24cfab3.css.map": "/static/css/main.e24cfab3.css.map",
+    "main.33ac6f38.js.map": "/static/js/main.33ac6f38.js.map",
     "453.937f8a7d.chunk.js.map": "/static/js/453.937f8a7d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d350b77d.css",
-    "static/js/main.9301808a.js"
+    "static/css/main.e24cfab3.css",
+    "static/js/main.33ac6f38.js"
   ]
 }

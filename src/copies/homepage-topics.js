@@ -1,3 +1,8 @@
+import cervical from '../img/vertebrae/cervical.gif';
+import thoracic from '../img/vertebrae/thoracic.gif';
+import lumbar from '../img/vertebrae/lumbar.gif';
+import sacral from '../img/vertebrae/sacral.gif';
+
 const topics = {
   'CERVICAL': {
     header: 'Cervical C1-C7',
@@ -7,7 +12,7 @@ const topics = {
     physicalExamItems: 'Key exam elements include assessing neck mobility, reflexes, muscle strength, and sensory function. Special tests, such as Spurling\'s test, can help diagnose cervical radiculopathy.',
     treatmentOptions: 'Treatments range from physical therapy and medications to epidural injections and, in severe cases, surgery. Non-surgical treatments aim to reduce pain and improve function, while surgical options may be necessary for severe nerve compression or instability.',
     funFact: 'The cervical spine, particularly the atlas (C1) and axis (C2) vertebrae, allow for approximately 50% of the total rotation of the entire spine, enabling us to turn our heads to look around.',
-    imageURL: 'https://lh3.googleusercontent.com/pw/AP1GczNEhRCJ2Nj9eAP6Ml8kqXmG8P6BhrxXAGWssPKybGJm1k6eGubSeIennadBn90irp_T3hWhRefGLTpO3hCPqsBk6RiI66IoFY_WBZxf0x5gHZtpa4Oa9TQkS0ZK9TnqRE4baEIhqfgYg72n_lYb0FBeR04e5EZKjHgy-HZNIIp-plW-CW3S9Zkt2kU9qFDnpsgJs68TUcoqe66C61kGNBi2NmRdRw0LcSoO836J5XvDluGQ5_WvwwUXr6bz0rsuK-spZayrZ_quGouwfCUTApHoG6sQJhL3A3qoBqIp4Ie84MDDhm647atxZPf_BXf7qOm0tnNhsLLj0rCZv_CLXb5-cFMosjOsrmjRMFHHkgVzBL0dz6rms4OiVKp6pVwlT2BmodSImlepJeqJiZff4mvnkEtrtwno5I_DDEIXyz4jqEG-xPpQ45FFsPVs_bEPrrkeCdU4IDj6ylJm9gIJUy1p30PZJKmgDZZXoRBN0vqxOvCgS8JLf1-J6xgl9bX7QOHfRG8ka8T7JAynzNKM55pDDKHe-utE0VWTgphUoHF11samglAC2llg22X78zF2Pth4sY9jiHIO01L15sNnzYjG8sGPr2jfYU3nOyznHdEK0KGAtBWbuOBt5IeI0GnISNvkOviDNmusp4Vf21W65wvVXdZKOEBcX4JH8nXjql5wBYrPdnYD7QocxCz1DBgL8SQzg-VwBvJRH_4v3tY9ZXAZsKz1A4dcJIYWdUpfEMKealzYuc4isceEqx56OL6VtyAnUvFBg2yVr4_DqUJtmgolqFtNXxeNHA-OTFxa_M05_7F-2M04gB_h3qIuL7LF6dlsxFeExLaQ3ddcAHkPY_3CxOFQa5rnjoQwgsmh6V73in2beLEsKZf7CEthZ_zwdN-yiV16GNxJmthmA6i6Urs=w640-h640-s-no-gm?authuser=0'
+    imageURL: cervical
   },
   'THORACIC': {
     header: 'Thoracic T1-T12',
@@ -17,7 +22,7 @@ const topics = {
     physicalExamItems: 'Examination focuses on posture assessment, rib cage mobility, and thoracic spine palpation for tenderness. Specific tests, like the Adam\'s forward bend test, can help identify scoliosis.',
     treatmentOptions: 'Treatments include bracing, physical therapy, pain management, and in some cases, surgical intervention. Addressing the underlying cause is crucial for effective management and improving the patient\'s quality of life.',
     funFact: 'The thoracic spine is the only region of the spine that is attached to the rib cage, providing stability and protection to the vital organs housed in the chest cavity.',
-    imageURL: 'https://lh3.googleusercontent.com/pw/AP1GczPAvP3NOjm_ccyZVizxKdpBANvSlixL5YYQhf9MgdncUog_N8zFS8jOvc1Tp60vEKDdSduJFh6_V4dziAvPqzPmgnbFZqvmTTkGYnrldeJlGLpf-zb5Yfbs275-0MBUkscKg1YK0Y9IwcBNC7lY7fyJjXijHGFjcFdVUppdr5xmAtSUJzJh0fL6JxdkluuhvYiNKOk4Z0ME9oUBWKeGSidd2Kh7KUxdVElKvy5DkPDqpFKB5DjXHEoCRrPaVlNvQQoE8M6K8wZLsCcL88wCelMCWNlhJqtzHCbZZARWQcnBMbFC5emLlbkuRqNj07e3fATYeXHVSZpGywNTcOfHDPx61yg90iKjS5TqoGy3J4rLi-A6YraYKwLv_mWZTf3f0O32MWyiAjHiyoZCpDo4l2Pk_9aW6jr5aB6EeepheQcXASVSD_LPMEk09-p_hjgUhw-4d_AIdu0orq5K_clZgQDZk5yZTfhDIMkJUjM5Oc5W5l1IAsEqHJP__UPMDlRuflwDgyj4flHUfxVPxqys54d8Eqy1S37MvO1iTruDuDycytv9rJ1-w11F04lLucD-yceHqd2qNYJHl0_cbX_sRoBmEXV9IHqoRU6jOK1ckFwYXOmQ775xkynof5jmLh-6KMB7F6LV1tVPGBfEy5qk4r-M_gLRD-LD12tmlui6JuU1dAO7qkR6yWAerK_Oae3kzo19eSFSXVhQ3PCTgSrrljhgHiVrx_t5asnGju-d7qUWvKIRTnuPNwJ0qLM9LfpR5_m28sjM7z75GWVX_gfIbK5c5iB2590w_dCVy08UlqwkrLij8Cb5ZjM6IV6qHrpj5YepjKZeugHucQr3m0MVkfjcrCsUsaQ_ndgLDZ4HK_bvTud77ju1DLEpMGDY_Ed_eFlITgD1JklEQOmAWs2SZ195=w640-h640-s-no-gm?authuser=0'
+    imageURL: thoracic
   },
   'LUMBAR': {
     header: 'Lumbar L1-L5',
@@ -27,7 +32,7 @@ const topics = {
     physicalExamItems: 'Exam elements include lumbar spine flexibility, muscle strength, reflexes, and gait analysis. Tests like the straight leg raise test can help diagnose lumbar radiculopathy.',
     treatmentOptions: 'Treatments range from physical therapy, chiropractic care, and medications to lumbar injections and surgery for severe cases. A comprehensive approach often includes exercise, pain management, and lifestyle modifications.',
     funFact: 'The lumbar spine (L1-L5) is designed to bear a significant amount of weight and stress. Each lumbar vertebra is larger and more robust compared to cervical and thoracic vertebrae, reflecting its role in supporting the body\'s weight.',
-    imageURL: 'https://lh3.googleusercontent.com/pw/AP1GczN5Gr5Ofj1-hGIP1mU7OloSFCRgn5RVA-PCzcjAOYi_swZEpbq-jg6B1AuCkHshQIE3c_ceHxAWI85EZP-mpF52Ii2fCQ7EgXIas-ZU3oGiKIwa6Sk-36maDudc_08pIoX-bhT7A_GoBhQaqN80-R73EIWv31Cy36X_LtlARaxs6ttcfwNSYXd_0tA-BkVWteKe84YPOv4WNfeAarq4zy2t5GhbUgkKxi9QdYJNgLcxePyQIpWqwHhrVXZn_XJuwuzQN9tsTkQWt7FGF5yDOxoISb0iXA07ZPJwnHsd0sYaRrZpn2evtjhcv2YaoyLnl8Pp-6-EC-3PO1whXzGzOCLoGQP_V5Jr00JxA4_F0PWazMlLF4iDiUO-jNDrkYVv3efIgX7mk54Ezyp3f7fZtNBANvjvaVA-bFwmbNeHH-H_t7NLHibo9847KwvImLpHX5fJ7wulmJHehKfOzLv9F5nAIKD2dOYDwOe8CPIQADOmdz_PsJ-Ognoc8vBu57RoZduLcJTGRxofJffBFxqUf0lmBGTK_zPgcutCbJWk_l4nVAelifi-cRXikaltXEVi-0dHtNMGKfcacVpCnuxWeVrENLhitURIO60fG-U-zu-OG-Tp_yH6CVvEDDfE1_AKcfVIPEpbni2DoAXKnwXY0Jdo-snYTxanp_BO9v8HW2DSxeDqMMDe_3uLcWh1R2hva2MWxAfSJo0Wy6OD_4UsKks1Q6cEhcDPxU2bh-MCwrNafDKCcz4KCUwBPWOQ8l1BWY20wEggCBpPQddcAx9en9Dvc2Bs_uxZWJ6RMjRD70s8V-W0y1KcQgBOzOyFBt5wCRr9oJJRvOFdJbXcgogA6eCJHB7cPlIim3C5kN3Bq6wULxkil4yzSXsbiPv-a-gYkUNFs1JyZK1SUVBOhPhG3Iub=w640-h640-s-no-gm?authuser=0'
+    imageURL: lumbar
   },
   'SACRAL': {
     header: 'Sacral S1-S5',
@@ -37,7 +42,7 @@ const topics = {
     physicalExamItems: 'Examination includes pelvic alignment assessment, sacroiliac joint tests, and evaluating for tenderness and stability. Tests like the FABER (Patrick\'s) test can help diagnose sacroiliac joint dysfunction.',
     treatmentOptions: 'Treatments involve physical therapy, manual manipulation, injections, and in some cases, surgical procedures. A multi-disciplinary approach often yields the best results, addressing pain, function, and overall quality of life.',
     funFact: 'The sacrum (S1-S5) is a triangular bone formed by the fusion of five sacral vertebrae. It articulates with the hip bones (ilia) to form the pelvis, providing stability and transferring weight between the spine and the lower extremities.',
-    imageURL: 'https://lh3.googleusercontent.com/pw/AP1GczP5QoEFKVxz8laNEdw3eaZIVnTHv7zkF-eZy7jxg749wGl46AcDapkeYYECa4IDhqKDOYFGOXapKoF48j-hLlJ5Bm273PaqlwZiC1_6aA2vB5ZWg1MD318zq0YjQxMVVT23KGzQIrA15kMHutPSM9hSZ8hnnnuc6kiZExLEAB-UyF6wN1P-33LajiNsVhM4Pz2doSPGFNowUWwWcgOcdlCaT9cI6J_VVC1qX_cg9aFAdxaJ0dGS7NJYpiqgFCj910Vdix-lNpjktK-FiwjSdAIFRF09Uziv51b2MrZo07GtIUlzUxBzinG3y31uwhkF11fdDcQ1g9t3BPpp7kIrvuclcGXRbroDi1KxF2EKE1gCA8wp9KIA03OM1wUX1FoFh8KLcJYY7V5cwxA0E-JI44IX9KnvGCUPKDdQEs6VnSk43WdxylSpB9HQ4b8qPPdxL-wuzRxs_DnV9VPq7SAsLuDbKSf-ONm_qgRe6RFDXk1wtPlvEouU-ct_yT5r4qxu9EdqcxYZBzWdzaAGMRhqq-4YNM4Y7Un0yOFoGAdKABkxR0-WAy6ARtDlVbfjwVtc3dXc2VmLJ4Nt0qUTyNmikQjOj3qLo_8ID-0mhekE-kd41Hw_TmVVq5UL1fx0wGdduc-RHVBdzKj7ALEKuuBkn6nMq9gTImx1uu-gxcXNvtnMFseqYyFhPqMgLVX8TGWCLc3vYdW_oR9TxGIv-cr22cjwYWJ986zIqTo77y9XgsB7nh2JR0OL73UImHG0cMPtksEpMSblsR8vQUiolX5gq9faEeQf4TXkxddEIRyfHCuG2iwmCwGJ9XFPfTaTnw32GAsbAhfIVpXt0JlF5xN2jyO9szaBi8sHecV7ZUKZTduMg7bmvVCB9Qi966eloXSmnDtZUyZA17c5-rUul-l4h7R_=w640-h640-s-no-gm?authuser=0'
+    imageURL: sacral
   }
 }
 

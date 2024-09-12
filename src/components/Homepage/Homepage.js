@@ -1,4 +1,5 @@
 import { useContext, useRef, useState } from 'react'
+import LazyLoad from 'react-lazy-load';
 import {
   HomepageNav,
   HomepageTopics,
@@ -39,11 +40,13 @@ export const Homepage = () => {
       ref={scrollToTopRef}>
       <header className="--nav-bar">
         <div className="--left-column">
-          <img
-            src={`${logoPath}`}
-            className="logo"
-            alt="Peace of Mind Spine.com logo, with a Vitruvian man in front of the beach at sunrise"
-          />
+          <LazyLoad>
+            <img
+              src={`${logoPath}`}
+              className="logo"
+              alt="Peace of Mind Spine.com logo, with a Vitruvian man in front of the beach at sunrise"
+            />
+          </LazyLoad>
           <ThemeToggle onToggle={setTheme} theme={theme}/>
         </div>
         <HomepageNav

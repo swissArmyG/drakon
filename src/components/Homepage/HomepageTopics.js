@@ -1,4 +1,5 @@
 import React  from 'react';
+import LazyLoad from 'react-lazy-load';
 import { FadedBgButton } from '../Buttons/FadedBgButton';
 import topics from '../../copies/homepage-topics';
 
@@ -19,7 +20,9 @@ export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
   const renderRightPane = (category) => {
     return (
       <div className="--right-pane">
-        <img src={topics[category].imageURL} alt={topics[category].header}/>
+        <LazyLoad>
+          <img src={topics[category].imageURL} alt={topics[category].header}/>
+        </LazyLoad>
       </div>
     )
   }

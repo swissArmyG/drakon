@@ -1,4 +1,5 @@
 import React, { useState, useEffect, forwardRef, useContext } from "react"
+import LazyLoad from 'react-lazy-load';
 import { ProgressBar } from "../Assorted"
 import { CustomerFile, CustomerProfileForm } from "../Customer"
 import { CustomerContext } from "../../contexts"
@@ -37,7 +38,9 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
 
   const renderHeader = () => {
     return <div className="--header-container">
-      <img src={spineGraphic} alt="A section of a spine" className="--header-logo" />
+      <LazyLoad>
+        <img src={spineGraphic} alt="A section of a spine" className="--header-logo" />
+      </LazyLoad>
       <p className="--header-text">
         { 
           (pane === FIRST_PANE || pane < 4) && `Your journey to a healed you begins here… Please begin by answering a few basic questions throughout these brief forms accurately and an associate from POMS will be in touch with you shortly for follow up`
