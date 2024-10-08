@@ -9,11 +9,12 @@ import {
 } from '.'
 import logoPath from '../../img/logo/logo_with_text.png'
 import { SideNavigation } from '../Buttons'
-import { ThemeToggle } from '../Assorted'
+// import { ThemeToggle } from '../Assorted'
 import { CustomerContext } from '../../contexts'
+import { blurb } from '../../copies/homepage-stories';
 
 export const Homepage = () => {
-  const [ theme, setTheme ] = useState('DEEP_OCEAN')
+  const [ theme, ] = useState('OCEAN')
   const [ topic, setTopic ] = useState(undefined)
 
   const [ isLoginModal, toggleLoginModal ] = useState(false)
@@ -47,7 +48,13 @@ export const Homepage = () => {
               alt="Peace of Mind Spine.com logo, with a Vitruvian man in front of the beach at sunrise"
             />
           </LazyLoad>
-          <ThemeToggle onToggle={setTheme} theme={theme}/>
+          <ul>
+            <li>Unbiased.</li>
+            <li>Independent.</li>
+            <li>Second Opinion Spine Advice.</li>
+            </ul>
+          {/* <ThemeToggle onToggle={setTheme} theme={theme}/> */}
+          <p className="-blurb">{blurb}</p>
         </div>
         <HomepageNav
           ref={{
