@@ -13,7 +13,9 @@ export const HomepageNav = forwardRef((props, refs) => {
     toggleLoginModal,
     toggleLogoutModal
   } = props
-  const { storyRef, consultationRef, contactRef } = refs
+
+  const { storyRef, consultationRef } = refs
+  // const { storyRef, consultationRef, contactRef } = refs
   const { userData } = useContext(AuthContext)
   const { 
     customerProfile, 
@@ -67,11 +69,11 @@ export const HomepageNav = forwardRef((props, refs) => {
       linkTo: '#story',
       text: 'OUR STORY'
     },
-    contact: {
-      onClick: () => contactRef.current.scrollIntoView(scrollConfig),
-      linkTo: '#contact',
-      text: 'CONTACT'
-    },
+    // contact: {
+    //   onClick: () => contactRef.current.scrollIntoView(scrollConfig),
+    //   linkTo: '#contact',
+    //   text: 'CONTACT'
+    // },
     // pricing: {
     //   onClick: () => {},
     //   linkTo: '/pricing',
