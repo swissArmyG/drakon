@@ -7,7 +7,7 @@ import { readCustomerByUserId } from '../../api/customers'
 
 export const HomepageNav = forwardRef((props, refs) => {
   const {
-    closeOverlappingModal,
+    // closeOverlappingModal,
     isLoginModal,
     isLogoutModal,
     toggleLoginModal,
@@ -41,42 +41,42 @@ export const HomepageNav = forwardRef((props, refs) => {
     }
   }, [userData])
 
-  const openLogoutModal = () => {
-    toggleLogoutModal(true)
-    closeOverlappingModal()
-  }
+  // const openLogoutModal = () => {
+  //   toggleLogoutModal(true)
+  //   closeOverlappingModal()
+  // }
 
-  const openLoginModal = () => {
-    toggleLoginModal(true)
-    closeOverlappingModal()
-  }
+  // const openLoginModal = () => {
+  //   toggleLoginModal(true)
+  //   closeOverlappingModal()
+  // }
 
   const navOptions = {
-    login: {
-      onClick: () => userData ? openLogoutModal() : openLoginModal(),
-      linkTo: '#login',
-      text: (userData && customerProfile) ? `Hi, ${customerProfile.firstname}` : 'LOGIN'
+    // login: {
+    //   onClick: () => userData ? openLogoutModal() : openLoginModal(),
+    //   linkTo: '#login',
+    //   text: (userData && customerProfile) ? `Hi, ${customerProfile.firstname}` : 'LOGIN'
+    // },
+    consultation: {
+      onClick: () => consultationRef.current.scrollIntoView(scrollConfig),
+      linkTo: '#consultation',
+      text: 'REQUEST CONSULTATION'
     },
     story: {
       onClick: () => storyRef.current.scrollIntoView(scrollConfig),
       linkTo: '#story',
       text: 'OUR STORY'
     },
-    consultation: {
-      onClick: () => consultationRef.current.scrollIntoView(scrollConfig),
-      linkTo: '#consultation',
-      text: 'REQUEST CONSULTATION'
-    },
     contact: {
       onClick: () => contactRef.current.scrollIntoView(scrollConfig),
       linkTo: '#contact',
       text: 'CONTACT'
     },
-    pricing: {
-      onClick: () => {},
-      linkTo: '/pricing',
-      text: 'PRICING'
-    }
+    // pricing: {
+    //   onClick: () => {},
+    //   linkTo: '/pricing',
+    //   text: 'PRICING'
+    // }
   }
 
   return (
@@ -113,9 +113,9 @@ export const HomepageNav = forwardRef((props, refs) => {
           })
         }
       </div>
-      <p className="--nav-info">
+      {/* <p className="--nav-info">
         #1 Choice. Second opinion Expert Advice. Fair Pricing
-      </p>
+      </p> */}
     </section>
   )
 })
