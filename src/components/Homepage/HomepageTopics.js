@@ -45,31 +45,33 @@ export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
   }
 
   return (
-    <section className="HomepageTopics --container">
-      {
-        Object.keys(topics).map((topicCategory, index) => {
-          return <div key={index} className="--topics-container">
-            <div className="--button-container">
-              <FadedBgButton
-                isFocused={topicCategory === topic}
-                buttonText={topicCategory} 
-                onClick={(e) => {
-                  e.preventDefault()
-                  setTopic(topic === topicCategory ? undefined : topicCategory)
-                  closeOverlappingModal()
-                }}
-                width="300px"
-              />
-            </div>
-            {
-              topicCategory === topic &&
-              <div className={`--modal-container`}>
-                {renderTopicContent(topicCategory, index)}
+    <section className="HomepageTopics">
+      <div className="--content-container">
+        {
+          Object.keys(topics).map((topicCategory, index) => {
+            return <div key={index} className="--topics-container">
+              <div className="--button-container">
+                <FadedBgButton
+                  isFocused={topicCategory === topic}
+                  buttonText={topicCategory} 
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setTopic(topic === topicCategory ? undefined : topicCategory)
+                    closeOverlappingModal()
+                  }}
+                  width="300px"
+                />
               </div>
-            }
-          </div>
-        })
-      }
+              {
+                topicCategory === topic &&
+                <div className={`--modal-container`}>
+                  {renderTopicContent(topicCategory, index)}
+                </div>
+              }
+            </div>
+          })
+        }
+      </div>
     </section>
   )
 }

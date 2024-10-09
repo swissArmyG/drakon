@@ -72,16 +72,20 @@ export const Homepage = () => {
       </header>
       
       <SideNavigation ref={scrollToTopRef} />
-      <HomepageTopics 
+      {/* <HomepageTopics 
         topic={topic} 
         setTopic={setTopic} 
         closeOverlappingModal={() => closeOverlappingModals('authentication')} 
-      />
-
+      /> */}
       <div className="--content-container">
         <HomepageStory ref={storyRef} />
         <HomepageConsultation ref={consultationRef} />
         <HomepagePricing />
+        <HomepageTopics 
+          topic={topic} 
+          setTopic={setTopic} 
+          closeOverlappingModal={() => closeOverlappingModals('authentication')} 
+        />
         <HomepageContact ref={contactRef} />
       </div>
     </section>

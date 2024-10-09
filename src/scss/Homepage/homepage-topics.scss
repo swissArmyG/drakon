@@ -1,6 +1,17 @@
 .HomepageTopics {
-  padding: 7.6% 0 0 12%;
+  // padding: 7.6% 0 0 12%;
   height: 1360px;
+  width: 100%;
+  margin: 0 auto 100px auto;
+
+  // position: absolute;
+  // width: 100%;
+  // left: -8%;
+
+  .--content-container {
+    width: calc(100% - 37%);
+    margin: 0 auto;
+  }
 
   .--header {
     position: relative;
@@ -16,9 +27,13 @@
   }
 
   .--modal-container {
+    // position: absolute;
+    width: 100%;
+    // left: -10%;
     text-align: left;
+  }
 
-    .--modal {
+  .--modal {
       position: absolute;
       z-index: 1000;
       height: -moz-fit-content;
@@ -26,11 +41,14 @@
       border: 3px solid #FFC655;
       border-radius: 60px;
       padding: 25px;
-      top: 20%;
-      left: 40%;
-      width: 500px;
-      max-width: 500px;
-      min-width: 45%;
+      // top: 20%;
+      // left: 40%;
+      top: 2%;
+      left: 30%;
+      // width: 500px;
+      width: 700px;
+      // max-width: 500px;
+      // min-width: 45%;
 
       // NOTE: keep this here for possible future iteration
       // &.-box-0 {
@@ -52,7 +70,6 @@
       em {
         font-family: 'Cantarell-Bold', sans-serif 
       }
-    }
   }
 
   .--panes-container {
@@ -84,12 +101,25 @@
 }
 
 
-@media screen and (max-width: 1219px) {
+// @media screen and (max-width: 1219px) {
+//   .HomepageTopics {
+//     .--modal-container {
+//       .--modal {
+//         left: 41%
+//       }
+//     }
+//   }
+// }
+
+@media screen and (max-width: 1149px) {
   .HomepageTopics {
-    .--modal-container {
-      .--modal {
-        left: 41%
-      }
+    .--content-container {
+      // width: calc(100% - 10%);
+      width: 100%;
+    }
+    
+    .--modal {
+      width: calc(100% - 44%);
     }
   }
 }
@@ -100,6 +130,7 @@
       .--modal {
         position: relative;
         left: 0%;
+        width: 77%;
 
         .--panes-container {
           .--left-pane,
@@ -122,8 +153,10 @@
   .HomepageTopics {
     .--modal-container {
       .--modal {
-        position: absolute;
-        width: 78%;
+        // position: absolute;
+        // width: 78%;
+        // left: -9%;
+        // width: calc(100% + 17px);
         border-radius: 30px;
         padding: 22px 15px;
       }
