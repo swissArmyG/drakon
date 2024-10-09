@@ -1,5 +1,8 @@
 .HomepageContact {
-  height: 500px;
+  // height: 500px;
+  position: relative;
+  bottom: 0%;
+  height: 288px;
 
   .--container {
     display: flex;
@@ -42,21 +45,21 @@
   }
 }
 
-@media screen and (max-width: 484px) {
+@media screen and (max-width: 430px) {
   .HomepageContact {
     .--container {
       flex-direction: column;
       justify-content: center;
       height: 340px;
-    }
 
-    .--column-left {
-      text-align: center;
-      padding-left: 0px;
-    }
-
-    .--column-right {
-      padding-right: 0px;
+      .--column-left {
+        text-align: center;
+        padding-left: 0px;
+      }
+  
+      .--column-right {
+        padding-right: 0px;
+      }
     }
   }
 }

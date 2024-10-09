@@ -1,14 +1,16 @@
 .HomepageConsultation {
-    position: relative;
-    z-index: 1;
-    width: calc(100% - 44%);
-    display: flex;
-    flex-direction: column;
-    flex-direction: flex-start;
-    align-items: center;
-    justify-content: center;
-    height: 1327px;
-    margin: auto;
+  position: relative;
+  z-index: 1;
+  width: calc(100% - 44%);
+  display: flex;
+  flex-direction: column;
+  flex-direction: flex-start;
+  align-items: center;
+  justify-content: center;
+  // height: 1327px;
+  // max-height: 1900px;
+  // height: 1900px;
+  margin: 100px auto;
 
   .--background-overlay {
     position: absolute;
@@ -21,9 +23,9 @@
   }
 
   .--form-container {
-    position: absolute;
-    z-index: 100;
-    top: 5%;
+    // position: absolute;
+    // z-index: 100;
+    // top: 5%;
     display: flex;
     flex-direction: column;
     justify-content: center;

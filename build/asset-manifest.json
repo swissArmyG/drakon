@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.e24cfab3.css",
-    "main.js": "/static/js/main.33ac6f38.js",
+    "main.css": "/static/css/main.42932fcc.css",
+    "main.js": "/static/js/main.41053e5a.js",
     "static/js/453.937f8a7d.chunk.js": "/static/js/453.937f8a7d.chunk.js",
     "static/media/sacral.gif": "/static/media/sacral.1ed32f344acb07774c81.gif",
     "static/media/lumbar.gif": "/static/media/lumbar.2945b1a1899f4f51a3c4.gif",
@@ -23,12 +23,12 @@
     "static/media/logo_with_text.png": "/static/media/logo_with_text.0a3ee26d7a5df7a10b40.png",
     "static/media/skele_icon_left.png": "/static/media/skele_icon_left.be16f9b4d4bf8a93092b.png",
     "index.html": "/index.html",
-    "main.e24cfab3.css.map": "/static/css/main.e24cfab3.css.map",
-    "main.33ac6f38.js.map": "/static/js/main.33ac6f38.js.map",
+    "main.42932fcc.css.map": "/static/css/main.42932fcc.css.map",
+    "main.41053e5a.js.map": "/static/js/main.41053e5a.js.map",
     "453.937f8a7d.chunk.js.map": "/static/js/453.937f8a7d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e24cfab3.css",
-    "static/js/main.33ac6f38.js"
+    "static/css/main.42932fcc.css",
+    "static/js/main.41053e5a.js"
   ]
 }

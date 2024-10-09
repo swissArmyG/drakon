@@ -1,0 +1,36 @@
+.HomepagePricing {
+  // height: 100vh;
+  width: 100%;
+  margin: 50px auto 100px auto;
+  // &.--background {
+  //   background-image: url('../../img/bg/homepage\ copy.png');
+  // }
+  
+  .--content-container {
+    // width: 55%;
+    width: calc(100% - 44%);
+    margin: 0 auto;
+  }
+
+  em {
+    margin-right: 5px;
+  }
+}
+
+@media screen and (max-width: 1149px) {
+  .HomepagePricing {
+    .--content-container {
+      width: calc(100% - 10%);
+    }
+  }
+}
+
+// @media screen and (max-width: 900px) {
+//   .HomepagePricing {
+//     height: fit-content;
+
+//     .--content-context {
+//       width: 90%;
+//     }
+//   }
+// }

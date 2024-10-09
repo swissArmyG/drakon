@@ -5,7 +5,8 @@ import {
   HomepageTopics,
   HomepageStory,
   HomepageConsultation,
-  HomepageContact
+  HomepageContact,
+  HomepagePricing
 } from '.'
 import logoPath from '../../img/logo/logo_with_text.png'
 import { SideNavigation } from '../Buttons'
@@ -80,6 +81,7 @@ export const Homepage = () => {
       <div className="--content-container">
         <HomepageStory ref={storyRef} />
         <HomepageConsultation ref={consultationRef} />
+        <HomepagePricing />
         <HomepageContact ref={contactRef} />
       </div>
     </section>
