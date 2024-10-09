@@ -1,6 +1,6 @@
 import { forwardRef, useState } from 'react'
 import LazyLoad from 'react-lazy-load'
-import { story, bioA, bioB } from '../../copies/homepage-stories'
+import { story, bioA, bioB, bioC } from '../../copies/homepage-stories'
 import skeleIconLeft from '../../img/shapes/skele_icon_left.png'
 import skeleIconMiddle from '../../img/shapes/skele_icon_middle.png'
 import skeleIconRight from '../../img/shapes/skele_icon_right.png'
@@ -24,7 +24,8 @@ export const HomepageStory = forwardRef((_, ref) => {
         <p className="--story-content">{story}</p>
         <LazyLoad><img src={barBreaker} alt="Paragraph break in blocks of colors" /></LazyLoad>
         <p className="--story-content">{bioA}</p>
-        <p className="--story-content">{bioB} (Please see <u><em onClick={() => toggleCredentialsOpen(true)}>Dr.Templin Credentials</em></u>)</p>
+        <p className="--story-content">{bioB}</p>
+        <p className="--story-content">{bioC} (Please see <u><em onClick={() => toggleCredentialsOpen(true)}>Dr.Templin Credentials</em></u>)</p>
       </div>
     </section>
   )
