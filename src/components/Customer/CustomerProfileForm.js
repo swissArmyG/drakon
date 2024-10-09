@@ -1,21 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { AuthContext, CustomerContext } from '../../contexts'
+// import { useNavigate } from 'react-router-dom'
+// import { AuthContext, CustomerContext } from '../../contexts'
+import { CustomerContext } from '../../contexts'
 import { containsMissingFields } from '../../utils/validation'
 import { DetailedInput, SingleSelect } from '../Assorted/Inputs'
 
 export const CustomerProfileForm = () => {
-  const { isAuthenticated } = useContext(AuthContext)
+  // const { isAuthenticated } = useContext(AuthContext)
 
   const { 
     isRegisterClicked,
     customerProfile,
-    setIsRegisterClicked,
+    // setIsRegisterClicked,
     setCustomerProfile
   } = useContext(CustomerContext)
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [ missingFields, setMissingFields ] = useState([])
 
   const checkForMissingFields = () => {
@@ -34,14 +35,14 @@ export const CustomerProfileForm = () => {
     }
   }, [customerProfile, isRegisterClicked])
 
-  const login = () => {
-    navigate("/login")
-  }
+  // const login = () => {
+  //   navigate("/login")
+  // }
 
-  const register = () => {
-    checkForMissingFields()
-    setIsRegisterClicked(true)
-  }
+  // const register = () => {
+  //   checkForMissingFields()
+  //   setIsRegisterClicked(true)
+  // }
 
   const isInvalid = useCallback((field) => {
     return missingFields.length > 0 && missingFields.includes(field) ? '--invalid' : ''
@@ -53,7 +54,7 @@ export const CustomerProfileForm = () => {
   
   return ( 
     <section className="CustomerProfileForm">
-      { !isAuthenticated && <p className="--login-nav">Please <u><em onClick={() => login()}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login</p> }
+      {/* { !isAuthenticated && <p className="--login-nav">Please <u><em onClick={() => login()}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login</p> } */}
 
       <p><em>Full Name</em>
        

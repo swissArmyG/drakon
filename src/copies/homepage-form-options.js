@@ -1,3 +1,5 @@
+export const formHeader = "Your journey to a healed you begins here. Our comprehensive second opinion service is available for $149.99 USD. This includes a detailed review of your intake form and imaging studies (MRI), CT Scan, X-Ray) by top, independent, board-certified spine specialists. This evaluation ensures you receive the best possible advice. Gain peace of mind and avoid unnecessary procedures with our trusted service and fair pricing. To optimize your chance for a successful outcome our service includes: "
+
 export const SELECT_TYPE_VARIABLES = {
   SINGLE_SELECT: 'single_select',
   MULTI_SELECT: 'multi_select',
