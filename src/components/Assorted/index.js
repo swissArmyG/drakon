@@ -1,5 +1,6 @@
 export { ConfirmEmailChange } from './ConfirmEmailChange'
 export { CredentialForm } from './CredentialForm'
+export { Modal } from './Modal'
 export { Notification } from './Notification' 
 export { PasswordReset } from './PasswordReset'
 export { ProgressBar } from './ProgressBar'

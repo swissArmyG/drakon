@@ -1,6 +1,7 @@
 import React  from 'react';
 import LazyLoad from 'react-lazy-load';
 import { FadedBgButton } from '../Buttons/FadedBgButton';
+import { Modal } from '../Assorted/Modal';
 import topics from '../../copies/homepage-topics';
 
 export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
@@ -26,48 +27,36 @@ export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
       </div>
     )
   }
-  
-  const renderTopicContent = (category, idx) => {  
-    return <div className={`--modal -box-${idx}`}>
-      <div>
-        <h3 className="--button --button-text -exit" 
-          onClick={() => setTopic(undefined)}>
-          X
-        </h3>
-      </div>
-      <h3 className="--header"><em>{topics[category].header}</em></h3>
-
-      <div className="--panes-container">
-        {renderLeftPane(category)}
-        {renderRightPane(category)}
-      </div>
-    </div>
-  }
 
   return (
     <section className="HomepageTopics">
       <div className="--content-container">
         {
-          Object.keys(topics).map((topicCategory, index) => {
+          Object.keys(topics).map((category, index) => {
             return <div key={index} className="--topics-container">
               <div className="--button-container">
                 <FadedBgButton
-                  isFocused={topicCategory === topic}
-                  buttonText={topicCategory} 
+                  isFocused={category === topic}
+                  buttonText={category} 
                   onClick={(e) => {
                     e.preventDefault()
-                    setTopic(topic === topicCategory ? undefined : topicCategory)
+                    setTopic(topic === category ? undefined : category)
                     closeOverlappingModal()
                   }}
                   width="300px"
                 />
               </div>
-              {
-                topicCategory === topic &&
-                <div className={`--modal-container`}>
-                  {renderTopicContent(topicCategory, index)}
+              
+              <Modal index={index}
+                isOpen={category === topic}
+                onClick={() => setTopic(undefined)}
+                header={topics[category].header}
+              >
+                <div className="--panes-container">
+                  {renderLeftPane(category)}
+                  {renderRightPane(category)}
                 </div>
-              }
+              </Modal>
             </div>
           })
         }
