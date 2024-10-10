@@ -9,6 +9,9 @@
   // left: -8%;
 
   .--content-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     width: calc(100% - 37%);
     margin: 0 auto;
   }
@@ -27,10 +30,13 @@
   }
 
   .--modal-container {
-    // position: absolute;
-    width: 100%;
+    // position: absolute;   
     // left: -10%;
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
   }
 
   .--modal {
@@ -43,10 +49,13 @@
       padding: 25px;
       // top: 20%;
       // left: 40%;
-      top: 2%;
-      left: 30%;
+      // top: 2%;
+      top: 77px;
+      left: 0;
+      // left: 30%;
       // width: 500px;
-      width: 700px;
+      // width: 700px;
+      width: 100%;
       // max-width: 500px;
       // min-width: 45%;
 
@@ -128,8 +137,8 @@
   .HomepageTopics {
     .--modal-container {
       .--modal {
-        position: relative;
-        left: 0%;
+        // position: relative;
+        // left: 0;
         width: 77%;
 
         .--panes-container {
