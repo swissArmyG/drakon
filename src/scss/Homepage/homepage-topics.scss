@@ -1,12 +1,21 @@
 .HomepageTopics {
   // padding: 7.6% 0 0 12%;
-  height: 1360px;
+  // height: 1360px;
+  height: fit-content;
   width: 100%;
   margin: 0 auto 100px auto;
 
   // position: absolute;
   // width: 100%;
   // left: -8%;
+
+  ::-webkit-scrollbar-track {
+    margin: 40px 0;
+  }
+
+  ::-moz-scrollbar-track {
+    margin: 40px 0;
+  }
 
   .--content-container {
     display: flex;
@@ -32,53 +41,52 @@
   .--modal-container {
     // position: absolute;   
     // left: -10%;
-    text-align: left;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: calc(100vh - 288px);
+    text-align: left;
   }
 
   .--modal {
-      position: absolute;
-      z-index: 1000;
-      height: -moz-fit-content;
-      height: fit-content;
-      border: 3px solid #FFC655;
-      border-radius: 60px;
-      padding: 25px;
-      // top: 20%;
-      // left: 40%;
-      // top: 2%;
-      top: 77px;
-      left: 0;
-      // left: 30%;
-      // width: 500px;
-      // width: 700px;
-      width: 100%;
-      // max-width: 500px;
-      // min-width: 45%;
+    position: absolute;
+    z-index: 1000;
+    height: -moz-fit-content;
+    height: fit-content;
+    height: -moz-fit-content;
+    border: 3px solid #FFC655;
+    border-radius: 60px;
+    padding: 25px;
+    top: 77px;
+    left: 0;
+    width: 100%;
+    max-height: calc(100vh - 288px);
+    overflow-y: auto;
 
-      // NOTE: keep this here for possible future iteration
-      // &.-box-0 {
-      //   top: 20%;
-      // }
-  
-      // &.-box-1 {
-      //   top: 39%;
-      // }
+    // top: 20%;
+    // left: 40%;
+    // width: 500px;
+    // width: 700px;
+    // max-width: 500px;
+    // min-width: 45%;
+    // NOTE: keep this here for possible future iteration
+    // &.-box-0 {
+    //   top: 20%;
+    // }
+    // &.-box-1 {
+    //   top: 39%;
+    // }
+    // &.-box-2 {
+    //   top: 68%;
+    // }
+    // &.-box-3 {
+    //   top: 80%;
+    // }
 
-      // &.-box-2 {
-      //   top: 68%;
-      // }
-
-      // &.-box-3 {
-      //   top: 80%;
-      // }
-
-      em {
-        font-family: 'Cantarell-Bold', sans-serif 
-      }
+    em {
+      font-family: 'Cantarell-Bold', sans-serif 
+    }
   }
 
   .--panes-container {

@@ -57,18 +57,20 @@ export const Homepage = () => {
           {/* <ThemeToggle onToggle={setTheme} theme={theme}/> */}
           <p className="-blurb">{blurb}</p>
         </div>
-        <HomepageNav
-          ref={{
-            storyRef,
-            consultationRef,
-            contactRef
-          }}
-          isLoginModal={isLoginModal}
-          isLogoutModal={isLogoutModal}
-          toggleLoginModal={toggleLoginModal}
-          toggleLogoutModal={toggleLogoutModal}
-          closeOverlappingModal={() => closeOverlappingModals('topic')}
-        />
+        <div className="--right-column">
+          <HomepageNav
+            ref={{
+              storyRef,
+              consultationRef,
+              contactRef
+            }}
+            isLoginModal={isLoginModal}
+            isLogoutModal={isLogoutModal}
+            toggleLoginModal={toggleLoginModal}
+            toggleLogoutModal={toggleLogoutModal}
+            closeOverlappingModal={() => closeOverlappingModals('topic')}
+          />
+        </div>
       </header>
       
       <SideNavigation ref={scrollToTopRef} />

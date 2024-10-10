@@ -82,7 +82,7 @@ export const HomepageNav = forwardRef((props, refs) => {
   }
 
   return (
-    <section className="HomepageNav">
+    <section className="HomepageNav --right-column">
       <div className="--nav-options">
         {
           Object.keys(navOptions).map((op, idx) => {

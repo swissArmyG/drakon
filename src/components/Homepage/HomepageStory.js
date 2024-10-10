@@ -15,14 +15,20 @@ export const HomepageStory = forwardRef((_, ref) => {
         isCredentialsOpen &&
         <div></div>
       }
+      
       <div className="--icon-container">
         <LazyLoad><img src={skeleIconLeft} alt="Skeleton left" className="smaller" /></LazyLoad>
         <LazyLoad><img src={skeleIconMiddle} alt="Skeleton middle" className="larger" /></LazyLoad>
         <LazyLoad><img src={skeleIconRight} alt="Skeleton right" className="smaller" /></LazyLoad>
       </div>
+
       <div className="--story-container">
         <p className="--story-content">{story}</p>
-        <LazyLoad><img src={barBreaker} alt="Paragraph break in blocks of colors" /></LazyLoad>
+      </div>
+
+      <LazyLoad><img src={barBreaker} alt="Paragraph break in blocks of colors" /></LazyLoad>
+      
+      <div className="--story-container">
         <p className="--story-content">{bioA}</p>
         <p className="--story-content">{bioB}</p>
         <p className="--story-content">{bioC} (Please see <u><em onClick={() => toggleCredentialsOpen(true)}>Dr.Templin Credentials</em></u>)</p>
