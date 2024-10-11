@@ -49,8 +49,9 @@ export const HomepageTopics =  ({ topic, setTopic, closeOverlappingModal }) => {
               
               <Modal index={index}
                 isOpen={category === topic}
-                onClick={() => setTopic(undefined)}
+                onClose={() => setTopic(undefined)}
                 header={topics[category].header}
+                scrollable
               >
                 <div className="--panes-container">
                   {renderLeftPane(category)}

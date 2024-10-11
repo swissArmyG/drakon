@@ -1,0 +1,46 @@
+.Modal {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: calc(100vh - 288px);
+
+  &.--scrollable {
+    height: calc(100vh - 288px);
+
+    .--modal {
+      overflow-y: auto;
+      max-height: calc(100vh - 288px);
+    }
+  }
+
+  .--modal {
+    position: absolute;
+    z-index: 1000;
+    height: -moz-fit-content;
+    height: fit-content;
+    height: -moz-fit-content;
+    border: 3px solid #FFC655;
+    border-radius: 60px;
+    padding: 25px;
+    top: 77px;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 1149px) {
+  .Modal {
+    .--modal {
+      width: calc(100% - 40px);
+    }
+  }
+}
+
+@media screen and (max-width: 766px) {
+  .Modal {
+    .--modal {
+      border-radius: 30px;
+      padding: 22px 15px;
+    }
+  }
+}

@@ -39,8 +39,12 @@ em {
   font-style: normal;
 }
 
-a {
-  text-decoration: none;
+u {
+  font-weight: 800;
+
+  &:hover {
+    color: $secondary-color;
+  }
 }
 
 h1 {
