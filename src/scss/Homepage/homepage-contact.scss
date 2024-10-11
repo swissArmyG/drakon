@@ -15,6 +15,11 @@
     position: absolute;
     bottom: -11px;
 
+    .--column-left,
+    .--column-right {
+      width: 20%;
+    }
+
     .--column-left {
       padding-left: 20px;
     }
