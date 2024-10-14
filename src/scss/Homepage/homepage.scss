@@ -19,9 +19,12 @@
       align-items: flex-start;
       width: 100%;
 
-      .--left-column {
+      .--left-column,
+      .--right-column {
         width: 50%;
+      }
 
+      .--left-column {
         .-blurb {
           padding: 0 20px;
         }
@@ -29,7 +32,6 @@
 
       .logo {
         width: 100%;
-        // min-width: 513px;
         padding: 20px 10px;
       }
     }
@@ -59,8 +61,9 @@
           width: 100%;
         }
 
-        .--left-column {
-          width: 95%;
+        .--left-column,
+        .--right-column {
+          width: 100%;
         }
       }
     } 

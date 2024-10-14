@@ -1,18 +1,18 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { forwardRef, useEffect, useContext } from 'react'
 import { Link } from 'react-router-dom'
-import { Login, Logout } from '.'
+// import { Login, Logout } from '.'
 import { AuthContext, CustomerContext } from '../../contexts'
 import { readCustomerByUserId } from '../../api/customers'
 
 export const HomepageNav = forwardRef((props, refs) => {
-  const {
-    // closeOverlappingModal,
-    isLoginModal,
-    isLogoutModal,
-    toggleLoginModal,
-    toggleLogoutModal
-  } = props
+  // const {
+  //   closeOverlappingModal,
+  //   isLoginModal,
+  //   isLogoutModal,
+  //   toggleLoginModal,
+  //   toggleLogoutModal
+  // } = props
 
   const { storyRef, consultationRef } = refs
   // const { storyRef, consultationRef, contactRef } = refs
@@ -69,6 +69,11 @@ export const HomepageNav = forwardRef((props, refs) => {
       linkTo: '#story',
       text: 'OUR STORY'
     },
+    spineAnatomy: {
+      onClick: () => {},
+      linkTo: '/anatomy',
+      text: 'SPINE ANATOMY / PATHOLOGY'
+    }
     // contact: {
     //   onClick: () => contactRef.current.scrollIntoView(scrollConfig),
     //   linkTo: '#contact',
@@ -82,23 +87,24 @@ export const HomepageNav = forwardRef((props, refs) => {
   }
 
   return (
-    <section className="HomepageNav --right-column">
+    <section className="HomepageNav">
       <div className="--nav-options">
         {
           Object.keys(navOptions).map((op, idx) => {
-            const isFocused = (op === 'login' && isLoginModal) ? '--focused' : ''
+            // const isFocused = (op === 'login' && isLoginModal) ? '--focused' : ''
             const text = navOptions[op].text
 
             return <React.Fragment key={idx}>
               <Link
                 to={`${navOptions[op]?.linkTo}`}
                 onClick={navOptions[op].onClick}>
-                <h4 className={`--nav-option --button ${isFocused} ${op}`}>
+                {/* <h4 className={`--nav-option --button ${isFocused} ${op}`}> */}
+                <h4 className={`--nav-option --button ${op}`}>
                   {text}
                 </h4>
               </Link>
 
-              {(op === 'login' && isLoginModal) && 
+              {/* {(op === 'login' && isLoginModal) && 
                 <Login
                   isOpen={isLoginModal}
                   toggleOpen={toggleLoginModal}
@@ -109,7 +115,7 @@ export const HomepageNav = forwardRef((props, refs) => {
                   isOpen={isLogoutModal}
                   toggleOpen={toggleLogoutModal}
                 />
-              }
+              } */}
 
             </React.Fragment>
           })

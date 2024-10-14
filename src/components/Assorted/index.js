@@ -1,3 +1,4 @@
+export { Anatomy } from './Anatomy'
 export { ConfirmEmailChange } from './ConfirmEmailChange'
 export { CredentialForm } from './CredentialForm'
 export { Modal } from './Modal'

@@ -2,7 +2,7 @@
   // padding: 7.6% 0 0 12%;
   // height: 1360px;
   height: fit-content;
-  width: 100%;
+  // width: 100%;
   margin: 0 auto 100px auto;
 
   // position: absolute;
@@ -39,25 +39,25 @@
   }
 
   // .--modal {
-    // top: 20%;
-    // left: 40%;
-    // width: 500px;
-    // width: 700px;
-    // max-width: 500px;
-    // min-width: 45%;
-    // NOTE: keep this here for possible future iteration
-    // &.-box-0 {
-    //   top: 20%;
-    // }
-    // &.-box-1 {
-    //   top: 39%;
-    // }
-    // &.-box-2 {
-    //   top: 68%;
-    // }
-    // &.-box-3 {
-    //   top: 80%;
-    // }
+  // top: 20%;
+  // left: 40%;
+  // width: 500px;
+  // width: 700px;
+  // max-width: 500px;
+  // min-width: 45%;
+  // NOTE: keep this here for possible future iteration
+  // &.-box-0 {
+  //   top: 20%;
+  // }
+  // &.-box-1 {
+  //   top: 39%;
+  // }
+  // &.-box-2 {
+  //   top: 68%;
+  // }
+  // &.-box-3 {
+  //   top: 80%;
+  // }
   // }
 
   .--panes-container {
@@ -90,6 +90,8 @@
 
 @media screen and (max-width: 1149px) {
   .HomepageTopics {
+    width: 100%;
+    
     .--content-container {
       width: 100%;
     }
@@ -100,8 +102,8 @@
   .HomepageTopics {
     .--modal-container {
       .--modal {
-
         .--panes-container {
+
           .--left-pane,
           .--right-pane {
             width: 100%
