@@ -18,7 +18,7 @@ const App = () => {
   const location = useLocation()
   
   return (
-    <section className="App">
+    <section className="App" data-testid="App">
       <Routes location={location}>
         <Route exact path="/" 
           element={<Homepage />} />
