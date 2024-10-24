@@ -5,11 +5,10 @@ export const Anatomy = () => {
       id="ypoedu-container" 
       name="ypoedu-container" width="100%" 
       border="0px" 
-      frameborder="0px" 
       style={{
         height: "300px",
         width: "100%"
       }} 
-    allowfullscreen="allowfullscreen"></iframe><script src="https://www.ypo.education/js/ypo-edu-embed.js"></script>
+    allowFullScreen="allowfullscreen"></iframe><script src="https://www.ypo.education/js/ypo-edu-embed.js"></script>
   </section>
 }

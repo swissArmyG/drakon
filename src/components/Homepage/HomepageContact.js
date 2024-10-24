@@ -25,10 +25,10 @@ export const HomepageContact = forwardRef((_, ref) => {
 
           <div className="--column-right">
             <p>
-            Peace of Mind Spine (POMS)<br/>
-            5555 Denver, Colorado<br/>
-            info@poms.com<br/>
-            +1 975 555 5555
+            50 West Liberty Street, Suite 880<br/>
+            Reno, Nevada 89501<br/>
+            {/* info@poms.com<br/>
+            +1 975 555 5555 */}
             </p>
           </div>
 
