@@ -59,6 +59,7 @@ export const ConditionForm = () => {
           type="number"
         />
       </div>
+      
       <DetailedInput
         containerClassName="--mb-20px"
         id="occupation"
