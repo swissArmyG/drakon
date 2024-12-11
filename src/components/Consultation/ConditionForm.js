@@ -1,11 +1,12 @@
 import React, { useContext } from "react"
-import { firstPageQuestions } from '../../copies/homepage-form-options'
+import { secondPageQuestions } from '../../copies/homepage-form-options'
 import { CustomerContext } from "../../contexts"
 import { DetailedInput, LabeledInput, SingleSelect } from "../Assorted/Inputs"
 import { MultipleSelects } from "../Assorted/Inputs"
 
 export const ConditionForm = () => {
-  const { 
+  const {
+    isInvalid,
     customerProfile,
     setCustomerProfile,
   } = useContext(CustomerContext)
@@ -20,6 +21,7 @@ export const ConditionForm = () => {
         <DetailedInput
           containerClassName="--mr-2p"
           id="age"
+          inputClassName={`${isInvalid('age')}`}
           label="Age"
           placeholder="Number only"
           value={customerProfile?.age}
@@ -28,6 +30,7 @@ export const ConditionForm = () => {
         />
         <DetailedInput
           id="sex"
+          inputClassName={`${isInvalid('sex')}`}
           label="Sex"
           value={customerProfile?.sex}
           onChange={(value) => onChange({ sex: value })}
@@ -38,6 +41,7 @@ export const ConditionForm = () => {
         <DetailedInput
           containerClassName="--mr-2p"
           id="height"
+          inputClassName={`${isInvalid('height')}`}
           label="Height"
           subLabel={`Example: 5'10"`}
           placeholder={"In Ft. (Feet) and In. (Inches)"}
@@ -46,6 +50,7 @@ export const ConditionForm = () => {
         />
         <DetailedInput
           id="weight"
+          inputClassName={`${isInvalid('weight')}`}
           label="Weight"
           subLabel={`Example: 170`}
           placeholder={"Number only, in Lbs. (Pounds)"}
@@ -53,24 +58,26 @@ export const ConditionForm = () => {
           onChange={(value) => onChange({ weight: value })}
           type="number"
         />
-    </div>
-    <DetailedInput
-      containerClassName="--mb-20px"
-      id="occupation"
-      label="Occupation"
-      placeholder="Your current occupation"
-      value={customerProfile?.occupation}
-      width={'100%'}
-      onChange={(value) => onChange({ occupation: value })}
-    />
+      </div>
+      <DetailedInput
+        containerClassName="--mb-20px"
+        id="occupation"
+        inputClassName={`${isInvalid('occupation')}`}
+        label="Occupation"
+        placeholder="Your current occupation"
+        value={customerProfile?.occupation}
+        width={'100%'}
+        onChange={(value) => onChange({ occupation: value })}
+      />
     </React.Fragment>
   }
 
   const renderPainDegreeInput = () => {
     return <React.Fragment>
-      <LabeledInput 
+      <LabeledInput
         className="painDegree --mb-20px"
         id="painDegree"
+        inputClassName={`${isInvalid('painDegree')}`}
         label="Rate your overall degree of pain right now from 1-10:"
         onChange={(value) => {
           let val = value
@@ -92,8 +99,9 @@ export const ConditionForm = () => {
         min="1"
       />
 
-      <LabeledInput 
+      <LabeledInput
         id="painDuration"
+        inputClassName={`${isInvalid('painDuration')}`}
         className="--mb-5px"
         label="How long have you been experiencing pain?"
         onChange={(value) => onChange({ painDuration: value })}
@@ -103,38 +111,40 @@ export const ConditionForm = () => {
   }
 
   return <section className="ConditionForm">
-    {renderAdditionalInputs()} 
+    {renderAdditionalInputs()}
 
     <div className="--options-container">
       <p><i>Please select <em>one</em> of the following:</i></p>
-        {
-          firstPageQuestions[1].options
-            .map((option, index) => {
-              return <SingleSelect
-                key={index}
-                isSelected={customerProfile?.acutePainType === option}
-                option={option}
-                selectOption={(option) => onChange({
-                  acutePainType: option
-                })}
-              />
-            }
+      {
+        secondPageQuestions[1].options
+          .map((option, index) => {
+            return <SingleSelect
+              key={index}
+              additionalClassName={`${isInvalid('acutePainType')}`}
+              isSelected={customerProfile?.acutePainType === option}
+              option={option}
+              selectOption={(option) => onChange({
+                acutePainType: option
+              })}
+            />
+          }
           )
-        }
-      </div>
+      }
+    </div>
 
-      <div className="--options-container --multiple-selects">
-        <p><i>-OR- select <em>one or more</em> of the following:</i></p>
+    <div className="--options-container --multiple-selects">
+      <p><i>-OR- select <em>one or more</em> of the following:</i></p>
 
-        <MultipleSelects
-          options={firstPageQuestions[2].options}
-          selectedOptions={customerProfile?.painSummary}
-          selectOptions={(options) => onChange({
-            painSummary: options
-          })}
-        />
-      </div>
-   
-      {renderPainDegreeInput()}
+      <MultipleSelects
+        additionalClassName={`${isInvalid('painSummary')}`}
+        options={secondPageQuestions[2].options}
+        selectedOptions={customerProfile?.painSummary}
+        selectOptions={(options) => onChange({
+          painSummary: options
+        })}
+      />
+    </div>
+
+    {renderPainDegreeInput()}
   </section>
 }

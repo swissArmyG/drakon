@@ -18,6 +18,10 @@
       &.--selected {
         background-color: $secondary-color;
       }
+
+      &.--invalid {
+        border: 2px solid $accent-c-color;
+      }
     }
 
     .--checkoption {

@@ -1,52 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 // import { useNavigate } from 'react-router-dom'
 // import { AuthContext, CustomerContext } from '../../contexts'
 import { CustomerContext } from '../../contexts'
-import { containsMissingFields } from '../../utils/validation'
 import { DetailedInput, SingleSelect } from '../Assorted/Inputs'
 
 export const CustomerProfileForm = () => {
   // const { isAuthenticated } = useContext(AuthContext)
-
   const { 
-    isRegisterClicked,
+    isInvalid,
     customerProfile,
-    // setIsRegisterClicked,
     setCustomerProfile
   } = useContext(CustomerContext)
-
-  // const navigate = useNavigate()
-  const [ missingFields, setMissingFields ] = useState([])
-
-  const checkForMissingFields = () => {
-    const _missingFields = containsMissingFields({
-      payload: customerProfile,
-      requiredFields: ['firstname', 'lastname', 'email', 'phoneNumber']
-    })
-
-    setMissingFields(_missingFields)
-  }
-
-  useEffect(() => {
-    // Check for missing fields only after "register" has been clicked
-    if (isRegisterClicked) {
-      checkForMissingFields()
-    }
-  }, [customerProfile, isRegisterClicked])
-
-  // const login = () => {
-  //   navigate("/login")
-  // }
-
-  // const register = () => {
-  //   checkForMissingFields()
-  //   setIsRegisterClicked(true)
-  // }
-
-  const isInvalid = useCallback((field) => {
-    return missingFields.length > 0 && missingFields.includes(field) ? '--invalid' : ''
-  }, [missingFields])
 
   const onChange = (data) => {
     setCustomerProfile({ ...customerProfile, ...data })
@@ -55,17 +20,7 @@ export const CustomerProfileForm = () => {
   return ( 
     <section className="CustomerProfileForm">
       {/* { !isAuthenticated && <p className="--login-nav">Please <u><em onClick={() => login()}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login</p> } */}
-
-      <p><em>Full Name</em>
-       
-        {missingFields.length > 0 && 
-          <span className="--required --ml-10px">
-            <i>
-              <sup>*</sup>
-              Required fields
-            </i>
-          </span>}
-      </p>
+      <p><em>Full Name</em></p>
 
       <div className="row">
         <DetailedInput
@@ -97,7 +52,7 @@ export const CustomerProfileForm = () => {
           onChange={(value) => onChange({ email: value })}
         />
         <DetailedInput
-          id="phone"
+          id="phoneNumber"
           label="Phone"
           subLabel="Number Only"
           placeholder="No dash (-) or dot (.) required"
@@ -109,6 +64,7 @@ export const CustomerProfileForm = () => {
 
       <SingleSelect 
         isSelected={customerProfile?.isConsented || false}
+        additionalClassName={`${isInvalid('isConsented')}`}
         option={"By checking this box, you acknowledge that the information provided is accurate and complete to the best of your ability. You consent to the terms and conditions of POMS, its affiliates and partners"}
         selectOption={() => {
           onChange({ isConsented: !customerProfile?.isConsented })

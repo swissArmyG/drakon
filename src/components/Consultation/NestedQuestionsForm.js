@@ -10,7 +10,10 @@ export const NestedQuestionsForm = ({
   nested=undefined,
   onChange
 }) => {
-  const { customerProfile } = useContext(CustomerContext)
+  const { 
+    customerProfile,
+    isInvalid 
+  } = useContext(CustomerContext)
   const { 
     MULTI_SELECT, 
     TEXT_INPUT 
@@ -23,6 +26,7 @@ export const NestedQuestionsForm = ({
           nested.type === MULTI_SELECT
           && <MultipleSelects
             className="--ml-10px"
+            additionalClassName={`${isInvalid(nested.attribute)}`}
             options={nested.options}
             selectedOptions={customerProfile?.[nested.attribute]}
             selectOptions={(options) => {
@@ -41,6 +45,7 @@ export const NestedQuestionsForm = ({
               className="--ml-10px --mb-5px"
               id={attribute}
               index={index}
+              inputClassName={`${isInvalid(attribute)}`}
               label={option.question}
               value={customerProfile?.[attribute]}
               onChange={(value) => {

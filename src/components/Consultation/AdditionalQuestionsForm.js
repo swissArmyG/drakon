@@ -14,6 +14,7 @@ export const AdditionalQuestionsForm = () => {
 
   const { 
     customerProfile,
+    isInvalid,
     paginatedQuestions,
     setCustomerProfile 
   } = useContext(CustomerContext)
@@ -30,6 +31,7 @@ export const AdditionalQuestionsForm = () => {
   }) => {
     return <SingleSelect 
       key={index}
+      additionalClassName={`${isInvalid(attribute)}`}
       isSelected={customerProfile?.[attribute] === op}
       option={op}
       selectOption={(option) => {
@@ -51,6 +53,7 @@ export const AdditionalQuestionsForm = () => {
   }) => {
     return <MultipleSelects
       className="row"
+      additionalClassName={`${isInvalid(attribute)}`}
       options={options}
       selectedOptions={customerProfile?.[attribute]}
       selectOptions={(options) => {
@@ -65,6 +68,7 @@ export const AdditionalQuestionsForm = () => {
   }) => {
     return <LabeledInput
       className="--mb-20px"
+      inputClassName={`${isInvalid(attribute)}`}
       id={attribute}
       label={question}
       value={customerProfile?.[attribute]}
@@ -102,11 +106,7 @@ export const AdditionalQuestionsForm = () => {
 
   return <section className="AdditionalQuestionsForm">
     {
-      paginatedQuestions && Object
-      .keys(paginatedQuestions)
-      .map((key, index) => {
-
-        const entry = paginatedQuestions[key]
+      paginatedQuestions.map((entry, index) => {
         const { attribute, ifYes, question, type } = entry
 
         const _ifYes = ifYes && customerProfile?.[attribute] === "Yes"

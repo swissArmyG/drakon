@@ -1,10 +1,10 @@
 export const MultipleSelects = ({
+  additionalClassName="",
   className="",
   options,
   selectedOptions=[],
   selectOptions,
 }) => {
-
   const optionsArray = Array.isArray(options) 
     ? options 
     : Object.keys(options);
@@ -31,7 +31,7 @@ export const MultipleSelects = ({
           
           return <div key={index} className='--option-container'>
             <div 
-              className={`--checkbox --button ${isSelected(label)}`} 
+              className={`--checkbox --button ${isSelected(label)} ${additionalClassName}`} 
               onClick={(e) => {
                 e.preventDefault()
                 determineMultipleOptions(label)

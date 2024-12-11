@@ -55,6 +55,11 @@ span {
   font-size: 13px;
 }
 
+.--required {
+  i {
+    color: $accent-c-color;
+  }
+}
 
 @media screen and (max-width: 412px) {
   h4 {

@@ -1,4 +1,5 @@
 export const SingleSelect = ({ 
+  additionalClassName='',
   isSelected=false,
   option,
   selectOption
@@ -8,7 +9,7 @@ export const SingleSelect = ({
   return <section className="SingleSelect">
     <div className='--option-container'>
       <div 
-        className={`--checkbox --button ${selected}`} 
+        className={`--checkbox --button ${selected} ${additionalClassName}`} 
         onClick={(e) => {
           e.preventDefault()
           selectOption(option)

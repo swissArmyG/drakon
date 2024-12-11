@@ -8,32 +8,30 @@ import {
 } from "../../api/customers"
 import { AuthContext, NotificationContext, CustomerContext } from "../../contexts"
 
-export const PANE_VARIABLES = {
+export const PAGE_VARIABLES = {
   INCOMPLETE: 0,
-  FIRST_PANE: 1,
-  LAST_PANE: 7
+  FIRST_PAGE: 1,
+  LAST_PAGE: 7
 }
 
-export const PaneControls = ({ windowWidth, scrollToFormTop }) => {
+export const PageControls = ({ windowWidth, scrollToFormTop }) => {
   const { 
-    FIRST_PANE,
-    LAST_PANE 
-  } = PANE_VARIABLES
+    FIRST_PAGE,
+    LAST_PAGE 
+  } = PAGE_VARIABLES
 
   const navigate = useNavigate()
-
   const { userData } = useContext(AuthContext)
   const { setNotification } = useContext(NotificationContext)
   const { 
     isRegisterClicked,
     originalCustomerProfile,
     customerProfile,
-    formPage,
-    pane,
+    page,
     resetForm,
-    setPane,
-    setFormPage,
-    stepsCompleted
+    setPage,
+    stepsCompleted,
+    validateForm
   } = useContext(CustomerContext)
 
   const customerId = customerProfile?.id  
@@ -160,52 +158,51 @@ export const PaneControls = ({ windowWidth, scrollToFormTop }) => {
   const buttonWidth = windowWidth > 613 ? "300px" : "160px"
   const buttonTextPosition = windowWidth > 613 ? undefined : "0%"
   
-  const isFirstPane = pane === FIRST_PANE
-  const isLastPane = pane === LAST_PANE
+  const isFirstPage = page === FIRST_PAGE
+  const isLastPage = page === LAST_PAGE
 
-  const isNextable = stepsCompleted >= pane
-  const isSubmittable = isLastPane && stepsCompleted === LAST_PANE
+  const isNextable = stepsCompleted >= page
+  const isSubmittable = isLastPage && stepsCompleted === LAST_PAGE
 
   let isDisabled = false;
-  if (pane < LAST_PANE) {
+  if (page < LAST_PAGE) {
     isDisabled = !isNextable
-  } else if (isLastPane) {
+  } else if (isLastPage) {
     isDisabled = !isSubmittable
   } else if (isSubmitting) {
     isDisabled = true
   }
 
-  return <section className="PaneControls row">
+  return <section className="PageControls row">
     <div className="--button-container">
       <FadedBgButton
         buttonText={'BACK'} 
         buttonTextPosition={buttonTextPosition}
         onClick={(e) => {
           e.preventDefault()
-          setPane(pane <= 1 ? 1 : pane - 1)
-
-          if (pane >= 3)
-          setFormPage(formPage <= 0 ? 0 : formPage - 1)
+          setPage(page <= 1 ? 1 : page - 1)
         }}
-        isDisabled={isFirstPane}
+        isDisabled={isFirstPage}
         width={buttonWidth}
       />
     </div>
     <div className="--button-container">
       <FadedBgButton    
-        buttonText={pane < LAST_PANE ? 'NEXT' : determineSubmitButtonText()} 
+        buttonText={page < LAST_PAGE ? 'NEXT' : determineSubmitButtonText()} 
         buttonTextPosition={buttonTextPosition}
         onClick={(e) => {
-          e.preventDefault() 
+          e.preventDefault()  
           if (isNextable) {
-            setPane(pane + 1)
+            setPage(page + 1)
+            validateForm(false)
+          } else {
+            validateForm(true)
           }
-          if (isLastPane && isSubmittable) {
+
+          if (isLastPage && isSubmittable) {
             determineSubmitButtonFunc()
           }
-          if (pane >= 3 && pane <= LAST_PANE) {
-            setFormPage(formPage + 1)
-          }
+          
           scrollToFormTop()
         }}
         isDisabled={isDisabled}

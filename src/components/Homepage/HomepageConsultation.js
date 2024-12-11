@@ -3,15 +3,16 @@ import LazyLoad from 'react-lazy-load';
 import { ProgressBar } from "../Assorted"
 import { CustomerFile, CustomerProfileForm } from "../Customer"
 import { CustomerContext } from "../../contexts"
-import { AdditionalQuestionsForm, ConditionForm, PaneControls } from "../Consultation"
-import { PANE_VARIABLES } from "../Consultation"
+import { AdditionalQuestionsForm, ConditionForm, PageControls } from "../Consultation"
+import { PAGE_VARIABLES } from "../Consultation"
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { formHeader } from "../../copies/homepage-form-options";
 
 export const HomepageConsultation = forwardRef((_props, ref) => {
-  const { FIRST_PANE,LAST_PANE } = PANE_VARIABLES
+  const { FIRST_PAGE, LAST_PAGE } = PAGE_VARIABLES
   const {
-    pane,
+    isValidatingForm,
+    page,
     stepsCompleted
   } = useContext(CustomerContext)
 
@@ -44,15 +45,6 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
           <img src={spineGraphic} alt="A section of a spine" className="--header-logo" />
         </LazyLoad>
         <p className="--header-text">
-          {/* { 
-            (pane === FIRST_PANE || pane < 4) && `Your journey to a healed you begins here… Please begin by answering a few basic questions throughout these brief forms accurately and an associate from POMS will be in touch with you shortly for follow up`
-          }
-          {
-            (pane > 3 && pane < LAST_PANE) && `You are almost done! We want to understand your pain better to be able to help you on your journey to relief. Please continue filling out our customer questionnaire to share more about what your body has been telling you. Your insights will guide us in identifying the best steps for your care.`
-          }
-          {
-            pane === LAST_PANE && `Your journey to clarity and relief is just a few clicks away! To upload your MRI scans, please use the secure upload form provided on our site below. By sharing your MRI, you’re giving us permission to have our expert affiliates and partners review your results for a thorough second opinion. Ensure all files are clearly labeled with your name and contact information for accurate processing.`
-          } */}
           {formHeader}
         </p>
       </div>
@@ -63,21 +55,33 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
       </ul>
     </React.Fragment>
   }
+
+  const renderRequiredWarning = () => {
+    return (isValidatingForm
+      && stepsCompleted < page)
+      && <span className="--required --ml-10px">
+        <em><i>
+          <sup>*</sup>
+          Please fill out required fields
+        </i></em>
+      </span>
+  }
   
   return (
     <section ref={ref} className="HomepageConsultation">
       <div className="--background-overlay" />
         <div className="--form-container">
           {renderHeader()}
-          {pane === FIRST_PANE && <CustomerProfileForm />}
-          {pane === 2 && <ConditionForm />}
-          {pane >= 3 && <AdditionalQuestionsForm />}
-          {pane === LAST_PANE && <CustomerFile />}
+          {renderRequiredWarning()}
+          {page === FIRST_PAGE && <CustomerProfileForm />}
+          {page === 2 && <ConditionForm />}
+          {page >= 3 && <AdditionalQuestionsForm />}
+          {page === LAST_PAGE && <CustomerFile />}
           <ProgressBar 
-            steps={LAST_PANE} 
+            steps={LAST_PAGE} 
             stepsCompleted={stepsCompleted}
           />
-          <PaneControls 
+          <PageControls 
             windowWidth={windowSize.width} 
             scrollToFormTop={() => ref.current.scrollIntoView({ behavior: 'smooth' })}  
           />

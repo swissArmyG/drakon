@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { createContext, useEffect, useRef, useState } from 'react'
+import { createContext, useCallback, useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { PANE_VARIABLES } from '../components/Consultation'
-import { additionalQuestions } from '../copies/homepage-form-options'
+import { PAGE_VARIABLES } from '../components/Consultation'
+import { questionsByPage } from '../copies/homepage-form-options'
+import { validateFields } from '../utils/validation'
 
 const CustomerContext = createContext()
 
@@ -10,14 +11,13 @@ const CustomerProvider = ({ children }) => {
   const navigate = useNavigate()
   const scrollToTopRef = useRef()
 
-  const { INCOMPLETE, FIRST_PANE } = PANE_VARIABLES
+  const { INCOMPLETE, FIRST_PAGE } = PAGE_VARIABLES
 
-  const [ isRegisterClicked, setIsRegisterClicked ] = useState(false)
+  const [ isValidatingForm, setIsValidatingForm ] = useState(false)
+  const [ missingFields, setMissingFields ] = useState([])
 
-  const [ pane, setPane ] = useState(FIRST_PANE)
-  const [ paginatedQuestions, setPaginatedQuestions ] = useState(undefined)
-
-  const [ formPage, setFormPage ] = useState(0)
+  const [ page, setPage ] = useState(FIRST_PAGE)
+  const [ paginatedQuestions, setPaginatedQuestions ] = useState([])
 
   const [ customerProfile, setCustomerProfile ] = useState(undefined)
   const [ originalCustomerProfile, setOriginalCustomerProfile] = useState(undefined)
@@ -25,44 +25,65 @@ const CustomerProvider = ({ children }) => {
   const [ stepsCompleted, setStepsCompleted ] = useState(INCOMPLETE)
 
   useEffect(() => {
-    if (pane >= 3) {
-      const pageSize = 5;
-      const startIndex = formPage * pageSize;
-      const endIndex = startIndex + pageSize;
-      const newPaginatedQuestions = Object.fromEntries(
-        Object.entries(additionalQuestions)
-              .slice(startIndex, endIndex)
-      );
-  
-      setPaginatedQuestions(newPaginatedQuestions)
+    const currentPageQuestions = questionsByPage[page] || []
+    setPaginatedQuestions(currentPageQuestions)
+  }, [page])
+
+  const isInvalid = useCallback((field) => {
+    if (isValidatingForm) {
+      const fieldValue = customerProfile?.[field]
+
+      return !fieldValue || (Array.isArray(fieldValue) && fieldValue.length === 0) ? '--invalid' : ''
     }
-  }, [pane]);
+    return '' 
+  }, [isValidatingForm, customerProfile])
+
+  const onValidateField = (_missingFields) => {
+    setMissingFields([
+      ...missingFields, 
+      ..._missingFields
+    ])
+  }
+
+  const _validateFields = (requiredFields) => {
+    const validationAttributes = {
+      payload: customerProfile,
+      onValidateField
+    }
+
+    return validateFields({
+      ...validationAttributes,
+      requiredFields
+    })
+  }
 
   const firstStepCompleted = () => {
     const requiredFields = ['firstname', 'lastname', 'email', 'phoneNumber', 'isConsented'];
 
-    return requiredFields.every(field => !!customerProfile?.[field]);
+    return _validateFields(requiredFields)
   };
 
   const secondStepCompleted = () => {
     const requiredFields = ['age', 'sex', 'height', 'weight', 'occupation', 'acutePainType', 'painDegree', 'painDuration'];
 
-    return requiredFields.every(field => !!customerProfile?.[field]) 
+    return _validateFields(requiredFields) 
       && customerProfile?.painSummary?.length > 0
   };
 
   const thirdStepCompleted = () => {
     const requiredFields = ['activityLevel', 'painStartType', 'physicalTherapyHistory']
 
-    return requiredFields.every(field => !!customerProfile?.[field])
+    return _validateFields(requiredFields)
       && customerProfile?.painAreas?.length > 0
       && customerProfile?.painStartCauses?.length > 0
   }
 
   const fourthStepCompleted = () => {
-    const nestedOfferedSpinalSurgery = ['offeredProcedure', 'offeredBy', 'discussedResult']
-    const nestedPreviousSpinalSurgery = ['surgeryType', 'surgeryDateTime', 'surgeon']
     const requiredFields = ['limbWeaknessNumbness', 'walkingUnsteadiness']
+
+    const nestedOfferedSpinalSurgery = ['offeredProcedure', 'offeredBy', 'discussedResult']
+    
+    const nestedPreviousSpinalSurgery = ['surgeryType', 'surgeryDateTime', 'surgeon']
     
     const offeredSpinalSurgery = customerProfile?.offeredSpinalSurgery === 'Yes'
       ? nestedOfferedSpinalSurgery.every(field => !!customerProfile?.[field])
@@ -72,22 +93,22 @@ const CustomerProvider = ({ children }) => {
       ? nestedPreviousSpinalSurgery.every(field => !!customerProfile?.[field])
       : !!customerProfile?.previousSpinalSurgery
 
-    return offeredSpinalSurgery
+    return _validateFields(requiredFields)  
+      && offeredSpinalSurgery
       && previousSpinalSurgery
-      && customerProfile?.spineImagingTypes?.length > 0
-      && requiredFields.every(field => !!customerProfile?.[field])
+      && customerProfile?.spineImagingTypes?.length > 0 
   }
 
   const fifthStepCompleted = () => {
     const requiredFields = ['handObjectManipulationProblem', 'pastPainMedication', 'currentPainMedication']
     
-    return requiredFields.every(field => !!customerProfile?.[field])
+    return _validateFields(requiredFields)
       && customerProfile?.painfulActivities?.length > 0
       && customerProfile?.painfulLegActivities?.length > 0
   }
 
   const sixthStepCompleted = () => {
-    const requiredFields = ['unoperationalDueToPain', 'physicianVisitForPain'].every(field => !!customerProfile?.[field])
+    const requiredFields = ['unoperationalDueToPain', 'physicianVisitForPain']
 
     const nestedInjectionRelief = ['helpfulInjection', 'injectionReliefDuration'].every(field => !!customerProfile?.[field])
 
@@ -101,24 +122,28 @@ const CustomerProvider = ({ children }) => {
 
     const helpfulActivities = customerProfile?.helpfulActivities?.length > 0
 
-    return requiredFields && injectionProcedureForPain && injectionRelief && helpfulActivities
+    return _validateFields(requiredFields)
+      && injectionProcedureForPain 
+      && injectionRelief 
+      && helpfulActivities
   }
 
   const seventhStepCompleted = () => {
     const requiredFields = ['medicalProblem', 'currentMedication']
-    return requiredFields.every(field => !!customerProfile?.[field])
+
+    return _validateFields(requiredFields)
   }
 
   const determineStepsCompleted = () => {
-    let _stepsCompleted = pane
+    let _stepsCompleted = page
     
     const decrementStep = () => {
-      if (_stepsCompleted >= pane) {
+      if (_stepsCompleted >= page) {
         return _stepsCompleted - 1
       }
     } 
   
-    switch (pane) {
+    switch (page) {
       case 1:
         _stepsCompleted = firstStepCompleted() ? 1 : 0;
         break;
@@ -146,15 +171,19 @@ const CustomerProvider = ({ children }) => {
     
     setStepsCompleted(_stepsCompleted);
   };
+
   useEffect(() => {
     determineStepsCompleted()
-  }, [customerProfile, pane])
+  }, [customerProfile, page])
+
+  const validateForm = (_isValidating) => {
+    setIsValidatingForm(_isValidating)
+  }
 
   const resetForm = () => {
     setCustomerProfile(undefined)
     setOriginalCustomerProfile(undefined)
-    setIsRegisterClicked(false)
-    setPane(FIRST_PANE)
+    setPage(FIRST_PAGE)
     setStepsCompleted(0)
     navigate("/")
     scrollToTopRef?.current?.scrollIntoView({ behavior: 'smooth' })
@@ -162,21 +191,22 @@ const CustomerProvider = ({ children }) => {
 
   return (
     <CustomerContext.Provider value={{
+      isInvalid,
+      isValidatingForm,
       customerProfile,
-      isRegisterClicked,
+      missingFields,
       originalCustomerProfile,
       paginatedQuestions,
-      pane,
-      formPage,
+      page,
       resetForm,
       scrollToTopRef,
       stepsCompleted,
-      setIsRegisterClicked,
       setCustomerProfile,
-      setPane,
+      setMissingFields,
+      setPage,
       setOriginalCustomerProfile,
-      setFormPage,
-      setStepsCompleted
+      setStepsCompleted,
+      validateForm
     }}>
       {children}
     </CustomerContext.Provider>
