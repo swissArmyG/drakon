@@ -6,7 +6,7 @@ export const Anatomy = () => {
       name="ypoedu-container" width="100%" 
       border="0px" 
       style={{
-        height: "300px",
+        height: "100vh",
         width: "100%"
       }} 
     allowFullScreen="allowfullscreen"></iframe><script src="https://www.ypo.education/js/ypo-edu-embed.js"></script>
