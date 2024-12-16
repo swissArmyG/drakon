@@ -1,16 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { 
   createContext,
-  useEffect,
+  // useEffect,
   useState 
 }  from 'react'
-import { useNavigate } from 'react-router-dom'
-import { authenticate } from '../api/sessions'
+// import { useNavigate } from 'react-router-dom'
+// import { authenticate } from '../api/sessions'
 
 const AuthContext = createContext()
 
 const AuthProvider = ({ children }) => {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   const [ isAuthenticated, setIsAuthenticated ] = useState(false)
   const [ loginPayload, setLoginPayload ] = useState({
     email: '',
@@ -18,27 +18,27 @@ const AuthProvider = ({ children }) => {
   })
   const [ userData, setUserData ] = useState(undefined)
 
-  useEffect(() => {
-    const authenticateCallback = async() => {
-      try {
-        const { userId, email, authenticated } = await authenticate()
+  // useEffect(() => {
+  //   const authenticateCallback = async() => {
+  //     try {
+  //       const { userId, email, authenticated } = await authenticate()
         
-        if (authenticated) {
-          setUserData({ id: userId, email })
-          setIsAuthenticated(authenticated)
-        } else {
-          setUserData(undefined)
-          setIsAuthenticated(false)
-          navigate("/")
-        }
+  //       if (authenticated) {
+  //         setUserData({ id: userId, email })
+  //         setIsAuthenticated(authenticated)
+  //       } else {
+  //         setUserData(undefined)
+  //         setIsAuthenticated(false)
+  //         navigate("/")
+  //       }
         
-      } catch (err) {
-        console.error(err)
-      }
-    }
+  //     } catch (err) {
+  //       console.error(err)
+  //     }
+  //   }
 
-    authenticateCallback()
-  }, [])
+  //   authenticateCallback()
+  // }, [])
 
   return (
     <AuthContext.Provider value={{ 

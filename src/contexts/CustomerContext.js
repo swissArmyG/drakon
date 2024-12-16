@@ -8,12 +8,15 @@ import { validateFields } from '../utils/validation'
 const CustomerContext = createContext()
 
 const CustomerProvider = ({ children }) => {
+  // const location = useLocation()
   const navigate = useNavigate()
+
   const scrollToTopRef = useRef()
 
   const { INCOMPLETE, FIRST_PAGE } = PAGE_VARIABLES
 
   const [ isValidatingForm, setIsValidatingForm ] = useState(false)
+  const [ isSubmitting, setIsSubmitting ] = useState(false)
   const [ missingFields, setMissingFields ] = useState([])
 
   const [ page, setPage ] = useState(FIRST_PAGE)
@@ -22,8 +25,23 @@ const CustomerProvider = ({ children }) => {
   const [ customerProfile, setCustomerProfile ] = useState(undefined)
   const [ originalCustomerProfile, setOriginalCustomerProfile] = useState(undefined)
 
+  const [ dropboxAccessToken, setDropboxAccessToken ] = useState('')
+  const [ file, setFile ] = useState(undefined)
+
   const [ stepsCompleted, setStepsCompleted ] = useState(INCOMPLETE)
 
+  const scrollToTop = () => {
+    scrollToTopRef?.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    // Initialize the customerProfile from localStorage on component mount
+    const savedProfile = localStorage.getItem('customerProfile')
+    if (savedProfile) {
+      setCustomerProfile(JSON.parse(savedProfile)) // Update context if needed
+    }
+  }, [setCustomerProfile])  // Run only once when the component mounts
+  
   useEffect(() => {
     const currentPageQuestions = questionsByPage[page] || []
     setPaginatedQuestions(currentPageQuestions)
@@ -186,24 +204,40 @@ const CustomerProvider = ({ children }) => {
     setPage(FIRST_PAGE)
     setStepsCompleted(0)
     navigate("/")
-    scrollToTopRef?.current?.scrollIntoView({ behavior: 'smooth' })
+    scrollToTop()
+  }
+
+  const setCustomerLocalStorage = () => {
+    localStorage.setItem('customerProfile', JSON.stringify(customerProfile))
+  }
+
+  const removeCustomerLocalStorage = () => {
+    localStorage.removeItem('customerProfile')
   }
 
   return (
     <CustomerContext.Provider value={{
       isInvalid,
       isValidatingForm,
+      isSubmitting,
       customerProfile,
+      dropboxAccessToken,
       missingFields,
       originalCustomerProfile,
       paginatedQuestions,
       page,
+      file,
+      removeCustomerLocalStorage,
       resetForm,
       scrollToTopRef,
       stepsCompleted,
+      setCustomerLocalStorage,
       setCustomerProfile,
+      setDropboxAccessToken,
+      setIsSubmitting,
       setMissingFields,
       setPage,
+      setFile,
       setOriginalCustomerProfile,
       setStepsCompleted,
       validateForm

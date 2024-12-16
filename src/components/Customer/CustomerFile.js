@@ -1,50 +1,75 @@
-import React, { useContext, useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { FilePond, registerPlugin } from 'react-filepond'
 import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import { authDropbox, authDropboxCallback } from '../../api/customerFiles';
-import { uploadFile } from '../../api/customerFiles';
-import { NotificationContext } from '../../contexts'
-
+import { authDropbox, authDropboxCallback } from '../../api/customerFiles'
+import { CustomerContext, NotificationContext } from '../../contexts'
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
-export const CustomerFile = () => {
+export const CustomerFile = ({ scrollToFormTop }) => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
   const [ code, setCode ] = useState('')
   const [ state, setState ] = useState('')
-
-  const [ files, setFiles ] = useState([])
-  const [ accessToken, setAccessToken ] = useState('')
-
+  const {
+    dropboxAccessToken,
+    file,
+    setCustomerLocalStorage,
+    setDropboxAccessToken,
+    setFile,
+  } = useContext(CustomerContext)
   const { setNotification } = useContext(NotificationContext)
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const code = params.get('code')
-    const state = params.get('state')
+  const getAuthUrl = async () => {
+    try {
+      const { auth_url } = await authDropbox()
 
-    code && setCode(code)
-    state && setState(state)
+      if (auth_url) {
+        setCustomerLocalStorage()
+        // window.open(auth_url, '_blank');
+        window.location.href = auth_url
+
+        scrollToFormTop()
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const getAccessToken = useCallback(async(code, state) => {
+    try {
+      const { access_token } = await authDropboxCallback({ code, state });
+      access_token && setDropboxAccessToken(access_token);
+      
+      scrollToFormTop()
+    } catch (err) {
+      console.error(err)
+    }
   }, [])
-
+  
   useEffect(() => {
-    const getAccessToken = async() => {
-      try {
-        const { access_token } = await authDropboxCallback({ code, state })
-        setAccessToken(access_token)
-      } catch (err) {
-        console.error(err)
+    const queryParams = new URLSearchParams(location.search)
+    const code = queryParams.get('code')
+    const state = queryParams.get('state')
+
+    if (code && state) {
+      setCode(code)
+      setState(state)
+
+      if (!dropboxAccessToken) {
+        getAccessToken(code, state)
       }
     }
 
-    if (code && state) {
-      getAccessToken()
-    }
-  }, [code, state])
+  }, [code, state, dropboxAccessToken])
 
   // Handle file upload
-  const handleUpload = async (file) => {
+  const handleFile = async (file) => {
     console.log('file', file)
 
     if (file.type !== 'application/dicom' 
@@ -54,42 +79,29 @@ export const CustomerFile = () => {
         type: 'error',
         message: 'Please upload only .dcm, .jpg or .jpeg file'
       })
-    }
-
-    // Upload file to Dropbox
-    const formData = new FormData();
-    formData.append('file', file);
-
-    try {
-      await uploadFile(accessToken, formData)
-    } catch (err) {
-      setNotification({ type: 'error', message: 'Unable to upload file currently, please check your internet connection or try again later' })
+      return;
+    } else {
+      setFile(file)
     }
   };
 
-  const getAuthUrl = async () => {
-    try {
-      const { auth_url } = await authDropbox()
-      if (auth_url) {
-        window.open(auth_url, '_blank');
-      }
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   return (
     <section className="CustomerFile">
-      <p>File upload: </p>
-      <u onClick={() => getAuthUrl()}>Please click here to authenticate with Dropbox</u>
-      <FilePond
-        files={files}
-        onupdatefiles={(files) => setFiles(files)}
-        onprocessfile={(file) => handleUpload(file)}
-        allowMultiple={false}
-        maxFiles={1}
-        labelIdle='Drag & Drop your.DCM or.jpg files or <span class="filepond--label-action">Browse</span> here'
-      />
+      <p>Upload your Dicom (.dcm) or JPEG (.jpg or .jpeg) files: </p>
+
+      {dropboxAccessToken ? 
+        <FilePond
+          files={file}
+          onupdatefiles={handleFile(file)}
+          // onprocessfile={(file) => handleUpload(file)}
+          allowMultiple={false}
+          maxFiles={1}
+          // maxFileSize="5MB" // Limit file size to 5MB, adjust as needed
+          labelIdle='Drag & Drop your.DCM or.jpg files or <span class="filepond--label-action">Browse</span> here'
+          labelFileProcessing='Uploading file...'
+          labelFileProcessingComplete='Upload complete!'
+        /> : 
+        <p>Please click <u onClick={() => getAuthUrl()}>here</u> and proceed to Dropbox authentication</p>}
     </section>
   );
 };

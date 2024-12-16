@@ -1,28 +1,22 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { forwardRef, useEffect, useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 // import { Login, Logout } from '.'
 import { AuthContext, CustomerContext } from '../../contexts'
 import { readCustomerByUserId } from '../../api/customers'
 
-export const HomepageNav = forwardRef((props, refs) => {
-  // const {
-  //   closeOverlappingModal,
-  //   isLoginModal,
-  //   isLogoutModal,
-  //   toggleLoginModal,
-  //   toggleLogoutModal
-  // } = props
-
+export const HomepageNav = forwardRef((_, refs) => {
   const { storyRef, consultationRef } = refs
-  // const { storyRef, consultationRef, contactRef } = refs
   const { userData } = useContext(AuthContext)
   const { 
     customerProfile, 
     setOriginalCustomerProfile, 
     setCustomerProfile 
   } = useContext(CustomerContext)
- 
+
+  const location = useLocation()
+  const queryParams = new URLSearchParams(location.search)
+
   const scrollConfig = { behavior: "smooth" }
 
   const readCustomer = async () => {
@@ -61,7 +55,7 @@ export const HomepageNav = forwardRef((props, refs) => {
     // },
     consultation: {
       onClick: () => consultationRef.current.scrollIntoView(scrollConfig),
-      linkTo: '#consultation',
+      linkTo: `?${queryParams}#consultation`,
       text: 'REQUEST CONSULTATION'
     },
     story: {
@@ -116,7 +110,6 @@ export const HomepageNav = forwardRef((props, refs) => {
                   toggleOpen={toggleLogoutModal}
                 />
               } */}
-
             </React.Fragment>
           })
         }
