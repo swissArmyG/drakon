@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import { FadedBgButton } from '../Buttons'
 import { CustomerContext } from "../../contexts"
 
@@ -15,7 +15,7 @@ export const PageControls = ({ onSubmit, scrollToFormTop, windowWidth }) => {
     LAST_PAGE 
   } = PAGE_VARIABLES
 
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
   // const { userData } = useContext(AuthContext)
   const { 
     // originalCustomerProfile,

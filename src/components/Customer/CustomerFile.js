@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { FilePond, registerPlugin } from 'react-filepond'
 import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
@@ -12,7 +12,7 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
 export const CustomerFile = ({ scrollToFormTop }) => {
   const location = useLocation()
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [ code, setCode ] = useState('')
   const [ state, setState ] = useState('')
