@@ -134,7 +134,7 @@ export const ConditionForm = () => {
     </div>
 
     <div className="--options-container --multiple-selects">
-      <p><i>-OR- select <em>one or more</em> of the following:</i></p>
+      <p><i>Please select <em>one or more</em> of the following:</i></p>
 
       <MultipleSelects
         additionalClassName={`${isInvalid('painSummary')}`}
