@@ -12,32 +12,37 @@ registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
 export const CustomerFile = ({ scrollToFormTop }) => {
   const location = useLocation()
-  // const navigate = useNavigate()
 
-  const [ code, setCode ] = useState('')
-  const [ state, setState ] = useState('')
   const {
     dropboxAccessToken,
     file,
-    setCustomerLocalStorage,
     setDropboxAccessToken,
-    setFile,
   } = useContext(CustomerContext)
   const { setNotification } = useContext(NotificationContext)
+
+  const [filesState, setFilesState] = useState(file || []);
 
   const getAuthUrl = async () => {
     try {
       const { auth_url } = await authDropbox()
 
       if (auth_url) {
-        setCustomerLocalStorage()
-        // window.open(auth_url, '_blank');
-        window.location.href = auth_url
+        const authWindow = window.open(auth_url, '_blank')
+        const interval = setInterval(() => {
+          try {
+            if (authWindow.location && authWindow.location.href.includes('page7#consultation')) {
+              clearInterval(interval)
+              authWindow.close()
+            } 
+          } catch (err) {
+            setNotification('Unable to load right now, please try again later')
+          }
+        }, 500)
 
         scrollToFormTop()
       }
     } catch (err) {
-      console.error(err)
+      setNotification('Unable to load right now, please try again later')
     }
   }
 
@@ -56,52 +61,100 @@ export const CustomerFile = ({ scrollToFormTop }) => {
     const queryParams = new URLSearchParams(location.search)
     const code = queryParams.get('code')
     const state = queryParams.get('state')
-
-    if (code && state) {
-      setCode(code)
-      setState(state)
-
-      if (!dropboxAccessToken) {
-        getAccessToken(code, state)
-      }
+    
+    if (code && state && !dropboxAccessToken) {
+      getAccessToken(code, state)
     }
+  }, [location.search, dropboxAccessToken])
 
-  }, [code, state, dropboxAccessToken])
-
-  // Handle file upload
-  const handleFile = async (file) => {
-    console.log('file', file)
-
-    if (file.type !== 'application/dicom' 
-      && file.type !== 'image/jpeg') {
-      
+  const handleFile = async (files) => {
+    console.log("Received files:", files); // Log the files object for debugging
+  
+    const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+  
+    // Check if files is not empty or undefined
+    if (!files || files.length === 0) {
       setNotification({
         type: 'error',
-        message: 'Please upload only .dcm, .jpg or .jpeg file'
-      })
+        message: 'No files added.'
+      });
       return;
-    } else {
-      setFile(file)
     }
+  
+    // Let's loop through each file and check if it's valid
+    files.forEach(file => {
+      console.log("Checking file:", file); // Log each file object for debugging
+  
+      if (!file || !file.name) {
+        console.log("Invalid file detected:", file); // This file is invalid, log it
+        setNotification({
+          type: 'error',
+          message: 'Only .dcm, .jpg, or .jpeg files are allowed.'
+        });
+        return;
+      }
+  
+      const isValidFileType = (file) => {
+        const validTypes = ['application/dicom', 'application/dcm', 'image/jpeg'];
+        const validExtensions = ['.dcm', '.jpg', '.jpeg'];
+  
+        const fileExtension = file.name.toLowerCase().split('.').pop();
+        const mimeTypeIsValid = validTypes.includes(file.type); // Check mime type
+        const extensionIsValid = validExtensions.includes(`.${fileExtension}`); // Check extension
+  
+        return mimeTypeIsValid || extensionIsValid;
+      };
+  
+      // Validate file type
+      if (!isValidFileType(file)) {
+        console.log("File type invalid:", file); // Log invalid file
+        setNotification({
+          type: 'error',
+          message: 'Only .dcm, .jpg, or .jpeg files are allowed.'
+        });
+        return;
+      }
+  
+      // Check file size
+      if (file.size > MAX_FILE_SIZE) {
+        console.log("File size exceeds limit:", file); // Log file exceeding size
+        setNotification({
+          type: 'error',
+          message: 'File exceeds the maximum size of 5MB.'
+        });
+        return;
+      }
+  
+      // All checks passed, so update the state
+      setFilesState(files);
+    });
   };
+
+  const handleRemoveFile = (file) => {
+    // Simply remove the file from the state when it's removed from FilePond
+    const updatedFiles = filesState.filter(f => f !== file);
+    setFilesState(updatedFiles);
+  }
 
   return (
     <section className="CustomerFile">
-      <p>Upload your Dicom (.dcm) or JPEG (.jpg or .jpeg) files: </p>
-
-      {dropboxAccessToken ? 
-        <FilePond
-          files={file}
-          onupdatefiles={handleFile(file)}
-          // onprocessfile={(file) => handleUpload(file)}
-          allowMultiple={false}
-          maxFiles={1}
-          // maxFileSize="5MB" // Limit file size to 5MB, adjust as needed
-          labelIdle='Drag & Drop your.DCM or.jpg files or <span class="filepond--label-action">Browse</span> here'
-          labelFileProcessing='Uploading file...'
-          labelFileProcessingComplete='Upload complete!'
-        /> : 
-        <p>Please click <u onClick={() => getAuthUrl()}>here</u> and proceed to Dropbox authentication</p>}
+      <p>Upload your Dicom (.dcm) or JPEG (.jpg or .jpeg) files:</p>
+      <FilePond
+        acceptedFileTypes={['image/jpeg', '.dcm']}
+        files={filesState} // Let FilePond control files state
+        onupdatefiles={(files) => handleFile(files)} // Only validate on file addition
+        onprocessfile={getAuthUrl}
+        allowMultiple={false}
+        maxFiles={1}
+        maxFileSize="5MB"
+        labelIdle={`<label id="filepond--drop-label" inert>
+          Drag & Drop your .DCM, .JPEG, .JPG files or 
+          <span class="filepond--label-action">Browse</span> here
+        </label>`}
+        labelFileProcessing='Uploading file...'
+        labelFileProcessingComplete='Upload complete!'
+        onremovefile={handleRemoveFile}  // Handle file removal without validation
+      />
     </section>
   );
 };

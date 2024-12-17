@@ -26,7 +26,7 @@ const CustomerProvider = ({ children }) => {
   const [ originalCustomerProfile, setOriginalCustomerProfile] = useState(undefined)
 
   const [ dropboxAccessToken, setDropboxAccessToken ] = useState('')
-  const [ file, setFile ] = useState(undefined)
+  const [ file, setFile ] = useState([])
 
   const [ stepsCompleted, setStepsCompleted ] = useState(INCOMPLETE)
 
