@@ -213,6 +213,7 @@ export const questionsByPage = {
         "Bending backward",
         "Sitting",
         "Lifting",
+        "None"
       ],
       type: MULTI_SELECT
     },

@@ -153,7 +153,6 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
       try {
         await createCustomer(customerProfile)
         await uploadFile()
-  
         setNotification({ 
           type: 'success', 
           message: 'You have requested a consultation! Our doctor will reach out to you soon via the email or the phone number you provided.'
