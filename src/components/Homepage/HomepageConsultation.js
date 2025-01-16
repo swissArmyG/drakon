@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect, forwardRef, useContext } from "react"
+import React, { forwardRef, useCallback, useContext, useEffect, useState } from "react"
 import LazyLoad from 'react-lazy-load';
 import { ProgressBar } from "../Assorted"
 import { CustomerFile, CustomerProfileForm } from "../Customer"
@@ -9,25 +9,25 @@ import { PAGE_VARIABLES } from "../Consultation"
 import spineGraphic from '../../img/shapes/form_spine_graphic.png'
 import { formHeader } from "../../copies/homepage-form-options";
 import { createCustomer } from "../../api/customers";
-import { uploadFileToDropbox } from "../../api/customerFiles";
-// import { useLocation } from "react-router-dom";
+import { authDropboxCallback, uploadFileToDropbox } from "../../api/dropbox";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const HomepageConsultation = forwardRef((_props, ref) => {
-  // const location = useLocation()
-  // const navigate = useNavigate()
+  const location = useLocation()
+  const navigate = useNavigate()
 
   const { FIRST_PAGE, LAST_PAGE } = PAGE_VARIABLES
   const {
     customerProfile,
-    dropboxAccessToken,
     file,
     isValidatingForm,
     page,
     stepsCompleted,
     removeCustomerLocalStorage,
     resetForm,
+    setDropboxAccessToken,
     setIsSubmitting,
-    // setPage
+    setPage,
   } = useContext(CustomerContext)
 
   const { setNotification } = useContext(NotificationContext)
@@ -38,25 +38,68 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
     height: window.innerHeight,
   });
 
+  const uploadFile = useCallback(async() => {
+    const queryParams = new URLSearchParams(location.search)
+    const code = queryParams.get('code')
+    const state = queryParams.get('state')
+
+    const { access_token } = await authDropboxCallback({ code, state })
+
+    const firstFile = file[0]
+    if (!firstFile.name) {
+      setNotification({
+        type: 'error',
+        message: 'Missing a file, please try again later.'
+      })
+    }
+
+    if (access_token) {
+      setDropboxAccessToken(access_token)
+
+      try {
+        await uploadFileToDropbox({ access_token, file: firstFile })
+      } catch (err) {
+        setNotification({ 
+          type: 'error', 
+          message: 'Unable to upload file currently, please check your internet connection or try again later' 
+        })
+      }
+    }
+  }, [file])
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search)
+    const pageParam = queryParams.get('page');
+    const code = queryParams.get('code');
+    const state = queryParams.get('state');
+
+    const parsedPage = parseInt(pageParam) || FIRST_PAGE;
+    if (!parsedPage !== page) {
+      setPage(parsedPage)
+    }
+
+    if (location.pathname === '/auth/dropbox/callback' && code && state) {
+      const updatedParams = new URLSearchParams(location.search);
+      updatedParams.set('page', LAST_PAGE);
+
+      const newUrl = `${location.pathname}?${updatedParams.toString()}#consultation`;
+      navigate(newUrl, { replace: true });
+
+      scrollToFormTop()
+    }
+
+    if (location.hash === '#consultation') {
+      scrollToFormTop()
+    }
+  }, [location, page])
+
+  const navigateToFormPage = (page) => {
+    navigate(`?page=${page}#consultation`)
+  }
+
   const scrollToFormTop = () => {
     ref.current.scrollIntoView({ behavior: 'smooth' })
   }
-
-  // TODO: make URL persistent with pagination and redirect post /auth/dropbox/callback
-  // useEffect(() => {
-  //   const queryParams = new URLSearchParams(location.search)
-  //   const pageParam = queryParams.get('page') || FIRST_PAGE
-  //   const newPage = Number(pageParam)
-
-  //   const consultationHash = '#consultation'
-  //   const newUrl = `?page=${newPage}${consultationHash}`
-
-  //   if (location.hash === consultationHash) {
-  //     if (newPage !== page) {
-  //       setPage(newPage);
-  //     }
-  //   }
-  // }, [page, location])
 
   useEffect(() => {
     const handleResize = () => {
@@ -103,21 +146,10 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
       </span>
   }
 
-  const uploadFile = async () => {
-    try {
-      await uploadFileToDropbox(dropboxAccessToken, file)
-    } catch (err) {
-      setNotification({ 
-        type: 'error', 
-        message: 'Unable to upload file currently, please check your internet connection or try again later' 
-      })
-    }
-  }
-
-  const requestNonAccountConsultation = async () => {
-    setIsSubmitting(true)
-
+  const submitConsultationRequest = async () => {
     if (customerProfile) {
+      setIsSubmitting(true)
+
       try {
         await createCustomer(customerProfile)
         await uploadFile()
@@ -126,10 +158,8 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
           type: 'success', 
           message: 'You have requested a consultation! Our doctor will reach out to you soon via the email or the phone number you provided.'
         })
-
         resetForm()
         removeCustomerLocalStorage()
-
       } catch (err) {
         setNotification({ 
           type: 'error', 
@@ -150,13 +180,14 @@ export const HomepageConsultation = forwardRef((_props, ref) => {
           {page === FIRST_PAGE && <CustomerProfileForm />}
           {page === 2 && <ConditionForm />}
           {page >= 3 && <AdditionalQuestionsForm />}
-          {page === LAST_PAGE && <CustomerFile scrollToFormTop={scrollToFormTop}/>}
+          {page === LAST_PAGE && <CustomerFile />}
           <ProgressBar 
             steps={LAST_PAGE} 
             stepsCompleted={stepsCompleted}
           />
           <PageControls 
-            onSubmit={requestNonAccountConsultation}
+            navigateToFormPage={navigateToFormPage}
+            onSubmit={submitConsultationRequest}
             windowWidth={windowSize.width} 
             scrollToFormTop={scrollToFormTop}
           />

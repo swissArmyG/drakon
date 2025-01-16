@@ -50,8 +50,7 @@ export const createCustomer = async(payload) => {
     password: payload.password
   }
 
-  // TODO: change backend /patients route to be /customers
-  const { data } = await Axios.post('/patients/create', creating)
+  const { data } = await Axios.post('/customers/create', creating)
   return data
 }
 

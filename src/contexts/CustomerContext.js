@@ -8,7 +8,6 @@ import { validateFields } from '../utils/validation'
 const CustomerContext = createContext()
 
 const CustomerProvider = ({ children }) => {
-  // const location = useLocation()
   const navigate = useNavigate()
 
   const scrollToTopRef = useRef()
@@ -34,13 +33,34 @@ const CustomerProvider = ({ children }) => {
     scrollToTopRef?.current?.scrollIntoView({ behavior: 'smooth' })
   }
 
-  useEffect(() => {
-    // Initialize the customerProfile from localStorage on component mount
+  const setCustomerLocalStorage = (_customerProfile) => {
+    localStorage.setItem('customerProfile', JSON.stringify(_customerProfile))
+    localStorage.setItem('page', page.toString())
+  }
+
+  const getCustomerLocalStorage = () => {
     const savedProfile = localStorage.getItem('customerProfile')
-    if (savedProfile) {
-      setCustomerProfile(JSON.parse(savedProfile)) // Update context if needed
+    const savedPage = localStorage.getItem('page')
+
+    if (savedProfile && savedPage) {
+      setCustomerProfile(JSON.parse(savedProfile))
+      setPage(parseInt(savedPage))
     }
-  }, [setCustomerProfile])  // Run only once when the component mounts
+  }
+
+  const removeCustomerLocalStorage = () => {
+    localStorage.removeItem('customerProfile')
+    localStorage.removeItem('page')
+  }
+
+  const _setCustomerProfile = (_customerProfile) => {
+    setCustomerLocalStorage(_customerProfile)
+    setCustomerProfile(_customerProfile)
+  }
+
+  useEffect(() => {
+    getCustomerLocalStorage()
+  }, [])
   
   useEffect(() => {
     const currentPageQuestions = questionsByPage[page] || []
@@ -100,7 +120,6 @@ const CustomerProvider = ({ children }) => {
     const requiredFields = ['limbWeaknessNumbness', 'walkingUnsteadiness']
 
     const nestedOfferedSpinalSurgery = ['offeredProcedure', 'offeredBy', 'discussedResult']
-    
     const nestedPreviousSpinalSurgery = ['surgeryType', 'surgeryDateTime', 'surgeon']
     
     const offeredSpinalSurgery = customerProfile?.offeredSpinalSurgery === 'Yes'
@@ -207,14 +226,6 @@ const CustomerProvider = ({ children }) => {
     scrollToTop()
   }
 
-  const setCustomerLocalStorage = () => {
-    localStorage.setItem('customerProfile', JSON.stringify(customerProfile))
-  }
-
-  const removeCustomerLocalStorage = () => {
-    localStorage.removeItem('customerProfile')
-  }
-
   return (
     <CustomerContext.Provider value={{
       isInvalid,
@@ -231,8 +242,7 @@ const CustomerProvider = ({ children }) => {
       resetForm,
       scrollToTopRef,
       stepsCompleted,
-      setCustomerLocalStorage,
-      setCustomerProfile,
+      setCustomerProfile: _setCustomerProfile,
       setDropboxAccessToken,
       setIsSubmitting,
       setMissingFields,

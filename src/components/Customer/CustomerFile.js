@@ -1,160 +1,151 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useLocation } from "react-router-dom";
 import { FilePond, registerPlugin } from 'react-filepond'
 import 'filepond/dist/filepond.min.css'
 import FilePondPluginImageExifOrientation from 'filepond-plugin-image-exif-orientation'
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css'
-import { authDropbox, authDropboxCallback } from '../../api/customerFiles'
+import { authDropbox } from '../../api/dropbox'
 import { CustomerContext, NotificationContext } from '../../contexts'
+import { SingleSelect } from '../Assorted/Inputs';
+
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview)
 
-export const CustomerFile = ({ scrollToFormTop }) => {
+export const CustomerFile = () => {
   const location = useLocation()
 
   const {
-    dropboxAccessToken,
     file,
-    setDropboxAccessToken,
+    setFile
   } = useContext(CustomerContext)
   const { setNotification } = useContext(NotificationContext)
 
-  const [filesState, setFilesState] = useState(file || []);
+  const [ isAllowingDropboxOAuth, setIsAllowingDropboxOAuth ] = useState(false)
 
+  useState(() => {
+    const queryParams = new URLSearchParams(location.search)
+    const code = queryParams.get('code');
+    const state = queryParams.get('state');
+
+    if (code && state) {
+      setIsAllowingDropboxOAuth(true)
+    }
+
+  }, [location.search])
+
+  const isValidFileType = (file) => {
+    if (!file) {
+      return false;
+    }
+
+    const validTypes = ['application/dicom', 'application/dcm', 'image/jpeg'];
+    const validExtensions = ['dcm', 'jpg', 'jpeg'];
+
+    const fileType = file.type?.toLowerCase();
+    const fileExtension = file.name.toLowerCase().split('.').pop();
+    const mimeTypeIsValid = validTypes.includes(fileType); // Check mime type
+    const extensionIsValid = validExtensions.includes(fileExtension); // Check extension
+
+    return mimeTypeIsValid || extensionIsValid;
+  };
+
+  let isAuthenticating = false
   const getAuthUrl = async () => {
     try {
+      if (isAuthenticating) return;
+      isAuthenticating = true
+
       const { auth_url } = await authDropbox()
 
       if (auth_url) {
-        const authWindow = window.open(auth_url, '_blank')
-        const interval = setInterval(() => {
-          try {
-            if (authWindow.location && authWindow.location.href.includes('page7#consultation')) {
-              clearInterval(interval)
-              authWindow.close()
-            } 
-          } catch (err) {
-            setNotification('Unable to load right now, please try again later')
-          }
-        }, 500)
-
-        scrollToFormTop()
+        window.location.href = auth_url
       }
     } catch (err) {
-      setNotification('Unable to load right now, please try again later')
+      setNotification({
+        type: 'error',
+        message: 'Unable to connect with Dropbox, please try again later.'
+      });
     }
   }
 
-  const getAccessToken = useCallback(async(code, state) => {
-    try {
-      const { access_token } = await authDropboxCallback({ code, state });
-      access_token && setDropboxAccessToken(access_token);
-      
-      scrollToFormTop()
-    } catch (err) {
-      console.error(err)
-    }
-  }, [])
-  
-  useEffect(() => {
-    const queryParams = new URLSearchParams(location.search)
-    const code = queryParams.get('code')
-    const state = queryParams.get('state')
-    
-    if (code && state && !dropboxAccessToken) {
-      getAccessToken(code, state)
-    }
-  }, [location.search, dropboxAccessToken])
-
-  const handleFile = async (files) => {
-    console.log("Received files:", files); // Log the files object for debugging
-  
+  const handleFile = (fileItems) => {  
     const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
   
-    // Check if files is not empty or undefined
-    if (!files || files.length === 0) {
+    if (!fileItems || fileItems.length === 0) {
       setNotification({
         type: 'error',
-        message: 'No files added.'
+        message: 'No valid file.'
       });
-      return;
     }
   
-    // Let's loop through each file and check if it's valid
-    files.forEach(file => {
-      console.log("Checking file:", file); // Log each file object for debugging
+    const firstFile = fileItems[0].file;
   
-      if (!file || !file.name) {
-        console.log("Invalid file detected:", file); // This file is invalid, log it
-        setNotification({
-          type: 'error',
-          message: 'Only .dcm, .jpg, or .jpeg files are allowed.'
-        });
-        return;
-      }
+    if (!isValidFileType(firstFile)) {
+      setNotification({
+        type: 'error',
+        message: 'Only .dcm, .jpg, or .jpeg files are allowed.'
+      });
+    }
   
-      const isValidFileType = (file) => {
-        const validTypes = ['application/dicom', 'application/dcm', 'image/jpeg'];
-        const validExtensions = ['.dcm', '.jpg', '.jpeg'];
+    if (firstFile.size > MAX_FILE_SIZE) {
+      setNotification({
+        type: 'error',
+        message: 'File exceeds the maximum size of 5MB.'
+      });
+    }
   
-        const fileExtension = file.name.toLowerCase().split('.').pop();
-        const mimeTypeIsValid = validTypes.includes(file.type); // Check mime type
-        const extensionIsValid = validExtensions.includes(`.${fileExtension}`); // Check extension
+    setFile([firstFile]);
+  };
   
-        return mimeTypeIsValid || extensionIsValid;
-      };
-  
-      // Validate file type
-      if (!isValidFileType(file)) {
-        console.log("File type invalid:", file); // Log invalid file
-        setNotification({
-          type: 'error',
-          message: 'Only .dcm, .jpg, or .jpeg files are allowed.'
-        });
-        return;
-      }
-  
-      // Check file size
-      if (file.size > MAX_FILE_SIZE) {
-        console.log("File size exceeds limit:", file); // Log file exceeding size
-        setNotification({
-          type: 'error',
-          message: 'File exceeds the maximum size of 5MB.'
-        });
-        return;
-      }
-  
-      // All checks passed, so update the state
-      setFilesState(files);
-    });
+  const handleRemoveFile = (error) => {
+    if (error) {
+      console.error("Error removing file:", error);
+      return;
+    }
+    setFile([]);
   };
 
-  const handleRemoveFile = (file) => {
-    // Simply remove the file from the state when it's removed from FilePond
-    const updatedFiles = filesState.filter(f => f !== file);
-    setFilesState(updatedFiles);
+  const onAllowDropboxOAuth = () => {
+    setIsAllowingDropboxOAuth(!isAllowingDropboxOAuth)
+    getAuthUrl()
+  }
+
+  const determineIsDropboxOAuthAuthenticated = () => {
+    if (!isAllowingDropboxOAuth) {
+      return <React.Fragment> 
+      <p>Please consent to connect your Dropbox account to securely upload files (.DCM, .JPG, or .JPEG)</p>
+      <SingleSelect
+        option={"By clicking the checkbox, you’ll be redirected to Dropbox to authenticate. Once connected, you can upload your file securely."}
+        selectOption={() => onAllowDropboxOAuth()}
+      />
+      </React.Fragment>
+    } else {
+      return <React.Fragment>
+        <p>You are now connected to Dropbox and can upload your file securely.</p>
+        <FilePond
+          acceptedFileTypes={['image/jpeg', '.dcm']}
+          files={file} // Let FilePond control files state
+          onupdatefiles={(fileItems) => handleFile(fileItems)} // Only validate on file addition
+          allowMultiple={false}
+          maxFiles={1}
+          maxFileSize="5MB"
+          labelIdle={`<label id="filepond--drop-label" inert>
+            Drag & Drop your .DCM, .JPEG, .JPG files or 
+            <span class="filepond--label-action">Browse</span> here
+          </label>`}
+          labelFileProcessing='Uploading file...'
+          labelFileProcessingComplete='Upload complete!'
+          onremovefile={handleRemoveFile}  // Handle file removal without validation
+        />
+      </React.Fragment>
+    }
   }
 
   return (
     <section className="CustomerFile">
-      <p>Upload your Dicom (.dcm) or JPEG (.jpg or .jpeg) files:</p>
-      <FilePond
-        acceptedFileTypes={['image/jpeg', '.dcm']}
-        files={filesState} // Let FilePond control files state
-        onupdatefiles={(files) => handleFile(files)} // Only validate on file addition
-        onprocessfile={getAuthUrl}
-        allowMultiple={false}
-        maxFiles={1}
-        maxFileSize="5MB"
-        labelIdle={`<label id="filepond--drop-label" inert>
-          Drag & Drop your .DCM, .JPEG, .JPG files or 
-          <span class="filepond--label-action">Browse</span> here
-        </label>`}
-        labelFileProcessing='Uploading file...'
-        labelFileProcessingComplete='Upload complete!'
-        onremovefile={handleRemoveFile}  // Handle file removal without validation
-      />
+      <em>Files Upload</em>
+      {determineIsDropboxOAuthAuthenticated()}
     </section>
   );
 };

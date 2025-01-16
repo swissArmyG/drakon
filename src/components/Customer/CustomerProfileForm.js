@@ -1,12 +1,9 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext } from 'react'
-// import { useNavigate } from 'react-router-dom'
-// import { AuthContext, CustomerContext } from '../../contexts'
 import { CustomerContext } from '../../contexts'
 import { DetailedInput, SingleSelect } from '../Assorted/Inputs'
 
 export const CustomerProfileForm = () => {
-  // const { isAuthenticated } = useContext(AuthContext)
   const { 
     isInvalid,
     customerProfile,
@@ -19,7 +16,6 @@ export const CustomerProfileForm = () => {
   
   return ( 
     <section className="CustomerProfileForm">
-      {/* { !isAuthenticated && <p className="--login-nav">Please <u><em onClick={() => login()}>login</em></u> to automatically fill out the following details, or <u><em onClick={() => register()}>register</em></u> and save time at the next login</p> } */}
       <p><em>Full Name</em></p>
 
       <div className="row">

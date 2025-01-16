@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import LazyLoad from 'react-lazy-load';
 import {
   HomepageNav,
@@ -10,7 +10,6 @@ import {
 } from '.'
 import logoPath from '../../img/logo/logo_with_text.png'
 import { SideNavigation } from '../Buttons'
-// import { ThemeToggle } from '../Assorted'
 import { CustomerContext } from '../../contexts'
 import { blurb } from '../../copies/homepage-stories';
 
@@ -54,7 +53,6 @@ export const Homepage = () => {
             <li>Independent.</li>
             <li>Second Opinion Spine Advice.</li>
             </ul>
-          {/* <ThemeToggle onToggle={setTheme} theme={theme}/> */}
           <p className="-blurb">{blurb}</p>
         </div>
         <div className="--right-column">
@@ -74,11 +72,6 @@ export const Homepage = () => {
       </header>
       
       <SideNavigation ref={scrollToTopRef} />
-      {/* <HomepageTopics 
-        topic={topic} 
-        setTopic={setTopic} 
-        closeOverlappingModal={() => closeOverlappingModals('authentication')} 
-      /> */}
       <div className="--content-container">
         <HomepageStory ref={storyRef} />
         <HomepageConsultation ref={consultationRef} />
