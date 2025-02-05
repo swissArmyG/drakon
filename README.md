@@ -32,7 +32,7 @@ The application is currently going through a few additional features- such as se
   #### Run `yarn` when
   - Changes or see changes in Package.json
 
-  #### Run `yarn audit` and|or `yarn outdated` whenREA
+  #### Run `yarn audit` and|or `yarn outdated` when
   - Whenever you want to check dependency vulnerabilities && integrity respectively
 
   #### Run `yarn cache clean` when 
