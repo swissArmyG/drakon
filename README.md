@@ -49,3 +49,4 @@ For development and production stages
 3. **sass**, **sass-loader**, **style-loader**, **css-loader** : Sassy CSS (Cascade Style Sheet) along with its loading-processing css in JavaScript
 4. **react-router** & **react-router-dom** : On-demand client-side URL routing for faster and more dynamic user experiences
 5. **react-lazy-load** : Predictable way to defer content loading once visible in the viewport
+6. **react-filepond** : Flexible file upload
