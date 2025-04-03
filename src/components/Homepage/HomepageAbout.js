@@ -5,7 +5,7 @@ import { about, RAASstats } from '../../copies/drakon-home'
 export const HomepageAbout = forwardRef((_, ref) => {
   const renderStats = () => {
     return RAASstats.stats.map(stat => {
-      return <div className="flex row justify-center align-center">
+      return <div className="Stat flex row justify-center align-baseline">
         <Image size="sm" />
         <div className="flex column align-center">
           <h1>{stat.counter}</h1>
