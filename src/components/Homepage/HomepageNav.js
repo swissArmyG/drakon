@@ -1,54 +1,36 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { forwardRef, useEffect, useContext } from 'react'
+import React, { forwardRef } from 'react'
 import { Link } from 'react-router-dom'
-import { AuthContext, CustomerContext } from '../../contexts'
-import { readCustomerByUserId } from '../../api/customers'
 
 export const HomepageNav = forwardRef((_, refs) => {
-  const { storyRef, consultationRef } = refs
-  const { userData } = useContext(AuthContext)
-  const { 
-    customerProfile, 
-    page,
-    setOriginalCustomerProfile, 
-    setCustomerProfile 
-  } = useContext(CustomerContext)
-
+  const {  
+    aboutRef,
+    servicesRef,
+    contactRef
+  } = refs
+  
   const scrollConfig = { behavior: "smooth" }
 
-  const readCustomer = async () => {
-    try {
-      const customer = await readCustomerByUserId(userData?.id)
-      const data = { ...customer, phoneNumber: customer.phone_number }
-      
-      setOriginalCustomerProfile(data)
-      setCustomerProfile(data)
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
-  useEffect(() => {
-    if (userData && !customerProfile) {
-      readCustomer()
-    }
-  }, [userData])
-
   const navOptions = {
-    consultation: {
-      onClick: () => consultationRef.current.scrollIntoView(scrollConfig),
-      linkTo: `?page=${page}#consultation`,
-      text: 'REQUEST CONSULTATION'
+    home: {
+      // onClick: () => "",
+      linkTo: '#home',
+      text: 'HOME'
     },
-    story: {
-      onClick: () => storyRef.current.scrollIntoView(scrollConfig),
-      linkTo: '#story',
-      text: 'OUR STORY'
+    about: {
+      onClick: () => aboutRef.current.scrollIntoView(scrollConfig),
+      linkTo: `#about`,
+      text: 'ABOUT'
     },
-    spineAnatomy: {
-      onClick: () => {},
-      linkTo: '/anatomy',
-      text: 'SPINE ANATOMY / PATHOLOGY'
+    services: {
+      onClick: () => servicesRef.current.scrollIntoView(scrollConfig),
+      linkTo: '#servies',
+      text: 'SERVICES'
+    },
+    contact: {
+      onClick: () => contactRef.current.scrollIntoView(scrollConfig),
+      linkTo: '#contact',
+      text: 'CONTACT'
     }
   }
 

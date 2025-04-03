@@ -1,16 +1,8 @@
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { Homepage } from './components/Homepage'
 import {
-  Anatomy,
-  ConfirmEmailChange,
-  Notification, 
-  PasswordReset,
-  Privacy
+  Notification
 } from './components/Assorted'
-import {
-  CustomerLogin,
-  CustomerRegister
-} from './components/Customer'
 
 const App = () => {
   const location = useLocation()
@@ -18,22 +10,18 @@ const App = () => {
   return (
     <section className="App" data-testid="App">
       <Routes location={location}>
-        <Route exact path="/auth/dropbox/callback"
-          element={<Homepage />} />
+        {/* <Route exact path="/auth/dropbox/callback"
+          element={<Homepage />} /> */}
         <Route exact path="/" 
           element={<Homepage />} />
-        <Route exact path="/password/reset" 
-        element={<PasswordReset />} />
-        <Route exact path="/login" 
+        {/* <Route exact path="/login" 
           element={<CustomerLogin />} />
         <Route exact path="/register"
           element={<CustomerRegister />} />
-        <Route exact path="/confirm"
-          element={<ConfirmEmailChange/> } />
         <Route exact path="/privacy"
           element={<Privacy />} />
         <Route exact path="/anatomy"
-          element={<Anatomy />} />
+          element={<Anatomy />} /> */}
       </Routes>
       <Notification />
     </section>
