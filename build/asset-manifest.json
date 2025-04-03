@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.30173a18.css",
-    "main.js": "/static/js/main.fc0bda7c.js",
+    "main.css": "/static/css/main.9b0cdca3.css",
+    "main.js": "/static/js/main.31a01d26.js",
     "static/js/453.152e9ee1.chunk.js": "/static/js/453.152e9ee1.chunk.js",
     "static/media/sacral.gif": "/static/media/sacral.1ed32f344acb07774c81.gif",
     "static/media/lumbar.gif": "/static/media/lumbar.2945b1a1899f4f51a3c4.gif",
@@ -23,12 +23,12 @@
     "static/media/dcg_toplogo_v2.png": "/static/media/dcg_toplogo_v2.20916f1e18dc41f4cd3f.png",
     "static/media/drakon-logo-full-color-rgb-300px72ppi.png": "/static/media/drakon-logo-full-color-rgb-300px72ppi.740bff06cde167e40bc7.png",
     "index.html": "/index.html",
-    "main.30173a18.css.map": "/static/css/main.30173a18.css.map",
-    "main.fc0bda7c.js.map": "/static/js/main.fc0bda7c.js.map",
+    "main.9b0cdca3.css.map": "/static/css/main.9b0cdca3.css.map",
+    "main.31a01d26.js.map": "/static/js/main.31a01d26.js.map",
     "453.152e9ee1.chunk.js.map": "/static/js/453.152e9ee1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.30173a18.css",
-    "static/js/main.fc0bda7c.js"
+    "static/css/main.9b0cdca3.css",
+    "static/js/main.31a01d26.js"
   ]
 }

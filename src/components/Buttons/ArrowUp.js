@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export const ArrowUp = () => {
   const [isHover, setIsHover] = useState(false)
-  const color = isHover ? '#FFC655' : 'darkgrey'
+  const color = isHover ? '#62DAFF' : 'darkgrey'
 
   return (
     <svg

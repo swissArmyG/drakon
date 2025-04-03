@@ -37,7 +37,7 @@ export const Homepage = () => {
 
       <header className="sticky flex row justify-between">
         <div className="left-column">
-          <Image imgSrc={headerLogo} position="left" />
+          <Image imgSrc={headerLogo} position="left" width="300px" />
         </div>
         <div className="right-column">
           <HomepageNav ref={refs} />
