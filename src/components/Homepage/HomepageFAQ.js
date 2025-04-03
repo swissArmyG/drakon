@@ -1,6 +1,7 @@
+import { forwardRef } from "react"
 import { services } from "../../copies/drakon-home"
 
-export const HomepageFAQ = () => {
+export const HomepageFAQ = forwardRef((_, ref) => {
   const renderServicesList = () => {
     return services.list.map(item => {
       return <div className="ListItem flex row justify-start">
@@ -19,7 +20,7 @@ export const HomepageFAQ = () => {
   }
 
   return (
-    <section className="HomepageFAQ section-container flex row justify-center">
+    <section className="HomepageFAQ section-container flex row justify-center" ref={ref}>
       <div className="left-column">
         {renderServicesList()}
       </div>
@@ -30,4 +31,4 @@ export const HomepageFAQ = () => {
       </div>
     </section>
   )
-}
+})
