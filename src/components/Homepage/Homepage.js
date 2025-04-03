@@ -1,14 +1,13 @@
 import { useContext, useRef } from 'react'
-// import LazyLoad from 'react-lazy-load';
 import {
   HomepageNav,
-  // HomepageTopics,
   HomepageServices,
   HomepageAbout,
   HomepageFAQ,
   HomepageContact,
 } from '.'
-// import logoPath from '../../img/logo/logo_with_text.png'
+import headerLogo from '../../img/logo/dcg_toplogo_v2.png'
+import mainLogo from '../../img/logo/drakon-logo-full-color-rgb-300px72ppi.png'
 import { SideNavigation } from '../Buttons'
 import { CustomerContext } from '../../contexts'
 import { intro } from '../../copies/drakon-home';
@@ -36,17 +35,17 @@ export const Homepage = () => {
       ref={scrollToTopRef}>
 
       <header className="sticky flex row justify-between">
-        <div className="--left-column">
-          <Image size="sm"/>
+        <div className="left-column">
+          <Image size="sm" logoPath={headerLogo} position="left" />
         </div>
-        <div className="--right-column">
+        <div className="right-column">
           <HomepageNav ref={refs} />
         </div>
       </header>
 
       <div className="section-container flex column justify-center align-center">
         <p className="-blurb">{intro}</p>
-        <Image size="l" />
+        <Image size="l" logoPath={mainLogo} />
       </div>
       
       <SideNavigation ref={scrollToTopRef} />

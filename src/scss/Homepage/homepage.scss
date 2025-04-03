@@ -21,23 +21,16 @@
       position: sticky;
       top: 0px;
       z-index: 1000;
-
-      .--left-column,
-      .--right-column {
-        width: 50%;
-      }
-
-      .--left-column {
-        .-blurb {
-          padding: 0 20px;
-        }
-      }
-
-      .logo {
-        width: 100%;
-        padding: 20px 10px;
-      }
     }
+  }
+  
+  .left-column {
+    min-width: 200px;
+    height: 100px;
+  }
+
+  .right-column {
+    width: 80%;
   }
 
   .--content-container {

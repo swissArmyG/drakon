@@ -1,3 +1,8 @@
+import raasImg1 from '../img/logo/cyber-security-virus-malware-attack-warning-23010.png'
+import raasImg2 from '../img/logo/cyber-security-system-network-and-devices-23014.png'
+import raasImg3 from '../img/logo/cyber-security-threats-or-attacks-shield-22988.png'
+import raasImg4 from '../img/logo/cyber-security-hacked-laptop-alert-23028.png'
+
 export const intro = "Infosec Compliance At Your Doorstep"
 
 export const about = {
@@ -11,19 +16,23 @@ export const RAASstats = {
   stats: [
     {
       counter: "317.59m",
-      label: "Attempts in 2023"
+      label: "Attempts in 2023",
+      imgSrc: raasImg1
     },
     {
       counter: "437",
-      label: "Against Critical Infra."
+      label: "Against Critical Infra.",
+      imgSrc: raasImg2
     },
     {
       counter: "274k+",
-      label: "Av. Lost per Incident"
+      label: "Av. Lost per Incident",
+      imgSrc: raasImg3
     },
     {
       counter: "3.86m",
-      label: "Av. Paid in Breah Lawsuits"
+      label: "Av. Paid in Breah Lawsuits",
+      imgSrc: raasImg4
     }
   ]
 }
