@@ -30,7 +30,7 @@ export const HomepageAbout = forwardRef((_, ref) => {
 
       <div className="RAASstats-container section-container">
         <h2>{RAASstats.title}</h2>
-        <div className="flex row justify-center">
+        <div className="flex row justify-center wrap">
           {renderStats()}
         </div>
       </div>
