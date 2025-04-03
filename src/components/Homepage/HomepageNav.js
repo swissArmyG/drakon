@@ -7,6 +7,7 @@ export const HomepageNav = forwardRef((_, refs) => {
     scrollToTopRef,
     aboutRef,
     servicesRef,
+    faqRef,
     contactRef
   } = refs
   
@@ -27,6 +28,11 @@ export const HomepageNav = forwardRef((_, refs) => {
       onClick: () => servicesRef.current.scrollIntoView(scrollConfig),
       linkTo: '#services',
       title: 'SERVICES'
+    },
+    faq: {
+      onClick: () => faqRef.current.scrollIntoView(scrollConfig),
+      linkTo: '#FAQ',
+      title: 'FAQ'
     },
     contact: {
       onClick: () => contactRef.current.scrollIntoView(scrollConfig),

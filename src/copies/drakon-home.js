@@ -28,18 +28,18 @@ export const RAASstats = {
   ]
 }
 
-export const topics = [
-  {
+export const topics = {
+  0: {
     title: "Insurance",
     content: "Drakon provides comprehensive insurance assessments aimed at aligning your security protocols with your insurance requirements. This meticulous evaluation pocess guarantees a seamless claims procedure in the event of a cyber-attack, facilitating swift compensation disbursal. Eary attention to insurance compliance empowers your enterprise to confront security breaches with assurance, minimizing both financial losses and operational interruptions. Rely on Drakon to validate your compliance status and fine-tune your insurance coverage, ensuring unparalleled protection.",
-    credit: "James Drake"
+    author: "James Drake"
   },
-  {
+  1: {
     title: "Data Privacy",
     content: "While there are many solutions to assuring data privacy compliance, these solutions require you to research and assemble all the pieces yourself. Drakon allows you to save the time and expense of hiring an IT consultant, an in-house Legal Compliance Officer, and a dedicated training manager. Drakon coordinates these pieces to provide end-to-end tailored solutions in a single package and with a single point of contact. We have internal experts who are IAPP (International Association of Privacy Professionals) certified in order to provide you with a solution that fits your need precisely.",
-    credit: "Jason Bolton"
+    author: "Jason Bolton"
   }
-]
+}
 
 export const services = {
   list: [
@@ -56,9 +56,9 @@ export const services = {
     "Do you know where your cloud based data travels when you hit enter?",
 
     "Is your company adequately insured in the event of a cyber-attack or breach?",
-
-    "If your are like the majority of companies; the answer to all these questions is no. "
   ],
+  contentHeader: "Security Auditing Questions",
+  contentSubHeader: "If your are like the majority of companies; the answer to all these questions is no.",
   content: [
     "The GDPR and CCPA are making businesses more accountable, covering legal, civil, and criminal aspects.  This means companies need to step up their responsibility, especially in areas like network security, data tracking, HR compliance, data protection, and reporting breaches.",
 

@@ -6,6 +6,10 @@ export const Image = ({ logoPath, size }) => {
       width: '100px',
       height: '50px',
     },
+    m: {
+      width: '100px',
+      heigt: '100px'
+    },
     l: {
       width: '300px',
       height: '300px',
@@ -22,7 +26,8 @@ export const Image = ({ logoPath, size }) => {
       <div style={{
         ...sizeConfig[size],
         border: '1px solid #FFF',
-        textAlign: 'center'
+        textAlign: 'center',
+        marginRight: '10px'
       }}><i><span>"Customize Image Here"</span></i></div>
     </LazyLoad>
   )
