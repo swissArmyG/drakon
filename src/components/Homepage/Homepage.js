@@ -6,12 +6,13 @@ import {
   HomepageFAQ,
   HomepageContact,
 } from '.'
-import headerLogo from '../../img/logo/dcg_toplogo_v2.png'
-import mainLogo from '../../img/logo/drakon-logo-full-color-rgb-300px72ppi.png'
 import { SideNavigation } from '../Buttons'
 import { CustomerContext } from '../../contexts'
 import { intro } from '../../copies/drakon-home';
 import { Image } from '../Assorted';
+
+import headerLogo from '../../img/logo/dcg_toplogo_v2.png'
+import mainLogo from '../../img/logo/drakon-logo-full-color-rgb-300px72ppi.png'
 
 export const Homepage = () => {
   const { scrollToTopRef } = useContext(CustomerContext)
@@ -36,7 +37,7 @@ export const Homepage = () => {
 
       <header className="sticky flex row justify-between">
         <div className="left-column">
-          <Image size="sm" logoPath={headerLogo} position="left" />
+          <Image imgSrc={headerLogo} position="left" />
         </div>
         <div className="right-column">
           <HomepageNav ref={refs} />
@@ -45,7 +46,7 @@ export const Homepage = () => {
 
       <div className="section-container flex column justify-center align-center">
         <p className="-blurb">{intro}</p>
-        <Image size="l" logoPath={mainLogo} />
+        <Image size="l" imgSrc={mainLogo} />
       </div>
       
       <SideNavigation ref={scrollToTopRef} />

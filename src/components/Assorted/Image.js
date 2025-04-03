@@ -1,6 +1,6 @@
 import LazyLoad from 'react-lazy-load';
 
-export const Image = ({ logoPath, position, size }) => {
+export const Image = ({ imgSrc, position, size, width }) => {
   const sizeConfig = {
     sm: {
       width: '100px',
@@ -20,10 +20,11 @@ export const Image = ({ logoPath, position, size }) => {
     <LazyLoad>
       <div 
         style={{
+          width: `${width}`,
           ...sizeConfig[size],
           textAlign: 'center',
           marginRight: '10px',
-          backgroundImage: `url(${logoPath})`,
+          backgroundImage: `url(${imgSrc})`,
           backgroundSize: 'contain',
           backgroundPosition: `${position ? position : 'center'}`,
           backgroundRepeat: 'no-repeat',
