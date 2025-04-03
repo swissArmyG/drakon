@@ -13,29 +13,36 @@ export const HomepageNav = forwardRef((_, refs) => {
   
   const scrollConfig = { behavior: "smooth" }
 
+  const scrollToSection = (currentRef) => {
+    if (currentRef?.current) {
+      const top = currentRef.current.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top: top - 50, ...scrollConfig })
+    }
+  }
+
   const navOptions = {
     home: {
-      onClick: () => scrollToTopRef.current.scrollIntoView(scrollConfig),
+      onClick: () => scrollToSection(scrollToTopRef),
       linkTo: '',
       title: 'HOME'
     },
     about: {
-      onClick: () => aboutRef.current.scrollIntoView(scrollConfig),
+      onClick: () => scrollToSection(aboutRef),
       linkTo: `#about`,
       title: 'ABOUT'
     },
     services: {
-      onClick: () => servicesRef.current.scrollIntoView(scrollConfig),
+      onClick: () => scrollToSection(servicesRef),
       linkTo: '#services',
       title: 'SERVICES'
     },
     faq: {
-      onClick: () => faqRef.current.scrollIntoView(scrollConfig),
+      onClick: () => scrollToSection(faqRef),
       linkTo: '#FAQ',
       title: 'FAQ'
     },
     contact: {
-      onClick: () => contactRef.current.scrollIntoView(scrollConfig),
+      onClick: () => scrollToSection(contactRef),
       linkTo: '#contact',
       title: 'CONTACT'
     }

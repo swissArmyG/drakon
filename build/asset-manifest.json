@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.18dc051d.css",
-    "main.js": "/static/js/main.7615c6c2.js",
-    "static/js/453.937f8a7d.chunk.js": "/static/js/453.937f8a7d.chunk.js",
+    "main.css": "/static/css/main.6986ae66.css",
+    "main.js": "/static/js/main.b368079c.js",
+    "static/js/453.152e9ee1.chunk.js": "/static/js/453.152e9ee1.chunk.js",
     "static/media/sacral.gif": "/static/media/sacral.1ed32f344acb07774c81.gif",
     "static/media/lumbar.gif": "/static/media/lumbar.2945b1a1899f4f51a3c4.gif",
     "static/media/homepage-OCEAN.png": "/static/media/homepage-OCEAN.a18b7f96d74d7ba8a86f.png",
@@ -15,20 +15,16 @@
     "static/media/logo.png": "/static/media/logo.32d947b2e4b9fd5fbcc5.png",
     "static/media/DidactGothic-Regular.ttf": "/static/media/DidactGothic-Regular.37c8a8ed522192cd4de5.ttf",
     "static/media/form_spine_graphic.png": "/static/media/form_spine_graphic.52d5ca89f186a4f85597.png",
-    "static/media/skele_icon_middle.png": "/static/media/skele_icon_middle.bf2e5ea53a93f3e01966.png",
     "static/media/Cantarell-BoldItalic.ttf": "/static/media/Cantarell-BoldItalic.7f0da357fd05ecec4818.ttf",
     "static/media/Cantarell-Bold.ttf": "/static/media/Cantarell-Bold.2c4f1ee735df59c4cdeb.ttf",
-    "static/media/skele_icon_right.png": "/static/media/skele_icon_right.cc740046c5500551825d.png",
     "static/media/Cantarell-Regular.ttf": "/static/media/Cantarell-Regular.d92f45e08b65acbc2b2f.ttf",
-    "static/media/logo_with_text.png": "/static/media/logo_with_text.0a3ee26d7a5df7a10b40.png",
-    "static/media/skele_icon_left.png": "/static/media/skele_icon_left.be16f9b4d4bf8a93092b.png",
     "index.html": "/index.html",
-    "main.18dc051d.css.map": "/static/css/main.18dc051d.css.map",
-    "main.7615c6c2.js.map": "/static/js/main.7615c6c2.js.map",
-    "453.937f8a7d.chunk.js.map": "/static/js/453.937f8a7d.chunk.js.map"
+    "main.6986ae66.css.map": "/static/css/main.6986ae66.css.map",
+    "main.b368079c.js.map": "/static/js/main.b368079c.js.map",
+    "453.152e9ee1.chunk.js.map": "/static/js/453.152e9ee1.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.18dc051d.css",
-    "static/js/main.7615c6c2.js"
+    "static/css/main.6986ae66.css",
+    "static/js/main.b368079c.js"
   ]
 }
