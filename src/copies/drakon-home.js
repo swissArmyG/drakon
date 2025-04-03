@@ -40,3 +40,30 @@ export const topics = [
     credit: "Jason Bolton"
   }
 ]
+
+export const services = {
+  list: [
+    "Have you met a lawyer who could confidentially  and competently evaluate your IT's security needs?",
+
+    "Is your company prepared to respond to the appropriate agencies and your clients if you have a data breach?",
+
+    "Are you willing to have case law for these issues written in your company's red ink?", 
+
+    "Is your current security policy in line with the security requirements of your insurance company?",
+
+    "Have you met an IT manager who could competently asses youur companies regulatory responisibility in regards to your networks physical, virtial, and cloude based security?",
+
+    "Do you know where your cloud based data travels when you hit enter?",
+
+    "Is your company adequately insured in the event of a cyber-attack or breach?",
+
+    "If your are like the majority of companies; the answer to all these questions is no. "
+  ],
+  content: [
+    "The GDPR and CCPA are making businesses more accountable, covering legal, civil, and criminal aspects.  This means companies need to step up their responsibility, especially in areas like network security, data tracking, HR compliance, data protection, and reporting breaches.",
+
+    "Leaving compliance to your company's management is risk, like letting a football team referee its own game. With remote work on the rise, it's crucial to handle these risks well.  At Drakon, we specialize in certifying your compliance with your thorough external evaluation program. We cover cyber insurance assessments, security policy checks, and seamless integration. Let us protect your business during these challenging times.",
+
+    "We also offer detailed insurance evaluations to ensure your security policies match your insurance needs. This ensures a smooth claims process if you face a cyber-attack, helping you get compensation quickly. By addressing insurance compliance early, we help your business handle security breaches confidentially, reducing financial and operational disruptions.  Count on Drakon to certify your compliance and optimize your insurance for maximum protection."
+  ]
+}

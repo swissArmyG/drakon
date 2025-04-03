@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 export const HomepageNav = forwardRef((_, refs) => {
   const {  
+    scrollToTopRef,
     aboutRef,
     servicesRef,
     contactRef
@@ -13,24 +14,24 @@ export const HomepageNav = forwardRef((_, refs) => {
 
   const navOptions = {
     home: {
-      // onClick: () => "",
-      linkTo: '#home',
-      text: 'HOME'
+      onClick: () => scrollToTopRef.current.scrollIntoView(scrollConfig),
+      linkTo: '',
+      title: 'HOME'
     },
     about: {
       onClick: () => aboutRef.current.scrollIntoView(scrollConfig),
       linkTo: `#about`,
-      text: 'ABOUT'
+      title: 'ABOUT'
     },
     services: {
       onClick: () => servicesRef.current.scrollIntoView(scrollConfig),
-      linkTo: '#servies',
-      text: 'SERVICES'
+      linkTo: '#services',
+      title: 'SERVICES'
     },
     contact: {
       onClick: () => contactRef.current.scrollIntoView(scrollConfig),
       linkTo: '#contact',
-      text: 'CONTACT'
+      title: 'CONTACT'
     }
   }
 
@@ -39,14 +40,14 @@ export const HomepageNav = forwardRef((_, refs) => {
       <div className="--nav-options">
         {
           Object.keys(navOptions).map((op, idx) => {
-            const text = navOptions[op].text
+            const title = navOptions[op].title
 
             return <React.Fragment key={idx}>
               <Link
                 to={`${navOptions[op]?.linkTo}`}
                 onClick={navOptions[op].onClick}>
                 <h4 className={`--nav-option --button ${op}`}>
-                  {text}
+                  {title}
                 </h4>
               </Link>
             </React.Fragment>

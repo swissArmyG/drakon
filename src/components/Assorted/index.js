@@ -1,6 +1,7 @@
 export { Anatomy } from './Anatomy'
 export { ConfirmEmailChange } from './ConfirmEmailChange'
 export { CredentialForm } from './CredentialForm'
+export { Image } from './Image'
 export { Modal } from './Modal'
 export { Notification } from './Notification' 
 export { PasswordReset } from './PasswordReset'

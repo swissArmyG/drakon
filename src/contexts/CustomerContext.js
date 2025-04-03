@@ -240,6 +240,7 @@ const CustomerProvider = ({ children }) => {
       file,
       removeCustomerLocalStorage,
       resetForm,
+      scrollToTop,
       scrollToTopRef,
       stepsCompleted,
       setCustomerProfile: _setCustomerProfile,

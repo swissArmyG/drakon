@@ -1,5 +1,33 @@
 @import './variables.scss';
 
+.App {
+  background-color: #000;
+}
+
+.flex {
+  display: flex;
+
+  &.column {
+    flex-direction: column;
+  }
+
+  &.row {
+    flex-direction: row
+  }
+
+  &.justify-between {
+    justify-content: space-between;
+  }
+
+  &.justify-center {
+    justify-content: center;
+  }
+
+  &.align-center {
+    align-items: center;
+  }
+}
+
 a {
   color: #FFF;
   font-weight: 800;
